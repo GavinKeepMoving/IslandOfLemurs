@@ -73,12 +73,19 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(background, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
+    //add player
     Player* player = Player::create(Player::PlayerType::PLAYER);
     player->setPosition(origin.x + player->getContentSize().width/2, origin.y + visibleSize.height/2);
     this->addChild(player);
+    
+    //add enemy1
     Player* enemy1 = Player::create(Player::PlayerType::ENEMY1);
     enemy1->setPosition(origin.x + visibleSize.width - player->getContentSize().width/2, origin.y + visibleSize.height/2);
     this->addChild(enemy1);
+    
+    //test animation
+    player->playAnimationForever(1);
+    enemy1->playAnimationForever(1);
     
     return true;
 }

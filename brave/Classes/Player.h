@@ -22,7 +22,14 @@ public:
     };
     bool initWithPlayerType(PlayerType type);
     static Player* create(PlayerType type);
-    
+    void addAnimation();
+    void playAnimationForever(int index);
+private:
+    PlayerType _type;
+    std::string _name;
+    int _animationNum;
+    std::vector<int> _animationFrameNum;
+    std::vector<std::string> _animationNames;
 };
 
 #endif
