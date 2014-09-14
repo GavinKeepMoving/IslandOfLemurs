@@ -79,6 +79,7 @@
 		FEAA761619C611C300E8ED22 /* ui.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEAA760D19C611C300E8ED22 /* ui.plist */; };
 		FEAA761719C611C300E8ED22 /* ui.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FEAA760E19C611C300E8ED22 /* ui.pvr.ccz */; };
 		FEAA761C19C611D800E8ED22 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEAA761B19C611D800E8ED22 /* Marker Felt.ttf */; };
+		FEAA762019C6201400E8ED22 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEAA761F19C6201400E8ED22 /* Player.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,6 +289,7 @@
 		FEAA760E19C611C300E8ED22 /* ui.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = ui.pvr.ccz; path = image/ui.pvr.ccz; sourceTree = "<group>"; };
 		FEAA761B19C611D800E8ED22 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
 		FEAA761D19C61BC800E8ED22 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Classes/Player.h; sourceTree = "<group>"; };
+		FEAA761F19C6201400E8ED22 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +364,7 @@
 				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
 				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 				FEAA761D19C61BC800E8ED22 /* Player.h */,
+				FEAA761F19C6201400E8ED22 /* Player.cpp */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -727,6 +730,7 @@
 			files = (
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
