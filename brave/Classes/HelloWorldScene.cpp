@@ -1,4 +1,5 @@
 #include "HelloWorldScene.h"
+#include "Player.h"
 
 USING_NS_CC;
 
@@ -72,6 +73,12 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(background, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
+    Player* player = Player::create(Player::PlayerType::PLAYER);
+    player->setPosition(origin.x + player->getContentSize().width/2, origin.y + visibleSize.height/2);
+    this->addChild(player);
+    Player* enemy1 = Player::create(Player::PlayerType::ENEMY1);
+    enemy1->setPosition(origin.x + visibleSize.width - player->getContentSize().width/2, origin.y + visibleSize.height/2);
+    this->addChild(enemy1);
     
     return true;
 }
