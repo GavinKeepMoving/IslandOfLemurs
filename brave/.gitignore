@@ -1,0 +1,11 @@
+*.[oa] 
+*.lib
+*.sdf
+*.opensdf
+cocos2d/
+*.xcodeproj
+.DS_Store
+proj.win32/
+proj.android/
+proj.linux/i
+proj.wp8-xaml/ 
