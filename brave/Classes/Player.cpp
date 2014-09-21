@@ -43,10 +43,13 @@ void Player::playAnimationForever(int index)
     auto animate = Animate::create(animation);
     this->runAction(RepeatForever::create(animate));
 }
+
 bool Player::initWithPlayerType(PlayerType type)
 {
     std::string sfName = "";
     _type = type;
+    _speed = 100;
+	_seq = nullptr;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
     
@@ -57,6 +60,7 @@ bool Player::initWithPlayerType(PlayerType type)
             sfName = "player1-1-1.png";
             _name = "player1";
             _animationNum = 5;
+            _speed = 125;
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 5);
             break;
         case PlayerType::ENEMY1:
@@ -96,3 +100,33 @@ Player* Player::create(PlayerType type)
     }
 }
 
+void Player::walkTo(Vec2 dest)
+{
+    //stop current moving action, if any.
+    if(_seq!=nullptr)
+        this->stopAction(_seq);
+        
+    auto curPos = this->getPosition();
+    
+    //flip when moving backward
+    if(curPos.x > dest.x)
+        this->setFlippedX(true);
+    else
+        this->setFlippedX(false);
+    
+    //calculate the time needed to move
+    auto diff = dest - curPos;
+    auto time = diff.getLength()/_speed;
+    auto move = MoveTo::create(time, dest);
+    //lambda function
+    auto func = [&]()
+    {
+        this->stopAllActions();
+        //_seq = nullptr;
+    };
+    auto callback = CallFunc::create(func);
+    auto _seq = Sequence::create(move, callback, nullptr);
+    
+    this->runAction(_seq);
+    this->playAnimationForever(0);
+}
