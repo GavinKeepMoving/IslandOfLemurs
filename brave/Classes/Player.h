@@ -20,16 +20,21 @@ public:
         ENEMY1,
         ENEMY2
     };
+    
     bool initWithPlayerType(PlayerType type);
     static Player* create(PlayerType type);
+    void walkTo(Vec2 dest);
     void addAnimation();
     void playAnimationForever(int index);
 private:
+    //Action _seq;
+    float _speed;
     PlayerType _type;
     std::string _name;
     int _animationNum;
     std::vector<int> _animationFrameNum;
     std::vector<std::string> _animationNames;
+    Sequence* _seq;
 };
 
 #endif
