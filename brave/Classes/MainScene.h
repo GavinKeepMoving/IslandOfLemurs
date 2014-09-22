@@ -23,9 +23,15 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
     
+    //add Attack option top right bar
+    void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
+    void activateWeaponOption(Ref* pSender);
+    
 private:
     Player* _player;
 	Player* _enemy1;
+    Size visibleSize;
+    Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
 };
 

@@ -1,5 +1,6 @@
 #include "MainScene.h"
 #include "Player.h"
+#include "Weapon.h"
 
 USING_NS_CC;
 
@@ -29,8 +30,8 @@ bool MainScene::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    visibleSize = Director::getInstance()->getVisibleSize();
+    origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -49,6 +50,9 @@ bool MainScene::init()
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
+    
+    // 3. add Weapon options bar
+    initWeaponOptionsBar(origin, visibleSize);
 //
 //    /////////////////////////////
 //    // 3. add your codes below...
@@ -98,6 +102,41 @@ bool MainScene::init()
     _enemy1->playAnimationForever(1);
     
     return true;
+}
+
+//Right top Weapon option bar
+void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
+{
+    // add a "close" icon to exit the progress. it's an autorelease object
+    auto optionItem = MenuItemImage::create(
+                                           "weapon1.png",
+                                           "CloseSelected.png",
+                                           CC_CALLBACK_1(MainScene::activateWeaponOption, this));
+    
+	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 ,
+                                origin.y + visibleSize.height - optionItem->getContentSize().height/2));
+    
+    // create menu, it's an autorelease object
+    auto menu = Menu::create(optionItem, NULL);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+}
+
+void MainScene::activateWeaponOption(Ref* pSender)
+{
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
+    
+    //add weapon
+    Weapon *weapon = Weapon::create(Weapon::WeaponType::COCONUT);
+    Vec2 pos = _player->getPosition();
+    weapon->setPosition(pos.x, pos.y);
+    this->addChild(weapon);
+    
+    Vec2 radius(visibleSize.width/3, 0);
+    Vec2 target(pos+radius);
+    
+    weapon->shootTo(target);
+    
 }
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
