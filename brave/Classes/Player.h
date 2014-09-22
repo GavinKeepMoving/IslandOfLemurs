@@ -20,7 +20,7 @@ public:
         ENEMY1,
         ENEMY2
     };
-    
+    static float height;
     bool initWithPlayerType(PlayerType type);
     static Player* create(PlayerType type);
     void walkTo(Vec2 dest);

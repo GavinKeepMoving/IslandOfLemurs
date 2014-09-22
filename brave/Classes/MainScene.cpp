@@ -74,38 +74,46 @@ bool MainScene::init()
     
     _listener_touch = EventListenerTouchOneByOne::create();
     _listener_touch->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan,this);
+    _listener_touch->onTouchEnded = CC_CALLBACK_2(MainScene::onTouchEnded,this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(_listener_touch, this);
-    
-    
+
     
     // add the sprite as a child to this layer
     this->addChild(background, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
     //add player
+    
     _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height/2);
+    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
     this->addChild(_player);
     
     //add enemy1
     _enemy1 = Player::create(Player::PlayerType::ENEMY1);
-    _enemy1->setPosition(origin.x + visibleSize.width - _player->getContentSize().width/2, origin.y + visibleSize.height/2);
+    _enemy1->setPosition(origin.x + visibleSize.width - _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
     this->addChild(_enemy1);
     
     
     
     //test animation
-    _player->playAnimationForever(1);
+    //_player->playAnimationForever(1);
     _enemy1->playAnimationForever(1);
     
     return true;
 }
 
+
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     _player->walkTo(pos);
-    //    log("MainScene::onTouchBegan");
+    log("MainScene::onTouchBegan");
     return true;
+}
+
+void MainScene::onTouchEnded(Touch* touch, Event* event)
+{
+    _player->stopAllActions();
+    log("MainScene::onTouchend");
 }
 
 void MainScene::menuCloseCallback(Ref* pSender)

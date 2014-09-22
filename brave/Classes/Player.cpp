@@ -8,6 +8,8 @@
 
 #include "Player.h"
 
+float Player::height = 0.25;
+
 void Player::addAnimation()
 {
     // check if already loaded
@@ -19,7 +21,7 @@ void Player::addAnimation()
     for(int i1=0; i1<_animationNum; i1++)
     {
         auto animation = Animation::create();
-        animation->setDelayPerUnit(0.2f);
+        animation->setDelayPerUnit(0.1f);
         //put frames into animation
         for(int j = 0; j< _animationFrameNum[i1] ; j++)
         {
@@ -102,17 +104,24 @@ Player* Player::create(PlayerType type)
 
 void Player::walkTo(Vec2 dest)
 {
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
     //stop current moving action, if any.
     if(_seq!=nullptr)
         this->stopAction(_seq);
         
     auto curPos = this->getPosition();
-    
     //flip when moving backward
-    if(curPos.x > dest.x)
+    if(curPos.x > dest.x) {
+        dest.x = origin.x;
         this->setFlippedX(true);
-    else
+    }
+    else {
+        dest.x = origin.x + visibleSize.width;
         this->setFlippedX(false);
+    }
+    dest.y = curPos.y;
     
     //calculate the time needed to move
     auto diff = dest - curPos;
