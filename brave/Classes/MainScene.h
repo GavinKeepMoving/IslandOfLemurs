@@ -19,7 +19,7 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
     
     bool onTouchBegan(Touch* touch, Event* event);
-    
+    void onTouchEnded(Touch* touch, Event* event);
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
     
@@ -33,6 +33,7 @@ private:
     Size visibleSize;
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
+    EventListenerPhysicsContact* _listener_contact;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
