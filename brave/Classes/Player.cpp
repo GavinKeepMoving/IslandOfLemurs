@@ -21,7 +21,7 @@ void Player::addAnimation()
     for(int i1=0; i1<_animationNum; i1++)
     {
         auto animation = Animation::create();
-        animation->setDelayPerUnit(0.1f);
+        animation->setDelayPerUnit(0.2f);
         //put frames into animation
         for(int j = 0; j< _animationFrameNum[i1] ; j++)
         {
@@ -59,8 +59,8 @@ bool Player::initWithPlayerType(PlayerType type)
     switch(type)
     {
         case PlayerType::PLAYER:
-            sfName = "player1-1-1.png";
-            _name = "player1";
+            sfName = "lemur-1-1.png";
+            _name = "lemur";
             _animationNum = 5;
             _speed = 125;
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 5);

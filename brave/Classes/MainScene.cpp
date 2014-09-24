@@ -85,6 +85,7 @@ bool MainScene::init()
     // add the sprite as a child to this layer
     this->addChild(background, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     //add player
     
     _player = Player::create(Player::PlayerType::PLAYER);
