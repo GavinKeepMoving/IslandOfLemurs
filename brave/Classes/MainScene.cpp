@@ -70,7 +70,7 @@ bool MainScene::init()
 //    this->addChild(label, 1);
 
     // add "HelloWorld" splash screen"
-    auto background = Sprite::create("background.png");
+    auto background = Sprite::create("image/newback.png");
 
     // position the sprite on the center of the screen
     background->setPosition(origin + visibleSize/2);
