@@ -1,6 +1,7 @@
 #include "MainScene.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "FSM.h"
 
 USING_NS_CC;
 
@@ -102,6 +103,8 @@ bool MainScene::init()
     //test animation
     //_player->playAnimationForever(1);
     _enemy1->playAnimationForever(1);
+    
+    auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     return true;
 }
