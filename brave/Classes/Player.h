@@ -20,13 +20,25 @@ public:
         ENEMY1,
         ENEMY2
     };
+    enum AnimationType
+	{
+		WALKING = 0,
+		ATTACKING,
+		DEAD,
+		BEINGHIT,
+		SKILL
+	};
     static float height;
     bool initWithPlayerType(PlayerType type);
     static Player* create(PlayerType type);
-    void walkTo(Vec2 dest);
+    void walkTo(Vec2 dest, Sprite* background);
     void addAnimation();
     void playAnimationForever(int index);
     Vec2 getCurPos();
+
+    void onWalk(Vec2 dest);
+    void climbDown(Vec2 dest);
+    void climbUp(Vec2 dest);
 private:
     //Action _seq;
     float _speed;

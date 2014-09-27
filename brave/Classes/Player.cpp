@@ -101,9 +101,20 @@ Player* Player::create(PlayerType type)
         return NULL;
     }
 }
-
+/*
 void Player::walkTo(Vec2 dest)
 {
+	std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, this, dest);
+	//_fsm->setOnEnter("walking", onWalk);
+	//_fsm->doEvent("walk");
+}*/
+
+
+//actually player stay in the center of the screeen but the background would move to the opposite position as the target
+void Player::walkTo(Vec2 dest, Sprite* background)
+{
+    log("onIdle: Enter walk");
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -130,6 +141,77 @@ void Player::walkTo(Vec2 dest)
     //lambda function
     auto func = [&]()
     {
+        //this->_fsm->doEvent("stop");
+        this->stopAllActions();
+        //_seq = nullptr;
+    };
+    auto callback = CallFunc::create(func);
+    auto _seq = Sequence::create(move, callback, nullptr);
+    
+    /*
+    this->runAction(_seq);
+    this->playAnimationForever(0);
+     */
+    background->runAction(_seq);
+    //background->playAnimationForever(0);
+}
+
+void Player::climbDown(Vec2 dest)
+{
+    log("onIdle: Climb down.");
+    
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    
+    //stop current moving action, if any.
+    if(_seq!=nullptr)
+        this->stopAction(_seq);
+    
+    auto curPos = this->getPosition();
+    dest.y = origin.y + visibleSize.height*Player::height;
+    dest.x = curPos.x;
+    
+    //calculate the time needed to move
+    auto diff = dest - curPos;
+    auto time = diff.getLength()/_speed;
+    auto move = MoveTo::create(time, dest);
+    //lambda function
+    auto func = [&]()
+    {
+        //this->_fsm->doEvent("stop");
+        this->stopAllActions();
+        //_seq = nullptr;
+    };
+    auto callback = CallFunc::create(func);
+    auto _seq = Sequence::create(move, callback, nullptr);
+    
+    this->runAction(_seq);
+    this->playAnimationForever(0);
+}
+
+void Player::climbUp(Vec2 dest)
+{
+    log("onIdle: Climb down.");
+    
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    
+    //stop current moving action, if any.
+    if(_seq!=nullptr)
+        this->stopAction(_seq);
+    
+    auto curPos = this->getPosition();
+    dest.y = origin.y + visibleSize.height*Player::height*3;
+    dest.x = curPos.x;
+    
+    //calculate the time needed to move
+    auto diff = dest - curPos;
+    auto time = diff.getLength()/_speed;
+    auto move = MoveTo::create(time, dest);
+    //lambda function
+    auto func = [&]()
+    {
+        //this->_fsm->doEvent("stop");
         this->stopAllActions();
         //_seq = nullptr;
     };

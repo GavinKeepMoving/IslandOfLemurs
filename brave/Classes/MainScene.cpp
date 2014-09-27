@@ -145,14 +145,20 @@ void MainScene::activateWeaponOption(Ref* pSender)
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
-    _player->walkTo(pos);
+    _player->walkTo(pos, background);
     log("MainScene::onTouchBegan");
     return true;
 }
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
 {
+    Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     _player->stopAllActions();
+    if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
+        _player->climbDown(pos);
+    }
+    else
+        _player->climbUp(pos);
     log("MainScene::onTouchend");
 }
 
@@ -183,6 +189,6 @@ void MainScene::setCenterPointOfView(CCPoint point)
     y=MIN(y,background->getBoundingBox().getMaxX() * mapTileSize.height-screenSize.height/2);
     
     CCPoint targetPosition=CCPoint(screenSize.width/2-x,screenSize.height/2-y);
-    this->setPosition(targetPosition);
+    _player->setPosition(targetPosition);
 }
  */
