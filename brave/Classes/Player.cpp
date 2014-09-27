@@ -139,3 +139,10 @@ void Player::walkTo(Vec2 dest)
     this->runAction(_seq);
     this->playAnimationForever(0);
 }
+
+Vec2 Player::getCurPos()
+{
+    auto curPos = this->getPosition();
+    Vec2 result = Vec2(curPos.x, curPos.y);
+    return result;
+}

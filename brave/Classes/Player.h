@@ -26,6 +26,7 @@ public:
     void walkTo(Vec2 dest);
     void addAnimation();
     void playAnimationForever(int index);
+    Vec2 getCurPos();
 private:
     //Action _seq;
     float _speed;
@@ -35,6 +36,8 @@ private:
     std::vector<int> _animationFrameNum;
     std::vector<std::string> _animationNames;
     Sequence* _seq;
+    //currentPos
+    Vec2 curPos;
 };
 
 #endif

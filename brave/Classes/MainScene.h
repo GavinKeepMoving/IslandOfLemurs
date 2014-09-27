@@ -27,6 +27,9 @@ public:
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
     void activateWeaponOption(Ref* pSender);
     
+    //set screen center point
+    void setCenterPointOfView(CCPoint point);
+    
 private:
     Player* _player;
 	Player* _enemy1;
@@ -34,6 +37,7 @@ private:
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
+    Sprite *background;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

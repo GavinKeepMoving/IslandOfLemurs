@@ -70,11 +70,10 @@ bool MainScene::init()
 //    this->addChild(label, 1);
 
     // add "HelloWorld" splash screen"
-    auto background = Sprite::create("background.png");
+    background = Sprite::create("background.png");
 
     // position the sprite on the center of the screen
     background->setPosition(origin + visibleSize/2);
-
     
     _listener_touch = EventListenerTouchOneByOne::create();
     _listener_touch->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan,this);
@@ -89,7 +88,7 @@ bool MainScene::init()
     //add player
     
     _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
+    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height/2);
     this->addChild(_player);
     
     //add enemy1
@@ -170,3 +169,20 @@ void MainScene::menuCloseCallback(Ref* pSender)
     exit(0);
 #endif
 }
+
+//set center point
+/*
+void MainScene::setCenterPointOfView(CCPoint point)
+{
+    float x=_player->getPosition().x;
+    float y=_player->getPosition().y;
+    x=MAX(x,visibleSize.width/2);
+    y=MAX(y,visibleSize.height/2);
+    
+    x=MIN(x,background->getBoundingBox().getMaxX() * mapTileSize.width - visibleSize.width/2);
+    y=MIN(y,background->getBoundingBox().getMaxX() * mapTileSize.height-screenSize.height/2);
+    
+    CCPoint targetPosition=CCPoint(screenSize.width/2-x,screenSize.height/2-y);
+    this->setPosition(targetPosition);
+}
+ */
