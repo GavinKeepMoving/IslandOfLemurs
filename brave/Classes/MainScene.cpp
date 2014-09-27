@@ -156,7 +156,13 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
 {
+    Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     _player->stopAllActions();
+    if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
+        _player->climbDown(pos);
+    }
+    else
+        _player->climbUp(pos);
     log("MainScene::onTouchend");
 }
 
