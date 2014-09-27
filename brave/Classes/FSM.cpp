@@ -128,7 +128,7 @@ void FSM::setOnEnter(std::string state, std::function<void()> onEnter)
 bool FSM::init()
 {
     this->addState("walking",[](){cocos2d::log("Enter walking");})
-    ->addState("dead",[](){cocos2d::log("Enter dead");})
+    ->addState("dead",[](){cocos2d::log("Enter dead");});
     
     this->addEvent("walk","idle","walking")
     ->addEvent("die","idle","dead")
