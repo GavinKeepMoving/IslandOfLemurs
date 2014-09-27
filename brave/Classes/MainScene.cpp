@@ -1,6 +1,7 @@
 #include "MainScene.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "FSM.h"
 
 USING_NS_CC;
 
@@ -70,7 +71,11 @@ bool MainScene::init()
 //    this->addChild(label, 1);
 
     // add "HelloWorld" splash screen"
+<<<<<<< HEAD
     background = Sprite::create("background.png");
+=======
+    auto background = Sprite::create("image/newback.png");
+>>>>>>> 1c40453f1dc911c9c8ed3941247536cb7d63ab6f
 
     // position the sprite on the center of the screen
     background->setPosition(origin + visibleSize/2);
@@ -101,6 +106,8 @@ bool MainScene::init()
     //test animation
     //_player->playAnimationForever(1);
     _enemy1->playAnimationForever(1);
+    
+    auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     return true;
 }

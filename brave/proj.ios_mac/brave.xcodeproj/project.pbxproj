@@ -62,6 +62,7 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		9C18747619D75262004B2E48 /* image in Resources */ = {isa = PBXBuildFile; fileRef = 9C18747519D75262004B2E48 /* image */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FC19CF473700DA478A /* weapon1.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C5B2FB19CF473700DA478A /* weapon1.png */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
@@ -77,6 +78,16 @@
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		FE16168F19D332E3005D9B4D /* animals.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE16168D19D332E3005D9B4D /* animals.plist */; };
 		FE16169019D332E3005D9B4D /* animals.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE16168E19D332E3005D9B4D /* animals.pvr.ccz */; };
+		FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE2E259D19D73D9400AC8DB5 /* FSM.cpp */; };
+		FE2E25A819D7444800AC8DB5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2E259F19D7444800AC8DB5 /* background.png */; };
+		FE2E25A919D7444800AC8DB5 /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A019D7444800AC8DB5 /* background2.png */; };
+		FE2E25AA19D7444800AC8DB5 /* effect.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A119D7444800AC8DB5 /* effect.plist */; };
+		FE2E25AB19D7444800AC8DB5 /* effect.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A219D7444800AC8DB5 /* effect.pvr.ccz */; };
+		FE2E25AC19D7444800AC8DB5 /* role.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A319D7444800AC8DB5 /* role.plist */; };
+		FE2E25AD19D7444800AC8DB5 /* role.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A419D7444800AC8DB5 /* role.pvr.ccz */; };
+		FE2E25AE19D7444800AC8DB5 /* start-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A519D7444800AC8DB5 /* start-bg.jpg */; };
+		FE2E25AF19D7444800AC8DB5 /* ui.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A619D7444800AC8DB5 /* ui.plist */; };
+		FE2E25B019D7444800AC8DB5 /* ui.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A719D7444800AC8DB5 /* ui.pvr.ccz */; };
 		FEAA761C19C611D800E8ED22 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEAA761B19C611D800E8ED22 /* Marker Felt.ttf */; };
 		FEAA762019C6201400E8ED22 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEAA761F19C6201400E8ED22 /* Player.cpp */; };
 /* End PBXBuildFile section */
@@ -268,6 +279,7 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		9C18747519D75262004B2E48 /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
 		A6C5B2F619CF3C0000DA478A /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FB19CF473700DA478A /* weapon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weapon1.png; path = image/weapon1.png; sourceTree = "<group>"; };
@@ -285,6 +297,17 @@
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		FE16168D19D332E3005D9B4D /* animals.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = animals.plist; path = image/animals.plist; sourceTree = "<group>"; };
 		FE16168E19D332E3005D9B4D /* animals.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = animals.pvr.ccz; path = image/animals.pvr.ccz; sourceTree = "<group>"; };
+		FE2E259A19D73D5200AC8DB5 /* FSM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FSM.h; path = ../Classes/FSM.h; sourceTree = "<group>"; };
+		FE2E259D19D73D9400AC8DB5 /* FSM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FSM.cpp; path = ../Classes/FSM.cpp; sourceTree = "<group>"; };
+		FE2E259F19D7444800AC8DB5 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = image/background.png; sourceTree = "<group>"; };
+		FE2E25A019D7444800AC8DB5 /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background2.png; path = image/background2.png; sourceTree = "<group>"; };
+		FE2E25A119D7444800AC8DB5 /* effect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = effect.plist; path = image/effect.plist; sourceTree = "<group>"; };
+		FE2E25A219D7444800AC8DB5 /* effect.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = effect.pvr.ccz; path = image/effect.pvr.ccz; sourceTree = "<group>"; };
+		FE2E25A319D7444800AC8DB5 /* role.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = role.plist; path = image/role.plist; sourceTree = "<group>"; };
+		FE2E25A419D7444800AC8DB5 /* role.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = role.pvr.ccz; path = image/role.pvr.ccz; sourceTree = "<group>"; };
+		FE2E25A519D7444800AC8DB5 /* start-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "start-bg.jpg"; path = "image/start-bg.jpg"; sourceTree = "<group>"; };
+		FE2E25A619D7444800AC8DB5 /* ui.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ui.plist; path = image/ui.plist; sourceTree = "<group>"; };
+		FE2E25A719D7444800AC8DB5 /* ui.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = ui.pvr.ccz; path = image/ui.pvr.ccz; sourceTree = "<group>"; };
 		FEAA761B19C611D800E8ED22 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
 		FEAA761D19C61BC800E8ED22 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Classes/Player.h; sourceTree = "<group>"; };
 		FEAA761F19C6201400E8ED22 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
@@ -365,6 +388,8 @@
 				FEAA761F19C6201400E8ED22 /* Player.cpp */,
 				A6C5B2FD19CF508900DA478A /* Weapon.h */,
 				A6C5B2FE19CF509500DA478A /* Weapon.cpp */,
+				FE2E259A19D73D5200AC8DB5 /* FSM.h */,
+				FE2E259D19D73D9400AC8DB5 /* FSM.cpp */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -480,6 +505,16 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9C18747519D75262004B2E48 /* image */,
+				FE2E259F19D7444800AC8DB5 /* background.png */,
+				FE2E25A019D7444800AC8DB5 /* background2.png */,
+				FE2E25A119D7444800AC8DB5 /* effect.plist */,
+				FE2E25A219D7444800AC8DB5 /* effect.pvr.ccz */,
+				FE2E25A319D7444800AC8DB5 /* role.plist */,
+				FE2E25A419D7444800AC8DB5 /* role.pvr.ccz */,
+				FE2E25A519D7444800AC8DB5 /* start-bg.jpg */,
+				FE2E25A619D7444800AC8DB5 /* ui.plist */,
+				FE2E25A719D7444800AC8DB5 /* ui.pvr.ccz */,
 				FE16168D19D332E3005D9B4D /* animals.plist */,
 				FE16168E19D332E3005D9B4D /* animals.pvr.ccz */,
 				A6C5B30719CF925700DA478A /* weapons.plist */,
@@ -673,26 +708,35 @@
 				A6C5B30919CF925700DA478A /* weapons.plist in Resources */,
 				FE16169019D332E3005D9B4D /* animals.pvr.ccz in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				9C18747619D75262004B2E48 /* image in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				FEAA761C19C611D800E8ED22 /* Marker Felt.ttf in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
+				FE2E25AD19D7444800AC8DB5 /* role.pvr.ccz in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				FE2E25AF19D7444800AC8DB5 /* ui.plist in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
-				BEAED0DB19D7654C005F5B07 /* background.png in Resources */,
+				FE2E25A819D7444800AC8DB5 /* background.png in Resources */,
+				FE2E25AC19D7444800AC8DB5 /* role.plist in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				A6C5B2FC19CF473700DA478A /* weapon1.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				FE2E25AA19D7444800AC8DB5 /* effect.plist in Resources */,
+				FE2E25A919D7444800AC8DB5 /* background2.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				FE2E25AB19D7444800AC8DB5 /* effect.pvr.ccz in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				FE16168F19D332E3005D9B4D /* animals.plist in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+				FE2E25B019D7444800AC8DB5 /* ui.pvr.ccz in Resources */,
+				FE2E25AE19D7444800AC8DB5 /* start-bg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
