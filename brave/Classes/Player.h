@@ -31,7 +31,7 @@ public:
     static float height;
     bool initWithPlayerType(PlayerType type);
     static Player* create(PlayerType type);
-    void walkTo(Vec2 dest, Sprite* background);
+    void walkTo(Vec2 dest);
     void addAnimation();
     void playAnimationForever(int index);
     Vec2 getCurPos();
@@ -49,6 +49,10 @@ private:
     std::vector<std::string> _animationNames;
     Sequence* _seq;
     //currentPos
+    
+public:
+    Sprite* background;
+    Sprite* background1;
     Vec2 curPos;
 };
 

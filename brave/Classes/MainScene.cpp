@@ -71,11 +71,14 @@ bool MainScene::init()
 //    this->addChild(label, 1);
 
     // add "HelloWorld" splash screen"
+    log("create background");
     auto background = Sprite::create("image/newback.png");
-
+    auto background1 = Sprite::create("image/newback.png");
+    log("created background");
 
     // position the sprite on the center of the screen
     background->setPosition(origin + visibleSize/2);
+    background1->setPosition(background->getPosition() + Vec2(background->getBoundingBox().size.width, 0));
     
     _listener_touch = EventListenerTouchOneByOne::create();
     _listener_touch->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan,this);
@@ -85,12 +88,15 @@ bool MainScene::init()
     
     // add the sprite as a child to this layer
     this->addChild(background, 0);
+    this->addChild(background1, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
-    //add player
     
+    //add player
     _player = Player::create(Player::PlayerType::PLAYER);
     _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height/2);
+    _player->background = background;
+    _player->background1 = background1;
     this->addChild(_player);
     
     //add enemy1
@@ -149,7 +155,7 @@ void MainScene::activateWeaponOption(Ref* pSender)
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
-    _player->walkTo(pos, background);
+    _player->walkTo(pos);
     log("MainScene::onTouchBegan");
     return true;
 }
