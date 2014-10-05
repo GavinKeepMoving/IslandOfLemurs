@@ -8,6 +8,8 @@
 
 #include "Weapon.h"
 
+extern Scene* scene;
+
 void Weapon::addAnimation()
 {
     // check if already loaded
@@ -55,7 +57,7 @@ bool Weapon::initWithWeaponType(WeaponType type)
     _speed = 100;
 	_seq = nullptr;
     int animationFrameNum[1] ={1};
-    int animationFrameNum2[5] ={3, 3, 3, 2, 0};
+    int animationFrameNum2[5] ={10, 3, 3, 2, 0};
     
     //setup according to PlayerType
     switch(type)
@@ -68,15 +70,21 @@ bool Weapon::initWithWeaponType(WeaponType type)
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 1);
             break;
         case WeaponType::BAMBOO:
-            sfName = "enemy1-1-1.png";
-            _name = "enemy1";
-            _animationNum = 4;
+            sfName = "arrow1-1-1.png";
+            _name = "arrow1";
+            _animationNum = 3;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 1);
             break;
         case WeaponType::HONEYNEST:
             sfName = "enemy2-1-1.png";
             _name = "enemy2";
             _animationNum = 4;
+            _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 1);
+            break;
+        case WeaponType::ARROW:
+            sfName = "arrow1-1-1.png";
+            _name = "arrow1";
+            _animationNum = 1;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 1);
             break;
     }
@@ -105,7 +113,7 @@ Weapon* Weapon::create(WeaponType type)
     }
 }
 
-void Weapon::shootTo(Vec2 dest)
+void Weapon::shootTo(Vec2 dest, std::function<void()> removefunc)
 {
     //stop current moving action, if any.
     if(_seq!=nullptr)
@@ -138,14 +146,16 @@ void Weapon::shootTo(Vec2 dest)
     //auto move = MoveTo::create(time, dest);
     
     //auto jump = JumpBy::create(time, dest, s.height/10, 1);
-    auto actionTo = JumpTo::create(2, curPos + CCPointMake(300, 0), 150, 2);
+    auto actionTo = JumpTo::create(2, dest, 150, 1);
     
 
     //lambda function
     auto func = [&]()
     {
         this->stopAllActions();
-        //_seq = nullptr;
+        
+        removefunc();
+                //_seq = nullptr;
     };
     auto callback = CallFunc::create(func);
     auto _seq = Sequence::create(actionTo, callback, nullptr);

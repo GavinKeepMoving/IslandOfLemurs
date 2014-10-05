@@ -27,6 +27,8 @@ public:
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
     void activateWeaponOption(Ref* pSender);
     
+    void spriteMoveFinished(CCNode* sender);
+    
 private:
     Player* _player;
 	Player* _enemy1;

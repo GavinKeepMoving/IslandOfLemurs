@@ -18,7 +18,9 @@ public:
     {
         COCONUT,
         BAMBOO,
-        HONEYNEST
+        HONEYNEST,
+        
+        ARROW
     };
     
     bool initWithWeaponType(WeaponType type);
@@ -26,7 +28,7 @@ public:
     
     void addAnimation();
     void playAnimationForever(int index);
-    void shootTo(Vec2 dest);
+    void shootTo(Vec2 dest, std::function<void()> func);
     
 private:
     //Action _seq;

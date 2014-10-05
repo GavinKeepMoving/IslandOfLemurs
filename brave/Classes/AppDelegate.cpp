@@ -3,6 +3,8 @@
 
 USING_NS_CC;
 
+
+
 AppDelegate::AppDelegate() {
 
 }
@@ -27,7 +29,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = MainScene::createScene();
+    scene = MainScene::createScene();
 
     // run
     director->runWithScene(scene);

@@ -85,8 +85,6 @@ bool MainScene::init()
     // add the sprite as a child to this layer
     this->addChild(background, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
     //add player
     
     _player = Player::create(Player::PlayerType::PLAYER);
@@ -107,7 +105,7 @@ bool MainScene::init()
     return true;
 }
 
-
+<<<<<<< HEAD
 //Right top Weapon option bar
 void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 {
@@ -128,23 +126,22 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 
 void MainScene::activateWeaponOption(Ref* pSender)
 {
-    float radius = -250.;
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
     
-    Weapon *weapon = this->_player->attack(radius, [](){spriteMoveFinished();});
-    
+    //add weapon
+    Weapon *weapon = Weapon::create(Weapon::WeaponType::COCONUT);
+    Vec2 pos = _player->getPosition();
+    weapon->setPosition(pos.x, pos.y);
     this->addChild(weapon);
     
+    Vec2 radius(visibleSize.width/3, 0);
+    Vec2 target(pos+radius);
     
-        
+    weapon->shootTo(target);
+    
 }
-
-void MainScene::spriteMoveFinished(CCNode* sender)
-{
-    CCSprite *sprite = (CCSprite *)sender;
-    this->removeChild(sprite);
-    //enemyArray->removeObject(sprite);
-}
-
+=======
+>>>>>>> origin/brave
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {

@@ -9,6 +9,7 @@
 #ifndef __Player__
 #define __Player__
 #include "cocos2d.h"
+#include "Weapon.h"
 USING_NS_CC;
 
 class Player : public Sprite
@@ -26,6 +27,9 @@ public:
     void walkTo(Vec2 dest);
     void addAnimation();
     void playAnimationForever(int index);
+    
+    Weapon* attack(float radius, std::function<void()> func);
+    
 private:
     //Action _seq;
     float _speed;

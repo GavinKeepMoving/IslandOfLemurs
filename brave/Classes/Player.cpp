@@ -7,6 +7,8 @@
 //
 
 #include "Player.h"
+#include "Weapon.h"
+
 
 float Player::height = 0.25;
 
@@ -102,6 +104,21 @@ Player* Player::create(PlayerType type)
     }
 }
 
+Weapon* Player::attack(float radius, std::function<void()> func)
+{
+    //add weapon
+    Weapon *weapon = Weapon::create(Weapon::WeaponType::ARROW);
+    Vec2 pos = this->getPosition();
+    weapon->setPosition(pos.x, pos.y);
+    //scene->addChild(weapon);
+    
+    Vec2 target(pos.x+radius, pos.y);
+    
+    weapon->shootTo(target);
+    
+    return weapon;
+}
+
 void Player::walkTo(Vec2 dest)
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -139,3 +156,4 @@ void Player::walkTo(Vec2 dest)
     this->runAction(_seq);
     this->playAnimationForever(0);
 }
+
