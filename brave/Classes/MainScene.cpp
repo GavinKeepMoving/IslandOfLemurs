@@ -1,6 +1,8 @@
 #include "MainScene.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Weapon.h"
+#include "FSM.h"
 
 USING_NS_CC;
 
@@ -69,12 +71,39 @@ bool MainScene::init()
 //    // add the label as a child to this layer
 //    this->addChild(label, 1);
 
-    // add "HelloWorld" splash screen"
-    auto background = Sprite::create("background.png");
+    //add background image
+    log("create background");
+    auto background = Sprite::create("image/background.png");
+    auto background1 = Sprite::create("image/background.png");
+    log("created background");
 
     // position the sprite on the center of the screen
     background->setPosition(origin + visibleSize/2);
-
+    background1->setPosition(background->getPosition() + Vec2(background->getBoundingBox().size.width, 0));
+    
+    //added by Wenbo Lin
+    //********************************************************************************************************//
+    //add trees to background
+    //initTrees(2);
+    int beginningPos = 300;
+    int treeNum = 2;
+    for(int i = 1; i <= treeNum; i++) {
+        auto treeSprite = Sprite::create("image/trees/tree.png");
+        treeSprite->setPosition(beginningPos * i, 300);
+        background->addChild(treeSprite);
+        _trees.push_back(new Tree(treeSprite));
+        //set tree position according to background position
+    }
+    
+    //test change status to tree burn up
+    auto testBareTree = Sprite::create("image/trees/bareTree.png");
+    background->removeChild(_trees[1]->treeSprite, true);
+    _trees[1]->treeSprite = Sprite::create("image/trees/bareTree.png");
+    _trees[1]->treeSprite->setPosition(beginningPos * 2, 300);
+    background->addChild(_trees[1]->treeSprite);
+    //finish initializing trees
+    //end of Wenbo Lin's code
+    //********************************************************************************************************//
     
     _listener_touch = EventListenerTouchOneByOne::create();
     _listener_touch->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan,this);
@@ -84,25 +113,29 @@ bool MainScene::init()
     
     // add the sprite as a child to this layer
     this->addChild(background, 0);
+    this->addChild(background1, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
     //add player
-    
     _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
+    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height/2);
+    _player->background = background;
+    _player->background1 = background1;
     this->addChild(_player);
     
     //add enemy1
-    _enemy1 = Player::create(Player::PlayerType::ENEMY1);
-    _enemy1->setPosition(origin.x + visibleSize.width - _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
+    _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
+    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
     this->addChild(_enemy1);
     
     
     
     //test animation
     //_player->playAnimationForever(1);
-    _enemy1->playAnimationForever(1);
+    //_enemy1->playAnimationForever(1);
+    
+    auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     return true;
 }
@@ -130,7 +163,7 @@ void MainScene::activateWeaponOption(Ref* pSender)
 {
     float radius = -250.;
     
-    Weapon *weapon = this->_player->attack(radius, [](){spriteMoveFinished();});
+    Weapon *weapon = this->_player->attack(radius);
     
     this->addChild(weapon);
     
@@ -145,6 +178,19 @@ void MainScene::spriteMoveFinished(CCNode* sender)
     //enemyArray->removeObject(sprite);
 }
 
+void MainScene::initTrees(int num) {
+    int beginningPos = 300;
+    std::vector<Tree*> trees;
+    for(int i = 0; i < num; i++) {
+        auto treeSprite = Sprite::create("image/tree.png");
+        treeSprite->setPosition(200, beginningPos * i);
+        background->addChild(treeSprite);
+        trees.push_back(new Tree(treeSprite));
+        //set tree position according to background position
+    }
+    _trees = trees;
+}
+
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
@@ -156,7 +202,13 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
 {
+    Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     _player->stopAllActions();
+    if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
+        _player->climbDown(pos);
+    }
+    else
+        _player->climbUp(pos);
     log("MainScene::onTouchend");
 }
 

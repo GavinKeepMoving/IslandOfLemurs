@@ -1,18 +1,19 @@
 //
-//  Player.cpp
+//  Enemy.cpp
 //  brave
 //
-//  Created by Huang Zhenni on 9/14/14.
+//  Created by Yafu Li on 10/5/14.
 //
 //
 
-#include "Player.h"
+#include "Enemy.h"
+
 #include "Weapon.h"
 
 
-float Player::height = 0.25;
+float Enemy::height = 0.25;
 
-void Player::addAnimation()
+void Enemy::addAnimation()
 {
     // check if already loaded
     auto animation = AnimationCache::getInstance()->getAnimation(String::createWithFormat("%s-%s",_name.c_str(),
@@ -35,7 +36,7 @@ void Player::addAnimation()
                                                                                         _animationNames[i1].c_str())->getCString());
     }
 }
-void Player::playAnimationForever(int index)
+void Enemy::playAnimationForever(int index)
 {
     if(index <0 || index >= _animationNum)
     {
@@ -48,32 +49,25 @@ void Player::playAnimationForever(int index)
     this->runAction(RepeatForever::create(animate));
 }
 
-bool Player::initWithPlayerType(PlayerType type)
+bool Enemy::initWithPlayerType(EnemyType type)
 {
     std::string sfName = "";
     _type = type;
     _speed = 100;
-	_seq = nullptr;
+    _seq = nullptr;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
     
     //setup according to PlayerType
     switch(type)
     {
-        case PlayerType::PLAYER:
-            sfName = "lemur-1-1.png";
-            _name = "lemur";
-            _animationNum = 5;
-            _speed = 125;
-            _animationFrameNum.assign(animationFrameNum, animationFrameNum + 5);
-            break;
-        case PlayerType::ENEMY1:
+        case EnemyType::ENEMY1:
             sfName = "enemy1-1-1.png";
             _name = "enemy1";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
             break;
-        case PlayerType::ENEMY2:
+        case EnemyType::ENEMY2:
             sfName = "enemy2-1-1.png";
             _name = "enemy2";
             _animationNum = 4;
@@ -88,31 +82,31 @@ bool Player::initWithPlayerType(PlayerType type)
     return true;
 }
 
-Player* Player::create(PlayerType type)
+Enemy* Enemy::create(EnemyType type)
 {
-    Player* player = new Player();
-    if(player && player->initWithPlayerType(type))
+    Enemy* enemy = new Enemy();
+    if(enemy && enemy->initWithPlayerType(type))
     {
-        player->autorelease();
-        return player;
+        enemy->autorelease();
+        return enemy;
     }
     else
     {
-        delete player;
-        player = NULL;
+        delete enemy;
+        enemy = NULL;
         return NULL;
     }
 }
 /*
-void Player::walkTo(Vec2 dest)
-{
+ void Player::walkTo(Vec2 dest)
+ {
 	std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, this, dest);
 	//_fsm->setOnEnter("walking", onWalk);
 	//_fsm->doEvent("walk");
-}*/
+ }*/
 
 
-Weapon* Player::attack(float radius)
+Weapon* Enemy::attack(float radius)
 {
     //add weapon
     Weapon *weapon = Weapon::create(Weapon::WeaponType::ARROW);
@@ -128,17 +122,17 @@ Weapon* Player::attack(float radius)
 }
 
 //actually player stay in the center of the screeen but the background would move to the opposite position as the target
-void Player::walkTo(Vec2 dest)
+void Enemy::walkTo(Vec2 dest)
 {
     log("onIdle: Enter walk");
-
+    
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+    
     //stop current moving action, if any.
     if(_seq!=nullptr)
         this->stopAction(_seq);
-        
+    
     auto curPos = this->getPosition();
     auto backgroundPos = background->getPosition();
     auto background1Pos = background1->getPosition();
@@ -180,7 +174,7 @@ void Player::walkTo(Vec2 dest)
     
     //this->runAction(_seq);
     //this->playAnimationForever(0);
-
+    
     //run action sequnce
     background->runAction(_seq);
     background1->runAction(_seq1);
@@ -190,85 +184,20 @@ void Player::walkTo(Vec2 dest)
     auto curPosback2 = background1->getPosition();
     
     /*
-    if(curPosback1.x - visibleSize.width / 2 > 0 || visibleSize.width / 2 - curPosback2.x > 0) {
-        background->stopAllActions();
-        background1->stopAllActions();
-        
-        //when background hit the end, player continue to move
-        //this->runAction(_seqPlayer);
-        //this->playAnimationForever(0);
-    }
-    //background->playAnimationForever(0);
+     if(curPosback1.x - visibleSize.width / 2 > 0 || visibleSize.width / 2 - curPosback2.x > 0) {
+     background->stopAllActions();
+     background1->stopAllActions();
+     
+     //when background hit the end, player continue to move
+     //this->runAction(_seqPlayer);
+     //this->playAnimationForever(0);
+     }
+     //background->playAnimationForever(0);
      */
 }
 
-void Player::climbDown(Vec2 dest)
-{
-    log("onIdle: Climb down.");
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    //stop current moving action, if any.
-    if(_seq!=nullptr)
-        this->stopAction(_seq);
-    
-    auto curPos = this->getPosition();
-    dest.y = origin.y + visibleSize.height*Player::height;
-    dest.x = curPos.x;
-    
-    //calculate the time needed to move
-    auto diff = dest - curPos;
-    auto time = diff.getLength()/_speed;
-    auto move = MoveTo::create(time, dest);
-    //lambda function
-    auto func = [&]()
-    {
-        //this->_fsm->doEvent("stop");
-        this->stopAllActions();
-        //_seq = nullptr;
-    };
-    auto callback = CallFunc::create(func);
-    auto _seq = Sequence::create(move, callback, nullptr);
-    
-    this->runAction(_seq);
-    this->playAnimationForever(0);
-}
 
-void Player::climbUp(Vec2 dest)
-{
-    log("onIdle: Climb down.");
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    //stop current moving action, if any.
-    if(_seq!=nullptr)
-        this->stopAction(_seq);
-    
-    auto curPos = this->getPosition();
-    dest.y = origin.y + visibleSize.height*Player::height*3;
-    dest.x = curPos.x;
-    
-    //calculate the time needed to move
-    auto diff = dest - curPos;
-    auto time = diff.getLength()/_speed;
-    auto move = MoveTo::create(time, dest);
-    //lambda function
-    auto func = [&]()
-    {
-        //this->_fsm->doEvent("stop");
-        this->stopAllActions();
-        //_seq = nullptr;
-    };
-    auto callback = CallFunc::create(func);
-    auto _seq = Sequence::create(move, callback, nullptr);
-    
-    this->runAction(_seq);
-    this->playAnimationForever(0);
-}
-
-Vec2 Player::getCurPos()
+Vec2 Enemy::getCurPos()
 {
     auto curPos = this->getPosition();
     Vec2 result = Vec2(curPos.x, curPos.y);

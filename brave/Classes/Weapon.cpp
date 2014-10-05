@@ -113,7 +113,7 @@ Weapon* Weapon::create(WeaponType type)
     }
 }
 
-void Weapon::shootTo(Vec2 dest, std::function<void()> removefunc)
+void Weapon::shootTo(Vec2 dest)
 {
     //stop current moving action, if any.
     if(_seq!=nullptr)
@@ -154,7 +154,6 @@ void Weapon::shootTo(Vec2 dest, std::function<void()> removefunc)
     {
         this->stopAllActions();
         
-        removefunc();
                 //_seq = nullptr;
     };
     auto callback = CallFunc::create(func);

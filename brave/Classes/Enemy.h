@@ -1,37 +1,38 @@
 //
-//  Player.h
+//  Enemy.h
 //  brave
 //
-//  Created by Huang Zhenni on 9/14/14.
+//  Created by Yafu Li on 10/5/14.
 //
 //
 
-#ifndef __Player__
-#define __Player__
+#ifndef __brave__Enemy__
+#define __brave__Enemy__
+
 #include "cocos2d.h"
+#include "Player.h"
 #include "Weapon.h"
 USING_NS_CC;
 
-class Player : public Sprite
+class Enemy : public Player
 {
 public:
-    enum PlayerType
+    enum EnemyType
     {
-        PLAYER,
         ENEMY1,
         ENEMY2
     };
     enum AnimationType
-	{
-		WALKING = 0,
-		ATTACKING,
-		DEAD,
-		BEINGHIT,
-		SKILL
-	};
+    {
+        WALKING = 0,
+        ATTACKING,
+        DEAD,
+        BEINGHIT,
+        SKILL
+    };
     static float height;
-    bool initWithPlayerType(PlayerType type);
-    static Player* create(PlayerType type);
+    bool initWithPlayerType(EnemyType type);
+    static Enemy* create(EnemyType type);
     void walkTo(Vec2 dest);
     void addAnimation();
     void playAnimationForever(int index);
@@ -39,15 +40,13 @@ public:
     Weapon* attack(float radius);
     
     Vec2 getCurPos();
-
+    
     void onWalk(Vec2 dest);
-    void climbDown(Vec2 dest);
-    void climbUp(Vec2 dest);
-
+    
 private:
     //Action _seq;
     float _speed;
-    PlayerType _type;
+    EnemyType _type;
     std::string _name;
     int _animationNum;
     std::vector<int> _animationFrameNum;
@@ -61,4 +60,5 @@ public:
     Vec2 curPos;
 };
 
-#endif
+
+#endif /* defined(__brave__Enemy__) */

@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Player.h"
+#include "Tree.h"
 
 USING_NS_CC;
 
@@ -28,6 +29,8 @@ public:
     void activateWeaponOption(Ref* pSender);
     
     void spriteMoveFinished(CCNode* sender);
+    //initialize trees
+    void initTrees(int num);
     
 private:
     Player* _player;
@@ -36,6 +39,8 @@ private:
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
+    Sprite *background;
+    std::vector<Tree*> _trees;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

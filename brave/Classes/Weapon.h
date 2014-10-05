@@ -28,7 +28,7 @@ public:
     
     void addAnimation();
     void playAnimationForever(int index);
-    void shootTo(Vec2 dest, std::function<void()> func);
+    void shootTo(Vec2 dest);
     
 private:
     //Action _seq;
