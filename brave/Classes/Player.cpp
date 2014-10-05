@@ -184,6 +184,7 @@ void Player::walkTo(Vec2 dest)
     //run action sequnce
     background->runAction(_seq);
     background1->runAction(_seq1);
+    this->playAnimationForever(0);
     
     //judge if action should be stopped
     auto curPosback1 = background->getPosition();
