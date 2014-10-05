@@ -37,6 +37,11 @@ public:
     void onWalk(Vec2 dest);
     void climbDown(Vec2 dest);
     void climbUp(Vec2 dest);
+    Vec2 getCurPos();
+    //lishi
+    int getMoney();
+    CCRect getBoundingBox();
+    
 private:
     //Action _seq;
     float _speed;
@@ -46,6 +51,13 @@ private:
     std::vector<int> _animationFrameNum;
     std::vector<std::string> _animationNames;
     Sequence* _seq;
+    int _money;
+    //currentPos
+    
+public:
+    Sprite* background;
+    Vec2 curPos;
+
 };
 
 #endif

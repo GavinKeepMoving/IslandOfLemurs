@@ -62,6 +62,9 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		9C18747619D75262004B2E48 /* image in Resources */ = {isa = PBXBuildFile; fileRef = 9C18747519D75262004B2E48 /* image */; };
+		9C609C3719E1BD01004B375D /* Banana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3519E1BD01004B375D /* Banana.cpp */; };
+		9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3B19E1CD87004B375D /* BananaManger.cpp */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FC19CF473700DA478A /* weapon1.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C5B2FB19CF473700DA478A /* weapon1.png */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
@@ -267,6 +270,11 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		9C18747519D75262004B2E48 /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
+		9C609C3519E1BD01004B375D /* Banana.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Banana.cpp; path = ../Classes/Banana.cpp; sourceTree = "<group>"; };
+		9C609C3619E1BD01004B375D /* Banana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Banana.h; path = ../Classes/Banana.h; sourceTree = "<group>"; };
+		9C609C3B19E1CD87004B375D /* BananaManger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BananaManger.cpp; path = ../Classes/BananaManger.cpp; sourceTree = "<group>"; };
+		9C609C3C19E1CD87004B375D /* BananaManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BananaManger.h; path = ../Classes/BananaManger.h; sourceTree = "<group>"; };
 		A6C5B2F619CF3C0000DA478A /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FB19CF473700DA478A /* weapon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weapon1.png; path = image/weapon1.png; sourceTree = "<group>"; };
@@ -359,10 +367,19 @@
 				A6C5B2F719CF3C0000DA478A /* MainScene.h */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
+				FEAA761F19C6201400E8ED22 /* Player.cpp */,
 				FEAA761D19C61BC800E8ED22 /* Player.h */,
 				FEAA761F19C6201400E8ED22 /* Player.cpp */,
 				A6C5B2FD19CF508900DA478A /* Weapon.h */,
 				A6C5B2FE19CF509500DA478A /* Weapon.cpp */,
+				FE2E259A19D73D5200AC8DB5 /* FSM.h */,
+				FE2E259D19D73D9400AC8DB5 /* FSM.cpp */,
+				BEDF548C19DD481C00068CBA /* Tree.cpp */,
+				BEDF548D19DD481C00068CBA /* Tree.h */,
+				9C609C3519E1BD01004B375D /* Banana.cpp */,
+				9C609C3619E1BD01004B375D /* Banana.h */,
+				9C609C3B19E1CD87004B375D /* BananaManger.cpp */,
+				9C609C3C19E1CD87004B375D /* BananaManger.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -711,7 +728,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				9C609C3719E1BD01004B375D /* Banana.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */,
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */,

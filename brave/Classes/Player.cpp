@@ -49,6 +49,7 @@ void Player::playAnimationForever(int index)
 bool Player::initWithPlayerType(PlayerType type)
 {
     std::string sfName = "";
+    _money = 0;
     _type = type;
     _speed = 100;
 	_seq = nullptr;
@@ -214,4 +215,32 @@ void Player::climbUp(Vec2 dest)
     
     this->runAction(_seq);
     this->playAnimationForever(0);
+
 }
+
+Vec2 Player::getCurPos()
+{
+    auto curPos = this->getPosition();
+    Vec2 result = Vec2(curPos.x, curPos.y);
+    return result;
+}
+
+
+int Player::getMoney()
+{
+    return _money;
+}
+
+CCRect Player::getBoundingBox()
+{
+    /*由于Sprite是放在Player上的，所以要检测Player的碰撞范围*/
+    CCSize spriteSize=this->getContentSize();
+    CCPoint entityPos=this->getPosition();//获取player中心点
+    
+    //获取Player左下角的坐标值
+    int x=entityPos.x-spriteSize.width/2;
+    int y=entityPos.y-spriteSize.height/2;
+    
+    return CCRectMake(x,y,spriteSize.width,spriteSize.height);
+}
+
