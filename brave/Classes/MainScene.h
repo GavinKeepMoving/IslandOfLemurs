@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Player.h"
+#include "Tree.h"
 
 USING_NS_CC;
 
@@ -27,8 +28,8 @@ public:
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
     void activateWeaponOption(Ref* pSender);
     
-    //set screen center point
-    void setCenterPointOfView(CCPoint point);
+    //initialize trees
+    void initTrees(int num);
     
 private:
     Player* _player;
@@ -38,6 +39,7 @@ private:
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
     Sprite *background;
+    std::vector<Tree*> _trees;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

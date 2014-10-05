@@ -16,24 +16,8 @@ Tree::Tree () {
 }
 
 //constructor2
-Tree::Tree(Sprite* background, Sprite* background1) {
-    this->background = background;
-    this->background1 = background1;
-}
-
-//create a single object of Tree
-static Tree* createTree() {
-    //add object and call initialization
-    Tree* newTree = new Tree();
-    if(newTree) {
-        newTree->autorelease();
-        return newTree;
-    }
-    else {
-        delete newTree;
-        newTree = NULL;
-        return NULL;
-    }
+Tree::Tree(Sprite* tree) {
+    this->treeSprite = tree;
 }
 
 //initialize a single tree
@@ -44,33 +28,39 @@ bool Tree::initSingleTree() {
 }
 
 //create trees at the beginning of game
+/*
 std::vector<Tree*> Tree::initWithTreeNum(int num) {
+    int beginningPos = 300;
     std::vector<Tree*> trees;
     for(int i = 0; i < num; i++) {
-        trees.push_back(createTree());
+        auto treeSprite = Sprite::create("image/tree.png");
+        treeSprite->setPosition(200, beginningPos);
+        trees.push_back();
         //set tree position according to background position
     }
     return trees;
 }
+ */
 
 //get blood values
-int Tree::getBlood() {
+int Tree::getBlood(Tree* tree) {
     //call status function
+    return 0;
 }
 
 //get state: burning or burn down or healthy
-Tree::TreeStates getState() {
-    
+int Tree::getState(Tree* tree) {
+    return 0;
 }
 
 //generate banana objects
-bool Tree::generateBananas() {
-    
+bool Tree::generateBananas(Tree* tree) {
+    return true;
 }
 
 //show burning or burndown, need to call getState to know which animations to play
-bool Tree::showAnimation() {
-    TreeStates curState = getState();
+bool Tree::showAnimation(Tree* tree) {
+    int curState = Tree::getState(tree);
     //play curState animation
-    
+    return true;
 }

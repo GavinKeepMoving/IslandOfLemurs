@@ -27,20 +27,18 @@ public:
     
     static float blood;
     
-    Sprite* background;
-    Sprite* background1;
+    Sprite* treeSprite;
     
     Tree(void);
-    Tree(Sprite* background, Sprite* background1);
-    
-    static Tree* createTree();// put trees
+    Tree(Sprite* tree);
+
     bool initSingleTree();
     std::vector<Tree*> initWithTreeNum(int num);// call createTree to build trees
 
-    int getBlood();//get blood values
-    TreeStates getState();//get state: burning or burn down or healthy
-    bool generateBananas();//generate banana objects
-    bool showAnimation();//show burning or burndown, need to call getState to know which animations to play
+    int getBlood(Tree* tree);//get blood values
+    int getState(Tree* tree);//get state: burning or burn down or healthy
+    bool generateBananas(Tree* tree);//generate banana objects
+    bool showAnimation(Tree* tree);//show burning or burndown, need to call getState to know which animations to play
 };
 
 #endif /* defined(__brave__Tree__) */

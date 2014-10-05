@@ -68,7 +68,7 @@
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
 		A6C5B30919CF925700DA478A /* weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6C5B30719CF925700DA478A /* weapons.plist */; };
 		A6C5B30A19CF925700DA478A /* weapons.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = A6C5B30819CF925700DA478A /* weapons.pvr.ccz */; };
-		BEAED0DB19D7654C005F5B07 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = BEAED0DA19D7654C005F5B07 /* background.png */; };
+		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -80,7 +80,6 @@
 		FE16169019D332E3005D9B4D /* animals.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE16168E19D332E3005D9B4D /* animals.pvr.ccz */; };
 		FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE2E259D19D73D9400AC8DB5 /* FSM.cpp */; };
 		FE2E25A819D7444800AC8DB5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2E259F19D7444800AC8DB5 /* background.png */; };
-		FE2E25A919D7444800AC8DB5 /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A019D7444800AC8DB5 /* background2.png */; };
 		FE2E25AA19D7444800AC8DB5 /* effect.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A119D7444800AC8DB5 /* effect.plist */; };
 		FE2E25AB19D7444800AC8DB5 /* effect.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A219D7444800AC8DB5 /* effect.pvr.ccz */; };
 		FE2E25AC19D7444800AC8DB5 /* role.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A319D7444800AC8DB5 /* role.plist */; };
@@ -288,6 +287,8 @@
 		A6C5B30719CF925700DA478A /* weapons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = weapons.plist; path = image/weapons/weapons.plist; sourceTree = "<group>"; };
 		A6C5B30819CF925700DA478A /* weapons.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = weapons.pvr.ccz; path = image/weapons/weapons.pvr.ccz; sourceTree = "<group>"; };
 		BEAED0DA19D7654C005F5B07 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = ../../../../Documents/study/studying/csci526/PSD/background.png; sourceTree = "<group>"; };
+		BEDF548C19DD481C00068CBA /* Tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tree.cpp; path = ../Classes/Tree.cpp; sourceTree = "<group>"; };
+		BEDF548D19DD481C00068CBA /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tree.h; path = ../Classes/Tree.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -300,7 +301,6 @@
 		FE2E259A19D73D5200AC8DB5 /* FSM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FSM.h; path = ../Classes/FSM.h; sourceTree = "<group>"; };
 		FE2E259D19D73D9400AC8DB5 /* FSM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FSM.cpp; path = ../Classes/FSM.cpp; sourceTree = "<group>"; };
 		FE2E259F19D7444800AC8DB5 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = image/background.png; sourceTree = "<group>"; };
-		FE2E25A019D7444800AC8DB5 /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background2.png; path = image/background2.png; sourceTree = "<group>"; };
 		FE2E25A119D7444800AC8DB5 /* effect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = effect.plist; path = image/effect.plist; sourceTree = "<group>"; };
 		FE2E25A219D7444800AC8DB5 /* effect.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = effect.pvr.ccz; path = image/effect.pvr.ccz; sourceTree = "<group>"; };
 		FE2E25A319D7444800AC8DB5 /* role.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = role.plist; path = image/role.plist; sourceTree = "<group>"; };
@@ -385,11 +385,13 @@
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 				FEAA761D19C61BC800E8ED22 /* Player.h */,
-				FEAA761F19C6201400E8ED22 /* Player.cpp */,
 				A6C5B2FD19CF508900DA478A /* Weapon.h */,
 				A6C5B2FE19CF509500DA478A /* Weapon.cpp */,
 				FE2E259A19D73D5200AC8DB5 /* FSM.h */,
 				FE2E259D19D73D9400AC8DB5 /* FSM.cpp */,
+				FEAA761F19C6201400E8ED22 /* Player.cpp */,
+				BEDF548C19DD481C00068CBA /* Tree.cpp */,
+				BEDF548D19DD481C00068CBA /* Tree.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -507,7 +509,6 @@
 			children = (
 				9C18747519D75262004B2E48 /* image */,
 				FE2E259F19D7444800AC8DB5 /* background.png */,
-				FE2E25A019D7444800AC8DB5 /* background2.png */,
 				FE2E25A119D7444800AC8DB5 /* effect.plist */,
 				FE2E25A219D7444800AC8DB5 /* effect.pvr.ccz */,
 				FE2E25A319D7444800AC8DB5 /* role.plist */,
@@ -726,7 +727,6 @@
 				A6C5B2FC19CF473700DA478A /* weapon1.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				FE2E25AA19D7444800AC8DB5 /* effect.plist in Resources */,
-				FE2E25A919D7444800AC8DB5 /* background2.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				FE2E25AB19D7444800AC8DB5 /* effect.pvr.ccz in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
@@ -767,6 +767,7 @@
 				A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				1AFAF8B816D35DE700DB1158 /* (null) in Sources */,
+				BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
