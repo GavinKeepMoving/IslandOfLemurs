@@ -39,7 +39,8 @@ private:
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
-    Sprite *background;
+    Sprite *_background;
+    Sprite *_background1;
     std::vector<Tree*> _trees;
 };
 

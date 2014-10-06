@@ -158,7 +158,6 @@ void Player::walkTo(Vec2 dest)
     auto diff = dest - curPos;
     auto realDest = backgroundPos - diff;
     auto realDest1 = background1Pos - diff;
-    auto playerTime = diff.length()/_speed;
     auto time = realDest.getLength()/_speed;
     
     //auto movePlayer = MoveTo::create(playerTime, dest);
@@ -185,22 +184,7 @@ void Player::walkTo(Vec2 dest)
     background->runAction(_seq);
     background1->runAction(_seq1);
     this->playAnimationForever(0);
-    
-    //judge if action should be stopped
-    auto curPosback1 = background->getPosition();
-    auto curPosback2 = background1->getPosition();
-    
-    /*
-    if(curPosback1.x - visibleSize.width / 2 > 0 || visibleSize.width / 2 - curPosback2.x > 0) {
-        background->stopAllActions();
-        background1->stopAllActions();
-        
-        //when background hit the end, player continue to move
-        //this->runAction(_seqPlayer);
-        //this->playAnimationForever(0);
-    }
-    //background->playAnimationForever(0);
-     */
+
 }
 
 void Player::climbDown(Vec2 dest)

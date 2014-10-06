@@ -73,34 +73,19 @@ bool MainScene::init()
 
     //add background image
     log("create background");
-    auto background = Sprite::create("image/background.png");
-    auto background1 = Sprite::create("image/background.png");
+    _background = Sprite::create("image/background.png");
+    _background1 = Sprite::create("image/background.png");
     log("created background");
 
     // position the sprite on the center of the screen
-    background->setPosition(origin + visibleSize/2);
-    background1->setPosition(background->getPosition() + Vec2(background->getBoundingBox().size.width, 0));
+    _background->setPosition(origin + visibleSize/2);
+    _background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
     
-    //added by Wenbo Lin
     //********************************************************************************************************//
+    //added by Wenbo Lin
     //add trees to background
-    //initTrees(2);
-    int beginningPos = 300;
-    int treeNum = 2;
-    for(int i = 1; i <= treeNum; i++) {
-        auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos * i, 300);
-        background->addChild(treeSprite);
-        _trees.push_back(new Tree(treeSprite));
-        //set tree position according to background position
-    }
-    
-    //test change status to tree burn up
-    auto testBareTree = Sprite::create("image/trees/bareTree.png");
-    background->removeChild(_trees[1]->treeSprite, true);
-    _trees[1]->treeSprite = Sprite::create("image/trees/bareTree.png");
-    _trees[1]->treeSprite->setPosition(beginningPos * 2, 300);
-    background->addChild(_trees[1]->treeSprite);
+    this->initTrees(2);
+    _trees[1]->showAnimation(2, _background);
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
@@ -112,16 +97,16 @@ bool MainScene::init()
 
     
     // add the sprite as a child to this layer
-    this->addChild(background, 0);
-    this->addChild(background1, 0);
+    this->addChild(_background, 0);
+    this->addChild(_background1, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
     _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height/2);
-    _player->background = background;
-    _player->background1 = background1;
+    _player->background = _background;
+    _player->background1 = _background1;
     this->addChild(_player);
     
     //add enemy1
@@ -179,16 +164,15 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 }
 
 void MainScene::initTrees(int num) {
+    if(_background == NULL) return;
     int beginningPos = 300;
-    std::vector<Tree*> trees;
-    for(int i = 0; i < num; i++) {
-        auto treeSprite = Sprite::create("image/tree.png");
-        treeSprite->setPosition(200, beginningPos * i);
-        background->addChild(treeSprite);
-        trees.push_back(new Tree(treeSprite));
-        //set tree position according to background position
+    int treeNum = 2;
+    for(int i = 1; i <= treeNum; i++) {
+        auto treeSprite = Sprite::create("image/trees/tree.png");
+        treeSprite->setPosition(beginningPos * i, 300);
+        _background->addChild(treeSprite);
+        _trees.push_back(new Tree(treeSprite));
     }
-    _trees = trees;
 }
 
 
@@ -204,6 +188,11 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     _player->stopAllActions();
+    //********************************************************************************
+    //added by Wenbo Lin
+    _background->stopAllActions();
+    _background1->stopAllActions();
+    //********************************************************************************
     if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
         _player->climbDown(pos);
     }

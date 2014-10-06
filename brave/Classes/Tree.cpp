@@ -18,6 +18,8 @@ Tree::Tree () {
 //constructor2
 Tree::Tree(Sprite* tree) {
     this->treeSprite = tree;
+    _posX = tree->getPosition().x;
+    _posY = tree->getPosition().y;
 }
 
 //initialize a single tree
@@ -40,7 +42,7 @@ std::vector<Tree*> Tree::initWithTreeNum(int num) {
     }
     return trees;
 }
- */
+*/
 
 //get blood values
 int Tree::getBlood(Tree* tree) {
@@ -59,8 +61,21 @@ bool Tree::generateBananas(Tree* tree) {
 }
 
 //show burning or burndown, need to call getState to know which animations to play
-bool Tree::showAnimation(Tree* tree) {
-    int curState = Tree::getState(tree);
-    //play curState animation
-    return true;
+void Tree::showAnimation(int state, Sprite* background) {
+    if(background == NULL) return;
+    //healthy
+    if(state == 0) {
+        
+    }
+    //burning
+    if(state == 1) {
+        
+    }
+    //burn up
+    if(state == 2) {
+        background->removeChild(this->treeSprite, true);
+        this->treeSprite = Sprite::create("image/trees/bareTree.png");
+        this->treeSprite->setPosition(_posX, _posY);
+        background->addChild(this->treeSprite);
+    }
 }
