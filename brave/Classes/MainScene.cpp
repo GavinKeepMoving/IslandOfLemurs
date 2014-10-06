@@ -85,7 +85,7 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    _trees[1]->showAnimation(2, _background);
+    _trees[0]->showAnimation(1, _background);
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//

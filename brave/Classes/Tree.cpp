@@ -69,7 +69,9 @@ void Tree::showAnimation(int state, Sprite* background) {
     }
     //burning
     if(state == 1) {
-        
+        auto fireSprite = Sprite::create("image/fire/flame.png");
+        fireSprite->setPosition(150,90);
+        this->treeSprite->addChild(fireSprite);
     }
     //burn up
     if(state == 2) {
