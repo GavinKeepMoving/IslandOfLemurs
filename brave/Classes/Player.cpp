@@ -183,8 +183,10 @@ void Player::walkTo(Vec2 dest)
     //run action sequnce
     background->runAction(_seq);
     background1->runAction(_seq1);
+    //******************************************************************************************
+    //added by Wenbo Lin
     this->playAnimationForever(0);
-
+    //******************************************************************************************
 }
 
 void Player::climbDown(Vec2 dest)

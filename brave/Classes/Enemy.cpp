@@ -7,7 +7,6 @@
 //
 
 #include "Enemy.h"
-
 #include "Weapon.h"
 #include "Progress.h"
 
