@@ -124,10 +124,13 @@ bool MainScene::init()
     _player->background1 = background1;
     this->addChild(_player);
     
+    /******************Begin-Added by Yafu*****************************/
     //add enemy1
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
     _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
     this->addChild(_enemy1);
+    
+    /******************End-Added by Yafu*****************************/
     
     
     
@@ -163,7 +166,7 @@ void MainScene::activateWeaponOption(Ref* pSender)
 {
     float radius = -250.;
     
-    Weapon *weapon = this->_player->attack(radius);
+    Weapon *weapon = this->_player->attack(radius, Weapon::WeaponType::COCONUT);
     
     this->addChild(weapon);
     

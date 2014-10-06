@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Tree.h"
+#include "Weapon.h"
 
 USING_NS_CC;
 

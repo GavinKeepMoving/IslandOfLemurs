@@ -7,8 +7,9 @@
 //
 
 #include "Weapon.h"
+#include "MainScene.h"
 
-extern Scene* scene;
+extern MainScene *mainLayer;
 
 void Weapon::addAnimation()
 {
@@ -153,6 +154,8 @@ void Weapon::shootTo(Vec2 dest)
     auto func = [&]()
     {
         this->stopAllActions();
+        
+        mainLayer->removeChild(this);
         
                 //_seq = nullptr;
     };

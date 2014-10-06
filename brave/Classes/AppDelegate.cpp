@@ -3,7 +3,9 @@
 
 USING_NS_CC;
 
-
+/******************Start-Modified by Yafu****************************/
+MainScene *mainLayer;
+/******************End-Modified by Yafu*****************************/
 
 AppDelegate::AppDelegate() {
 
@@ -30,6 +32,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     Scene *scene = MainScene::createScene();
+    
+    /******************Start-Modified by Yafu****************************/
+    Vector<Node *> children = scene->getChildren();
+    mainLayer = (MainScene *)children.back();
+    /******************End-Modified by Yafu*****************************/
 
     // run
     director->runWithScene(scene);

@@ -112,10 +112,10 @@ void Player::walkTo(Vec2 dest)
 }*/
 
 
-Weapon* Player::attack(float radius)
+Weapon* Player::attack(float radius, Weapon::WeaponType weaponType)
 {
     //add weapon
-    Weapon *weapon = Weapon::create(Weapon::WeaponType::ARROW);
+    Weapon *weapon = Weapon::create(weaponType);
     Vec2 pos = this->getPosition();
     weapon->setPosition(pos.x, pos.y);
     //scene->addChild(weapon);

@@ -36,7 +36,7 @@ public:
     void addAnimation();
     void playAnimationForever(int index);
     
-    Weapon* attack(float radius);
+    Weapon* attack(float radius, Weapon::WeaponType weaponType);
     
     Vec2 getCurPos();
 
