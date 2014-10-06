@@ -9,7 +9,7 @@
 #include "Enemy.h"
 
 #include "Weapon.h"
-
+#include "Progress.h"
 
 float Enemy::height = 0.25;
 
