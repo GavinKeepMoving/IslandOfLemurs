@@ -31,7 +31,9 @@ public:
     void spriteMoveFinished(CCNode* sender);
     //initialize trees
     void initTrees(int num);
-    
+      
+	//------blood progress----------------//
+	void addProgress();
 private:
     Player* _player;
 	Player* _enemy1;

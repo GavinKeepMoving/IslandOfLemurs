@@ -100,6 +100,10 @@ bool MainScene::init()
     this->addChild(_background, 0);
     this->addChild(_background1, 0);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
+	
+	//init blood progress
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
+	//-------------------------------------//
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
     //add player
@@ -119,12 +123,21 @@ bool MainScene::init()
     //test animation
     //_player->playAnimationForever(1);
     //_enemy1->playAnimationForever(1);
-    
+    //add blood progress
+    addProgress();
+	//--------------------//
     auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     return true;
 }
+void MainScene::addProgress()
+{
+	_progress = Progress::create("player-progress-bg.png","player-progress-fill.png");
+	
+	_progress->setPosition(origin.x + _progress->getContentSize().width/2, origin.y - _progress->getContentSize().height/2);
+	this->addChild(_progress);
 
+}
 
 //Right top Weapon option bar
 void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
