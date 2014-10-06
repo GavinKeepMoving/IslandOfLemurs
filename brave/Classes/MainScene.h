@@ -6,6 +6,11 @@
 #include "Tree.h"
 #include "Weapon.h"
 
+//******************************************************************************************************************
+//added by Wenbo Lin
+#include "Progress.h"
+//******************************************************************************************************************
+
 USING_NS_CC;
 
 class MainScene : public cocos2d::Layer
@@ -32,7 +37,9 @@ public:
     void spriteMoveFinished(CCNode* sender);
     //initialize trees
     void initTrees(int num);
-    
+      
+	//------blood progress----------------//
+	void addProgress();
 private:
     Player* _player;
 	Player* _enemy1;
@@ -40,8 +47,13 @@ private:
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
-    Sprite *background;
+    Sprite *_background;
+    Sprite *_background1;
     std::vector<Tree*> _trees;
+    //******************************************************************************************************************
+    //added by Wenbo Lin
+    Progress* _progress;
+    //******************************************************************************************************************
 };
 
 #endif // __HELLOWORLD_SCENE_H__

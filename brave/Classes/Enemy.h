@@ -12,6 +12,12 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Weapon.h"
+
+//******************************************************************************************************************
+//added by Wenbo Lin
+#include "Progress.h"
+//******************************************************************************************************************
+
 USING_NS_CC;
 
 class Enemy : public Player
@@ -37,7 +43,7 @@ public:
     void addAnimation();
     void playAnimationForever(int index);
     
-    Weapon* attack(float radius);
+   Weapon* attack(float radius);
     
     Vec2 getCurPos();
     
@@ -57,6 +63,10 @@ private:
 public:
     Sprite* background;
     Sprite* background1;
+    //******************************************************************************************************************
+    //added by Wenbo Lin
+    Progress* _progress;
+    //******************************************************************************************************************
     Vec2 curPos;
 };
 

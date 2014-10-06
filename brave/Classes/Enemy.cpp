@@ -7,9 +7,8 @@
 //
 
 #include "Enemy.h"
-
 #include "Weapon.h"
-
+#include "Progress.h"
 
 float Enemy::height = 0.25;
 
@@ -79,6 +78,16 @@ bool Enemy::initWithPlayerType(EnemyType type)
     _animationNames.assign(animationNames, animationNames + 5);
     //load animation
     this->addAnimation();
+	
+	
+	
+	//add enemy's progress
+	auto size = this->getContentSize();
+	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
+	_progress->setPosition( size.width*2/3, size.height + _progress->getContentSize().height/2);
+	
+	this->addChild(_progress);
+//-----------------------------------------------//
     return true;
 }
 

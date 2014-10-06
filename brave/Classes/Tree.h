@@ -27,6 +27,10 @@ public:
     
     static float blood;
     
+    //store the position of trees
+    float _posX;
+    float _posY;
+    
     Sprite* treeSprite;
     
     Tree(void);
@@ -38,7 +42,7 @@ public:
     int getBlood(Tree* tree);//get blood values
     int getState(Tree* tree);//get state: burning or burn down or healthy
     bool generateBananas(Tree* tree);//generate banana objects
-    bool showAnimation(Tree* tree);//show burning or burndown, need to call getState to know which animations to play
+    void showAnimation(int state, Sprite* background);//show burning or burndown, need to call getState to know which animations to play
 };
 
 #endif /* defined(__brave__Tree__) */
