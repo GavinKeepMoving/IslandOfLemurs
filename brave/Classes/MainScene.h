@@ -14,6 +14,7 @@ public:
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
+    virtual void update(float delta);
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
@@ -26,6 +27,7 @@ public:
     //add Attack option top right bar
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
     void activateWeaponOption(Ref* pSender);
+    LabelTTF* label;
     
 private:
     Player* _player;

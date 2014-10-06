@@ -1,6 +1,7 @@
 #include "MainScene.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "BananaManger.h"
 
 USING_NS_CC;
 
@@ -53,59 +54,72 @@ bool MainScene::init()
     
     // 3. add Weapon options bar
     initWeaponOptionsBar(origin, visibleSize);
-//
-//    /////////////////////////////
-//    // 3. add your codes below...
-//
-//    // add a label shows "Hello World"
-//    // create and initialize a label
-//    
-//    auto label = LabelTTF::create("Hello World", "Arial", 24);
-//    
-//    // position the label on the center of the screen
-//    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-//                            origin.y + visibleSize.height - label->getContentSize().height));
-//
-//    // add the label as a child to this layer
-//    this->addChild(label, 1);
+    
+
+    /////////////////////////////
+    // 3. add your codes below...
+
+    // add a label shows "Hello World"
+    // create and initialize a label
+    
+    label = LabelTTF::create("Score: 0", "Arial", 24);
+    
+    // position the label on the center of the screen
+    label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                            origin.y + visibleSize.height - label->getContentSize().height));
+
+    // add the label as a child to this layer
+    this->addChild(label, 1);
 
     // add "HelloWorld" splash screen"
     auto background = Sprite::create("background.png");
 
     // position the sprite on the center of the screen
     background->setPosition(origin + visibleSize/2);
-
+    
+    // add the sprite as a child to this layer
+    this->addChild(background, 0);
     
     _listener_touch = EventListenerTouchOneByOne::create();
     _listener_touch->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan,this);
     _listener_touch->onTouchEnded = CC_CALLBACK_2(MainScene::onTouchEnded,this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(_listener_touch, this);
 
-    
-    // add the sprite as a child to this layer
-    this->addChild(background, 0);
+
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     //add player
     
     _player = Player::create(Player::PlayerType::PLAYER);
+    _player->setScale(0.5);
     _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
     this->addChild(_player);
+    _player->retain();
     
     //add enemy1
     _enemy1 = Player::create(Player::PlayerType::ENEMY1);
     _enemy1->setPosition(origin.x + visibleSize.width - _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
     this->addChild(_enemy1);
     
+    BananaManger* bananaManger = BananaManger::create();
+    bananaManger->bindPlayer(_player);
+    this->addChild(bananaManger,4);
     
     
     //test animation
     //_player->playAnimationForever(1);
     _enemy1->playAnimationForever(1);
     
+    this->scheduleUpdate();
     return true;
 }
 
+void MainScene::update(float delta)
+{
+
+    label->setString(CCString::createWithFormat("Score:%d",_player->getMoney())->getCString());
+
+}
 
 //Right top Weapon option bar
 void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
@@ -155,11 +169,11 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     _player->stopAllActions();
-    if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
+    /*if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
         _player->climbDown(pos);
     }
     else
-        _player->climbUp(pos);
+        _player->climbUp(pos);*/
     log("MainScene::onTouchend");
 }
 

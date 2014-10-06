@@ -38,9 +38,11 @@ public:
     void climbDown(Vec2 dest);
     void climbUp(Vec2 dest);
     Vec2 getCurPos();
+    
     //lishi
     int getMoney();
-    CCRect getBoundingBox();
+    Rect getBoundingBox();
+    int money;
     
 private:
     //Action _seq;
@@ -51,7 +53,7 @@ private:
     std::vector<int> _animationFrameNum;
     std::vector<std::string> _animationNames;
     Sequence* _seq;
-    int _money;
+    
     //currentPos
     
 public:

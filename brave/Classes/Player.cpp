@@ -49,7 +49,7 @@ void Player::playAnimationForever(int index)
 bool Player::initWithPlayerType(PlayerType type)
 {
     std::string sfName = "";
-    _money = 0;
+    money = 0;
     _type = type;
     _speed = 100;
 	_seq = nullptr;
@@ -228,19 +228,19 @@ Vec2 Player::getCurPos()
 
 int Player::getMoney()
 {
-    return _money;
+    return money;
 }
 
-CCRect Player::getBoundingBox()
+Rect Player::getBoundingBox()
 {
     /*由于Sprite是放在Player上的，所以要检测Player的碰撞范围*/
-    CCSize spriteSize=this->getContentSize();
-    CCPoint entityPos=this->getPosition();//获取player中心点
+    Size spriteSize=getContentSize();
+    Vec2 entityPos=getCurPos();//获取player中心点
     
     //获取Player左下角的坐标值
-    int x=entityPos.x-spriteSize.width/2;
+    int x=entityPos.x-spriteSize.width/4;
     int y=entityPos.y-spriteSize.height/2;
     
-    return CCRectMake(x,y,spriteSize.width,spriteSize.height);
+    return Rect(x,y,spriteSize.width/2,spriteSize.height);
 }
 

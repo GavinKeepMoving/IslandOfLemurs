@@ -15,11 +15,12 @@ USING_NS_CC;
 
 #define MAX_MONSTER_NUM 10
 
-class BananaManger:public Sprite
+class BananaManger:public Node
 {
 public:
     BananaManger();
     ~BananaManger();
+    static BananaManger* create();
     virtual bool init();
     virtual void update(float dt);/*重写update函数*/
     void bindPlayer(Player* player);

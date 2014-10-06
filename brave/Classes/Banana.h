@@ -24,14 +24,14 @@ public:
 public:
     void show();
     void hide();
-    void reset();//重置怪物数据
+    void reset(int i);//重置怪物数据
     bool isAlive();//是否活动状态
     
     bool isCollideWithPlayer(Player* player);//检测是否碰撞
-    void bindSprite(CCSprite* sprite);
+    void bindSprite(Sprite* sprite);
 private:
     bool m_isAlive;
-    CCSprite* _sprite; 
+    Sprite* _sprite;
 };
 
 #endif /* defined(__brave__Banana__) */
