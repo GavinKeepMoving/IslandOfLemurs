@@ -50,6 +50,10 @@ public:
     Sprite* background;
     Sprite* background1;
     Vec2 curPos;
+    //lishi
+    int getMoney();
+    Rect getBoundingBox();
+    int money;
 
 private:
     //Action _seq;
@@ -62,7 +66,6 @@ private:
     Sequence* _seq;
     //currentPos
     FSM *_fsm;
-    
 };
 
 #endif
