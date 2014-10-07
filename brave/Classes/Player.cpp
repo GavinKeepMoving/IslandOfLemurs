@@ -155,8 +155,6 @@ void Player::stop() {
 void Player::onWalk(Vec2 dest, int boundry) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
-    boundry += visibleSize.width/2;
-    
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto curPos = background->getPosition();
     Vector< FiniteTimeAction * > arrayOfActions;
