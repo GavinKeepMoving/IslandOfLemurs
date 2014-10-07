@@ -154,55 +154,72 @@ void Player::stop() {
 
 void Player::onWalk(Vec2 dest, int boundry) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    
+    boundry += visibleSize.width/2;
+    
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    auto curPos = this->getPosition();
+    auto curPos = background->getPosition();
     Vector< FiniteTimeAction * > arrayOfActions;
+    Vector< FiniteTimeAction * > backgroundActions;
+    Vector< FiniteTimeAction * > backgroundActions1;
     Vec2 dest1, dest2, dest3;
     auto backgroundPos = background->getPosition();
     auto background1Pos = background1->getPosition();
     
     //flip when moving backward
     if(dest.x < origin.x + visibleSize.width/2) {
-        dest1.x = boundry;
+        dest1.x = -boundry;
         dest3.x = origin.x;
-        dest2.y = origin.y + visibleSize.height*Player::height*3;
+        dest2.y = visibleSize.height * 3/4;
         this->setFlippedX(true);
     }
     else {
-        dest1.x = boundry;
-        dest3.x = origin.x + visibleSize.width;
-        dest2.y = origin.y + visibleSize.height*Player::height;
+        dest1.x = -boundry;
+        dest3.x = visibleSize.width*3/2 - background->getContentSize().width*2;
+        dest2.y = visibleSize.height * 1/4;
         this->setFlippedX(false);
     }
-    dest1.y = curPos.y;
-    dest2.x = dest1.x;
-    dest3.y = dest2.y;
+    dest1.y = origin.y;
+    dest2.x = visibleSize.width/2;
+    dest3.y = origin.y;
+    dest1 += visibleSize/2;
+    dest3 += visibleSize/2;
     //calculate the time needed to move
     
     auto diff1 = dest1 - curPos;
     auto time1 = diff1.getLength()/_speed;
-    auto move1 = MoveTo::create(time1, dest1);
-    auto diff2 = dest2 - dest1;
-    auto time2 = diff2.getLength()/_speed;
+    auto empty = Vec2(0, 0);
+    auto move1 = MoveBy::create(time1, empty);
+    auto bmove1 = MoveTo::create(time1, dest1);
+    auto bmove11 = MoveTo::create(time1, dest1 + background1Pos - backgroundPos);
+    auto time2 = (dest2 - this->getPosition()).getLength()/_speed;
     auto climb = MoveTo::create(time2, dest2);
-    auto diff3 = dest3 - dest2;
-    auto time3 = diff3.getLength()/_speed;
-    auto move2 = MoveTo::create(time3, dest3);
-    if((dest.x < origin.x + visibleSize.width/2 && curPos.x >= boundry)
-       ||(dest.x > origin.x + visibleSize.width/2 && curPos.x <= boundry)) {
+    auto bmove2 = MoveBy::create(time2, empty);
+    
+    if((dest.x < origin.x + visibleSize.width/2 && curPos.x <= dest1.x)
+       ||(dest.x > origin.x + visibleSize.width/2 && curPos.x >= dest1.x)) {
         arrayOfActions.pushBack(move1);
         arrayOfActions.pushBack(climb);
+        backgroundActions.pushBack(bmove1);
+        backgroundActions.pushBack(bmove2);
+        backgroundActions1.pushBack(bmove11);
+        backgroundActions1.pushBack(bmove2);
     }
-    arrayOfActions.pushBack(move2);
+    else {
+        dest1 = curPos;
+    }
+    auto diff3 = dest3 - dest1;
+    auto time3 = diff3.getLength()/_speed;
+    auto move2 = MoveBy::create(time3, empty);
+    auto bmove3 = MoveTo::create(time3, dest3);
+    auto bmove31 = MoveTo::create(time3, dest3 + background1Pos - backgroundPos);
     
-    auto diff = dest - curPos;
-    auto realDest1 = backgroundPos - diff1;
-    auto realDest11 = background1Pos - diff1;
-    auto time = realDest1.getLength()/_speed;
+    arrayOfActions.pushBack(move2);
+    backgroundActions.pushBack(bmove3);
+    backgroundActions1.pushBack(bmove31);
     
     //auto movePlayer = MoveTo::create(playerTime, dest);
-    auto bmove = MoveTo::create(time, realDest1);
-    auto bmove1 = MoveTo::create(time, realDest11);
+   
     
     //lambda function
     auto func = [&]()
@@ -211,13 +228,15 @@ void Player::onWalk(Vec2 dest, int boundry) {
     };
     auto callback = CallFunc::create(func);
     
+    arrayOfActions.pushBack(callback);
+    backgroundActions.pushBack(callback);
+    
     //create sequence for two backgrounds and player(some bugs)
     //auto _seqPlayer = Sequence::create(movePlayer, callback, nullptr);
-    auto _bseq = Sequence::create(bmove, callback, nullptr);
-    auto _bseq1 = Sequence::create(bmove1, callback, nullptr);
-    
-    //this->runAction(_seq);
-    //this->playAnimationForever(0);
+    auto _bseq = Sequence::create(backgroundActions);
+    auto _bseq1 = Sequence::create(backgroundActions1);
+    auto _seq = Sequence::create(arrayOfActions);
+    this->runAction(_seq);
     
     //run action sequnce
     background->runAction(_bseq);

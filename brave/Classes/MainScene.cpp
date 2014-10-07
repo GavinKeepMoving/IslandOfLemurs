@@ -112,7 +112,7 @@ bool MainScene::init()
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height/2);
+    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*3/4);
     _player->background = _background;
     _player->background1 = _background1;
     this->addChild(_player);
@@ -200,7 +200,7 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     //TO-DO change 750 the integer to tree boundries or something
-    _player->walkTo(pos, 750);
+    _player->walkTo(pos, 250);
     log("MainScene::onTouchBegan");
     return true;
 }
