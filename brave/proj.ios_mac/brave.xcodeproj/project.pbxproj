@@ -92,6 +92,9 @@
 		FE2E25B019D7444800AC8DB5 /* ui.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE2E25A719D7444800AC8DB5 /* ui.pvr.ccz */; };
 		FEAA761C19C611D800E8ED22 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEAA761B19C611D800E8ED22 /* Marker Felt.ttf */; };
 		FEAA762019C6201400E8ED22 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEAA761F19C6201400E8ED22 /* Player.cpp */; };
+		FEDF9FE419E39E7A00484807 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FDE19E39E7A00484807 /* Attack.cpp */; };
+		FEDF9FE519E39E7A00484807 /* blood.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FE019E39E7A00484807 /* blood.cpp */; };
+		FEDF9FE619E39E7A00484807 /* Progress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FE219E39E7A00484807 /* Progress.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -318,6 +321,12 @@
 		FEAA761B19C611D800E8ED22 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
 		FEAA761D19C61BC800E8ED22 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Classes/Player.h; sourceTree = "<group>"; };
 		FEAA761F19C6201400E8ED22 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		FEDF9FDE19E39E7A00484807 /* Attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Attack.cpp; path = ../Classes/Attack.cpp; sourceTree = "<group>"; };
+		FEDF9FDF19E39E7A00484807 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attack.h; path = ../Classes/Attack.h; sourceTree = "<group>"; };
+		FEDF9FE019E39E7A00484807 /* blood.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = blood.cpp; path = ../Classes/blood.cpp; sourceTree = "<group>"; };
+		FEDF9FE119E39E7A00484807 /* blood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blood.h; path = ../Classes/blood.h; sourceTree = "<group>"; };
+		FEDF9FE219E39E7A00484807 /* Progress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Progress.cpp; path = ../Classes/Progress.cpp; sourceTree = "<group>"; };
+		FEDF9FE319E39E7A00484807 /* Progress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Progress.h; path = ../Classes/Progress.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +396,12 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FEDF9FDE19E39E7A00484807 /* Attack.cpp */,
+				FEDF9FDF19E39E7A00484807 /* Attack.h */,
+				FEDF9FE019E39E7A00484807 /* blood.cpp */,
+				FEDF9FE119E39E7A00484807 /* blood.h */,
+				FEDF9FE219E39E7A00484807 /* Progress.cpp */,
+				FEDF9FE319E39E7A00484807 /* Progress.h */,
 				A6C5B2F619CF3C0000DA478A /* MainScene.cpp */,
 				A6C5B2F719CF3C0000DA478A /* MainScene.h */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
@@ -777,11 +792,14 @@
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */,
+				FEDF9FE519E39E7A00484807 /* blood.cpp in Sources */,
 				A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				1AFAF8B816D35DE700DB1158 /* (null) in Sources */,
+				FEDF9FE619E39E7A00484807 /* Progress.cpp in Sources */,
 				A60105AC19E1C28100664A6C /* Enemy.cpp in Sources */,
 				BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */,
+				FEDF9FE419E39E7A00484807 /* Attack.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

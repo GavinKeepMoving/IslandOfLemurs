@@ -199,7 +199,8 @@ void MainScene::initTrees(int num) {
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
-    _player->walkTo(pos);
+    //TO-DO change 750 the integer to tree boundries or something
+    _player->walkTo(pos, 750);
     log("MainScene::onTouchBegan");
     return true;
 }
@@ -207,17 +208,13 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
 void MainScene::onTouchEnded(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
-    _player->stopAllActions();
+    // added by Zhenni Huang
+    _player->stop();
     //********************************************************************************
     //added by Wenbo Lin
     _background->stopAllActions();
     _background1->stopAllActions();
     //********************************************************************************
-    if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
-        _player->climbDown(pos);
-    }
-    else
-        _player->climbUp(pos);
     log("MainScene::onTouchend");
 }
 

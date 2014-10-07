@@ -9,6 +9,7 @@
 #ifndef __Player__
 #define __Player__
 #include "cocos2d.h"
+#include "FSM.h"
 #include "Weapon.h"
 USING_NS_CC;
 
@@ -29,20 +30,26 @@ public:
 		BEINGHIT,
 		SKILL
 	};
+    enum ActionTag
+    {
+        WALKTO_TAG =100
+    };
     static float height;
     bool initWithPlayerType(PlayerType type);
     static Player* create(PlayerType type);
     void walkTo(Vec2 dest);
+    void walkTo(Vec2 dest, int boundry);
     void addAnimation();
     void playAnimationForever(int index);
-    
+    void onWalk(Vec2 dest, int boundry);
+    void initFSM();
+    void stop();
     Weapon* attack(float radius, Weapon::WeaponType weaponType);
     
     Vec2 getCurPos();
-
-    void onWalk(Vec2 dest);
-    void climbDown(Vec2 dest);
-    void climbUp(Vec2 dest);
+    Sprite* background;
+    Sprite* background1;
+    Vec2 curPos;
 
 private:
     //Action _seq;
@@ -54,11 +61,8 @@ private:
     std::vector<std::string> _animationNames;
     Sequence* _seq;
     //currentPos
+    FSM *_fsm;
     
-public:
-    Sprite* background;
-    Sprite* background1;
-    Vec2 curPos;
 };
 
 #endif
