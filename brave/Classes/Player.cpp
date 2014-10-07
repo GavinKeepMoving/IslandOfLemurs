@@ -51,6 +51,7 @@ void Player::playAnimationForever(int index)
 bool Player::initWithPlayerType(PlayerType type)
 {
     std::string sfName = "";
+    money = 0;
     _type = type;
     _speed = 100;
 	_seq = nullptr;
@@ -252,3 +253,53 @@ Vec2 Player::getCurPos()
     Vec2 result = Vec2(curPos.x, curPos.y);
     return result;
 }
+/*
+=======
+    dest.y = origin.y + visibleSize.height*Player::height*3;
+    dest.x = curPos.x;
+    
+    //calculate the time needed to move
+    auto diff = dest - curPos;
+    auto time = diff.getLength()/_speed;
+    auto move = MoveTo::create(time, dest);
+    //lambda function
+    auto func = [&]()
+    {
+        //this->_fsm->doEvent("stop");
+        this->stopAllActions();
+        //_seq = nullptr;
+    };
+    auto callback = CallFunc::create(func);
+    auto _seq = Sequence::create(move, callback, nullptr);
+    
+    this->runAction(_seq);
+    this->playAnimationForever(0);
+
+}
+
+Vec2 Player::getCurPos()
+{
+    auto curPos = this->getPosition();
+    Vec2 result = Vec2(curPos.x, curPos.y);
+    return result;
+}
+*/
+
+int Player::getMoney()
+{
+    return money;
+}
+
+Rect Player::getBoundingBox()
+{
+    /*由于Sprite是放在Player上的，所以要检测Player的碰撞范围*/
+    Size spriteSize=getContentSize();
+    Vec2 entityPos=getCurPos();//获取player中心点
+    
+    //获取Player左下角的坐标值
+    int x=entityPos.x-spriteSize.width/4;
+    int y=entityPos.y-spriteSize.height/2;
+    
+    return Rect(x,y,spriteSize.width/2,spriteSize.height);
+}
+
