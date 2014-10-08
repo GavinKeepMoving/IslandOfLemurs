@@ -169,13 +169,13 @@ void Player::onWalk(Vec2 dest, int boundry) {
     if(dest.x < origin.x + visibleSize.width/2) {
         dest1.x = -boundry;
         dest3.x = origin.x;
-        dest2.y = visibleSize.height * 3/4;
+        dest2.y = origin.y + visibleSize.height*Player::height*3;
         this->setFlippedX(true);
     }
     else {
         dest1.x = -boundry;
         dest3.x = visibleSize.width*3/2 - background->getContentSize().width*2;
-        dest2.y = visibleSize.height * 1/4;
+        dest2.y = origin.y + visibleSize.height*Player::height;
         this->setFlippedX(false);
     }
     dest1.y = origin.y;

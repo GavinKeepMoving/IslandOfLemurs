@@ -119,11 +119,11 @@ bool MainScene::init()
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
-    //_player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*3/4);
+    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Player::height*3);
     _player->background = _background;
     _player->background1 = _background1;
     _player->setScale(0.5);
-    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
+    //_player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
     this->addChild(_player);
     _player->retain();
     
@@ -135,10 +135,17 @@ bool MainScene::init()
     
     /******************End-Added by Yafu*****************************/
     
-    BananaManger* bananaManger = BananaManger::create();
+    BananaManger* bananaManger = BananaManger::create(_background);
     bananaManger->bindPlayer(_player);
-    this->addChild(bananaManger,4);
     
+    /****************** Begin-Added by Wenbo *********************/
+    //Original Version
+    //this->addChild(bananaManger,4);
+    
+    //Edit Version
+    bananaManger->_background = _background;
+    _background->addChild(bananaManger, 4);
+    /****************** End-Added by Wenbo *********************/
     
     //test animation
     //_player->playAnimationForever(1);
@@ -146,7 +153,7 @@ bool MainScene::init()
     //add blood progress
     addProgress();
 	//--------------------//
-    auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
+    //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     this->scheduleUpdate();
     return true;
