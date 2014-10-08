@@ -15,9 +15,12 @@ BananaManger::BananaManger(){}
 
 BananaManger::~BananaManger(){}
 
-BananaManger* BananaManger::create()
+BananaManger* BananaManger::create(Sprite* background)
 {
     BananaManger* bananaManger = new BananaManger();
+    /******************************** Begin-Added by Wenbo Lin *********************************/
+    bananaManger->_background = background;
+    /******************************** End-Added by Wenbo Lin ***********************************/
     bananaManger->init();
     return bananaManger;
 }
@@ -48,6 +51,11 @@ void BananaManger::createBananas()
     for(int i=0;i<max_Banana_num; i++)
     {
         auto banana=Banana::create();
+        
+        /******************************** Begin-Added by Wenbo Lin *********************************/
+        banana->_background = this->_background;
+        /******************************** End-Added by Wenbo Lin ***********************************/
+        
         banana->setScale(0.3);
         banana->bindSprite(Sprite::create("fruit.png"));
         banana->reset(i);
@@ -84,8 +92,16 @@ void BananaManger::update(float dt)
         }
     }
 }
+
 void BananaManger::bindPlayer(Player* player)
 {
     this->_player=player;
     this->_player->retain();//引用计数 +1
 }
+
+/******************************** Begin-Added by Wenbo Lin *********************************/
+void BananaManger::bindBackground(Sprite* background)
+{
+    this->_background=background;
+}
+/******************************** End-Added by Wenbo Lin ***********************************/
