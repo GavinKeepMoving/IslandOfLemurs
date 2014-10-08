@@ -187,7 +187,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 
 void MainScene::activateWeaponOption(Ref* pSender)
 {
-    float radius = -250.;
+    float radius = 250.;
     
     Weapon *weapon = this->_player->attack(radius, Weapon::WeaponType::COCONUT);
     
