@@ -25,8 +25,10 @@ class Animal : public Player
 public:
     enum AnimalType
     {
-        ANIMAL1,
-        ANIMAL2
+        CLOTHE,
+        DOG,
+        AC,
+        ELEPHANT
     };
     enum AnimationType
     {

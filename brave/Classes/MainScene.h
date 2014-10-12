@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Tree.h"
 #include "Weapon.h"
-
+#include "Animal.h"
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
@@ -43,6 +43,7 @@ public:
 	//------blood progress----------------//
 	void addProgress();
 private:
+    Animal* _animal;
     Player* _player;
 	Player* _enemy1;
     Size visibleSize;
