@@ -12,7 +12,7 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Weapon.h"
-
+#include "FSM.h"
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
@@ -51,7 +51,8 @@ public:
     Vec2 getCurPos();
     
     void onWalk(Vec2 dest);
-    
+	//when hit reduce blood Xiaojing
+    void beHit(int attack);
 private:
     //Action _seq;
     float _speed;
@@ -63,6 +64,7 @@ private:
     Sequence* _seq;
     //currentPos
     //blood attribute  xiaojing
+	FSM* _fsm;
 	int _health;  //current blood 
 	int _maxHealth;  //total blood
 	int _attack;  //each attack harm enemy

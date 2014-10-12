@@ -47,7 +47,7 @@ void Banana::reset(int i)
 void Banana::reset(int i)
 {
     //初始化金币坐标,宽度(800-2800),高度（100-200
-    this->setPosition(800 + i*100, 600);
+    this->setPosition(800 + i*100, 330);
     //this->setPosition(ccp(800+CCRANDOM_0_1()*2000,200-CCRANDOM_0_1()*100));
 }
 

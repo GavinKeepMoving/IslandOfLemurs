@@ -37,7 +37,9 @@ public:
     
     //add Attack option top right bar
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
+    void initAnimalOptionsBar();
     void activateWeaponOption(Ref* pSender);
+    void callAnimalHelper(Ref* pSender, int index);
     LabelTTF* label;
     
     void spriteMoveFinished(CCNode* sender);
@@ -48,10 +50,17 @@ public:
     void enemyMove(float dt);
     //
 //    bool closeToEnemy( obj);
-    
-      
+	 void enemyDead(Ref* obj);
+     void animalDead(Ref* obj);
 	//------blood progress----------------//
 	void addProgress();
+    
+    /******************Begin-Added by Yafu*****************************/
+    Vec2 getOrigin() {
+        return origin;
+    }
+    /******************End-Added by Yafu*****************************/
+
 private:
     Animal* _animal;
     Player* _player;
@@ -59,11 +68,12 @@ private:
     Enemy* _enemy2;
     Enemy* _enemy3;
     Vector<Enemy*> _enemys;
-    
+    Vector<Animal*> _animals;
     Size visibleSize;
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
+
 public:
     Sprite *_background;
     Sprite *_background1;

@@ -9,6 +9,10 @@
 #include "Player.h"
 #include "Weapon.h"
 
+#include "MainScene.h"
+
+extern MainScene *mainLayer;
+
 
 float Player::height = 0.25;
 
@@ -133,14 +137,19 @@ Weapon* Player::attack(float radius, Weapon::WeaponType weaponType)
 {
     //add weapon
     Weapon *weapon = Weapon::create(weaponType);
-    Vec2 pos = this->getPosition();
+
+    Vec2 groundPos = mainLayer->getOrigin() + Vec2(0.f, this->getContentSize().height);
+    Vec2 pos = mainLayer->_background->convertToNodeSpace(this->getPosition());
     weapon->setPosition(pos.x, pos.y);
     //scene->addChild(weapon);
     
-    Vec2 target(pos.x+radius, pos.y);
+    Vec2 target(pos.x+radius, groundPos.y);
     
     weapon->shootTo(target);
-    
+    //-------reset attack value of player according to weaponType---xiaojing -------------//
+	
+	 _attack+= weapon->_weaponPower;
+	//-------end edited by xiaojing---------------------------------------------------//
     return weapon;
 }
 
@@ -307,4 +316,21 @@ Rect Player::getBoundingBox()
     
     return Rect(x,y,spriteSize.width/2,spriteSize.height);
 }
-
+//reduce the _health value of current animal Xiaojing ***************//
+void Player::beHit(int attack){
+    _health -= attack;
+	if(_health <= 0)
+	{ //die
+		_health = 0;
+		
+		//do event die
+		_fsm->doEvent("die");
+		return;
+	}
+	else
+	{
+		//be hit
+		_fsm->doEvent("beHit");
+	}
+}
+//***************************************************//
