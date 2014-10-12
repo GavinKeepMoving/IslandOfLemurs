@@ -57,7 +57,11 @@ bool Enemy::initWithPlayerType(EnemyType type)
     _seq = nullptr;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
-    
+	//init enemy's blood xiaojing**************************//
+    _health = 50;
+	_maxHealth = 50;
+	_attack = 5;
+	//*************************************************//
     //setup according to PlayerType
     switch(type)
     {
@@ -154,13 +158,14 @@ Weapon* Enemy::attack(float radius)
     return weapon;
 }
 
+/****************** Begin-Added by Zhe Liu *********************/
 //enemy functions: attack, behit
 void Enemy::attack()
 {
     // find the nearest player, and then attack it.
     //    for (auto attacker : _attackers){
     //        if (abs(attacker->getPositionX()-this->getPositionX()) <= 1){
-    this->attack(30.0);
+//    this->attack(30.0);
     //            break;
     //        }
     //    }
@@ -308,3 +313,5 @@ bool Enemy::closeToTree(std::vector<Tree *> trees){
     auto curPos = this->getPosition();
     float dist = last->getPositionX()+last->Sprite::getContentSize().width/2;
 }
+
+/****************** End-Added by Zhe Liu *********************/

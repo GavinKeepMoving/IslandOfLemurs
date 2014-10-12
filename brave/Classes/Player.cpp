@@ -66,6 +66,11 @@ bool Player::initWithPlayerType(PlayerType type)
             _name = "lemur";
             _animationNum = 5;
             _speed = 125;
+			//init player's blood value xiaojing
+			_health = 100;
+			_maxHealth =100;
+			_attack = 20;
+			//-----------------------------------//
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 5);
             break;
         case PlayerType::ENEMY1:

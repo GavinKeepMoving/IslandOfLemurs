@@ -134,7 +134,7 @@ bool MainScene::init()
 //    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
 //    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
 
-    this->addChild(_enemy1);
+    _background->addChild(_enemy1);
 //    this->addChild(_enemy2);
     /******************End-Added by Yafu*****************************/
     
@@ -155,13 +155,13 @@ bool MainScene::init()
     //_enemy1->playAnimationForever(1);
     //add blood progress
     
-    // my change here
+    /****************** Begin-Added by Zhe Liu *********************/
     _enemys.pushBack(_enemy1);
 //    _enemys.pushBack(_enemy2);
     _enemy1->addAttacker(_player);
 //    _enemy2->addAttacker(_player);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
-    // my change here
+    /****************** End-Added by Zhe Liu *********************/
     addProgress();
 	//--------------------//
     //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
@@ -224,17 +224,18 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 300;
+    int beginningPos = 700;
+    int interval = 600;
     int treeNum = 2;
-    for(int i = 1; i <= treeNum; i++) {
+    for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos * i, 300);
+        treeSprite->setPosition(beginningPos + interval * i, 500);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
     }
 }
 
-
+/****************** Begin-Added by Zhe Liu *********************/
 // enemy move
 void MainScene::enemyMove(float dt)
 {
@@ -254,7 +255,7 @@ void MainScene::enemyMove(float dt)
     }
     
 }
-
+/****************** End-Added by Zhe Liu *********************/
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
