@@ -60,6 +60,7 @@ bool MainScene::init()
     
     // 3. add Weapon options bar
     initWeaponOptionsBar(origin, visibleSize);
+    initAnimalOptionsBar();
     
 
     /////////////////////////////
@@ -131,7 +132,7 @@ bool MainScene::init()
     //add enemy1
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
     _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-    this->addChild(_enemy1);
+    _background->addChild(_enemy1);
     
     /******************End-Added by Yafu*****************************/
     
@@ -192,13 +193,40 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     this->addChild(menu, 1);
 }
 
+//Right top Weapon option bar
+void MainScene::initAnimalOptionsBar()
+{
+    // add a "close" icon to exit the progress. it's an autorelease object
+    auto optionItem = MenuItemImage::create(
+                                            "animal1.png",
+                                            "CloseSelected.png",
+                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this));
+    
+    optionItem->setPosition(Vec2(origin.x + optionItem->getContentSize().width/2,
+                                 origin.y + optionItem->getContentSize().height/2));
+    
+    auto optionItem2 = MenuItemImage::create(
+                                            "animal2.png",
+                                            "CloseSelected.png",
+                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this));
+    
+    optionItem2->setPosition(Vec2(origin.x + optionItem->getContentSize().width/2 + optionItem->getContentSize().width,
+                                 origin.y + optionItem->getContentSize().height/2));
+    
+    // create menu, it's an autorelease object
+    auto menu = Menu::create(optionItem, NULL);
+    menu->addChild(optionItem2);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+}
+
 void MainScene::activateWeaponOption(Ref* pSender)
 {
     float radius = 250.;
     
-    Weapon *weapon = this->_player->attack(radius, Weapon::WeaponType::COCONUT);
+    Weapon *weapon = this->_player->attack(radius, Weapon::WeaponType::WATER);
     
-    this->addChild(weapon);
+    _background->addChild(weapon);
     
     
         

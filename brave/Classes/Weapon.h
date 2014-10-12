@@ -17,6 +17,7 @@ public:
     enum WeaponType
     {
         COCONUT,
+        WATER,
         BAMBOO,
         HONEYNEST,
         

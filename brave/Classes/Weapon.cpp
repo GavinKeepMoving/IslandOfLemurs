@@ -57,7 +57,7 @@ bool Weapon::initWithWeaponType(WeaponType type)
     _type = type;
     _speed = 100;
 	_seq = nullptr;
-    int animationFrameNum[1] ={1};
+    int animationFrameNum[2] ={1, 12};
     int animationFrameNum2[5] ={10, 3, 3, 2, 0};
     
     //setup according to PlayerType
@@ -69,6 +69,13 @@ bool Weapon::initWithWeaponType(WeaponType type)
             _animationNum = 1;
             _speed = 100;
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 1);
+            break;
+        case WeaponType::WATER:
+            sfName = "water-1-1.png";
+            _name = "water";
+            _animationNum = 1;
+            _speed = 100;
+            _animationFrameNum.assign(animationFrameNum+1, animationFrameNum + 2);
             break;
         case WeaponType::BAMBOO:
             sfName = "arrow1-1-1.png";
@@ -155,7 +162,7 @@ void Weapon::shootTo(Vec2 dest)
     {
         this->stopAllActions();
         
-        mainLayer->removeChild(this);
+        mainLayer->_background->removeChild(this, true);
         
                 //_seq = nullptr;
     };

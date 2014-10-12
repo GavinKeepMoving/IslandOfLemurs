@@ -33,6 +33,7 @@ public:
     
     //add Attack option top right bar
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
+    void initAnimalOptionsBar();
     void activateWeaponOption(Ref* pSender);
     LabelTTF* label;
     
@@ -42,6 +43,15 @@ public:
       
 	//------blood progress----------------//
 	void addProgress();
+    
+    /******************Begin-Added by Yafu*****************************/
+    Vec2 getOrigin() {
+        return origin;
+    }
+    /******************End-Added by Yafu*****************************/
+    
+    Sprite *_background;
+    Sprite *_background1;
 private:
     Player* _player;
 	Player* _enemy1;
@@ -49,8 +59,7 @@ private:
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
-    Sprite *_background;
-    Sprite *_background1;
+
     std::vector<Tree*> _trees;
     //******************************************************************************************************************
     //added by Wenbo Lin
