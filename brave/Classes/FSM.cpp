@@ -15,10 +15,10 @@ FSM::FSM(std::string state, std::function<void()> onEnter)
     this->addState(state, onEnter);
 }
 
-FSM* FSM::create(std::string state, std::function<void()> onEnter)
+FSM* FSM::create(std::string state,std::string type ,std::function<void()> onEnter)
 {
     FSM* fsm = new FSM(state, onEnter);
-    if(fsm && fsm->init())
+    if(fsm && fsm->init(type))
     {
         fsm->autorelease();
         return fsm;
@@ -125,10 +125,12 @@ void FSM::setOnEnter(std::string state, std::function<void()> onEnter)
     }
 }
 
-bool FSM::init()
+bool FSM::init(std::string type)
 {
     this->addState("walking",[](){cocos2d::log("Enter walking");})
-    ->addState("dead",[](){cocos2d::log("Enter dead");});
+    ->addState("dead",[](){cocos2d::log("Enter dead");})
+    ->addState("attacking",[](){cocos2d::log("Enter attacking");})
+    ->addState("beingHit",[](){cocos2d::log("Enter beingHit");});
     
     this->addEvent("walk","idle","walking")
     ->addEvent("die","idle","dead")
@@ -136,6 +138,17 @@ bool FSM::init()
     ->addEvent("stop","walking","idle")
     ->addEvent("walk","walking","walking")
     ->addEvent("stop","idle","idle");
-    
+    if (type == "Helper" || type == "Enemy"){
+        this->addEvent("beHit", "idle", "beingHit");
+        this->addEvent("beHit", "walking", "beingHit");
+        this->addEvent("die", "beingHit", "dead");
+        this->addEvent("die", "attacking", "dead");
+        this->addEvent("stop", "beingHit", "idle");
+        this->addEvent("attack", "idle", "attacking");
+        this->addEvent("attack", "walking", "attacking");
+        this->addEvent("stop","walking","idle");
+		this->addEvent("stop","attacking","idle");
+
+    }
     return true;
 }
