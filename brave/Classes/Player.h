@@ -59,7 +59,7 @@ public:
 	int _health;  //current blood 
 	int _maxHealth;  //total blood
 	int _attack;  //each attack harm enemy
-
+	void beHit(int attack);
 private:
     //Action _seq;
     float _speed;

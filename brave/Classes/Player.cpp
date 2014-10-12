@@ -310,4 +310,21 @@ Rect Player::getBoundingBox()
     
     return Rect(x,y,spriteSize.width/2,spriteSize.height);
 }
-
+//reduce the _health value of current animal Xiaojing ***************//
+void Player::beHit(int attack){
+    _health -= attack;
+	if(_health <= 0)
+	{ //die
+		_health = 0;
+		
+		//do event die
+		_fsm->doEvent("die");
+		return;
+	}
+	else
+	{
+		//be hit
+		_fsm->doEvent("beHit");
+	}
+}
+//***************************************************//
