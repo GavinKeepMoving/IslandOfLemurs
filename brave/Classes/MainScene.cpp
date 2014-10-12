@@ -131,8 +131,11 @@ bool MainScene::init()
     //add enemy1
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
     _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+//    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
+//    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+
     this->addChild(_enemy1);
-    
+//    this->addChild(_enemy2);
     /******************End-Added by Yafu*****************************/
     
     BananaManger* bananaManger = BananaManger::create(_background);
@@ -151,6 +154,14 @@ bool MainScene::init()
     //_player->playAnimationForever(1);
     //_enemy1->playAnimationForever(1);
     //add blood progress
+    
+    // my change here
+    _enemys.pushBack(_enemy1);
+//    _enemys.pushBack(_enemy2);
+    _enemy1->addAttacker(_player);
+//    _enemy2->addAttacker(_player);
+    this->schedule(schedule_selector(MainScene::enemyMove), 3);
+    // my change here
     addProgress();
 	//--------------------//
     //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
@@ -221,6 +232,27 @@ void MainScene::initTrees(int num) {
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
     }
+}
+
+
+// enemy move
+void MainScene::enemyMove(float dt)
+{
+    for (auto enemy : _enemys)
+    {
+        if ("dead" != enemy->getState() && _player)
+        {
+            Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees);
+            
+            if (dest == enemy->getPosition()){
+                enemy->attack();
+            }
+            else{
+                enemy->walkTo(dest);
+            }
+        }
+    }
+    
 }
 
 

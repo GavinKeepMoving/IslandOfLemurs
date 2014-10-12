@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "Weapon.h"
 #include "Progress.h"
+#include <iostream>
 
 float Enemy::height = 0.25;
 
@@ -65,18 +66,23 @@ bool Enemy::initWithPlayerType(EnemyType type)
             _name = "enemy1";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+            _minDist = 20;
+            _speed = 100;
             break;
         case EnemyType::ENEMY2:
             sfName = "enemy2-1-1.png";
             _name = "enemy2";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+            _minDist = 30;
+            _speed = 70;
             break;
     }
     this->initWithSpriteFrameName(sfName);
     std::string animationNames[] = {"walk", "attack", "dead", "hit", "skill"};
     _animationNames.assign(animationNames, animationNames + 5);
     //load animation
+    this->initFSM();
     this->addAnimation();
 	
 	
@@ -106,13 +112,31 @@ Enemy* Enemy::create(EnemyType type)
         return NULL;
     }
 }
-/*
- void Player::walkTo(Vec2 dest)
- {
-	std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, this, dest);
-	//_fsm->setOnEnter("walking", onWalk);
-	//_fsm->doEvent("walk");
- }*/
+void Enemy::walkTo(Vec2 dest)
+{
+	std::function<void()> onWalk = CC_CALLBACK_0(Enemy::onWalk, this, dest);
+	_fsm->setOnEnter("walking", onWalk);
+	_fsm->doEvent("walk");
+}
+// dest is the position of the targetted ending point of the enemy
+void Enemy::onWalk(Vec2 dest)
+{
+    log("Enter walk");
+    auto curPos = this->getPosition();
+    //    this->stopActionByTag(WALKTO_TAG);
+    auto diff = dest - curPos;
+	auto time = diff.getLength()/_speed;
+    auto move = MoveTo::create(time,dest);
+    auto func = [&]()
+    {
+        this->_fsm->doEvent("stop");
+    };
+    auto callback = CallFunc::create(func);
+    auto seq = Sequence::create(move, callback,nullptr);
+    //    seq->setTag(w)
+    this->runAction(seq);
+    this->playAnimationForever(WALKING);
+}
 
 
 Weapon* Enemy::attack(float radius)
@@ -130,80 +154,98 @@ Weapon* Enemy::attack(float radius)
     return weapon;
 }
 
-//actually player stay in the center of the screeen but the background would move to the opposite position as the target
-void Enemy::walkTo(Vec2 dest)
+//enemy functions: attack, behit
+void Enemy::attack()
 {
-    log("onIdle: Enter walk");
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    //stop current moving action, if any.
-    if(_seq!=nullptr)
-        this->stopAction(_seq);
-    
-    auto curPos = this->getPosition();
-    auto backgroundPos = background->getPosition();
-    auto background1Pos = background1->getPosition();
-    
-    //flip when moving backward
-    if(curPos.x > dest.x) {
-        dest.x = origin.x;
-        this->setFlippedX(true);
-    }
-    else {
-        dest.x = origin.x + visibleSize.width;
-        this->setFlippedX(false);
-    }
-    dest.y = curPos.y;
-    
-    //calculate the time needed to move
-    auto diff = dest - curPos;
-    auto realDest = backgroundPos - diff;
-    auto realDest1 = background1Pos - diff;
-    auto playerTime = diff.length()/_speed;
-    auto time = realDest.getLength()/_speed;
-    
-    //auto movePlayer = MoveTo::create(playerTime, dest);
-    auto move = MoveTo::create(time, realDest);
-    auto move1 = MoveTo::create(time, realDest1);
-    
-    //lambda function
-    auto func = [&]()
-    {
-        this->stopAllActions();
-        //_seq = nullptr;
-    };
-    auto callback = CallFunc::create(func);
-    
-    //create sequence for two backgrounds and player(some bugs)
-    //auto _seqPlayer = Sequence::create(movePlayer, callback, nullptr);
-    auto _seq = Sequence::create(move, callback, nullptr);
-    auto _seq1 = Sequence::create(move1, callback, nullptr);
-    
-    //this->runAction(_seq);
-    //this->playAnimationForever(0);
-    
-    //run action sequnce
-    background->runAction(_seq);
-    background1->runAction(_seq1);
-    
-    //judge if action should be stopped
-    auto curPosback1 = background->getPosition();
-    auto curPosback2 = background1->getPosition();
-    
-    /*
-     if(curPosback1.x - visibleSize.width / 2 > 0 || visibleSize.width / 2 - curPosback2.x > 0) {
-     background->stopAllActions();
-     background1->stopAllActions();
-     
-     //when background hit the end, player continue to move
-     //this->runAction(_seqPlayer);
-     //this->playAnimationForever(0);
-     }
-     //background->playAnimationForever(0);
-     */
+    // find the nearest player, and then attack it.
+    //    for (auto attacker : _attackers){
+    //        if (abs(attacker->getPositionX()-this->getPositionX()) <= 1){
+    this->attack(30.0);
+    //            break;
+    //        }
+    //    }
+    _fsm->doEvent("attack");
 }
+
+
+// get animate by type
+Animate* Enemy::getAnimateByType(AnimationType type){
+    if (type < 0 || type >= _animationNum)
+    {
+        log("illegal animation index!");
+        return nullptr;
+    }
+    auto str = String::createWithFormat("%s-%s",_name.c_str(), _animationNames[type].c_str())->getCString();
+    auto animation = AnimationCache::getInstance()->getAnimation(str);
+    auto animate = Animate::create(animation);
+    animate->setTag(type);
+    return animate;
+}
+
+void Enemy::initFSM(){
+    _fsm = FSM::create("idle", "Enemy");
+    _fsm->retain();
+    // corresponding functions
+    auto onIdle =[&]()
+	{
+		log("Enemy onIdle: Enter idle");
+		this->stopActionByTag(WALKING);
+		auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
+		auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
+		this->setSpriteFrame(spriteFrame);
+	};
+	_fsm->setOnEnter("idle",onIdle);
+    
+	auto onAttacking =[&]()
+	{
+		log("Enemy onAttacking: Enter Attacking");
+		auto animate = getAnimateByType(ATTACKING);
+		auto func = [&]()
+		{
+			this->_fsm->doEvent("stop");
+		};
+		auto callback = CallFunc::create(func);
+		auto seq = Sequence::create(animate, callback, nullptr);
+		this->runAction(seq);
+	};
+	_fsm->setOnEnter("attacking",onAttacking);
+	
+	auto onBeingHit = [&]()
+	{
+		log("Enemy onBeingHit: Enter BeingHit");
+		auto animate = getAnimateByType(BEINGHIT);
+		auto func = [&]()
+		{
+			this->_fsm->doEvent("stop");
+		};
+		auto wait = DelayTime::create(0.6f);
+		auto callback = CallFunc::create(func);
+		auto seq = Sequence::create(wait,animate, callback, nullptr);
+		this->runAction(seq);
+	};
+	_fsm->setOnEnter("beingHit",onBeingHit);
+    // dead callback function
+    //	auto onDead = [&]()
+    //	{
+    //		this->setCanAttack(false);
+    //		log("onDead: Enter Dead");
+    //		auto animate = getAnimateByType(DEAD);
+    //		auto func = [&]()
+    //		{
+    //			log("A charactor died!");
+    //			NotificationCenter::getInstance()->postNotification("enemyDead",this);
+    //			this->removeFromParentAndCleanup(true);
+    //		};
+    //		auto blink = Blink::create(3,5);
+    //		auto callback = CallFunc::create(func);
+    //		auto seq = Sequence::create(animate, blink, callback, nullptr);
+    //		this->stopAllActions();
+    //		this->runAction(seq);
+    ////		_progress->setVisible(false);
+    //	};
+    //	_fsm->setOnEnter("dead",onDead);
+}
+
 
 
 Vec2 Enemy::getCurPos()
@@ -211,4 +253,58 @@ Vec2 Enemy::getCurPos()
     auto curPos = this->getPosition();
     Vec2 result = Vec2(curPos.x, curPos.y);
     return result;
+}
+
+// need to add interfaces about blood process, when the enemy is hitted, it need to stop
+void Enemy::beHit(int attack){
+    
+}
+
+//judge for the player
+void Enemy::addAttacker(Player *attacker){
+    _attackers.pushBack(attacker);
+}
+void Enemy::removeAttacker(Player *attacker){
+    _attackers.eraseObject(attacker);
+}
+bool Enemy::isInRange(Player *enemy){
+    return _attackers.contains(enemy);
+}
+
+// get best attack position
+Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees)
+{
+    // fill in the closest object to be attacked.
+    auto curPos = this->getPosition();
+    Vec2 firstObj;
+    bool isTree = false;
+    if (trees.size() == 0 || (pos.x >= trees.back()->getPositionX() && curPos.x >= pos.x)){
+        firstObj = pos;
+    }
+    else{
+//        if (pos.x < trees.back()->getPositionX() || ){
+        firstObj = trees.back()->getPosition();
+        isTree = true;
+//        }
+    }
+	auto pos1 = curPos - Vec2(_speed, 0);
+	auto pos2 = curPos;
+    auto pos3 = firstObj + Vec2(this->_minDist,0);
+    auto diff1 = pos1.x - firstObj.x;
+    if (diff1 > this->_minDist+_speed || (isTree == false && std::abs(firstObj.y - curPos.y) > 20)){
+//        std::cout<< "the existence of tree is: "<<isTree<<std::endl;
+        return pos1;
+    }
+    else if (diff1 > this->_minDist && (isTree == false && std::abs(firstObj.y - curPos.y) <= 20)){
+        return pos3;
+    }
+    else{
+        return pos2;
+    }
+}
+
+bool Enemy::closeToTree(std::vector<Tree *> trees){
+    Tree* last = trees.at(trees.size()-1);
+    auto curPos = this->getPosition();
+    float dist = last->getPositionX()+last->Sprite::getContentSize().width/2;
 }

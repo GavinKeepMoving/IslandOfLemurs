@@ -12,6 +12,8 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "FSM.h"
+#include "Tree.h"
 
 //******************************************************************************************************************
 //added by Wenbo Lin
@@ -48,6 +50,21 @@ public:
     Vec2 getCurPos();
     
     void onWalk(Vec2 dest);
+    // init enemy's fsm
+    void initFSM();
+    // get animate by type
+    Animate* getAnimateByType(AnimationType type);
+    // attack, behit
+    void attack();
+    void beHit(int attack);
+    void addAttacker(Player* attacker);
+    void removeAttacker(Player* attacker);
+    bool isInRange(Player* enemy);
+    
+    std::string getState(){return _fsm->getState();}
+    Vec2 getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees);
+    float getMinDist(){return _minDist;}
+    bool closeToTree(std::vector<Tree*> trees);
     
 private:
     //Action _seq;
@@ -59,6 +76,11 @@ private:
     std::vector<std::string> _animationNames;
     Sequence* _seq;
     //currentPos
+    FSM* _fsm;
+    float _radius = 0.1f;
+    Vector<Player*> _attackers;
+    float _minDist; // min distance for attacking
+
     
 public:
     Sprite* background;
