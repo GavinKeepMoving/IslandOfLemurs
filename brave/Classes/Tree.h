@@ -35,14 +35,14 @@ public:
     bool initSingleTree();
     std::vector<Tree*> initWithTreeNum(int num);// call createTree to build trees
 
-    void setBlood(int value);
+    int setBlood(int value);
     
     int getBlood(Tree* tree);//get blood values
     int getState(Tree* tree);//get state: burning or burn down or healthy
     bool generateBananas(Tree* tree);//generate banana objects
     void showStateAccordingtoBlood();
     void showAnimation();//show burning or burndown, need to call getState to know which animations to play
-    Fire* addFire();
+    Fire* addFire(int scale);
 };
 
 #endif /* defined(__brave__Tree__) */

@@ -92,7 +92,7 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    //_trees[0]->setBlood(4);
+    int curBlood = _trees[0]->setBlood(1);
     //_background->removeChild(_trees[0]->treeSprite, true);
     //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
