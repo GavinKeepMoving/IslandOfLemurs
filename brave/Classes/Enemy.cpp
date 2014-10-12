@@ -56,7 +56,11 @@ bool Enemy::initWithPlayerType(EnemyType type)
     _seq = nullptr;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
-    
+	//init enemy's blood xiaojing**************************//
+    _health = 50;
+	_maxHealth = 50;
+	_attack = 5;
+	//*************************************************//
     //setup according to PlayerType
     switch(type)
     {
