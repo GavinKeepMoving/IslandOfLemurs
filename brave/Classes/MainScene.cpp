@@ -325,7 +325,24 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
         _player->climbUp(pos);*/
     log("MainScene::onTouchend");
 }
+//------------------remove dead enemy--------------------------------------------------------------//
+void MainScene::enemyDead(Ref* obj)
+{
+	auto enemy= (Enemy*)obj;
+	_enemys.eraseObject(enemy,true);
+	log("onEnemyDead:%d", _enemys.size());
+	//if(_enemys.size() == 0) //show success or go to next level
+}
 
+void MainScene::animalDead(Ref* obj)
+{
+	auto animal= (Animal*)obj;
+	_animals.eraseObject(animal,true);		
+}
+
+
+
+//----------------------------------------------------------------------------------//
 void MainScene::menuCloseCallback(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
