@@ -218,7 +218,7 @@ void MainScene::initTrees(int num) {
     int treeNum = 2;
     for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 300);
+        treeSprite->setPosition(beginningPos + interval * i, 500);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
     }
