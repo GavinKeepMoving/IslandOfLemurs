@@ -120,23 +120,6 @@ bool MainScene::init()
 	//-------------------------------------//
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
-    //Lishi Jiang
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/clothe.plist", "image/clothe.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/dog.plist", "image/dog.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/AC.plist", "image/AC.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/elephant.plist", "image/elephant.pvr.ccz");
-    _animal = Animal::create(Animal::AnimalType::ELEPHANT);
-    _animal->setPosition(visibleSize.width/2+100, origin.y + visibleSize.height*Animal::height);
-    this->addChild(_animal);
-    _animal = Animal::create(Animal::AnimalType::CLOTHE);
-    _animal->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Animal::height);
-    this->addChild(_animal);
-    _animal = Animal::create(Animal::AnimalType::DOG);
-    _animal->setPosition(visibleSize.width/2 -100, origin.y + visibleSize.height*Animal::height);
-    this->addChild(_animal);
-    _animal = Animal::create(Animal::AnimalType::AC);
-    _animal->setPosition(visibleSize.width/2 -200, origin.y + visibleSize.height*Animal::height);
-    this->addChild(_animal);
     
     //************************* Begin add by Wenbo Lin *****************************//
     //add fire animation
