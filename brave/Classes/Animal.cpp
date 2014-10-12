@@ -64,7 +64,7 @@ bool Animal::initWithPlayerType(AnimalType type)
         case AnimalType::CLOTHE:
             sfName = "clothe-1-1.png";
             _name = "clothe";
-            _animationNum = 5;
+            _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
 			//-----assign different blood----------Xiaojing---------------//
 			_health = 20;
@@ -73,18 +73,19 @@ bool Animal::initWithPlayerType(AnimalType type)
 			
 			//-------------------------------------------------//
             break;
-        case AnimalType::DOG:
-            sfName = "dog-1-1.png";
-            _name = "dog";
+        case AnimalType::TIGER:
+            sfName = "tiger-1-1.png";
+            _name = "tiger";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+            
 			_health = 30;
 			_maxHealth = 30;
 			_attack = 3;
             break;
-        case AnimalType::AC:
-            sfName = "AC-1-1.png";
-            _name = "AC";
+        case AnimalType::FOX:
+            sfName = "fox-1-1.png";
+            _name = "fox";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
 			_health = 40;
@@ -106,7 +107,7 @@ bool Animal::initWithPlayerType(AnimalType type)
     _animationNames.assign(animationNames, animationNames + 5);
     //load animation
     this->addAnimation();
-    this->walkTo(Director::getInstance()->getVisibleOrigin());
+    //this->walkTo(Director::getInstance()->getVisibleOrigin());
     
     
     //add enemy's progress
@@ -134,28 +135,21 @@ Animal* Animal::create(AnimalType type)
         return NULL;
     }
 }
-/*
- void Player::walkTo(Vec2 dest)
- {
-	std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, this, dest);
-	//_fsm->setOnEnter("walking", onWalk);
-	//_fsm->doEvent("walk");
- }
-*/
 
-Weapon* Animal::attack(float radius)
-{
-    //add weapon
-    Weapon *weapon = Weapon::create(Weapon::WeaponType::ARROW);
-    Vec2 pos = this->getPosition();
-    weapon->setPosition(pos.x, pos.y);
-    //scene->addChild(weapon);
-    
-    Vec2 target(pos.x+radius, pos.y);
-    
-    weapon->shootTo(target);
-    
-    return weapon;
+
+// get animate by type
+Animate* Animal::getAnimateByType(AnimationType type){
+    if (type < 0 || type >= _animationNum)
+    {
+        log("illegal animation index!");
+        return nullptr;
+    }
+    auto str = String::createWithFormat("%s-%s",_name.c_str(), _animationNames[type].c_str())->getCString();
+    auto animation = AnimationCache::getInstance()->getAnimation(str);
+    auto animate = Animate::create(animation);
+    animate->setTag(type);
+    //this->runAction(RepeatForever::create(animate));
+    return animate;
 }
 
 //actually player stay in the center of the screeen but the background would move to the opposite position as the target
@@ -199,7 +193,6 @@ void Animal::walkTo(Vec2 dest)
     
     this->runAction(_seq);
     this->playAnimationForever(0);
- 
 }
 
 

@@ -26,17 +26,17 @@ public:
     enum AnimalType
     {
         CLOTHE,
-        DOG,
-        AC,
+        TIGER,
+        FOX,
         ELEPHANT
     };
     enum AnimationType
     {
         WALKING = 0,
-        ATTACKING,
-        DEAD,
-        BEINGHIT,
-        SKILL
+        ATTACKING = 1,
+        DEAD = 2,
+        BEINGHIT = 3,
+        SKILL = 4
     };
     static float height;
     bool initWithPlayerType(AnimalType type);
@@ -44,8 +44,9 @@ public:
     void walkTo(Vec2 dest);
     void addAnimation();
     void playAnimationForever(int index);
+    Animate* getAnimateByType(AnimationType type);
     
-    Weapon* attack(float radius);
+    void attack();
     
     Vec2 getCurPos();
     

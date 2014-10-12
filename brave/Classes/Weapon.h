@@ -17,6 +17,7 @@ public:
     enum WeaponType
     {
         COCONUT,
+        WATER,
         BAMBOO,
         HONEYNEST,
         
@@ -29,7 +30,6 @@ public:
     void addAnimation();
     void playAnimationForever(int index);
     void shootTo(Vec2 dest);
-	//-------------------------------------------------------//
     int _weaponPower;  //each weapon will add a value to player's attack
 private:
     //Action _seq;
@@ -41,7 +41,6 @@ private:
     std::vector<std::string> _animationNames;
     Sequence* _seq;
 
-	
 };
 
 
