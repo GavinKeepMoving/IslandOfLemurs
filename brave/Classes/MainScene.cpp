@@ -91,7 +91,9 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    _trees[0]->showAnimation(1, _background);
+    _trees[0]->blood = 2;
+    _trees[0]->setBlood(5);
+    _trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
@@ -117,6 +119,14 @@ bool MainScene::init()
 	//-------------------------------------//
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
+    
+    
+    //************************* Begin add by Wenbo Lin *****************************//
+    //add fire animation
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/fire/fire.plist","image/fire/fire.pvr.ccz");
+    //************************* End add by Wenbo Lin *****************************//
+    
+    
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
     _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Player::height*3);
@@ -221,6 +231,7 @@ void MainScene::initTrees(int num) {
         treeSprite->setPosition(beginningPos + interval * i, 500);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
+        _trees[_trees.size() - 1]->_background = _background;
     }
 }
 
