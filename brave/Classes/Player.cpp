@@ -98,7 +98,7 @@ bool Player::initWithPlayerType(PlayerType type)
 
 void Player::initFSM()
 {
-    _fsm = FSM::create("idle");
+    _fsm = FSM::create("idle","Lemur");
     _fsm->retain();
     auto onIdle =[&]()
     {

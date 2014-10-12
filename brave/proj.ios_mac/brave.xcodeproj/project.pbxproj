@@ -58,6 +58,7 @@
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		9C609C3719E1BD01004B375D /* Banana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3519E1BD01004B375D /* Banana.cpp */; };
 		9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3B19E1CD87004B375D /* BananaManger.cpp */; };
+		9C609C4C19E21BD4004B375D /* attackoption1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4419E21BD4004B375D /* attackoption1.png */; };
 		9C609C4E19E21BD4004B375D /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4619E21BD4004B375D /* CloseNormal.png */; };
 		9C609C4F19E21BD4004B375D /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4719E21BD4004B375D /* CloseSelected.png */; };
 		9C609C5019E21BD4004B375D /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4819E21BD4004B375D /* fonts */; };
@@ -65,11 +66,14 @@
 		9C609C5219E21BD4004B375D /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4A19E21BD4004B375D /* HelloWorld.png */; };
 		A60105AC19E1C28100664A6C /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A60105AA19E1C28100664A6C /* Enemy.cpp */; };
 		A60107D119E5028F00664A6C /* image in Resources */ = {isa = PBXBuildFile; fileRef = A60107D019E5028F00664A6C /* image */; };
+		A60107D119E5028F00664A6C /* image in Resources */ = {isa = PBXBuildFile; fileRef = A60107D019E5028F00664A6C /* image */; };
 		A60107ED19E5060200664A6C /* weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = A60107EB19E5060200664A6C /* weapons.plist */; };
 		A60107EE19E5060200664A6C /* weapons.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = A60107EC19E5060200664A6C /* weapons.pvr.ccz */; };
 		A60107F419EAF9C300664A6C /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A60107F219EAF9C300664A6C /* Animal.cpp */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
+		AE6F131C19E50B9D0020CDE6 /* weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE6F131A19E50B9D0020CDE6 /* weapons.plist */; };
+		AE6F131D19E50B9D0020CDE6 /* weapons.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = AE6F131B19E50B9D0020CDE6 /* weapons.pvr.ccz */; };
 		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -389,8 +393,6 @@
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 				FEAA761D19C61BC800E8ED22 /* Player.h */,
 				FEAA761F19C6201400E8ED22 /* Player.cpp */,
-				A6C5B2FD19CF508900DA478A /* Weapon.h */,
-				A6C5B2FE19CF509500DA478A /* Weapon.cpp */,
 				FE2E259A19D73D5200AC8DB5 /* FSM.h */,
 				FE2E259D19D73D9400AC8DB5 /* FSM.cpp */,
 				BEDF548C19DD481C00068CBA /* Tree.cpp */,
@@ -711,6 +713,7 @@
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				AE6F131C19E50B9D0020CDE6 /* weapons.plist in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
@@ -740,6 +743,7 @@
 				A60107F419EAF9C300664A6C /* Animal.cpp in Sources */,
 				FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				BE3982ED19EAF9240029E95A /* Fire.cpp in Sources */,
 				9C609C3719E1BD01004B375D /* Banana.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */,
@@ -827,7 +831,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yanwen Cheng (HZ8WZLL2PS)";
+				CODE_SIGN_IDENTITY = "";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -858,7 +862,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yanwen Cheng (HZ8WZLL2PS)";
+				CODE_SIGN_IDENTITY = "";
 				COMPRESS_PNG_FILES = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

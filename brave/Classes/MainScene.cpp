@@ -92,7 +92,9 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    _trees[0]->showAnimation(1, _background);
+    _trees[0]->blood = 2;
+    _trees[0]->setBlood(5);
+    _trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
@@ -118,6 +120,7 @@ bool MainScene::init()
 	//-------------------------------------//
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
+    //Lishi Jiang
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/clothe.plist", "image/clothe.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/dog.plist", "image/dog.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/AC.plist", "image/AC.pvr.ccz");
@@ -135,6 +138,11 @@ bool MainScene::init()
     _animal->setPosition(visibleSize.width/2 -200, origin.y + visibleSize.height*Animal::height);
     this->addChild(_animal);
     
+    //************************* Begin add by Wenbo Lin *****************************//
+    //add fire animation
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/fire/fire.plist","image/fire/fire.pvr.ccz");
+    //************************* End add by Wenbo Lin *****************************//
+       
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
     _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Player::height*3);
@@ -149,8 +157,11 @@ bool MainScene::init()
     //add enemy1
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
     _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-    this->addChild(_enemy1);
-    
+//    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
+//    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+
+    _background->addChild(_enemy1);
+//    this->addChild(_enemy2);
     /******************End-Added by Yafu*****************************/
     
     BananaManger* bananaManger = BananaManger::create(_background);
@@ -169,6 +180,14 @@ bool MainScene::init()
     //_player->playAnimationForever(1);
     //_enemy1->playAnimationForever(1);
     //add blood progress
+    
+    /****************** Begin-Added by Zhe Liu *********************/
+    _enemys.pushBack(_enemy1);
+//    _enemys.pushBack(_enemy2);
+    _enemy1->addAttacker(_player);
+//    _enemy2->addAttacker(_player);
+    this->schedule(schedule_selector(MainScene::enemyMove), 3);
+    /****************** End-Added by Zhe Liu *********************/
     addProgress();
 	//--------------------//
     //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
@@ -239,9 +258,31 @@ void MainScene::initTrees(int num) {
         treeSprite->setPosition(beginningPos + interval * i, 500);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
+        _trees[_trees.size() - 1]->_background = _background;
     }
 }
 
+/****************** Begin-Added by Zhe Liu *********************/
+// enemy move
+void MainScene::enemyMove(float dt)
+{
+    for (auto enemy : _enemys)
+    {
+        if ("dead" != enemy->getState() && _player)
+        {
+            Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees);
+            
+            if (dest == enemy->getPosition()){
+                enemy->attack();
+            }
+            else{
+                enemy->walkTo(dest);
+            }
+        }
+    }
+    
+}
+/****************** End-Added by Zhe Liu *********************/
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {

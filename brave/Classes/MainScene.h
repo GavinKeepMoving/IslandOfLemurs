@@ -6,6 +6,10 @@
 #include "Tree.h"
 #include "Weapon.h"
 #include "Animal.h"
+#include "Enemy.h"
+#include <iostream>
+
+
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
@@ -39,17 +43,28 @@ public:
     void spriteMoveFinished(CCNode* sender);
     //initialize trees
     void initTrees(int num);
+    
+    // enemy module
+    void enemyMove(float dt);
+    //
+//    bool closeToEnemy( obj);
+    
       
 	//------blood progress----------------//
 	void addProgress();
 private:
     Animal* _animal;
     Player* _player;
-	Player* _enemy1;
+	Enemy* _enemy1;
+    Enemy* _enemy2;
+    Enemy* _enemy3;
+    Vector<Enemy*> _enemys;
+    
     Size visibleSize;
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
+public:
     Sprite *_background;
     Sprite *_background1;
     std::vector<Tree*> _trees;
