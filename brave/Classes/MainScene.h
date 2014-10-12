@@ -5,6 +5,10 @@
 #include "Player.h"
 #include "Tree.h"
 #include "Weapon.h"
+#include "Animal.h"
+#include "Enemy.h"
+#include <iostream>
+
 
 //******************************************************************************************************************
 //added by Wenbo Lin
@@ -35,11 +39,18 @@ public:
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
     void initAnimalOptionsBar();
     void activateWeaponOption(Ref* pSender);
+    void callAnimalHelper(Ref* pSender, int index);
     LabelTTF* label;
     
     void spriteMoveFinished(CCNode* sender);
     //initialize trees
     void initTrees(int num);
+    
+    // enemy module
+    void enemyMove(float dt);
+    //
+//    bool closeToEnemy( obj);
+    
       
 	//------blood progress----------------//
 	void addProgress();
@@ -49,17 +60,23 @@ public:
         return origin;
     }
     /******************End-Added by Yafu*****************************/
-    
-    Sprite *_background;
-    Sprite *_background1;
+
 private:
+    Animal* _animal;
     Player* _player;
-	Player* _enemy1;
+	Enemy* _enemy1;
+    Enemy* _enemy2;
+    Enemy* _enemy3;
+    Vector<Enemy*> _enemys;
+    Vector<Animal*> _animals;
     Size visibleSize;
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
 
+public:
+    Sprite *_background;
+    Sprite *_background1;
     std::vector<Tree*> _trees;
     //******************************************************************************************************************
     //added by Wenbo Lin

@@ -58,18 +58,25 @@
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		9C609C3719E1BD01004B375D /* Banana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3519E1BD01004B375D /* Banana.cpp */; };
 		9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3B19E1CD87004B375D /* BananaManger.cpp */; };
-		9C609C4E19E21BD4004B375D /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4619E21BD4004B375D /* CloseNormal.png */; };
-		9C609C4F19E21BD4004B375D /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4719E21BD4004B375D /* CloseSelected.png */; };
-		9C609C5019E21BD4004B375D /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4819E21BD4004B375D /* fonts */; };
-		9C609C5119E21BD4004B375D /* fruit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4919E21BD4004B375D /* fruit.png */; };
-		9C609C5219E21BD4004B375D /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C609C4A19E21BD4004B375D /* HelloWorld.png */; };
+		9CFB92BF19EB2AC9000F869A /* attackoption1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92B519EB2AC9000F869A /* attackoption1.png */; };
+		9CFB92C019EB2AC9000F869A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92B619EB2AC9000F869A /* background.png */; };
+		9CFB92C119EB2AC9000F869A /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92B719EB2AC9000F869A /* CloseNormal.png */; };
+		9CFB92C219EB2AC9000F869A /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92B819EB2AC9000F869A /* CloseSelected.png */; };
+		9CFB92C319EB2AC9000F869A /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92B919EB2AC9000F869A /* fonts */; };
+		9CFB92C419EB2AC9000F869A /* fruit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92BA19EB2AC9000F869A /* fruit.png */; };
+		9CFB92C519EB2AC9000F869A /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92BB19EB2AC9000F869A /* HelloWorld.png */; };
+		9CFB92C719EB2AC9000F869A /* weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92BD19EB2AC9000F869A /* weapons.plist */; };
+		9CFB92C819EB2AC9000F869A /* weapons.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92BE19EB2AC9000F869A /* weapons.pvr.ccz */; };
+		9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFB92C919EB2AD7000F869A /* Animal.cpp */; };
+		9CFB92CE19EB2AD7000F869A /* Fire.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFB92CB19EB2AD7000F869A /* Fire.cpp */; };
+		9CFB92DE19EB325A000F869A /* image in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92DD19EB325A000F869A /* image */; };
 		A60105AC19E1C28100664A6C /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A60105AA19E1C28100664A6C /* Enemy.cpp */; };
-		A60107D119E5028F00664A6C /* image in Resources */ = {isa = PBXBuildFile; fileRef = A60107D019E5028F00664A6C /* image */; };
-		A60107F419EAF9C300664A6C /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A60107F219EAF9C300664A6C /* Animal.cpp */; };
 		A60107FE19EB24F500664A6C /* weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = A60107FC19EB24F500664A6C /* weapons.plist */; };
 		A60107FF19EB24F500664A6C /* weapons.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = A60107FD19EB24F500664A6C /* weapons.pvr.ccz */; };
 		A601080119EB39D400664A6C /* animal1.png in Resources */ = {isa = PBXBuildFile; fileRef = A601080019EB39D400664A6C /* animal1.png */; };
 		A601080319EB3B5100664A6C /* animal2.png in Resources */ = {isa = PBXBuildFile; fileRef = A601080219EB3B5100664A6C /* animal2.png */; };
+		A601080719EB478300664A6C /* animal3.png in Resources */ = {isa = PBXBuildFile; fileRef = A601080519EB478300664A6C /* animal3.png */; };
+		A601080819EB478300664A6C /* animal4.png in Resources */ = {isa = PBXBuildFile; fileRef = A601080619EB478300664A6C /* animal4.png */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
 		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
@@ -275,20 +282,29 @@
 		9C609C3619E1BD01004B375D /* Banana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Banana.h; path = ../Classes/Banana.h; sourceTree = "<group>"; };
 		9C609C3B19E1CD87004B375D /* BananaManger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BananaManger.cpp; path = ../Classes/BananaManger.cpp; sourceTree = "<group>"; };
 		9C609C3C19E1CD87004B375D /* BananaManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BananaManger.h; path = ../Classes/BananaManger.h; sourceTree = "<group>"; };
-		9C609C4619E21BD4004B375D /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
-		9C609C4719E21BD4004B375D /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
-		9C609C4819E21BD4004B375D /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
-		9C609C4919E21BD4004B375D /* fruit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fruit.png; sourceTree = "<group>"; };
-		9C609C4A19E21BD4004B375D /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
+		9CFB92B519EB2AC9000F869A /* attackoption1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attackoption1.png; sourceTree = "<group>"; };
+		9CFB92B619EB2AC9000F869A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		9CFB92B719EB2AC9000F869A /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
+		9CFB92B819EB2AC9000F869A /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
+		9CFB92B919EB2AC9000F869A /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		9CFB92BA19EB2AC9000F869A /* fruit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fruit.png; sourceTree = "<group>"; };
+		9CFB92BB19EB2AC9000F869A /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
+		9CFB92BD19EB2AC9000F869A /* weapons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = weapons.plist; sourceTree = "<group>"; };
+		9CFB92BE19EB2AC9000F869A /* weapons.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = weapons.pvr.ccz; sourceTree = "<group>"; };
+		9CFB92C919EB2AD7000F869A /* Animal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal.cpp; path = ../Classes/Animal.cpp; sourceTree = "<group>"; };
+		9CFB92CA19EB2AD7000F869A /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = ../Classes/Animal.h; sourceTree = "<group>"; };
+		9CFB92CB19EB2AD7000F869A /* Fire.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Fire.cpp; path = ../Classes/Fire.cpp; sourceTree = "<group>"; };
+		9CFB92CC19EB2AD7000F869A /* Fire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fire.h; path = ../Classes/Fire.h; sourceTree = "<group>"; };
+		9CFB92DD19EB325A000F869A /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
 		A60105AA19E1C28100664A6C /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy.cpp; path = ../Classes/Enemy.cpp; sourceTree = "<group>"; };
 		A60105AB19E1C28100664A6C /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy.h; path = ../Classes/Enemy.h; sourceTree = "<group>"; };
 		A60107D019E5028F00664A6C /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
-		A60107F219EAF9C300664A6C /* Animal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal.cpp; path = ../Classes/Animal.cpp; sourceTree = "<group>"; };
-		A60107F319EAF9C300664A6C /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = ../Classes/Animal.h; sourceTree = "<group>"; };
 		A60107FC19EB24F500664A6C /* weapons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = weapons.plist; path = image/weapons/weapons.plist; sourceTree = "<group>"; };
 		A60107FD19EB24F500664A6C /* weapons.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = weapons.pvr.ccz; path = image/weapons/weapons.pvr.ccz; sourceTree = "<group>"; };
 		A601080019EB39D400664A6C /* animal1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal1.png; sourceTree = "<group>"; };
 		A601080219EB3B5100664A6C /* animal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal2.png; sourceTree = "<group>"; };
+		A601080519EB478300664A6C /* animal3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal3.png; sourceTree = "<group>"; };
+		A601080619EB478300664A6C /* animal4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal4.png; sourceTree = "<group>"; };
 		A6C5B2F619CF3C0000DA478A /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FD19CF508900DA478A /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
@@ -381,6 +397,10 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9CFB92C919EB2AD7000F869A /* Animal.cpp */,
+				9CFB92CA19EB2AD7000F869A /* Animal.h */,
+				9CFB92CB19EB2AD7000F869A /* Fire.cpp */,
+				9CFB92CC19EB2AD7000F869A /* Fire.h */,
 				FEDF9FDE19E39E7A00484807 /* Attack.cpp */,
 				FEDF9FDF19E39E7A00484807 /* Attack.h */,
 				FEDF9FE019E39E7A00484807 /* blood.cpp */,
@@ -405,8 +425,6 @@
 				9C609C3619E1BD01004B375D /* Banana.h */,
 				9C609C3B19E1CD87004B375D /* BananaManger.cpp */,
 				9C609C3C19E1CD87004B375D /* BananaManger.h */,
-				A60107F219EAF9C300664A6C /* Animal.cpp */,
-				A60107F319EAF9C300664A6C /* Animal.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -524,14 +542,21 @@
 			children = (
 				A601080019EB39D400664A6C /* animal1.png */,
 				A601080219EB3B5100664A6C /* animal2.png */,
+				A601080519EB478300664A6C /* animal3.png */,
+				A601080619EB478300664A6C /* animal4.png */,
 				A60107D019E5028F00664A6C /* image */,
-				9C609C4619E21BD4004B375D /* CloseNormal.png */,
-				9C609C4719E21BD4004B375D /* CloseSelected.png */,
 				A60107FC19EB24F500664A6C /* weapons.plist */,
 				A60107FD19EB24F500664A6C /* weapons.pvr.ccz */,
-				9C609C4819E21BD4004B375D /* fonts */,
-				9C609C4919E21BD4004B375D /* fruit.png */,
-				9C609C4A19E21BD4004B375D /* HelloWorld.png */,
+				9CFB92DD19EB325A000F869A /* image */,
+				9CFB92B519EB2AC9000F869A /* attackoption1.png */,
+				9CFB92B619EB2AC9000F869A /* background.png */,
+				9CFB92B719EB2AC9000F869A /* CloseNormal.png */,
+				9CFB92B819EB2AC9000F869A /* CloseSelected.png */,
+				9CFB92B919EB2AC9000F869A /* fonts */,
+				9CFB92BA19EB2AC9000F869A /* fruit.png */,
+				9CFB92BB19EB2AC9000F869A /* HelloWorld.png */,
+				9CFB92BD19EB2AC9000F869A /* weapons.plist */,
+				9CFB92BE19EB2AC9000F869A /* weapons.pvr.ccz */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -701,17 +726,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C609C5119E21BD4004B375D /* fruit.png in Resources */,
+				9CFB92C719EB2AC9000F869A /* weapons.plist in Resources */,
+				9CFB92C819EB2AC9000F869A /* weapons.pvr.ccz in Resources */,
+				9CFB92C419EB2AC9000F869A /* fruit.png in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				A601080819EB478300664A6C /* animal4.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
-				9C609C5019E21BD4004B375D /* fonts in Resources */,
+				9CFB92DE19EB325A000F869A /* image in Resources */,
+				9CFB92C319EB2AC9000F869A /* fonts in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
-				9C609C5219E21BD4004B375D /* HelloWorld.png in Resources */,
-				9C609C4F19E21BD4004B375D /* CloseSelected.png in Resources */,
+				9CFB92C519EB2AC9000F869A /* HelloWorld.png in Resources */,
+				9CFB92C219EB2AC9000F869A /* CloseSelected.png in Resources */,
+				9CFB92C019EB2AC9000F869A /* background.png in Resources */,
+				9CFB92BF19EB2AC9000F869A /* attackoption1.png in Resources */,
+				A601080719EB478300664A6C /* animal3.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
@@ -725,8 +757,7 @@
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				A601080119EB39D400664A6C /* animal1.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
-				A60107D119E5028F00664A6C /* image in Resources */,
-				9C609C4E19E21BD4004B375D /* CloseNormal.png in Resources */,
+				9CFB92C119EB2AC9000F869A /* CloseNormal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,7 +776,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A60107F419EAF9C300664A6C /* Animal.cpp in Sources */,
+				9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */,
 				FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				9C609C3719E1BD01004B375D /* Banana.cpp in Sources */,
@@ -754,6 +785,7 @@
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */,
+				9CFB92CE19EB2AD7000F869A /* Fire.cpp in Sources */,
 				FEDF9FE519E39E7A00484807 /* blood.cpp in Sources */,
 				A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
@@ -835,7 +867,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yanwen Cheng (HZ8WZLL2PS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -866,7 +898,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yanwen Cheng (HZ8WZLL2PS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

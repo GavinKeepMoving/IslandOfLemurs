@@ -7,6 +7,10 @@
 //
 
 #include "Tree.h"
+#include "Fire.h"
+#include "MainScene.h"
+
+extern MainScene *mainLayer;
 
 float Tree::blood = 10;
 
@@ -24,7 +28,7 @@ Tree::Tree(Sprite* tree) {
 
 //initialize a single tree
 bool Tree::initSingleTree() {
-    state = HEATHY;
+    state = 0;
     //-----------
     return true;
 }
@@ -44,15 +48,20 @@ std::vector<Tree*> Tree::initWithTreeNum(int num) {
 }
 */
 
+//set blood value
+void Tree::setBlood(int value) {
+    this->blood = value;
+}
+
 //get blood values
 int Tree::getBlood(Tree* tree) {
     //call status function
-    return 0;
+    return this->blood;
 }
 
 //get state: burning or burn down or healthy
 int Tree::getState(Tree* tree) {
-    return 0;
+    return this->state;
 }
 
 //generate banana objects
@@ -60,24 +69,83 @@ bool Tree::generateBananas(Tree* tree) {
     return true;
 }
 
+void Tree::showStateAccordingtoBlood() {
+    if (blood == 6) {
+        state = 6;
+        showAnimation(_background);
+    }
+    if (blood == 5) {
+        state = 5;
+        showAnimation(_background);
+    }
+    if (blood == 4) {
+        state = 4;
+        showAnimation(_background);
+    }
+    if (blood == 3) {
+        state = 3;
+        showAnimation(_background);
+    }
+    if (blood == 2) {
+        state = 2;
+        showAnimation(_background);
+    }
+    if (blood == 1) {
+        state = 1;
+        showAnimation(_background);
+    }
+    if (blood == 0) {
+        state = 0;
+        showAnimation(_background);
+    }
+}
+
 //show burning or burndown, need to call getState to know which animations to play
-void Tree::showAnimation(int state, Sprite* background) {
+void Tree::showAnimation(Sprite* background) {
     if(background == NULL) return;
     //healthy
-    if(state == 0) {
+    
+    Fire *fire;
+    
+    if(state == 6) {
         
     }
     //burning
-    if(state == 1) {
-        auto fireSprite = Sprite::create("image/fire/flame.png");
-        fireSprite->setPosition(150,90);
-        this->treeSprite->addChild(fireSprite);
+    if(state == 5) {
+        //Try to add fire
+        fire = this->addFire();
     }
-    //burn up
+    if(state == 5) {
+        CCTextureCache *sharedTextureCache = new CCTextureCache();
+        this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-1.png"));
+    }
+    if(state == 4) {
+        CCTextureCache *sharedTextureCache = new CCTextureCache();
+        this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-2.png"));
+    }
+    if(state == 3) {
+        CCTextureCache *sharedTextureCache = new CCTextureCache();
+        this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-3.png"));
+    }
     if(state == 2) {
-        background->removeChild(this->treeSprite, true);
-        this->treeSprite = Sprite::create("image/trees/bareTree.png");
-        this->treeSprite->setPosition(_posX, _posY);
-        background->addChild(this->treeSprite);
+        CCTextureCache *sharedTextureCache = new CCTextureCache();
+        this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-4.png"));
     }
+    if(state == 1) {
+        CCTextureCache *sharedTextureCache = new CCTextureCache();
+        this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-5.png"));
+    }
+    if(state == 0) {
+        CCTextureCache *sharedTextureCache = new CCTextureCache();
+        this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-6.png"));
+        this->treeSprite->removeChild(fire, true);
+    }
+}
+
+Fire* Tree::addFire() {
+    Fire *fire = Fire::create(Fire::FireType::SHOW);
+    fire->setScale(0.5, 0.5);
+    fire->setPosition(150, 120);
+    this->treeSprite->addChild(fire);
+    fire->setFire();
 }

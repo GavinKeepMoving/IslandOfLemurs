@@ -54,6 +54,11 @@ public:
     int getMoney();
     Rect getBoundingBox();
     int money;
+	
+	//blood attribute  xiaojing
+	int _health;  //current blood 
+	int _maxHealth;  //total blood
+	int _attack;  //each attack harm enemy
 
 private:
     //Action _seq;

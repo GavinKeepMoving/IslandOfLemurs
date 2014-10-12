@@ -15,9 +15,9 @@ class FSM :public cocos2d::Ref
 {
 public:
     
-    bool init();
+    bool init(std::string type);
     //Create FSM with a initial state name and optional callback function
-    static FSM* create(std::string state, std::function<void()> onEnter = nullptr);
+    static FSM* create(std::string state,std::string type ,std::function<void()> onEnter = nullptr);
     
     FSM(std::string state, std::function<void()> onEnter = nullptr);
     //add state into FSM
@@ -34,6 +34,8 @@ public:
     bool canDoEvent(std::string eventName);
     //set the onEnter callback for a specified state
     void setOnEnter(std::string state, std::function<void()> onEnter);
+    // get current state
+    std::string getState(){return _currentState;}
 private:
     //change state and run callback.
     void changeToState(std::string state);

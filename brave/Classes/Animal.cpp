@@ -61,17 +61,44 @@ bool Animal::initWithPlayerType(AnimalType type)
     //setup according to PlayerType
     switch(type)
     {
-        case AnimalType::ANIMAL1:
-            sfName = "enemy1-1-1.png";
-            _name = "enemy1";
-            _animationNum = 4;
+        case AnimalType::CLOTHE:
+            sfName = "clothe-1-1.png";
+            _name = "clothe";
+            _animationNum = 5;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+			//-----assign different blood----------Xiaojing---------------//
+			_health = 20;
+			_maxHealth =20;
+			_attack = 2;
+			
+			//-------------------------------------------------//
             break;
-        case AnimalType::ANIMAL2:
-            sfName = "enemy2-1-1.png";
-            _name = "enemy2";
+        case AnimalType::DOG:
+            sfName = "dog-1-1.png";
+            _name = "dog";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+			_health = 30;
+			_maxHealth = 30;
+			_attack = 3;
+            break;
+        case AnimalType::AC:
+            sfName = "AC-1-1.png";
+            _name = "AC";
+            _animationNum = 4;
+            _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+			_health = 40;
+			_maxHealth =40;
+			_attack = 4 ;
+            break;
+        case AnimalType::ELEPHANT:
+            sfName = "elephant-1-1.png";
+            _name = "elephant";
+            _animationNum = 4;
+            _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+			_health = 50;
+			_maxHealth =50;
+			_attack = 5;
             break;
     }
     this->initWithSpriteFrameName(sfName);
@@ -79,7 +106,7 @@ bool Animal::initWithPlayerType(AnimalType type)
     _animationNames.assign(animationNames, animationNames + 5);
     //load animation
     this->addAnimation();
-    
+    this->walkTo(Director::getInstance()->getVisibleOrigin());
     
     
     //add enemy's progress
@@ -113,8 +140,8 @@ Animal* Animal::create(AnimalType type)
 	std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, this, dest);
 	//_fsm->setOnEnter("walking", onWalk);
 	//_fsm->doEvent("walk");
- }*/
-
+ }
+*/
 
 Weapon* Animal::attack(float radius)
 {
@@ -144,9 +171,7 @@ void Animal::walkTo(Vec2 dest)
         this->stopAction(_seq);
     
     auto curPos = this->getPosition();
-    auto backgroundPos = background->getPosition();
-    auto background1Pos = background1->getPosition();
-    
+    dest.y = origin.y + visibleSize.height*Animal::height;
     //flip when moving backward
     if(curPos.x > dest.x) {
         dest.x = origin.x;
@@ -156,54 +181,25 @@ void Animal::walkTo(Vec2 dest)
         dest.x = origin.x + visibleSize.width;
         this->setFlippedX(false);
     }
-    dest.y = curPos.y;
+    
     
     //calculate the time needed to move
     auto diff = dest - curPos;
-    auto realDest = backgroundPos - diff;
-    auto realDest1 = background1Pos - diff;
-    auto playerTime = diff.length()/_speed;
-    auto time = realDest.getLength()/_speed;
-    
-    //auto movePlayer = MoveTo::create(playerTime, dest);
-    auto move = MoveTo::create(time, realDest);
-    auto move1 = MoveTo::create(time, realDest1);
-    
+    auto time = diff.getLength()/_speed;
+    auto move = MoveTo::create(time, dest);
     //lambda function
     auto func = [&]()
     {
+        //this->_fsm->doEvent("stop");
         this->stopAllActions();
         //_seq = nullptr;
     };
     auto callback = CallFunc::create(func);
-    
-    //create sequence for two backgrounds and player(some bugs)
-    //auto _seqPlayer = Sequence::create(movePlayer, callback, nullptr);
     auto _seq = Sequence::create(move, callback, nullptr);
-    auto _seq1 = Sequence::create(move1, callback, nullptr);
     
-    //this->runAction(_seq);
-    //this->playAnimationForever(0);
-    
-    //run action sequnce
-    background->runAction(_seq);
-    background1->runAction(_seq1);
-    
-    //judge if action should be stopped
-    auto curPosback1 = background->getPosition();
-    auto curPosback2 = background1->getPosition();
-    
-    /*
-     if(curPosback1.x - visibleSize.width / 2 > 0 || visibleSize.width / 2 - curPosback2.x > 0) {
-     background->stopAllActions();
-     background1->stopAllActions();
-     
-     //when background hit the end, player continue to move
-     //this->runAction(_seqPlayer);
-     //this->playAnimationForever(0);
-     }
-     //background->playAnimationForever(0);
-     */
+    this->runAction(_seq);
+    this->playAnimationForever(0);
+ 
 }
 
 
@@ -213,4 +209,21 @@ Vec2 Animal::getCurPos()
     Vec2 result = Vec2(curPos.x, curPos.y);
     return result;
 }
-
+//reduce the _health value of current animal Xiaojing ***************//
+void Animal::beHit(int attack){
+    _health -= attack;
+	if(_health <= 0)
+	{ //die
+		_health = 0;
+		
+		//do event die
+		_fsm->doEvent("die");
+		return;
+	}
+	else
+	{
+		//be hit
+		_fsm->doEvent("beHit");
+	}
+}
+//***************************************************//
