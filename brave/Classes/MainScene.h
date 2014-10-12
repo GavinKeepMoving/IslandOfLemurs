@@ -50,8 +50,8 @@ public:
     void enemyMove(float dt);
     //
 //    bool closeToEnemy( obj);
-    
-      
+	 void enemyDead(Ref* obj);
+     void animalDead(Ref* obj);
 	//------blood progress----------------//
 	void addProgress();
     

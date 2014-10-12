@@ -30,7 +30,7 @@ public:
     void addAnimation();
     void playAnimationForever(int index);
     void shootTo(Vec2 dest);
-    
+    int _weaponPower;  //each weapon will add a value to player's attack
 private:
     //Action _seq;
     float _speed;
@@ -41,8 +41,6 @@ private:
     std::vector<std::string> _animationNames;
     Sequence* _seq;
 
-public:
-    int _weaponPower;  //each weapon will add a value to player's attack
 };
 
 

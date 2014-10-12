@@ -93,9 +93,9 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    _trees[0]->blood = 2;
-    _trees[0]->setBlood(5);
-    _trees[0]->showStateAccordingtoBlood();
+    //_trees[0]->setBlood(4);
+    //_background->removeChild(_trees[0]->treeSprite, true);
+    //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
@@ -323,11 +323,11 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
     int beginningPos = 700;
-    int interval = 600;
+    int interval = 500;
     int treeNum = 2;
     for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 500);
+        treeSprite->setPosition(beginningPos + interval * i, 285);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
         _trees[_trees.size() - 1]->_background = _background;
@@ -382,7 +382,24 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
         _player->climbUp(pos);*/
     log("MainScene::onTouchend");
 }
+//------------------remove dead enemy--------------------------------------------------------------//
+void MainScene::enemyDead(Ref* obj)
+{
+	auto enemy= (Enemy*)obj;
+	_enemys.eraseObject(enemy,true);
+	log("onEnemyDead:%d", _enemys.size());
+	//if(_enemys.size() == 0) //show success or go to next level
+}
 
+void MainScene::animalDead(Ref* obj)
+{
+	auto animal= (Animal*)obj;
+	_animals.eraseObject(animal,true);		
+}
+
+
+
+//----------------------------------------------------------------------------------//
 void MainScene::menuCloseCallback(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
