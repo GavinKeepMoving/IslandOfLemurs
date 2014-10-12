@@ -5,8 +5,10 @@
 #include "Player.h"
 #include "Tree.h"
 #include "Weapon.h"
+#include "Animal.h"
 #include "Enemy.h"
 #include <iostream>
+
 
 //******************************************************************************************************************
 //added by Wenbo Lin
@@ -51,6 +53,7 @@ public:
 	//------blood progress----------------//
 	void addProgress();
 private:
+    Animal* _animal;
     Player* _player;
 	Enemy* _enemy1;
     Enemy* _enemy2;
