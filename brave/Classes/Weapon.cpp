@@ -69,24 +69,28 @@ bool Weapon::initWithWeaponType(WeaponType type)
             _animationNum = 1;
             _speed = 100;
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 1);
+			_weaponPower = 1;  
             break;
         case WeaponType::BAMBOO:
             sfName = "arrow1-1-1.png";
             _name = "arrow1";
             _animationNum = 3;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 1);
+			_weaponPower = 3;
             break;
         case WeaponType::HONEYNEST:
             sfName = "enemy2-1-1.png";
             _name = "enemy2";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 1);
+			_weaponPower = 1;  //Xiaojing enemy attack may be not change 
             break;
         case WeaponType::ARROW:
             sfName = "arrow1-1-1.png";
             _name = "arrow1";
             _animationNum = 1;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 1);
+			_weaponPower = 3;  //Xiaojing enemy attack may be not change 
             break;
     }
     this->initWithSpriteFrameName(sfName);

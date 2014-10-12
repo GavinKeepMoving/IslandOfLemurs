@@ -115,7 +115,7 @@ bool MainScene::init()
 
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
 	
-	//init blood progress
+	
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
 	//-------------------------------------//
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
@@ -128,15 +128,27 @@ bool MainScene::init()
     _animal = Animal::create(Animal::AnimalType::ELEPHANT);
     _animal->setPosition(visibleSize.width/2+100, origin.y + visibleSize.height*Animal::height);
     this->addChild(_animal);
+	//add animals -------------------------------//
+	 _animals.pushBack( _animal);
+	
     _animal = Animal::create(Animal::AnimalType::CLOTHE);
     _animal->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Animal::height);
     this->addChild(_animal);
+	//add animals -------------------------------//
+	 _animals.pushBack( _animal);
+	
     _animal = Animal::create(Animal::AnimalType::DOG);
     _animal->setPosition(visibleSize.width/2 -100, origin.y + visibleSize.height*Animal::height);
     this->addChild(_animal);
+	//add animals -------------------------------//
+	 _animals.pushBack( _animal);
+	
     _animal = Animal::create(Animal::AnimalType::AC);
     _animal->setPosition(visibleSize.width/2 -200, origin.y + visibleSize.height*Animal::height);
     this->addChild(_animal);
+	//add animals -------------------------------//
+	 _animals.pushBack( _animal);
+	
     
     //************************* Begin add by Wenbo Lin *****************************//
     //add fire animation
@@ -188,8 +200,11 @@ bool MainScene::init()
 //    _enemy2->addAttacker(_player);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
     /****************** End-Added by Zhe Liu *********************/
+	
+	//*****init blood progress  xiaojing **************//
     addProgress();
-	//--------------------//
+	
+	
     //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     this->scheduleUpdate();

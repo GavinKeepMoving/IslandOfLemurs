@@ -59,7 +59,7 @@ private:
     Enemy* _enemy2;
     Enemy* _enemy3;
     Vector<Enemy*> _enemys;
-    
+    Vector<Animal*> _animals;
     Size visibleSize;
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;

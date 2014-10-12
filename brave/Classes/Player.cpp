@@ -140,7 +140,10 @@ Weapon* Player::attack(float radius, Weapon::WeaponType weaponType)
     Vec2 target(pos.x+radius, pos.y);
     
     weapon->shootTo(target);
-    
+    //-------reset attack value of player according to weaponType---xiaojing -------------//
+	
+	 _attack+= weapon->_weaponPower;
+	//-------end edited by xiaojing---------------------------------------------------//
     return weapon;
 }
 
