@@ -29,6 +29,11 @@ public:
     
     bool isCollideWithPlayer(Player* player);//检测是否碰撞
     void bindSprite(Sprite* sprite);
+    
+    /******************************** Begin-Added by Wenbo Lin *********************************/
+    Sprite* _background;
+    /******************************** End-Added by Wenbo Lin ***********************************/
+    
 private:
     bool m_isAlive;
     Sprite* _sprite;

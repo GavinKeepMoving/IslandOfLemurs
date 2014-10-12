@@ -20,10 +20,20 @@ class BananaManger:public Node
 public:
     BananaManger();
     ~BananaManger();
-    static BananaManger* create();
+    
+    /******************************** Begin-Added by Wenbo Lin *********************************/
+    static BananaManger* create(Sprite* background);
+    /******************************** End-Added by Wenbo Lin ***********************************/
+    
     virtual bool init();
     virtual void update(float dt);/*重写update函数*/
     void bindPlayer(Player* player);
+    
+    /******************************** Begin-Added by Wenbo Lin *********************************/
+    void bindBackground(Sprite* background);
+    Sprite* _background;
+    /******************************** End-Added by Wenbo Lin ***********************************/
+    
 private:
     void createBananas();/*创建Monster对象*/
 private:

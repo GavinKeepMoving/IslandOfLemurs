@@ -119,11 +119,11 @@ bool MainScene::init()
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
-    //_player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*3/4);
+    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Player::height*3);
     _player->background = _background;
     _player->background1 = _background1;
     _player->setScale(0.5);
-    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
+    //_player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
     this->addChild(_player);
     _player->retain();
     
@@ -135,10 +135,17 @@ bool MainScene::init()
     
     /******************End-Added by Yafu*****************************/
     
-    BananaManger* bananaManger = BananaManger::create();
+    BananaManger* bananaManger = BananaManger::create(_background);
     bananaManger->bindPlayer(_player);
-    this->addChild(bananaManger,4);
     
+    /****************** Begin-Added by Wenbo *********************/
+    //Original Version
+    //this->addChild(bananaManger,4);
+    
+    //Edit Version
+    bananaManger->_background = _background;
+    _background->addChild(bananaManger, 4);
+    /****************** End-Added by Wenbo *********************/
     
     //test animation
     //_player->playAnimationForever(1);
@@ -146,7 +153,7 @@ bool MainScene::init()
     //add blood progress
     addProgress();
 	//--------------------//
-    auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
+    //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     this->scheduleUpdate();
     return true;
@@ -187,7 +194,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 
 void MainScene::activateWeaponOption(Ref* pSender)
 {
-    float radius = -250.;
+    float radius = 250.;
     
     Weapon *weapon = this->_player->attack(radius, Weapon::WeaponType::COCONUT);
     
@@ -206,11 +213,12 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 300;
+    int beginningPos = 700;
+    int interval = 600;
     int treeNum = 2;
-    for(int i = 1; i <= treeNum; i++) {
+    for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos * i, 300);
+        treeSprite->setPosition(beginningPos + interval * i, 500);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
     }
