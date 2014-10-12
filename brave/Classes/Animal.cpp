@@ -209,4 +209,21 @@ Vec2 Animal::getCurPos()
     Vec2 result = Vec2(curPos.x, curPos.y);
     return result;
 }
-
+//reduce the _health value of current animal Xiaojing ***************//
+void Animal::beHit(int attack){
+    _health -= attack;
+	if(_health <= 0)
+	{ //die
+		_health = 0;
+		
+		//do event die
+		_fsm->doEvent("die");
+		return;
+	}
+	else
+	{
+		//be hit
+		_fsm->doEvent("beHit");
+	}
+}
+//***************************************************//
