@@ -41,7 +41,7 @@ public:
     int getState(Tree* tree);//get state: burning or burn down or healthy
     bool generateBananas(Tree* tree);//generate banana objects
     void showStateAccordingtoBlood();
-    void showAnimation(Sprite* background);//show burning or burndown, need to call getState to know which animations to play
+    void showAnimation();//show burning or burndown, need to call getState to know which animations to play
     Fire* addFire();
 };
 
