@@ -260,10 +260,25 @@ Vec2 Enemy::getCurPos()
     return result;
 }
 
-// need to add interfaces about blood process, when the enemy is hitted, it need to stop
+//reduce the _health value of current enemy Xiaojing ***************//
 void Enemy::beHit(int attack){
-    
+    _health -= attack;
+	if(_health <= 0)
+	{ //the enemy die
+		_health = 0;
+		//reset blood progress
+		this->_progress->setProgress((float)_health/_maxHealth*100);
+		//do event die
+		_fsm->doEvent("die");
+		return;
+	}
+	else
+	{
+		this->_progress->setProgress((float)_health/_maxHealth*100);
+		_fsm->doEvent("beHit");
+	}
 }
+//***************************************************//
 
 //judge for the player
 void Enemy::addAttacker(Player *attacker){

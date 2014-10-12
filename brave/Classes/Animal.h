@@ -61,7 +61,11 @@ private:
     std::vector<std::string> _animationNames;
     Sequence* _seq;
     //currentPos
-    
+    //blood attribute  xiaojing
+	int _health;  //current blood 
+	int _maxHealth;  //total blood
+	int _attack;  //each attack harm enemy
+	//****************************************//
 public:
     Sprite* background;
     Sprite* background1;
