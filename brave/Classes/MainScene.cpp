@@ -213,11 +213,12 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 300;
+    int beginningPos = 700;
+    int interval = 600;
     int treeNum = 2;
-    for(int i = 1; i <= treeNum; i++) {
+    for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos * i, 300);
+        treeSprite->setPosition(beginningPos + interval * i, 300);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
     }
