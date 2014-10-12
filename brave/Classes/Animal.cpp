@@ -66,24 +66,39 @@ bool Animal::initWithPlayerType(AnimalType type)
             _name = "clothe";
             _animationNum = 5;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+			//-----assign different blood----------Xiaojing---------------//
+			_health = 20;
+			_maxHealth =20;
+			_attack = 2;
+			
+			//-------------------------------------------------//
             break;
         case AnimalType::DOG:
             sfName = "dog-1-1.png";
             _name = "dog";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+			_health = 30;
+			_maxHealth = 30;
+			_attack = 3;
             break;
         case AnimalType::AC:
             sfName = "AC-1-1.png";
             _name = "AC";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+			_health = 40;
+			_maxHealth =40;
+			_attack = 4 ;
             break;
         case AnimalType::ELEPHANT:
             sfName = "elephant-1-1.png";
             _name = "elephant";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
+			_health = 50;
+			_maxHealth =50;
+			_attack = 5;
             break;
     }
     this->initWithSpriteFrameName(sfName);
