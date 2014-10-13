@@ -38,7 +38,7 @@ public:
     //add Attack option top right bar
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
     void initAnimalOptionsBar();
-    void activateWeaponOption(Ref* pSender);
+    void activateWeaponOption(Ref* pSender, int index);
     void callAnimalHelper(Ref* pSender, int index);
     LabelTTF* label;
     
@@ -73,6 +73,7 @@ private:
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
+    
 
 public:
     Sprite *_background;

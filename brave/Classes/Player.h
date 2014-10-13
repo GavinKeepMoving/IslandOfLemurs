@@ -44,7 +44,11 @@ public:
     void onWalk(Vec2 dest, int boundry);
     void initFSM();
     void stop();
-    Weapon* attack(float radius, Weapon::WeaponType weaponType);
+    Weapon* attack(float radius = 250.f);
+    
+    void setWeapon(Weapon::WeaponType weaponType) {
+        currentWeapon = weaponType;
+    }
     
     Vec2 getCurPos();
     Sprite* background;
@@ -71,6 +75,8 @@ private:
     Sequence* _seq;
     //currentPos
     FSM *_fsm;
+    Weapon::WeaponType currentWeapon;
+
 };
 
 #endif

@@ -133,10 +133,12 @@ Player* Player::create(PlayerType type)
 }
 
 
-Weapon* Player::attack(float radius, Weapon::WeaponType weaponType)
+Weapon* Player::attack(float radius)
 {
     //add weapon
-    Weapon *weapon = Weapon::create(weaponType);
+    Weapon *weapon = Weapon::create(currentWeapon);
+    
+    mainLayer->_background->addChild(weapon);
 
     Vec2 groundPos = mainLayer->getOrigin() + Vec2(0.f, this->getContentSize().height);
     Vec2 pos = mainLayer->_background->convertToNodeSpace(this->getPosition());

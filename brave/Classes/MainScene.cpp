@@ -121,7 +121,9 @@ bool MainScene::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
 	//-------------------------------------//
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
+
+    
 
     
     //************************* Begin add by Wenbo Lin *****************************//
@@ -206,15 +208,24 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 {
     // add a "close" icon to exit the progress. it's an autorelease object
     auto optionItem = MenuItemImage::create(
-                                           "weapon1.png",
+                                           "attackoption1.png",
                                            "CloseSelected.png",
-                                           CC_CALLBACK_1(MainScene::activateWeaponOption, this));
+                                           CC_CALLBACK_1(MainScene::activateWeaponOption, this, 1));
     
-	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 ,
+	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 - optionItem->getContentSize().width,
                                 origin.y + visibleSize.height - optionItem->getContentSize().height/2));
+    
+    auto optionItem2 = MenuItemImage::create(
+                                            "attackoption2.png",
+                                            "CloseSelected.png",
+                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this, 2));
+    
+    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 ,
+                                 origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(optionItem, NULL);
+    menu->addChild(optionItem2);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 }
@@ -263,13 +274,21 @@ void MainScene::initAnimalOptionsBar()
     this->addChild(menu, 1);
 }
 
-void MainScene::activateWeaponOption(Ref* pSender)
+void MainScene::activateWeaponOption(Ref* pSender, int index)
 {
-    float radius = 250.;
+    switch (index) {
+        case 1:
+            this->_player->setWeapon(Weapon::WeaponType::COCONUT);
+            break;
+        case 2:
+            this->_player->setWeapon(Weapon::WeaponType::WATER);
+            break;
+        default:
+            break;
+    }
     
-    Weapon *weapon = this->_player->attack(radius, Weapon::WeaponType::WATER);
-    
-    _background->addChild(weapon);
+    this->_player->attack();
+
 }
 
 void MainScene::callAnimalHelper(Ref* pSender, int index) {
