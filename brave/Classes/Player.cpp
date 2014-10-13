@@ -9,6 +9,10 @@
 #include "Player.h"
 #include "Weapon.h"
 
+#include "MainScene.h"
+
+extern MainScene *mainLayer;
+
 
 float Player::height = 0.25;
 
@@ -66,6 +70,11 @@ bool Player::initWithPlayerType(PlayerType type)
             _name = "lemur";
             _animationNum = 5;
             _speed = 125;
+			//init player's blood value xiaojing
+			_health = 100;
+			_maxHealth =100;
+			_attack = 20;
+			//-----------------------------------//
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 5);
             break;
         case PlayerType::ENEMY1:
@@ -93,7 +102,7 @@ bool Player::initWithPlayerType(PlayerType type)
 
 void Player::initFSM()
 {
-    _fsm = FSM::create("idle");
+    _fsm = FSM::create("idle","Lemur");
     _fsm->retain();
     auto onIdle =[&]()
     {
@@ -124,18 +133,25 @@ Player* Player::create(PlayerType type)
 }
 
 
-Weapon* Player::attack(float radius, Weapon::WeaponType weaponType)
+Weapon* Player::attack(float radius)
 {
     //add weapon
-    Weapon *weapon = Weapon::create(weaponType);
-    Vec2 pos = this->getPosition();
+    Weapon *weapon = Weapon::create(currentWeapon);
+    
+    mainLayer->_background->addChild(weapon);
+
+    Vec2 groundPos = mainLayer->getOrigin() + Vec2(0.f, this->getContentSize().height);
+    Vec2 pos = mainLayer->_background->convertToNodeSpace(this->getPosition());
     weapon->setPosition(pos.x, pos.y);
     //scene->addChild(weapon);
     
-    Vec2 target(pos.x+radius, pos.y);
+    Vec2 target(pos.x+radius, groundPos.y);
     
     weapon->shootTo(target);
-    
+    //-------reset attack value of player according to weaponType---xiaojing -------------//
+	
+	 _attack+= weapon->_weaponPower;
+	//-------end edited by xiaojing---------------------------------------------------//
     return weapon;
 }
 
@@ -169,13 +185,13 @@ void Player::onWalk(Vec2 dest, int boundry) {
     if(dest.x < origin.x + visibleSize.width/2) {
         dest1.x = -boundry;
         dest3.x = origin.x;
-        dest2.y = visibleSize.height * 3/4;
+        dest2.y = origin.y + visibleSize.height*Player::height*3;
         this->setFlippedX(true);
     }
     else {
         dest1.x = -boundry;
         dest3.x = visibleSize.width*3/2 - background->getContentSize().width*2;
-        dest2.y = visibleSize.height * 1/4;
+        dest2.y = origin.y + visibleSize.height*Player::height;
         this->setFlippedX(false);
     }
     dest1.y = origin.y;
@@ -302,4 +318,21 @@ Rect Player::getBoundingBox()
     
     return Rect(x,y,spriteSize.width/2,spriteSize.height);
 }
-
+//reduce the _health value of current animal Xiaojing ***************//
+void Player::beHit(int attack){
+    _health -= attack;
+	if(_health <= 0)
+	{ //die
+		_health = 0;
+		
+		//do event die
+		_fsm->doEvent("die");
+		return;
+	}
+	else
+	{
+		//be hit
+		_fsm->doEvent("beHit");
+	}
+}
+//***************************************************//
