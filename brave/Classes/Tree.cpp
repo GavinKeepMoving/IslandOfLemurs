@@ -150,7 +150,7 @@ void Tree::showAnimation() {
 Fire* Tree::addFire(int scale) {
     Fire *fire = Fire::create(Fire::FireType::SHOW);
     fire->setScale(0.2 * scale, 0.2 * scale);
-    fire->setPosition(150, 120);
+    fire->setPosition(280, 120);
     this->treeSprite->addChild(fire);
     fire->setFire();
 }

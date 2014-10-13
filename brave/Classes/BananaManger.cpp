@@ -9,7 +9,7 @@
 #include "BananaManger.h"
 #include "BananaManger.h"
 #include "Banana.h"
-#define max_Banana_num 5
+#define max_Banana_num 3
 
 BananaManger::BananaManger(){}
 
