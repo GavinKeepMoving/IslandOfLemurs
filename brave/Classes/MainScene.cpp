@@ -93,7 +93,7 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    //_trees[0]->setBlood(4);
+    int curBlood = _trees[0]->setBlood(1);
     //_background->removeChild(_trees[0]->treeSprite, true);
     //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
@@ -162,7 +162,7 @@ bool MainScene::init()
     
     //Edit Version
     bananaManger->_background = _background;
-    _background->addChild(bananaManger, 4);
+    _background->addChild(bananaManger, 2);
     /****************** End-Added by Wenbo *********************/
     
     //test animation
@@ -337,11 +337,18 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
     int beginningPos = 700;
-    int interval = 500;
+    int interval = 800;
     int treeNum = 2;
+    
+    //add rope
+    auto rope = Sprite::create("image/trees/rope.png");
+    rope->setScale(0.7, 0.5);
+    rope->cocos2d::Node::setPosition(beginningPos + 370, 520);
+    _background->addChild(rope);
+    
     for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 285);
+        treeSprite->setPosition(beginningPos + interval * i, 450);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
         _trees[_trees.size() - 1]->_background = _background;

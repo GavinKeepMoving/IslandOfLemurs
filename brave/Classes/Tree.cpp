@@ -49,17 +49,15 @@ std::vector<Tree*> Tree::initWithTreeNum(int num) {
 */
 
 //set blood value
-void Tree::setBlood(int value) {
-    std::cout<<this->blood;
-    this->blood = this->blood - value;
-    std::cout<<this->blood;
-    log("in setBlood");
+int Tree::setBlood(int value) {
+    this->blood -= value;
     this->showStateAccordingtoBlood();
+    return this->blood;
 }
 
 void Tree::showStateAccordingtoBlood() {
     log("in showStateAccordingtoBlood");
-    if (blood == 6) {
+    if (blood >= 6) {
         state = 6;
         showAnimation();
     }
@@ -85,7 +83,6 @@ void Tree::showStateAccordingtoBlood() {
     }
     if (blood <= 0) {
         state = 0;
-        log("in showStateAccordingtoBlood");
         showAnimation();
     }
 }
@@ -98,38 +95,44 @@ void Tree::showAnimation() {
     Fire *fire = NULL;
     
     if(state == 6) {
-        
+        this->removeChild(fire, true);
+        CCTextureCache *sharedTextureCache = new CCTextureCache();
+        this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree.png"));
     }
     //burning
     if(state == 5) {
         //Try to add fire
-        fire = this->addFire();
+        if(fire != NULL)
+            this->removeChild(fire, true);
+        fire = this->addFire(6 - state);
         CCTextureCache *sharedTextureCache = new CCTextureCache();
         this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-1.png"));
     }
-    if(state == 5) {
-    }
     if(state == 4) {
-        if(fire == NULL)
-            fire = this->addFire();
+        if(fire != NULL)
+            this->removeChild(fire, true);
+        fire = this->addFire(6 - state);
         CCTextureCache *sharedTextureCache = new CCTextureCache();
         this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-2.png"));
     }
     if(state == 3) {
-        if(fire == NULL)
-            fire = this->addFire();
+        if(fire != NULL)
+            this->removeChild(fire, true);
+        fire = this->addFire(6 - state);
         CCTextureCache *sharedTextureCache = new CCTextureCache();
         this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-3.png"));
     }
     if(state == 2) {
-        if(fire == NULL)
-            fire = this->addFire();
+        if(fire != NULL)
+            this->removeChild(fire, true);
+        fire = this->addFire(6 - state);
         CCTextureCache *sharedTextureCache = new CCTextureCache();
         this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-4.png"));
     }
     if(state == 1) {
-        if(fire == NULL)
-            fire = this->addFire();
+        if(fire != NULL)
+            this->removeChild(fire, true);
+        fire = this->addFire(6 - state);
         CCTextureCache *sharedTextureCache = new CCTextureCache();
         this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree-5.png"));
     }
@@ -144,10 +147,10 @@ void Tree::showAnimation() {
     }
 }
 
-Fire* Tree::addFire() {
+Fire* Tree::addFire(int scale) {
     Fire *fire = Fire::create(Fire::FireType::SHOW);
-    fire->setScale(0.5, 0.5);
-    fire->setPosition(150, 120);
+    fire->setScale(0.2 * scale, 0.2 * scale);
+    fire->setPosition(280, 120);
     this->treeSprite->addChild(fire);
     fire->setFire();
 }
