@@ -7,6 +7,7 @@
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
+#include <unistd.h>
 //******************************************************************************************************************
 #include "BananaManger.h"
 
@@ -93,7 +94,6 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    int curBlood = _trees[0]->setBlood(1);
     //curBlood = _trees[0]->setBlood(1);
     //curBlood = _trees[0]->setBlood(1);
     //_background->removeChild(_trees[0]->treeSprite, true);
