@@ -61,6 +61,7 @@ bool Enemy::initWithPlayerType(EnemyType type)
     _health = 50;
 	_maxHealth = 50;
 	_attack = 5;
+    setCanAttack(true);
 	//*************************************************//
     //setup according to PlayerType
     switch(type)
@@ -70,16 +71,18 @@ bool Enemy::initWithPlayerType(EnemyType type)
             _name = "enemy1";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
-            _minDist = 20;
+            _minDist = 5;
             _speed = 100;
+            _attack = 10;
             break;
         case EnemyType::ENEMY2:
             sfName = "enemy2-1-1.png";
             _name = "enemy2";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
-            _minDist = 30;
+            _minDist = 10;
             _speed = 70;
+            _attack = 15;
             break;
     }
     this->initWithSpriteFrameName(sfName);
@@ -125,7 +128,7 @@ void Enemy::walkTo(Vec2 dest)
 // dest is the position of the targetted ending point of the enemy
 void Enemy::onWalk(Vec2 dest)
 {
-    log("Enter walk");
+    log("Enemy: Enter walk");
     auto curPos = this->getPosition();
     //    this->stopActionByTag(WALKTO_TAG);
     auto diff = dest - curPos;
@@ -143,33 +146,27 @@ void Enemy::onWalk(Vec2 dest)
 }
 
 
-Weapon* Enemy::attack(float radius)
-{
-    //add weapon
-    Weapon *weapon = Weapon::create(Weapon::WeaponType::ARROW);
-    Vec2 pos = this->getPosition();
-    weapon->setPosition(pos.x, pos.y);
-    //scene->addChild(weapon);
-    
-    Vec2 target(pos.x+radius, pos.y);
-    
-    weapon->shootTo(target);
-    
-    return weapon;
-}
+//Weapon* Enemy::attack(float radius)
+//{
+//    //add weapon
+//    Weapon *weapon = Weapon::create(Weapon::WeaponType::ARROW);
+//    Vec2 pos = this->getPosition();
+//    weapon->setPosition(pos.x, pos.y);
+//    //scene->addChild(weapon);
+//    
+//    Vec2 target(pos.x+radius, pos.y);
+//    
+//    weapon->shootTo(target);
+//    
+//    return weapon;
+//}
 
 /****************** Begin-Added by Zhe Liu *********************/
 //enemy functions: attack, behit
 void Enemy::attack()
 {
-    // find the nearest player, and then attack it.
-    //    for (auto attacker : _attackers){
-    //        if (abs(attacker->getPositionX()-this->getPositionX()) <= 1){
-//    this->attack(30.0);
-    //            break;
-    //        }
-    //    }
-    _fsm->doEvent("attack");
+    if (isCanAttack())
+        _fsm->doEvent("attack");
 }
 
 
@@ -214,9 +211,10 @@ void Enemy::initFSM(){
 		this->runAction(seq);
 	};
 	_fsm->setOnEnter("attacking",onAttacking);
-	
+	// behit need to stop !!!
 	auto onBeingHit = [&]()
 	{
+//        this->setCanAttack(false);
 		log("Enemy onBeingHit: Enter BeingHit");
 		auto animate = getAnimateByType(BEINGHIT);
 		auto func = [&]()
@@ -229,26 +227,26 @@ void Enemy::initFSM(){
 		this->runAction(seq);
 	};
 	_fsm->setOnEnter("beingHit",onBeingHit);
-    // dead callback function
-    //	auto onDead = [&]()
-    //	{
-    //		this->setCanAttack(false);
-    //		log("onDead: Enter Dead");
-    //		auto animate = getAnimateByType(DEAD);
-    //		auto func = [&]()
-    //		{
-    //			log("A charactor died!");
-    //			NotificationCenter::getInstance()->postNotification("enemyDead",this);
-    //			this->removeFromParentAndCleanup(true);
-    //		};
-    //		auto blink = Blink::create(3,5);
-    //		auto callback = CallFunc::create(func);
-    //		auto seq = Sequence::create(animate, blink, callback, nullptr);
-    //		this->stopAllActions();
-    //		this->runAction(seq);
-    ////		_progress->setVisible(false);
-    //	};
-    //	_fsm->setOnEnter("dead",onDead);
+//    dead callback function
+    auto onDead = [&]()
+    {
+        this->setCanAttack(false);
+        log("onDead: Enter Dead");
+        auto animate = getAnimateByType(DEAD);
+        auto func = [&]()
+        {
+            log("A charactor died!");
+            NotificationCenter::getInstance()->postNotification("enemyDead",this);
+            this->removeFromParentAndCleanup(true);
+        };
+        auto blink = Blink::create(3,5);
+        auto callback = CallFunc::create(func);
+        auto seq = Sequence::create(animate, blink, callback, nullptr);
+        this->stopAllActions();
+        this->runAction(seq);
+    //		_progress->setVisible(false);
+    };
+    _fsm->setOnEnter("dead",onDead);
 }
 
 
@@ -261,7 +259,7 @@ Vec2 Enemy::getCurPos()
 }
 
 //reduce the _health value of current enemy Xiaojing ***************//
-void Enemy::beHit(int attack){
+int Enemy::beHit(int attack){
     _health -= attack;
 	if(_health <= 0)
 	{ //the enemy die
@@ -270,12 +268,13 @@ void Enemy::beHit(int attack){
 		this->_progress->setProgress((float)_health/_maxHealth*100);
 		//do event die
 		_fsm->doEvent("die");
-		return;
+		return 1;
 	}
 	else
 	{
 		this->_progress->setProgress((float)_health/_maxHealth*100);
 		_fsm->doEvent("beHit");
+        return 0;
 	}
 }
 //***************************************************//
@@ -291,42 +290,102 @@ bool Enemy::isInRange(Player *enemy){
     return _attackers.contains(enemy);
 }
 
-// get best attack position
-Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees)
+// get best attack position: add effect of animals
+Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees, std::vector<Animal*> animals, int &type)
 {
     // fill in the closest object to be attacked.
     auto curPos = this->getPosition();
     Vec2 firstObj;
-    bool isTree = false;
-    if (trees.size() == 0 || (pos.x >= trees.back()->getPositionX() && curPos.x >= pos.x)){
-        firstObj = pos;
+    int isTree = 0;
+    int hasAnimal = 0;
+    int index = -1;
+    Animal* closest;
+    if (animals.size() > 0){
+        hasAnimal = 1;
+        index = 0;
+        closest = animals[0];
+        for (int i=1;i<animals.size();i++){
+            if (animals[i]->getPositionX() > closest->getPositionX()){
+                index = i;
+                closest = animals[i];
+            }
+        }
     }
-    else{
+    if ((trees.size() == 0 || (pos.x >= trees[0]->treeSprite->getPositionX() && curPos.x >= pos.x))
+        && (hasAnimal == 0 || (pos.x >= closest->getPositionX() && curPos.x >= pos.x))){
+        firstObj = pos;
+        type = 0;
+    }
+    else if (trees.size() > 0 && (trees[0]->treeSprite->getPositionX() > pos.x && curPos.x > trees[0]->treeSprite->getPositionX()) && (hasAnimal == 0 || (trees[0]->treeSprite->getPositionX() > closest->getPositionX() && curPos.x > trees[0]->treeSprite->getPositionX()))) {// tree
 //        if (pos.x < trees.back()->getPositionX() || ){
-        firstObj = trees.back()->getPosition();
-        isTree = true;
+        firstObj = Vec2(trees[0]->treeSprite->getPositionX(),curPos.y);
+        type = 1;
+        isTree = 1;
 //        }
     }
-	auto pos1 = curPos - Vec2(_speed, 0);
+    else { // animal
+        firstObj = Vec2(closest->getPositionX(),curPos.y);
+        type = 200+index;
+    }
+    
+	auto pos1 = curPos - Vec2(_speed, 0); // location after move
 	auto pos2 = curPos;
-    auto pos3 = firstObj + Vec2(this->_minDist,0);
+    auto pos3 = firstObj + Vec2(_minDist,0); // location with minDist
     auto diff1 = pos1.x - firstObj.x;
-    if (diff1 > this->_minDist+_speed || (isTree == false && std::abs(firstObj.y - curPos.y) > 20)){
+    if (diff1 > _minDist+_speed || (isTree == 0 && std::abs(firstObj.y - curPos.y) > 20)){
 //        std::cout<< "the existence of tree is: "<<isTree<<std::endl;
         return pos1;
     }
-    else if (diff1 > this->_minDist && (isTree == false && std::abs(firstObj.y - curPos.y) <= 20)){
+    else if (diff1 > _minDist && (isTree == 1 || (isTree == 0 && std::abs(firstObj.y - curPos.y) <= 20))){
         return pos3;
     }
     else{
         return pos2;
     }
 }
+/*
+ backup for getBestAttackPosition()
+ 
+ Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees, std::vector<Animal*> animals, int &type)
+ {
+ // fill in the closest object to be attacked.
+ auto curPos = this->getPosition();
+ Vec2 firstObj;
+ int isTree = 0;
+ if (trees.size() == 0 || (pos.x >= trees[0]->treeSprite->getPositionX() && curPos.x >= pos.x)){
+ firstObj = pos;
+ type = 0;
+ }
+ else{
+ //        if (pos.x < trees.back()->getPositionX() || ){
+ firstObj = Vec2(trees[0]->treeSprite->getPositionX(),curPos.y);
+ type = 1;
+ isTree = 1;
+ //        }
+ }
+ auto pos1 = curPos - Vec2(_speed, 0); // location after move
+ auto pos2 = curPos;
+ auto pos3 = firstObj + Vec2(_minDist,0); // location with minDist
+ auto diff1 = pos1.x - firstObj.x;
+ if (diff1 > _minDist+_speed || (isTree == 0 && std::abs(firstObj.y - curPos.y) > 20)){
+ //        std::cout<< "the existence of tree is: "<<isTree<<std::endl;
+ return pos1;
+ }
+ else if (diff1 > _minDist && (isTree == 1 || (isTree == 0 && std::abs(firstObj.y - curPos.y) <= 20))){
+ return pos3;
+ }
+ else{
+ return pos2;
+ }
+ }
+
+ */
 
 bool Enemy::closeToTree(std::vector<Tree *> trees){
     Tree* last = trees.at(trees.size()-1);
     auto curPos = this->getPosition();
     float dist = last->getPositionX()+last->Sprite::getContentSize().width/2;
 }
+
 
 /****************** End-Added by Zhe Liu *********************/

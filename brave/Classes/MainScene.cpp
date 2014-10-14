@@ -7,6 +7,7 @@
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
+#include <unistd.h>
 //******************************************************************************************************************
 #include "BananaManger.h"
 
@@ -93,7 +94,8 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    int curBlood = _trees[0]->setBlood(1);
+    //curBlood = _trees[0]->setBlood(1);
+    //curBlood = _trees[0]->setBlood(1);
     //_background->removeChild(_trees[0]->treeSprite, true);
     //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
@@ -141,16 +143,19 @@ bool MainScene::init()
     this->addChild(_player);
     _player->retain();
     
-    /******************Begin-Added by Yafu*****************************/
+    /******************Begin-Added by Zhe Liu*****************************/
     //add enemy1
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+     _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
     _background->addChild(_enemy1);
     
 //    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
 //    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-
-    //_background->addChild(_enemy2);
+     //_background->addChild(_enemy2);
+    
+//    _animal = Animal::create(Animal::AnimalType::ELEPHANT);
+//    _animal->setPosition(1450, origin.y + visibleSize.height * Animal::height);
+//    _background->addChild(_animal);
     /******************End-Added by Yafu*****************************/
     
     BananaManger* bananaManger = BananaManger::create(_background);
@@ -165,17 +170,18 @@ bool MainScene::init()
     _background->addChild(bananaManger, 2);
     /****************** End-Added by Wenbo *********************/
     
-    //test animation
-    //_player->playAnimationForever(1);
-    //_enemy1->playAnimationForever(1);
+
     //add blood progress
     
     /****************** Begin-Added by Zhe Liu *********************/
-    _enemys.pushBack(_enemy1);
+    
+    _enemys.push_back(_enemy1);
 //    _enemys.pushBack(_enemy2);
     _enemy1->addAttacker(_player);
 //    _enemy2->addAttacker(_player);
+//    _animals.push_back(_animal);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
+    this->schedule(schedule_selector(MainScene::animalMove), 3);
     /****************** End-Added by Zhe Liu *********************/
 	
 	//*****init blood progress  xiaojing **************//
@@ -290,36 +296,36 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
     this->_player->attack();
 
 }
-
+// 1450, origin.y + visibleSize.height * Enemy::height
 void MainScene::callAnimalHelper(Ref* pSender, int index) {
     switch (index) {
         case 1:
             _animal = Animal::create(Animal::AnimalType::ELEPHANT);
-            _animal->setPosition(visibleSize.width/2+100, origin.y + visibleSize.height*Animal::height);
-            this->addChild(_animal);
+            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            _background->addChild(_animal);
             //add animals -------------------------------//
-            _animals.pushBack( _animal);
+            _animals.push_back( _animal);
             break;
         case 2:
             _animal = Animal::create(Animal::AnimalType::CLOTHE);
-            _animal->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Animal::height);
-            this->addChild(_animal);
+            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            _background->addChild(_animal);
             //add animals -------------------------------//
-            _animals.pushBack( _animal);
+            _animals.push_back( _animal);
             break;
         case 3:
             _animal = Animal::create(Animal::AnimalType::TIGER);
-            _animal->setPosition(visibleSize.width/2 -100, origin.y + visibleSize.height*Animal::height);
-            this->addChild(_animal);
+            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            _background->addChild(_animal);
             //add animals -------------------------------//
-            _animals.pushBack( _animal);
+            _animals.push_back( _animal);
             break;
         case 4:
             _animal = Animal::create(Animal::AnimalType::FOX);
-            _animal->setPosition(visibleSize.width/2 -200, origin.y + visibleSize.height*Animal::height);
-            this->addChild(_animal);
+            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            _background->addChild(_animal);
             //add animals -------------------------------//
-            _animals.pushBack( _animal);
+            _animals.push_back( _animal);
             break;
         default:
             break;
@@ -359,14 +365,35 @@ void MainScene::initTrees(int num) {
 // enemy move
 void MainScene::enemyMove(float dt)
 {
+    if (_enemys.size() == 0){
+        std::cout<<"no enemy right now, please wait"<<std::endl;
+        addEnemy();
+        return;
+    }
     for (auto enemy : _enemys)
     {
         if ("dead" != enemy->getState() && _player)
         {
-            Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees);
-            
+            int type = -1;
+            Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees,_animals ,type);
+            std::cout<<"current type is: "<<type<<std::endl;
             if (dest == enemy->getPosition()){
                 enemy->attack();
+                std::cout<<"the attack target of enemy is: "<<type<<std::endl;
+                // control the blood volumn of the object it hitted
+                if (type == 0){// lemur
+                    
+                }
+                else if (type == 1){
+                    
+                }
+                else if (type >= 200){
+                    int animal_index = type%200;
+                    _animals[animal_index]->beHit(enemy->getAttack());
+                }
+                else{
+                    
+                }
             }
             else{
                 enemy->walkTo(dest);
@@ -375,13 +402,58 @@ void MainScene::enemyMove(float dt)
     }
     
 }
+
+void MainScene::animalMove(float dt)
+{
+    if (_enemys.size() == 0){
+        for (auto animal : _animals)
+            animal->stop();
+    }
+    for (auto animal : _animals)
+    {
+        if ("dead" != animal->getState() && _player)
+        {
+            int index = -1;
+            Vec2 dest = animal->getBestAttackPosition(_enemys, index);
+            if (dest == animal->getPosition())
+            {
+                if (index != -1){
+                    animal->attack();
+                    // control the blood volumn of the bihitted animal
+                    int state = _enemys[index]->beHit(animal->getAttack());
+                    if (state == 1){
+                        log("this enemy is dead, remove it~");
+                        _enemys.erase(_enemys.begin()+index);
+                        index = -1;
+                    }
+                }
+            }
+            else
+            {
+                animal->walkTo(dest);
+            }
+        }
+    }
+}
+
+void MainScene::addEnemy()
+{
+    _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
+    // origin.x
+    //    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+    _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
+    _background->addChild(_enemy1);
+    _enemys.push_back(_enemy1);
+    _enemy1->addAttacker(_player);
+
+}
 /****************** End-Added by Zhe Liu *********************/
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     //TO-DO change 750 the integer to tree boundries or something
-    _player->walkTo(pos, 250);
+    _player->walkTo(pos, 550);
     log("MainScene::onTouchBegan");
     return true;
 }
@@ -404,19 +476,19 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
     log("MainScene::onTouchend");
 }
 //------------------remove dead enemy--------------------------------------------------------------//
-void MainScene::enemyDead(Ref* obj)
-{
-	auto enemy= (Enemy*)obj;
-	_enemys.eraseObject(enemy,true);
-	log("onEnemyDead:%d", _enemys.size());
-	//if(_enemys.size() == 0) //show success or go to next level
-}
+//void MainScene::enemyDead(Ref* obj)
+//{
+//	auto enemy= (Enemy*)obj;
+//	_enemys.eraseObject(enemy,true);
+//	log("onEnemyDead:%d", _enemys.size());
+//	//if(_enemys.size() == 0) //show success or go to next level
+//}
 
-void MainScene::animalDead(Ref* obj)
-{
-	auto animal= (Animal*)obj;
-	_animals.eraseObject(animal,true);		
-}
+//void MainScene::animalDead(Ref* obj)
+//{
+//	auto animal= (Animal*)obj;
+//	_animals.eraseObject(animal,true);		
+//}
 
 
 

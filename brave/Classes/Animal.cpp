@@ -10,6 +10,9 @@
 
 #include "Weapon.h"
 #include "Progress.h"
+#include <iostream>
+#include "MainScene.h"
+//#include "Enemy.h"
 
 float Animal::height = 0.25;
 
@@ -114,7 +117,7 @@ bool Animal::initWithPlayerType(AnimalType type)
     auto size = this->getContentSize();
     _progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
     _progress->setPosition( size.width*2/3, size.height + _progress->getContentSize().height/2);
-    
+    this->initFSM();
     this->addChild(_progress);
     //-----------------------------------------------//
     return true;
@@ -137,45 +140,44 @@ Animal* Animal::create(AnimalType type)
 }
 
 
-// get animate by type
-Animate* Animal::getAnimateByType(AnimationType type){
-    if (type < 0 || type >= _animationNum)
-    {
-        log("illegal animation index!");
-        return nullptr;
-    }
-    auto str = String::createWithFormat("%s-%s",_name.c_str(), _animationNames[type].c_str())->getCString();
-    auto animation = AnimationCache::getInstance()->getAnimation(str);
-    auto animate = Animate::create(animation);
-    animate->setTag(type);
-    //this->runAction(RepeatForever::create(animate));
-    return animate;
-}
+//Weapon* Animal::attack(float radius)
+//{
+//    //add weapon
+//    Weapon *weapon = Weapon::create(Weapon::WeaponType::ARROW);
+//    Vec2 pos = this->getPosition();
+//    weapon->setPosition(pos.x, pos.y);
+//    //scene->addChild(weapon);
+//    
+//    Vec2 target(pos.x+radius, pos.y);
+//    
+//    weapon->shootTo(target);
+//    
+//    return weapon;
+//}
 
 //actually player stay in the center of the screeen but the background would move to the opposite position as the target
 void Animal::walkTo(Vec2 dest)
 {
-    log("onIdle: Enter walk");
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    //stop current moving action, if any.
-    if(_seq!=nullptr)
-        this->stopAction(_seq);
-    
+	std::function<void()> onWalk = CC_CALLBACK_0(Animal::onWalk, this, dest);
+	_fsm->setOnEnter("walking", onWalk);
+	_fsm->doEvent("walk");
+}
+
+void Animal::onWalk(Vec2 dest)
+{
+    log("Enemy: Enter walk");
     auto curPos = this->getPosition();
-    dest.y = origin.y + visibleSize.height*Animal::height;
-    //flip when moving backward
-    if(curPos.x > dest.x) {
-        dest.x = origin.x;
-        this->setFlippedX(true);
-    }
-    else {
-        dest.x = origin.x + visibleSize.width;
-        this->setFlippedX(false);
-    }
-    
+//    dest.y = origin.y + visibleSize.height*Animal::height;
+//    //flip when moving backward
+//    if(curPos.x > dest.x) {
+//        dest.x = origin.x;
+//        this->setFlippedX(true);
+//    }
+//    else {
+//        dest.x = origin.x + visibleSize.width;
+//        this->setFlippedX(false);
+//    }
+//    
     
     //calculate the time needed to move
     auto diff = dest - curPos;
@@ -220,3 +222,127 @@ void Animal::beHit(int attack){
 	}
 }
 //***************************************************//
+
+/****************** Begin-Added by Zhe Liu *********************/
+void Animal::attack()
+{
+    _fsm->doEvent("attack");
+}
+void Animal::stop()
+{
+    _fsm->doEvent("stop");
+}
+
+void Animal::initFSM(){
+    _fsm = FSM::create("idle", "Helper");
+    _fsm->retain();
+    // corresponding functions
+    auto onIdle =[&]()
+	{
+		log("Enemy onIdle: Enter idle");
+		this->stopActionByTag(WALKING);
+		auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
+		auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
+		this->setSpriteFrame(spriteFrame);
+	};
+	_fsm->setOnEnter("idle",onIdle);
+    
+	auto onAttacking =[&]()
+	{
+		log("Enemy onAttacking: Enter Attacking");
+		auto animate = getAnimateByType(ATTACKING);
+		auto func = [&]()
+		{
+			this->_fsm->doEvent("stop");
+		};
+		auto callback = CallFunc::create(func);
+		auto seq = Sequence::create(animate, callback, nullptr);
+		this->runAction(seq);
+	};
+	_fsm->setOnEnter("attacking",onAttacking);
+	
+	auto onBeingHit = [&]()
+	{
+		log("Enemy onBeingHit: Enter BeingHit");
+		auto animate = getAnimateByType(BEINGHIT);
+		auto func = [&]()
+		{
+			this->_fsm->doEvent("stop");
+		};
+		auto wait = DelayTime::create(0.6f);
+		auto callback = CallFunc::create(func);
+		auto seq = Sequence::create(wait,animate, callback, nullptr);
+		this->runAction(seq);
+	};
+	_fsm->setOnEnter("beingHit",onBeingHit);
+    //    dead callback function
+    auto onDead = [&]()
+    {
+        //        this->setCanAttack(false);
+        log("onDead: Enter Dead");
+        auto animate = getAnimateByType(DEAD);
+        auto func = [&]()
+        {
+            log("A charactor died!");
+            NotificationCenter::getInstance()->postNotification("enemyDead",this);
+            this->removeFromParentAndCleanup(true);
+        };
+        auto blink = Blink::create(3,5);
+        auto callback = CallFunc::create(func);
+        auto seq = Sequence::create(animate, blink, callback, nullptr);
+        this->stopAllActions();
+        this->runAction(seq);
+        //		_progress->setVisible(false);
+    };
+    _fsm->setOnEnter("dead",onDead);
+}
+
+// get animate by type
+Animate* Animal::getAnimateByType(AnimationType type){
+    if (type < 0 || type >= _animationNum)
+    {
+        log("illegal animation index!");
+        return nullptr;
+    }
+    auto str = String::createWithFormat("%s-%s",_name.c_str(), _animationNames[type].c_str())->getCString();
+    auto animation = AnimationCache::getInstance()->getAnimation(str);
+    auto animate = Animate::create(animation);
+    animate->setTag(type);
+    return animate;
+}
+// return the position we need to go in the next frame
+Vec2 Animal::getBestAttackPosition(std::vector<Enemy*> enemys,int& index)
+{
+    // animal's position
+    auto curPos = this->getPosition();
+    auto pos1 = curPos;
+    auto pos2 = curPos + Vec2(_speed,0);
+    if (enemys.size() == 0){
+        return pos1;
+    }
+    else{
+        // find the closest enemy
+        Enemy* closestEnemy = enemys[0];
+        index = 0;
+        for (int i=1;i<enemys.size();i++){
+            if (enemys[i]->getPositionX() < closestEnemy->getPositionX()){
+                closestEnemy = enemys[i];
+                index = i;
+            }
+        }
+        // judge for the move dest
+        auto diff = closestEnemy->getPositionX() - curPos.x;
+        if (diff > _minDist+_speed){
+            return pos2;
+        }
+        else if (diff > _minDist){
+            auto pos3 = Vec2(closestEnemy->getPositionX()-_minDist, curPos.y);
+            return pos3;
+        }
+        else{
+            return pos1;
+        }
+    }
+}
+/****************** End-Added by Zhe Liu *********************/
+

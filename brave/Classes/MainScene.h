@@ -7,6 +7,7 @@
 #include "Weapon.h"
 #include "Animal.h"
 #include "Enemy.h"
+#include "Animal.h"
 #include <iostream>
 
 
@@ -48,7 +49,9 @@ public:
     
     // enemy module
     void enemyMove(float dt);
-    //
+    void animalMove(float dt);
+    void addEnemy();
+//    void 
 //    bool closeToEnemy( obj);
 	 void enemyDead(Ref* obj);
      void animalDead(Ref* obj);
@@ -67,8 +70,8 @@ private:
 	Enemy* _enemy1;
     Enemy* _enemy2;
     Enemy* _enemy3;
-    Vector<Enemy*> _enemys;
-    Vector<Animal*> _animals;
+    std::vector<Enemy*> _enemys;
+    std::vector<Animal*> _animals;
     Size visibleSize;
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;

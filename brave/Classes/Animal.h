@@ -13,6 +13,10 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "FSM.h"
+#include "Enemy.h"
+class Enemy;
+
+#include "FSM.h"
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
@@ -53,6 +57,18 @@ public:
     void onWalk(Vec2 dest);
 	//when hit reduce blood Xiaojing
     void beHit(int attack);
+    
+    /*** add by Zhe Liu ***/
+    Vec2 getBestAttackPosition(std::vector<Enemy*> enemys,int& index);
+    
+    std::string getState(){return _fsm->getState();}
+    
+    void stop();
+    
+    void initFSM();
+    
+    int getAttack(){return _attack ;}
+    /*** add by Zhe Liu ***/
 private:
     //Action _seq;
     float _speed;
@@ -68,6 +84,7 @@ private:
 	int _health;  //current blood 
 	int _maxHealth;  //total blood
 	int _attack;  //each attack harm enemy
+    float _minDist;
 	//****************************************//
 public:
     Sprite* background;
