@@ -94,6 +94,8 @@ bool MainScene::init()
     //add trees to background
     this->initTrees(2);
     int curBlood = _trees[0]->setBlood(1);
+    //curBlood = _trees[0]->setBlood(1);
+    //curBlood = _trees[0]->setBlood(1);
     //_background->removeChild(_trees[0]->treeSprite, true);
     //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
@@ -381,7 +383,7 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     //TO-DO change 750 the integer to tree boundries or something
-    _player->walkTo(pos, 250);
+    _player->walkTo(pos, 550);
     log("MainScene::onTouchBegan");
     return true;
 }

@@ -12,7 +12,7 @@
 
 extern MainScene *mainLayer;
 
-float Tree::blood = 6;
+float Tree::blood = 100;
 
 //constructor1
 Tree::Tree () {
@@ -57,27 +57,27 @@ int Tree::setBlood(int value) {
 
 void Tree::showStateAccordingtoBlood() {
     log("in showStateAccordingtoBlood");
-    if (blood >= 6) {
+    if (blood >= 100) {
         state = 6;
         showAnimation();
     }
-    if (blood == 5) {
+    if (blood >= 70 && blood <= 80) {
         state = 5;
         showAnimation();
     }
-    if (blood == 4) {
+    if (blood >= 50 && blood  <= 70) {
         state = 4;
         showAnimation();
     }
-    if (blood == 3) {
+    if (blood >= 30 && blood <= 50) {
         state = 3;
         showAnimation();
     }
-    if (blood == 2) {
+    if (blood >= 10 && blood <= 30) {
         state = 2;
         showAnimation();
     }
-    if (blood == 1) {
+    if (blood >= 1 && blood <= 10) {
         state = 1;
         showAnimation();
     }
