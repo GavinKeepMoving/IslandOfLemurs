@@ -218,7 +218,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
             backgroundActions.pushBack(bmove0);
         }
         dest1.x = -boundry;
-        dest3.x = visibleSize.width*3/2 - background->getContentSize().width;
+        dest3.x = visibleSize.width*3/2 - background->getContentSize().width*5/4;
         dest2.y = origin.y + visibleSize.height*Player::height;
         dest4.x = origin.x + visibleSize.width;
         if(this->getPositionX() > origin.x + visibleSize.width/2) {
