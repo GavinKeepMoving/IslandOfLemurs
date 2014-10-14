@@ -133,7 +133,7 @@ bool MainScene::init()
        
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Player::height*3);
+    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
     _player->background = _background;
     _player->background1 = _background1;
     _player->setScale(0.5);
