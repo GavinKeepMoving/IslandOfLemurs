@@ -14,7 +14,8 @@
 #include "Weapon.h"
 #include "FSM.h"
 #include "Tree.h"
-
+#include "Animal.h"
+class Animal;
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
@@ -56,15 +57,19 @@ public:
     Animate* getAnimateByType(AnimationType type);
     // attack, behit
     void attack();
-    void beHit(int attack);
+    int beHit(int attack);
     void addAttacker(Player* attacker);
     void removeAttacker(Player* attacker);
     bool isInRange(Player* enemy);
+    void setCanAttack(bool canAttack){_isCanAttack=canAttack;}
+	
+	bool isCanAttack(){return _isCanAttack;}
     
     std::string getState(){return _fsm->getState();}
-    Vec2 getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees);
+    Vec2 getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees, std::vector<Animal*> animals,int &type);
     float getMinDist(){return _minDist;}
     bool closeToTree(std::vector<Tree*> trees);
+    int getAttack(){return _attack;}
     
 private:
     //Action _seq;
@@ -80,6 +85,8 @@ private:
     float _radius = 0.1f;
     Vector<Player*> _attackers;
     float _minDist; // min distance for attacking
+    bool _isCanAttack;
+    
 
     
 	

@@ -137,18 +137,19 @@ bool FSM::init(std::string type)
     ->addEvent("die","walking","dead")
     ->addEvent("stop","walking","idle")
     ->addEvent("walk","walking","walking")
-    ->addEvent("stop","idle","idle");
-    if (type == "Helper" || type == "Enemy"){
-        this->addEvent("beHit", "idle", "beingHit");
-        this->addEvent("beHit", "walking", "beingHit");
-        this->addEvent("die", "beingHit", "dead");
-        this->addEvent("die", "attacking", "dead");
-        this->addEvent("stop", "beingHit", "idle");
-        this->addEvent("attack", "idle", "attacking");
-        this->addEvent("attack", "walking", "attacking");
-        this->addEvent("stop","walking","idle");
-		this->addEvent("stop","attacking","idle");
+    ->addEvent("stop","idle","idle")
+//    if (type == "Helper" || type == "Enemy"){
+    ->addEvent("beHit", "idle", "beingHit")
+    ->addEvent("beHit", "walking", "beingHit")
+    ->addEvent("beHit", "attacking", "beingHit")
+    ->addEvent("die", "beingHit", "dead")
+    ->addEvent("die", "attacking", "dead")
+    ->addEvent("stop", "beingHit", "idle")
+    ->addEvent("attack", "idle", "attacking")
+    ->addEvent("attack", "walking", "attacking")
+    ->addEvent("stop","walking","idle")
+    ->addEvent("stop","attacking","idle");
 
-    }
+//    }
     return true;
 }
