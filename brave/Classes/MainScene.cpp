@@ -1,5 +1,6 @@
 #include "MainScene.h"
 #include "Player.h"
+#include "Animal.h"
 #include "Enemy.h"
 #include "Weapon.h"
 #include "FSM.h"
@@ -60,6 +61,7 @@ bool MainScene::init()
     
     // 3. add Weapon options bar
     initWeaponOptionsBar(origin, visibleSize);
+    initAnimalOptionsBar();
     
 
     /////////////////////////////
@@ -91,7 +93,9 @@ bool MainScene::init()
     //added by Wenbo Lin
     //add trees to background
     this->initTrees(2);
-    _trees[0]->showAnimation(1, _background);
+    int curBlood = _trees[0]->setBlood(1);
+    //_background->removeChild(_trees[0]->treeSprite, true);
+    //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
@@ -112,11 +116,21 @@ bool MainScene::init()
 
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
 	
-	//init blood progress
+    //Lishi Jiang
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/animal.plist", "image/animal.pvr.ccz");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
 	//-------------------------------------//
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("weapons.plist","weapons.pvr.ccz");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
+
+    
+
+    
+    //************************* Begin add by Wenbo Lin *****************************//
+    //add fire animation
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/fire/fire.plist","image/fire/fire.pvr.ccz");
+    //************************* End add by Wenbo Lin *****************************//
+       
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
     _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Player::height*3);
@@ -130,20 +144,17 @@ bool MainScene::init()
     /******************Begin-Added by Zhe Liu*****************************/
     //add enemy1
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    // origin.x
-//    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-    _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
+     _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
+    _background->addChild(_enemy1);
+    
 //    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
 //    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+     //_background->addChild(_enemy2);
     
-    _background->addChild(_enemy1);
-//    _background->addChild(_enemy2);
-    /**  add animals **/
-    _animal1 = Animal::create(Animal::AnimalType::ANIMAL1);
-    _animal1->setPosition(200,origin.y + visibleSize.height * Animal::height);
-    _animal1->setFlippedX(true);
-    _background->addChild(_animal1);
-    /******************End-Added by Zhe Liu*****************************/
+//    _animal = Animal::create(Animal::AnimalType::ELEPHANT);
+//    _animal->setPosition(1450, origin.y + visibleSize.height * Animal::height);
+//    _background->addChild(_animal);
+    /******************End-Added by Yafu*****************************/
     
     BananaManger* bananaManger = BananaManger::create(_background);
     bananaManger->bindPlayer(_player);
@@ -154,7 +165,7 @@ bool MainScene::init()
     
     //Edit Version
     bananaManger->_background = _background;
-    _background->addChild(bananaManger, 4);
+    _background->addChild(bananaManger, 2);
     /****************** End-Added by Wenbo *********************/
     
 
@@ -166,12 +177,15 @@ bool MainScene::init()
 //    _enemys.pushBack(_enemy2);
     _enemy1->addAttacker(_player);
 //    _enemy2->addAttacker(_player);
-    _animals.push_back(_animal1);
+//    _animals.push_back(_animal);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
     this->schedule(schedule_selector(MainScene::animalMove), 3);
     /****************** End-Added by Zhe Liu *********************/
+	
+	//*****init blood progress  xiaojing **************//
     addProgress();
-	//--------------------//
+	
+	
     //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     this->scheduleUpdate();
@@ -198,29 +212,123 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 {
     // add a "close" icon to exit the progress. it's an autorelease object
     auto optionItem = MenuItemImage::create(
-                                           "weapon1.png",
+                                           "attackoption1.png",
                                            "CloseSelected.png",
-                                           CC_CALLBACK_1(MainScene::activateWeaponOption, this));
+                                           CC_CALLBACK_1(MainScene::activateWeaponOption, this, 1));
     
-	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 ,
+	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 - optionItem->getContentSize().width,
                                 origin.y + visibleSize.height - optionItem->getContentSize().height/2));
+    
+    auto optionItem2 = MenuItemImage::create(
+                                            "attackoption2.png",
+                                            "CloseSelected.png",
+                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this, 2));
+    
+    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 ,
+                                 origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(optionItem, NULL);
+    menu->addChild(optionItem2);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 }
 
-void MainScene::activateWeaponOption(Ref* pSender)
+//Right top Weapon option bar
+void MainScene::initAnimalOptionsBar()
 {
-    float radius = 250.;
+    // add a "close" icon to exit the progress. it's an autorelease object
+    auto optionItem1 = MenuItemImage::create(
+                                            "animal1.png",
+                                            "CloseSelected.png",
+                                            CC_CALLBACK_1(MainScene::callAnimalHelper, this, 1));
     
-    Weapon *weapon = this->_player->attack(radius, Weapon::WeaponType::COCONUT);
+    optionItem1->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2,
+                                 origin.y + optionItem1->getContentSize().height/2));
     
-    this->addChild(weapon);
+    auto optionItem2 = MenuItemImage::create(
+                                            "animal2.png",
+                                            "CloseSelected.png",
+                                            CC_CALLBACK_1(MainScene::callAnimalHelper, this, 2));
     
+    optionItem2->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width,
+                                 origin.y + optionItem1->getContentSize().height/2));
     
-        
+    auto optionItem3 = MenuItemImage::create(
+                                             "animal3.png",
+                                             "CloseSelected.png",
+                                             CC_CALLBACK_1(MainScene::callAnimalHelper, this, 3));
+    
+    optionItem3->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width*2,
+                                  origin.y + optionItem1->getContentSize().height/2));
+    
+    auto optionItem4 = MenuItemImage::create(
+                                             "animal4.png",
+                                             "CloseSelected.png",
+                                             CC_CALLBACK_1(MainScene::callAnimalHelper, this, 4));
+    
+    optionItem4->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width*3,
+                                  origin.y + optionItem1->getContentSize().height/2));
+    // create menu, it's an autorelease object
+    auto menu = Menu::create(optionItem1, NULL);
+    menu->addChild(optionItem2);
+    menu->addChild(optionItem3);
+    menu->addChild(optionItem4);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+}
+
+void MainScene::activateWeaponOption(Ref* pSender, int index)
+{
+    switch (index) {
+        case 1:
+            this->_player->setWeapon(Weapon::WeaponType::COCONUT);
+            break;
+        case 2:
+            this->_player->setWeapon(Weapon::WeaponType::WATER);
+            break;
+        default:
+            break;
+    }
+    
+    this->_player->attack();
+
+}
+// 1450, origin.y + visibleSize.height * Enemy::height
+void MainScene::callAnimalHelper(Ref* pSender, int index) {
+    switch (index) {
+        case 1:
+            _animal = Animal::create(Animal::AnimalType::ELEPHANT);
+            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            _background->addChild(_animal);
+            //add animals -------------------------------//
+            _animals.push_back( _animal);
+            break;
+        case 2:
+            _animal = Animal::create(Animal::AnimalType::CLOTHE);
+            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            _background->addChild(_animal);
+            //add animals -------------------------------//
+            _animals.push_back( _animal);
+            break;
+        case 3:
+            _animal = Animal::create(Animal::AnimalType::TIGER);
+            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            _background->addChild(_animal);
+            //add animals -------------------------------//
+            _animals.push_back( _animal);
+            break;
+        case 4:
+            _animal = Animal::create(Animal::AnimalType::FOX);
+            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            _background->addChild(_animal);
+            //add animals -------------------------------//
+            _animals.push_back( _animal);
+            break;
+        default:
+            break;
+    }
+
 }
 
 void MainScene::spriteMoveFinished(CCNode* sender)
@@ -233,13 +341,21 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
     int beginningPos = 700;
-    int interval = 600;
+    int interval = 800;
     int treeNum = 2;
+    
+    //add rope
+    auto rope = Sprite::create("image/trees/rope.png");
+    rope->setScale(0.7, 0.5);
+    rope->cocos2d::Node::setPosition(beginningPos + 370, 520);
+    _background->addChild(rope);
+    
     for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 285);
+        treeSprite->setPosition(beginningPos + interval * i, 450);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
+        _trees[_trees.size() - 1]->_background = _background;
     }
 }
 
@@ -261,6 +377,7 @@ void MainScene::enemyMove(float dt)
             std::cout<<"current type is: "<<type<<std::endl;
             if (dest == enemy->getPosition()){
                 enemy->attack();
+                std::cout<<"the attack target of enemy is: "<<type<<std::endl;
                 // control the blood volumn of the object it hitted
                 if (type == 0){// lemur
                     
@@ -268,8 +385,9 @@ void MainScene::enemyMove(float dt)
                 else if (type == 1){
                     
                 }
-                else if (type != -1){
-                    
+                else if (type >= 200){
+                    int animal_index = type%200;
+                    _animals[animal_index]->beHit(enemy->getAttack());
                 }
                 else{
                     
@@ -355,7 +473,24 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
         _player->climbUp(pos);*/
     log("MainScene::onTouchend");
 }
+//------------------remove dead enemy--------------------------------------------------------------//
+//void MainScene::enemyDead(Ref* obj)
+//{
+//	auto enemy= (Enemy*)obj;
+//	_enemys.eraseObject(enemy,true);
+//	log("onEnemyDead:%d", _enemys.size());
+//	//if(_enemys.size() == 0) //show success or go to next level
+//}
 
+//void MainScene::animalDead(Ref* obj)
+//{
+//	auto animal= (Animal*)obj;
+//	_animals.eraseObject(animal,true);		
+//}
+
+
+
+//----------------------------------------------------------------------------------//
 void MainScene::menuCloseCallback(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)

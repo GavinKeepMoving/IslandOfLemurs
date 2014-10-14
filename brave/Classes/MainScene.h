@@ -5,9 +5,11 @@
 #include "Player.h"
 #include "Tree.h"
 #include "Weapon.h"
+#include "Animal.h"
 #include "Enemy.h"
 #include "Animal.h"
 #include <iostream>
+
 
 //******************************************************************************************************************
 //added by Wenbo Lin
@@ -36,7 +38,9 @@ public:
     
     //add Attack option top right bar
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
-    void activateWeaponOption(Ref* pSender);
+    void initAnimalOptionsBar();
+    void activateWeaponOption(Ref* pSender, int index);
+    void callAnimalHelper(Ref* pSender, int index);
     LabelTTF* label;
     
     void spriteMoveFinished(CCNode* sender);
@@ -49,30 +53,32 @@ public:
     void addEnemy();
 //    void 
 //    bool closeToEnemy( obj);
-    
-      
+	 void enemyDead(Ref* obj);
+     void animalDead(Ref* obj);
 	//------blood progress----------------//
 	void addProgress();
     
-    
+    /******************Begin-Added by Yafu*****************************/
+    Vec2 getOrigin() {
+        return origin;
+    }
+    /******************End-Added by Yafu*****************************/
+
 private:
-    cocos2d::Rect s_visibleRect;
-    // variables
+    Animal* _animal;
     Player* _player;
 	Enemy* _enemy1;
     Enemy* _enemy2;
     Enemy* _enemy3;
-    Animal* _animal1;
-    Animal* _animal2;
-    Animal* _animal3;
-    std::vector<Animal*> _animals;
     std::vector<Enemy*> _enemys;
-    
-    
+    std::vector<Animal*> _animals;
     Size visibleSize;
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
+    
+
+public:
     Sprite *_background;
     Sprite *_background1;
     std::vector<Tree*> _trees;

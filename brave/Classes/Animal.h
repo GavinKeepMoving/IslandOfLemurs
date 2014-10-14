@@ -16,6 +16,7 @@
 #include "Enemy.h"
 class Enemy;
 
+#include "FSM.h"
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
@@ -28,16 +29,18 @@ class Animal : public Player
 public:
     enum AnimalType
     {
-        ANIMAL1,
-        ANIMAL2
+        CLOTHE,
+        TIGER,
+        FOX,
+        ELEPHANT
     };
     enum AnimationType
     {
         WALKING = 0,
-        ATTACKING,
-        DEAD,
-        BEINGHIT,
-        SKILL
+        ATTACKING = 1,
+        DEAD = 2,
+        BEINGHIT = 3,
+        SKILL = 4
     };
     static float height;
     bool initWithPlayerType(AnimalType type);
@@ -45,23 +48,27 @@ public:
     void walkTo(Vec2 dest);
     void addAnimation();
     void playAnimationForever(int index);
+    Animate* getAnimateByType(AnimationType type);
+    
     void attack();
-    Weapon* attack(float radius);
     
     Vec2 getCurPos();
     
     void onWalk(Vec2 dest);
-    //Begin add by Zhe Liu
-    std::string getState(){return _fsm->getState();}
-    // init enemy's fsm
-    void initFSM();
-    void stop();
-    // get animate by type
-    Animate* getAnimateByType(AnimationType type);
+	//when hit reduce blood Xiaojing
+    void beHit(int attack);
+    
+    /*** add by Zhe Liu ***/
     Vec2 getBestAttackPosition(std::vector<Enemy*> enemys,int& index);
-    float getMinDist(){return _minDist;}
-    int getAttack(){return _attack;}
-    //Edn add by Zhe Liu
+    
+    std::string getState(){return _fsm->getState();}
+    
+    void stop();
+    
+    void initFSM();
+    
+    int getAttack(){return _attack ;}
+    /*** add by Zhe Liu ***/
 private:
     //Action _seq;
     float _speed;
@@ -72,10 +79,13 @@ private:
     std::vector<std::string> _animationNames;
     Sequence* _seq;
     //currentPos
-    FSM* _fsm;
+    //blood attribute  xiaojing
+	FSM* _fsm;
+	int _health;  //current blood 
+	int _maxHealth;  //total blood
+	int _attack;  //each attack harm enemy
     float _minDist;
-    int _attack;
-    
+	//****************************************//
 public:
     Sprite* background;
     Sprite* background1;

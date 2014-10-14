@@ -258,13 +258,15 @@ Vec2 Enemy::getCurPos()
     return result;
 }
 
-// need to add interfaces about blood process, when the enemy is hitted, it need to stop
+//reduce the _health value of current enemy Xiaojing ***************//
 int Enemy::beHit(int attack){
     _health -= attack;
 	if(_health <= 0)
-	{
+	{ //the enemy die
 		_health = 0;
+		//reset blood progress
 		this->_progress->setProgress((float)_health/_maxHealth*100);
+		//do event die
 		_fsm->doEvent("die");
 		return 1;
 	}
@@ -272,10 +274,10 @@ int Enemy::beHit(int attack){
 	{
 		this->_progress->setProgress((float)_health/_maxHealth*100);
 		_fsm->doEvent("beHit");
-        log("enemy is doing event behit now!");
         return 0;
 	}
 }
+//***************************************************//
 
 //judge for the player
 void Enemy::addAttacker(Player *attacker){
@@ -323,7 +325,7 @@ Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees, std
     }
     else { // animal
         firstObj = Vec2(closest->getPositionX(),curPos.y);
-        type = 20+index;
+        type = 200+index;
     }
     
 	auto pos1 = curPos - Vec2(_speed, 0); // location after move
