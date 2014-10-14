@@ -12,6 +12,9 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "FSM.h"
+#include "Enemy.h"
+class Enemy;
 
 //******************************************************************************************************************
 //added by Wenbo Lin
@@ -42,13 +45,23 @@ public:
     void walkTo(Vec2 dest);
     void addAnimation();
     void playAnimationForever(int index);
-    
+    void attack();
     Weapon* attack(float radius);
     
     Vec2 getCurPos();
     
     void onWalk(Vec2 dest);
-    
+    //Begin add by Zhe Liu
+    std::string getState(){return _fsm->getState();}
+    // init enemy's fsm
+    void initFSM();
+    void stop();
+    // get animate by type
+    Animate* getAnimateByType(AnimationType type);
+    Vec2 getBestAttackPosition(std::vector<Enemy*> enemys,int& index);
+    float getMinDist(){return _minDist;}
+    int getAttack(){return _attack;}
+    //Edn add by Zhe Liu
 private:
     //Action _seq;
     float _speed;
@@ -59,6 +72,9 @@ private:
     std::vector<std::string> _animationNames;
     Sequence* _seq;
     //currentPos
+    FSM* _fsm;
+    float _minDist;
+    int _attack;
     
 public:
     Sprite* background;

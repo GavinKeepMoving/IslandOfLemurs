@@ -6,6 +6,7 @@
 #include "Tree.h"
 #include "Weapon.h"
 #include "Enemy.h"
+#include "Animal.h"
 #include <iostream>
 
 //******************************************************************************************************************
@@ -44,18 +45,29 @@ public:
     
     // enemy module
     void enemyMove(float dt);
-    //
+    void animalMove(float dt);
+    void addEnemy();
+//    void 
 //    bool closeToEnemy( obj);
     
       
 	//------blood progress----------------//
 	void addProgress();
+    
+    
 private:
+    cocos2d::Rect s_visibleRect;
+    // variables
     Player* _player;
 	Enemy* _enemy1;
     Enemy* _enemy2;
     Enemy* _enemy3;
-    Vector<Enemy*> _enemys;
+    Animal* _animal1;
+    Animal* _animal2;
+    Animal* _animal3;
+    std::vector<Animal*> _animals;
+    std::vector<Enemy*> _enemys;
+    
     
     Size visibleSize;
     Vec2 origin;

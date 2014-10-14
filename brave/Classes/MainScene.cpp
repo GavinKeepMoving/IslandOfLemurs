@@ -127,16 +127,23 @@ bool MainScene::init()
     this->addChild(_player);
     _player->retain();
     
-    /******************Begin-Added by Yafu*****************************/
+    /******************Begin-Added by Zhe Liu*****************************/
     //add enemy1
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+    // origin.x
+//    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+    _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
 //    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
 //    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-
+    
     _background->addChild(_enemy1);
-//    this->addChild(_enemy2);
-    /******************End-Added by Yafu*****************************/
+//    _background->addChild(_enemy2);
+    /**  add animals **/
+    _animal1 = Animal::create(Animal::AnimalType::ANIMAL1);
+    _animal1->setPosition(200,origin.y + visibleSize.height * Animal::height);
+    _animal1->setFlippedX(true);
+    _background->addChild(_animal1);
+    /******************End-Added by Zhe Liu*****************************/
     
     BananaManger* bananaManger = BananaManger::create(_background);
     bananaManger->bindPlayer(_player);
@@ -150,17 +157,18 @@ bool MainScene::init()
     _background->addChild(bananaManger, 4);
     /****************** End-Added by Wenbo *********************/
     
-    //test animation
-    //_player->playAnimationForever(1);
-    //_enemy1->playAnimationForever(1);
+
     //add blood progress
     
     /****************** Begin-Added by Zhe Liu *********************/
-    _enemys.pushBack(_enemy1);
+    
+    _enemys.push_back(_enemy1);
 //    _enemys.pushBack(_enemy2);
     _enemy1->addAttacker(_player);
 //    _enemy2->addAttacker(_player);
+    _animals.push_back(_animal1);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
+    this->schedule(schedule_selector(MainScene::animalMove), 3);
     /****************** End-Added by Zhe Liu *********************/
     addProgress();
 	//--------------------//
@@ -229,7 +237,7 @@ void MainScene::initTrees(int num) {
     int treeNum = 2;
     for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 500);
+        treeSprite->setPosition(beginningPos + interval * i, 285);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
     }
@@ -239,14 +247,33 @@ void MainScene::initTrees(int num) {
 // enemy move
 void MainScene::enemyMove(float dt)
 {
+    if (_enemys.size() == 0){
+        std::cout<<"no enemy right now, please wait"<<std::endl;
+        addEnemy();
+        return;
+    }
     for (auto enemy : _enemys)
     {
         if ("dead" != enemy->getState() && _player)
         {
-            Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees);
-            
+            int type = -1;
+            Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees,_animals ,type);
+            std::cout<<"current type is: "<<type<<std::endl;
             if (dest == enemy->getPosition()){
                 enemy->attack();
+                // control the blood volumn of the object it hitted
+                if (type == 0){// lemur
+                    
+                }
+                else if (type == 1){
+                    
+                }
+                else if (type != -1){
+                    
+                }
+                else{
+                    
+                }
             }
             else{
                 enemy->walkTo(dest);
@@ -254,6 +281,51 @@ void MainScene::enemyMove(float dt)
         }
     }
     
+}
+
+void MainScene::animalMove(float dt)
+{
+    if (_enemys.size() == 0){
+        for (auto animal : _animals)
+            animal->stop();
+    }
+    for (auto animal : _animals)
+    {
+        if ("dead" != animal->getState() && _player)
+        {
+            int index = -1;
+            Vec2 dest = animal->getBestAttackPosition(_enemys, index);
+            if (dest == animal->getPosition())
+            {
+                if (index != -1){
+                    animal->attack();
+                    // control the blood volumn of the bihitted animal
+                    int state = _enemys[index]->beHit(animal->getAttack());
+                    if (state == 1){
+                        log("this enemy is dead, remove it~");
+                        _enemys.erase(_enemys.begin()+index);
+                        index = -1;
+                    }
+                }
+            }
+            else
+            {
+                animal->walkTo(dest);
+            }
+        }
+    }
+}
+
+void MainScene::addEnemy()
+{
+    _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
+    // origin.x
+    //    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+    _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
+    _background->addChild(_enemy1);
+    _enemys.push_back(_enemy1);
+    _enemy1->addAttacker(_player);
+
 }
 /****************** End-Added by Zhe Liu *********************/
 
