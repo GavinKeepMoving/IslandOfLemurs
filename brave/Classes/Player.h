@@ -71,6 +71,7 @@ public:
     int targetEnemyIdx;
     void attackCallback(float test);
     void generalAttack(float radius = 250.f);
+    void playerDrop(int start, int end);
 private:
     //Action _seq;
     float _speed;
