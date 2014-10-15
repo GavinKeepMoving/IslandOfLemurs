@@ -69,6 +69,18 @@ public:
     bool isEnemyInRange(Player* p);
     
     bool isOnTree(Player* p);
+    
+    Vec2 attackTarget(Player* p);
+    
+    Enemy * getEnemy(int i) {
+        return _enemys[i];
+    }
+    void eraseEnemy(int i) {
+        if(_enemys.size() <= i) {
+            return;
+        }
+        _enemys.erase(_enemys.begin() + i);
+    }
     /******************End-Added by Zhenni ************************/
 private:
     Animal* _animal;

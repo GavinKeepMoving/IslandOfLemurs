@@ -31,6 +31,8 @@ public:
     void playAnimationForever(int index);
     void shootTo(Vec2 dest);
     int _weaponPower;  //each weapon will add a value to player's attack
+    //Zhenni
+    int getSpeed();
 private:
     //Action _seq;
     float _speed;

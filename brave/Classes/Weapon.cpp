@@ -50,12 +50,15 @@ void Weapon::playAnimationForever(int index)
     this->runAction(RepeatForever::create(animate));
 }
 
+int Weapon::getSpeed() {
+    return _speed;
+}
 
 bool Weapon::initWithWeaponType(WeaponType type)
 {
     std::string sfName = "";
     _type = type;
-    _speed = 100;
+    _speed = 300;
 	_seq = nullptr;
     int animationFrameNum[2] ={1, 12};
     int animationFrameNum2[5] ={10, 3, 3, 2, 0};
@@ -67,7 +70,7 @@ bool Weapon::initWithWeaponType(WeaponType type)
             sfName = "coconut1-1-1.png";
             _name = "coconut1";
             _animationNum = 1;
-            _speed = 100;
+            _speed = 300;
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 1);
 			_weaponPower = 1;  
             break;
@@ -75,7 +78,7 @@ bool Weapon::initWithWeaponType(WeaponType type)
             sfName = "water-1-1.png";
             _name = "water";
             _animationNum = 1;
-            _speed = 100;
+            _speed = 300;
             _animationFrameNum.assign(animationFrameNum+1, animationFrameNum + 2);
             break;
         case WeaponType::BAMBOO:
@@ -158,7 +161,7 @@ void Weapon::shootTo(Vec2 dest)
     //auto move = MoveTo::create(time, dest);
     
     //auto jump = JumpBy::create(time, dest, s.height/10, 1);
-    auto actionTo = JumpTo::create(2, dest, 150, 1);
+    auto actionTo = JumpTo::create(time, dest, 150, 1);
     
 
     //lambda function
