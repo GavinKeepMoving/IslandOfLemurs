@@ -14,8 +14,6 @@ extern MainScene *mainLayer;
 
 #define originalBlood 100
 
-float Tree::blood = originalBlood;
-
 //constructor1
 Tree::Tree () {
     
@@ -26,6 +24,8 @@ Tree::Tree(Sprite* tree) {
     this->treeSprite = tree;
     _posX = tree->getPosition().x;
     _posY = tree->getPosition().y;
+    blood = (float)originalBlood;
+    state = 6;
 }
 
 //initialize a single tree
@@ -52,6 +52,7 @@ std::vector<Tree*> Tree::initWithTreeNum(int num) {
 
 //set blood value
 int Tree::setBlood(int value) {
+    log("in setBlood");
     this->blood -= value;
     this->showStateAccordingtoBlood();
     return this->blood;
@@ -60,30 +61,39 @@ int Tree::setBlood(int value) {
 void Tree::showStateAccordingtoBlood() {
     log("in showStateAccordingtoBlood");
     if (blood >= originalBlood * 0.8) {
+        log("in 80");
         state = 6;
         showAnimation();
     }
-    if (blood >= originalBlood * 0.7 && blood <= originalBlood * 0.8) {
+    
+    else if (blood >= originalBlood * 0.7) {
+        log("in 70");
         state = 5;
         showAnimation();
     }
-    if (blood >= originalBlood * 0.5 && blood  <= originalBlood * 0.7) {
+    else if (blood >= originalBlood * 0.5) {
+        log("in 50");
         state = 4;
         showAnimation();
     }
-    if (blood >= originalBlood * 0.3 && blood <= originalBlood * 0.5) {
+    else if (blood >= originalBlood * 0.3) {
+        log("in 30");
         state = 3;
         showAnimation();
     }
-    if (blood >= originalBlood * 0.1 && blood <= originalBlood * 0.3) {
+    else if (blood >= originalBlood * 0.1) {
+        log("in 10");
         state = 2;
         showAnimation();
     }
-    if (blood >= originalBlood * 0.01 && blood <= originalBlood * 0.1) {
+    else if (blood >= originalBlood * 0.01) {
+        log("in 1");
         state = 1;
         showAnimation();
     }
-    if (blood <= 0) {
+     
+    else if (blood <= 0) {
+        log("in 0");
         state = 0;
         showAnimation();
     }
@@ -97,7 +107,8 @@ void Tree::showAnimation() {
     Fire *fire = NULL;
     
     if(state == 6) {
-        this->removeChild(fire, true);
+        if(fire != NULL)
+            this->removeChild(fire, true);
         CCTextureCache *sharedTextureCache = new CCTextureCache();
         this->treeSprite->setTexture(sharedTextureCache->addImage("image/trees/tree.png"));
     }
@@ -152,7 +163,7 @@ void Tree::showAnimation() {
 Fire* Tree::addFire(int scale) {
     Fire *fire = Fire::create(Fire::FireType::SHOW);
     fire->setScale(0.2 * scale, 0.2 * scale);
-    fire->setPosition(280, 120);
+    fire->setPosition(240, 200);
     this->treeSprite->addChild(fire);
     fire->setFire();
 }

@@ -311,14 +311,14 @@ Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees, std
             }
         }
     }
-    if ((trees.size() == 0 || (pos.x >= trees[0]->treeSprite->getPositionX() && curPos.x >= pos.x))
+    if ((trees.size() == 0 || (pos.x >= trees.back()->treeSprite->getPositionX() && curPos.x >= pos.x))
         && (hasAnimal == 0 || (pos.x >= closest->getPositionX() && curPos.x >= pos.x))){
         firstObj = pos;
         type = 0;
     }
-    else if (trees.size() > 0 && (trees[0]->treeSprite->getPositionX() > pos.x && curPos.x > trees[0]->treeSprite->getPositionX()) && (hasAnimal == 0 || (trees[0]->treeSprite->getPositionX() > closest->getPositionX() && curPos.x > trees[0]->treeSprite->getPositionX()))) {// tree
+    else if (trees.size() > 0 && (trees.back()->treeSprite->getPositionX() > pos.x && curPos.x > trees.back()->treeSprite->getPositionX()) && (hasAnimal == 0 || (trees.back()->treeSprite->getPositionX() > closest->getPositionX() && curPos.x > trees.back()->treeSprite->getPositionX()))) {// tree
 //        if (pos.x < trees.back()->getPositionX() || ){
-        firstObj = Vec2(trees[0]->treeSprite->getPositionX(),curPos.y);
+        firstObj = Vec2(trees.back()->treeSprite->getPositionX(),curPos.y);
         type = 1;
         isTree = 1;
 //        }
