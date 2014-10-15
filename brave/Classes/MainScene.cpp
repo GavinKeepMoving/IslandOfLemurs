@@ -388,9 +388,12 @@ void MainScene::enemyMove(float dt)
                 else if (type == 1){
                     int state = _trees.back()->setBlood(enemy->getAttack());
                     if (state <= 0){
+                        
                         _trees.pop_back();
                         if(rope != NULL)
                             _background->removeChild(rope, true);
+                         
+                        //deleteTree();
                     }
                 }
                 else if (type >= 200){
@@ -505,7 +508,18 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
 //	_animals.eraseObject(animal,true);		
 //}
 
-
+/*******************************Begin add by Wenbo Lin*******************************/
+void MainScene::deleteTree() {
+    float xPos = _trees[_trees.size() - 1]->_posX;
+    float yPos = _trees[_trees.size() - 1]->_posY;
+    Sprite* bareTree = Sprite::create("image/trees/bare_tree.png");
+    bareTree->cocos2d::Node::setPosition(xPos - 50, yPos - 270);
+    _background->addChild(bareTree, 0);
+    _trees.pop_back();
+    if(rope != NULL)
+        _background->removeChild(rope, true);
+}
+/*******************************Ended add by Wenbo Lin*******************************/
 
 //----------------------------------------------------------------------------------//
 void MainScene::menuCloseCallback(Ref* pSender)

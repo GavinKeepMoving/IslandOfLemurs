@@ -92,6 +92,8 @@ public:
     //added by Wenbo Lin
     Progress* _progress;
     Sprite* rope;
+    void deleteTree();
+    //End added by Wenbo Lin
     //******************************************************************************************************************
 };
 
