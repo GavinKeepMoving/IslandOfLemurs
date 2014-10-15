@@ -561,10 +561,17 @@ void MainScene::menuCloseCallback(Ref* pSender)
 	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
     return;
 #endif
-
-    Director::getInstance()->end();
+    if(!pause) {
+        this->cocos2d::Node::pause();
+        pause = true;
+    }
+    else {
+        this->resume();
+        pause = false;
+    }
+    //Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
+    //exit(0);
 #endif
 }
