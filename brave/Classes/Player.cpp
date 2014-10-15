@@ -160,6 +160,9 @@ void Player::generalAttack(float radius) {
     }
 }
 
+void Player::playerDrop(int start, int end) {
+    log("player dropping!");
+}
 
 Weapon* Player::attack(float radius)
 {
