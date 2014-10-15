@@ -96,18 +96,8 @@ bool MainScene::init()
     //********************************************************************************************************//
     //added by Wenbo Lin
     
-    //add rope
-    rope = Sprite::create("image/trees/rope.png");
-    rope->setScale(0.7, 0.5);
-    rope->cocos2d::Node::setPosition(700 + 370, 520);
-    _background->addChild(rope);
-    
     //add trees to background
     this->initTrees(2);
-    //int curBlood = _trees[1]->setBlood(20);
-    //curBlood = _trees[1]->setBlood(20);
-    //_background->removeChild(_trees[0]->treeSprite, true);
-    //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
@@ -168,7 +158,7 @@ bool MainScene::init()
 //    _background->addChild(_animal);
     /******************End-Added by Yafu*****************************/
     
-    BananaManger* bananaManger = BananaManger::create(_background);
+    bananaManger = BananaManger::create(_background);
     bananaManger->bindPlayer(_player);
     
     /****************** Begin-Added by Wenbo *********************/
@@ -352,13 +342,30 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 700;
-    int interval = 800;
+    int beginningPos = 900;
+    int interval = 600;
     int treeNum = 2;
     
+    //add treeBase
+    treeBase = Sprite::create("image/trees/treeBase.png");
+    treeBase->setPosition(580, 460);
+    _background->addChild(treeBase);
+
+    
     for(int i = 0; i < treeNum; i++) {
+        //add ropes
+        auto rope = Sprite::create("image/trees/rope.png");
+        rope->setScale(0.3 + i * 0.2, 0.5);
+        rope->cocos2d::Node::setPosition(beginningPos - 230 + i * 550, 520);
+        _ropes.push_back(rope);
+        _background->addChild(rope);
+        
+        auto bareTree = Sprite::create("image/trees/bare_tree.png");
+        bareTree->setPosition(beginningPos + interval * i, 180);
+        _background->addChild(bareTree);
+        
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 450);
+        treeSprite->setPosition(beginningPos + interval * i, 430);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
         _trees[_trees.size() - 1]->_background = _background;
@@ -524,28 +531,35 @@ void MainScene::deleteTree() {
     Tree * target = _trees[_trees.size() - 1];
     Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
     float xPos = targetTreePos.x;
-    //float yPos = targetTreePos.y;
+    float yPos = targetTreePos.y;
     Size visibleSize = Director::getInstance()->getVisibleSize();
+
+    Sprite * rope = _ropes[_ropes.size() - 1];
     float rangeLeft = 0;
     float rangeRight = 0;
     
     if(_trees.size() - 1 == 0) {
         rangeLeft = xPos - target->getContentSize().width / 2;
         rangeRight = xPos + target->getContentSize().width / 2;
-        this->boundry = target->_posX - target->getContentSize().width / 2 - visibleSize.width/2;
+        this->boundry = target->_posX - target->getContentSize().width*5/4 - visibleSize.width/2;
         _player->playerDrop(rangeLeft, rangeRight);
     }
     else {
         rangeLeft = xPos - target->getContentSize().width / 2 - rope->getContentSize().width;
         rangeRight = xPos + target->getContentSize().width / 2;
-        this->boundry = target->_posX - target->getContentSize().width*3/2 - rope->getContentSize().width - visibleSize.width/2;
+        this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
         std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
         _player->playerDrop(rangeLeft, rangeRight, onWalk);
     }
     
     _trees.pop_back();
-    if(rope != NULL)
+    
+    if(_trees.size() == 0) _background->removeChild(bananaManger, true);
+    
+    if(rope != NULL) {
         _background->removeChild(rope, true);
+        _ropes.pop_back();
+    }
 }
 /*******************************Ended add by Wenbo Lin*******************************/
 
