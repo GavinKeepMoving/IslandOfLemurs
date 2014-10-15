@@ -93,18 +93,8 @@ bool MainScene::init()
     //********************************************************************************************************//
     //added by Wenbo Lin
     
-    //add rope
-    rope = Sprite::create("image/trees/rope.png");
-    rope->setScale(0.7, 0.5);
-    rope->cocos2d::Node::setPosition(700 + 370, 520);
-    _background->addChild(rope);
-    
     //add trees to background
     this->initTrees(2);
-    //int curBlood = _trees[1]->setBlood(20);
-    //curBlood = _trees[1]->setBlood(20);
-    //_background->removeChild(_trees[0]->treeSprite, true);
-    //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
@@ -349,13 +339,30 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 700;
-    int interval = 800;
+    int beginningPos = 900;
+    int interval = 600;
     int treeNum = 2;
     
+    //add treeBase
+    treeBase = Sprite::create("image/trees/treeBase.png");
+    treeBase->setPosition(580, 460);
+    _background->addChild(treeBase);
+
+    
     for(int i = 0; i < treeNum; i++) {
+        //add ropes
+        auto rope = Sprite::create("image/trees/rope.png");
+        rope->setScale(0.3 + i * 0.5, 0.5);
+        rope->cocos2d::Node::setPosition(beginningPos - 230 + i * 370, 520);
+        _ropes.push_back(rope);
+        _background->addChild(rope);
+        
+        auto bareTree = Sprite::create("image/trees/bare_tree.png");
+        bareTree->setPosition(beginningPos + interval * i, 180);
+        _background->addChild(bareTree);
+        
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 450);
+        treeSprite->setPosition(beginningPos + interval * i, 430);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
         _trees[_trees.size() - 1]->_background = _background;
@@ -518,6 +525,7 @@ Vec2 MainScene::attackTarget(Player *p) {
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
     Tree * target = _trees[_trees.size() - 1];
+    Sprite * rope = _ropes[_ropes.size() - 1];
     float xPos = target->_posX;
     float yPos = target->_posY;
     
@@ -536,8 +544,10 @@ void MainScene::deleteTree() {
     }
     
     _trees.pop_back();
-    if(rope != NULL)
+    if(rope != NULL) {
         _background->removeChild(rope, true);
+        _ropes.pop_back();
+    }
 }
 /*******************************Ended add by Wenbo Lin*******************************/
 
