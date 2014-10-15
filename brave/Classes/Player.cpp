@@ -58,6 +58,8 @@ bool Player::initWithPlayerType(PlayerType type)
     money = 0;
     _type = type;
     _speed = 100;
+    _attackSpeed = 2;
+    _attackRange = 350;
 	_seq = nullptr;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
@@ -109,12 +111,19 @@ void Player::initFSM()
         log("onIdle: Enter idle");
         //this->stopActionByTag(WALKING);
         this->stopAllActions();
+        auto func = [&]()
+        {
+            this->stop();
+        };
         auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
         auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
         this->setSpriteFrame(spriteFrame);
+        this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
+        this->scheduleUpdate();
     };
     _fsm->setOnEnter("idle",onIdle);
 }
+
 
 Player* Player::create(PlayerType type)
 {
@@ -132,6 +141,13 @@ Player* Player::create(PlayerType type)
     }
 }
 
+void Player::generalAttack(float radius) {
+    //log(mainLayer->_enemys.size());
+    if(mainLayer->isEnemyInRange(this)) {
+        log("Player: attacking");
+        this->attack(radius);
+    }
+}
 
 Weapon* Player::attack(float radius)
 {
@@ -355,6 +371,20 @@ Rect Player::getBoundingBox()
     int y=entityPos.y-spriteSize.height/2;
     
     return Rect(x,y,spriteSize.width/2,spriteSize.height);
+}
+Rect Player::getAttackBox() {
+    /*由于Sprite是放在Player上的，所以要检测Player的碰撞范围*/
+    Size spriteSize=getContentSize();
+    Vec2 entityPos=getCurPos();//获取player中心点
+    //获取Player attack box左下角的坐标值
+    int x=entityPos.x-spriteSize.width/4;
+    int y=0;
+    //判断攻击方向
+    if(this->isFlippedX()) {
+        x=entityPos.x+spriteSize.width/4 - _attackRange;
+    }
+    // attack range 为横向，纵向无限制条件
+    return Rect(x, y, _attackRange, Director::getInstance()->getVisibleSize().height);
 }
 //reduce the _health value of current animal Xiaojing ***************//
 void Player::beHit(int attack){

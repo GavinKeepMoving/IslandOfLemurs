@@ -11,6 +11,7 @@
 #include "cocos2d.h"
 #include "FSM.h"
 #include "Weapon.h"
+//#include "Enemy.h"
 USING_NS_CC;
 
 class Player : public Sprite
@@ -46,6 +47,8 @@ public:
     void stop();
     Weapon* attack(float radius = 250.f);
     
+    void generalAttack(float radius = 250.f);
+    
     void setWeapon(Weapon::WeaponType weaponType) {
         currentWeapon = weaponType;
     }
@@ -64,9 +67,14 @@ public:
 	int _maxHealth;  //total blood
 	int _attack;  //each attack harm enemy
 	void beHit(int attack);
+    
+    //Zhenni
+    Rect getAttackBox();
 private:
     //Action _seq;
     float _speed;
+    float _attackSpeed; //wait duration for attack //Zhenni
+    float _attackRange; //horizontal attack range // Zhenni
     PlayerType _type;
     std::string _name;
     int _animationNum;
@@ -76,6 +84,7 @@ private:
     //currentPos
     FSM *_fsm;
     Weapon::WeaponType currentWeapon;
+    //std::vector<Enemy*> *_enemys;
 
 };
 

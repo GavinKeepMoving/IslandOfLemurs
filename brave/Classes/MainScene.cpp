@@ -457,6 +457,15 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
     log("MainScene::onTouchBegan");
     return true;
 }
+//added by Zhenni
+bool MainScene::isEnemyInRange(Player* p) {
+    Rect playerRect=p->getAttackBox();
+    for(int i=0; i<_enemys.size(); i++) {
+        Vec2 enemyPos = _background->convertToWorldSpace(_enemys[i]->getPosition());
+        if(playerRect.containsPoint(enemyPos)) return true;
+    }
+    return false;
+}
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
 {

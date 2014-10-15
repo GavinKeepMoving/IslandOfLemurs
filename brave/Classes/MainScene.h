@@ -64,6 +64,12 @@ public:
     }
     /******************End-Added by Yafu*****************************/
 
+    /******************Begin-Added by Zhenni ************************/
+    // judge if the player can attack enemy
+    bool isEnemyInRange(Player* p);
+    
+    bool isOnTree(Player* p);
+    /******************End-Added by Zhenni ************************/
 private:
     Animal* _animal;
     Player* _player;
