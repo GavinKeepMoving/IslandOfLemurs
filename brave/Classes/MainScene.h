@@ -111,6 +111,7 @@ public:
     Sprite* treeBase;
     void deleteTree();
     BananaManger* bananaManger;
+    bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************
 };
