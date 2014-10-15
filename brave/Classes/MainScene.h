@@ -81,6 +81,9 @@ public:
         }
         _enemys.erase(_enemys.begin() + i);
     }
+    
+    int boundry;
+    Vec2 touchPos;
     /******************End-Added by Zhenni ************************/
 private:
     Animal* _animal;

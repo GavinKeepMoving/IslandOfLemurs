@@ -41,6 +41,9 @@ bool MainScene::init()
     
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
+    
+    //Zhenni
+    this->boundry = 550;
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -460,9 +463,10 @@ void MainScene::addEnemy()
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
-    Vec2 pos = this->convertToNodeSpace(touch->getLocation());
+    this->touchPos = this->convertToNodeSpace(touch->getLocation());
     //TO-DO change 750 the integer to tree boundries or something
-    _player->walkTo(pos, 550);
+    
+    _player->walkTo(this->touchPos, this->boundry);
     log("MainScene::onTouchBegan");
     return true;
 }
@@ -518,21 +522,25 @@ Vec2 MainScene::attackTarget(Player *p) {
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
     Tree * target = _trees[_trees.size() - 1];
-    float xPos = target->_posX;
-    float yPos = target->_posY;
-    
+    Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
+    float xPos = targetTreePos.x;
+    //float yPos = targetTreePos.y;
+    Size visibleSize = Director::getInstance()->getVisibleSize();
     float rangeLeft = 0;
     float rangeRight = 0;
     
     if(_trees.size() - 1 == 0) {
         rangeLeft = xPos - target->getContentSize().width / 2;
         rangeRight = xPos + target->getContentSize().width / 2;
+        this->boundry = target->_posX - target->getContentSize().width / 2 - visibleSize.width/2;
         _player->playerDrop(rangeLeft, rangeRight);
     }
     else {
         rangeLeft = xPos - target->getContentSize().width / 2 - rope->getContentSize().width;
         rangeRight = xPos + target->getContentSize().width / 2;
-        _player->playerDrop(rangeLeft, rangeRight);
+        this->boundry = target->_posX - target->getContentSize().width*3/2 - rope->getContentSize().width - visibleSize.width/2;
+        std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
+        _player->playerDrop(rangeLeft, rangeRight, onWalk);
     }
     
     _trees.pop_back();
