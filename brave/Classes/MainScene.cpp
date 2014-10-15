@@ -301,6 +301,10 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
 void MainScene::callAnimalHelper(Ref* pSender, int index) {
     switch (index) {
         case 1:
+            if (_player->money < 10) {
+                break;
+            }
+            _player->money-=10;
             _animal = Animal::create(Animal::AnimalType::ELEPHANT);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
 //            _animal->setFlippedX(true);
@@ -309,6 +313,10 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
             _animals.push_back( _animal);
             break;
         case 2:
+            if (_player->money < 20) {
+                break;
+            }
+            _player->money-=20;
             _animal = Animal::create(Animal::AnimalType::CLOTHE);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
             _background->addChild(_animal);
@@ -316,6 +324,10 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
             _animals.push_back( _animal);
             break;
         case 3:
+            if (_player->money < 30) {
+                break;
+            }
+            _player->money-=30;
             _animal = Animal::create(Animal::AnimalType::TIGER);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
             _background->addChild(_animal);
@@ -323,6 +335,10 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
             _animals.push_back( _animal);
             break;
         case 4:
+            if (_player->money < 40) {
+                break;
+            }
+            _player->money-=40;
             _animal = Animal::create(Animal::AnimalType::FOX);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
             _background->addChild(_animal);
