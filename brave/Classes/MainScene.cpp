@@ -527,10 +527,12 @@ void MainScene::deleteTree() {
     if(_trees.size() - 1 == 0) {
         rangeLeft = xPos - target->getContentSize().width / 2;
         rangeRight = xPos + target->getContentSize().width / 2;
+        _player->playerDrop(rangeLeft, rangeRight);
     }
     else {
         rangeLeft = xPos - target->getContentSize().width / 2 - rope->getContentSize().width;
         rangeRight = xPos + target->getContentSize().width / 2;
+        _player->playerDrop(rangeLeft, rangeRight);
     }
     
     _trees.pop_back();
