@@ -114,9 +114,9 @@ void Player::initFSM()
 //        {
 //            this->stop();
 //        };
-        auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
-        auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
-        this->setSpriteFrame(spriteFrame);
+//        auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
+//        auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
+//        this->setSpriteFrame(spriteFrame);
         this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
     
         this->scheduleUpdate();
@@ -402,7 +402,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
     
     
     if(dest.x < origin.x + visibleSize.width/2) {
-        if(pPos.x - bPos.x >= boundry) {
+        if(pPos.x - bPos.x >= boundry - 10) {
             this->constructActionArray(pPos.x - bPos.x, boundry, arrayOfActions, backgroundActions);
             Vec2 climbBy(0, origin.y + visibleSize.height*Player::height*3 - pPos.y);
             auto time = climbBy.getLength()/_speed;
@@ -418,7 +418,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
         this->setFlippedX(true);
     }
     else {
-        if(pPos.x - bPos.x <= boundry) {
+        if(pPos.x - bPos.x <= boundry + 10) {
             this->constructActionArray(pPos.x - bPos.x,  boundry, arrayOfActions, backgroundActions);
             Vec2 climbBy(0, origin.y + visibleSize.height*Player::height - pPos.y);
             auto time = climbBy.getLength()/_speed;

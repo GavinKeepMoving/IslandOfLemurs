@@ -301,6 +301,10 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
 void MainScene::callAnimalHelper(Ref* pSender, int index) {
     switch (index) {
         case 1:
+            if (_player->money < 10) {
+                break;
+            }
+            _player->money-=10;
             _animal = Animal::create(Animal::AnimalType::ELEPHANT);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
 //            _animal->setFlippedX(true);
@@ -309,6 +313,10 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
             _animals.push_back( _animal);
             break;
         case 2:
+            if (_player->money < 20) {
+                break;
+            }
+            _player->money-=20;
             _animal = Animal::create(Animal::AnimalType::CLOTHE);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
             _background->addChild(_animal);
@@ -316,6 +324,10 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
             _animals.push_back( _animal);
             break;
         case 3:
+            if (_player->money < 30) {
+                break;
+            }
+            _player->money-=30;
             _animal = Animal::create(Animal::AnimalType::TIGER);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
             _background->addChild(_animal);
@@ -323,6 +335,10 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
             _animals.push_back( _animal);
             break;
         case 4:
+            if (_player->money < 40) {
+                break;
+            }
+            _player->money-=40;
             _animal = Animal::create(Animal::AnimalType::FOX);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
             _background->addChild(_animal);
@@ -573,7 +589,7 @@ void MainScene::deleteTree() {
         _player->playerDrop(rangeLeft, rangeRight);
     }
     else {
-        rangeLeft = xPos - target->getContentSize().width / 2 - rope->getContentSize().width;
+        rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.5;
         rangeRight = xPos + target->getContentSize().width / 2;
         this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
         std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
@@ -598,10 +614,17 @@ void MainScene::menuCloseCallback(Ref* pSender)
 	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
     return;
 #endif
-
-    Director::getInstance()->end();
+    if(!pause) {
+        this->cocos2d::Node::pause();
+        pause = true;
+    }
+    else {
+        this->resume();
+        pause = false;
+    }
+    //Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
+    //exit(0);
 #endif
 }
