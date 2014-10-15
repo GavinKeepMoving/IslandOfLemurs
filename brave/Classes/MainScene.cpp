@@ -92,10 +92,17 @@ bool MainScene::init()
     
     //********************************************************************************************************//
     //added by Wenbo Lin
+    
+    //add rope
+    rope = Sprite::create("image/trees/rope.png");
+    rope->setScale(0.7, 0.5);
+    rope->cocos2d::Node::setPosition(700 + 370, 520);
+    _background->addChild(rope);
+    
     //add trees to background
     this->initTrees(2);
-    //curBlood = _trees[0]->setBlood(1);
-    //curBlood = _trees[0]->setBlood(1);
+    //int curBlood = _trees[1]->setBlood(20);
+    //curBlood = _trees[1]->setBlood(20);
     //_background->removeChild(_trees[0]->treeSprite, true);
     //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
@@ -146,7 +153,7 @@ bool MainScene::init()
     /******************Begin-Added by Zhe Liu*****************************/
     //add enemy1
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-     _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
+     _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
     _background->addChild(_enemy1);
     
 //    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
@@ -346,12 +353,6 @@ void MainScene::initTrees(int num) {
     int interval = 800;
     int treeNum = 2;
     
-    //add rope
-    auto rope = Sprite::create("image/trees/rope.png");
-    rope->setScale(0.7, 0.5);
-    rope->cocos2d::Node::setPosition(beginningPos + 370, 520);
-    _background->addChild(rope);
-    
     for(int i = 0; i < treeNum; i++) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
         treeSprite->setPosition(beginningPos + interval * i, 450);
@@ -385,7 +386,12 @@ void MainScene::enemyMove(float dt)
                     
                 }
                 else if (type == 1){
-                    
+                    int state = _trees.back()->setBlood(enemy->getAttack());
+                    if (state <= 0){
+                        _trees.pop_back();
+                        if(rope != NULL)
+                            _background->removeChild(rope, true);
+                    }
                 }
                 else if (type >= 200){
                     int animal_index = type%200;
