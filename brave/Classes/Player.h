@@ -11,7 +11,6 @@
 #include "cocos2d.h"
 #include "FSM.h"
 #include "Weapon.h"
-//#include "Enemy.h"
 USING_NS_CC;
 
 class Player : public Sprite
@@ -47,7 +46,6 @@ public:
     void stop();
     Weapon* attack(float radius = 250.f);
     
-    void generalAttack(float radius = 250.f);
     
     void setWeapon(Weapon::WeaponType weaponType) {
         currentWeapon = weaponType;
@@ -70,6 +68,9 @@ public:
     
     //Zhenni
     Rect getAttackBox();
+    int targetEnemyIdx;
+    void attackCallback(float test);
+    void generalAttack(float radius = 250.f);
 private:
     //Action _seq;
     float _speed;

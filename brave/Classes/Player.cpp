@@ -58,7 +58,7 @@ bool Player::initWithPlayerType(PlayerType type)
     money = 0;
     _type = type;
     _speed = 100;
-    _attackSpeed = 2;
+    _attackSpeed = 3;
     _attackRange = 350;
 	_seq = nullptr;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
@@ -109,16 +109,16 @@ void Player::initFSM()
     auto onIdle =[&]()
     {
         log("onIdle: Enter idle");
-        //this->stopActionByTag(WALKING);
         this->stopAllActions();
-        auto func = [&]()
-        {
-            this->stop();
-        };
+//        auto func = [&]()
+//        {
+//            this->stop();
+//        };
         auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
         auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
         this->setSpriteFrame(spriteFrame);
         this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
+    
         this->scheduleUpdate();
     };
     _fsm->setOnEnter("idle",onIdle);
@@ -141,13 +141,25 @@ Player* Player::create(PlayerType type)
     }
 }
 
-void Player::generalAttack(float radius) {
-    //log(mainLayer->_enemys.size());
-    if(mainLayer->isEnemyInRange(this)) {
-        log("Player: attacking");
-        this->attack(radius);
+void Player::attackCallback(float test) {
+    if(mainLayer->getEnemy(this->targetEnemyIdx)->beHit(this->_attack) == 1) {
+        mainLayer->eraseEnemy(this->targetEnemyIdx);
     }
 }
+
+void Player::generalAttack(float radius) {
+    //log(mainLayer->_enemys.size());
+    if(this->_fsm->getState() == "idle" && mainLayer->isEnemyInRange(this)) {
+        log("Player: attacking enemy");
+        Vec2 attackTarget = mainLayer->attackTarget(this);
+        radius = attackTarget.x - this->getPositionX();
+        auto weapon = this->attack(radius);
+        auto attackTime = (attackTarget-this->getPosition()).getLength()/weapon->getSpeed();
+        this->scheduleOnce(schedule_selector(Player::attackCallback), attackTime);
+        this->scheduleUpdate();
+    }
+}
+
 
 Weapon* Player::attack(float radius)
 {

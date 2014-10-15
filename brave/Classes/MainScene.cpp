@@ -471,7 +471,10 @@ bool MainScene::isEnemyInRange(Player* p) {
     Rect playerRect=p->getAttackBox();
     for(int i=0; i<_enemys.size(); i++) {
         Vec2 enemyPos = _background->convertToWorldSpace(_enemys[i]->getPosition());
-        if(playerRect.containsPoint(enemyPos)) return true;
+        if(playerRect.containsPoint(enemyPos)) {
+            _player->targetEnemyIdx = i;
+            return true;
+        }
     }
     return false;
 }
@@ -492,6 +495,10 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
     else
         _player->climbUp(pos);*/
     log("MainScene::onTouchend");
+}
+
+Vec2 MainScene::attackTarget(Player *p) {
+    return _background->convertToWorldSpace(_enemys[0]->getPosition());
 }
 //------------------remove dead enemy--------------------------------------------------------------//
 //void MainScene::enemyDead(Ref* obj)
