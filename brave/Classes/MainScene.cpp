@@ -352,8 +352,8 @@ void MainScene::initTrees(int num) {
     for(int i = 0; i < treeNum; i++) {
         //add ropes
         auto rope = Sprite::create("image/trees/rope.png");
-        rope->setScale(0.3 + i * 0.5, 0.5);
-        rope->cocos2d::Node::setPosition(beginningPos - 230 + i * 370, 520);
+        rope->setScale(0.3 + i * 0.2, 0.5);
+        rope->cocos2d::Node::setPosition(beginningPos - 230 + i * 550, 520);
         _ropes.push_back(rope);
         _background->addChild(rope);
         

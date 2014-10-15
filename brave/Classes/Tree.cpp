@@ -12,7 +12,7 @@
 
 extern MainScene *mainLayer;
 
-#define originalBlood 10
+#define originalBlood 100
 
 //constructor1
 Tree::Tree () {
