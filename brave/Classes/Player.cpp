@@ -114,9 +114,9 @@ void Player::initFSM()
 //        {
 //            this->stop();
 //        };
-        auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
-        auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
-        this->setSpriteFrame(spriteFrame);
+//        auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
+//        auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
+//        this->setSpriteFrame(spriteFrame);
         this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
     
         this->scheduleUpdate();
