@@ -73,7 +73,7 @@ bool Animal::initWithPlayerType(AnimalType type)
 			_health = 20;
 			_maxHealth =20;
 			_attack = 2;
-			
+			_minDist = 20;
 			//-------------------------------------------------//
             break;
         case AnimalType::TIGER:
@@ -81,7 +81,7 @@ bool Animal::initWithPlayerType(AnimalType type)
             _name = "tiger";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
-            
+            _minDist = 20;
 			_health = 30;
 			_maxHealth = 30;
 			_attack = 3;
@@ -94,6 +94,7 @@ bool Animal::initWithPlayerType(AnimalType type)
 			_health = 40;
 			_maxHealth =40;
 			_attack = 4 ;
+            _minDist = 20;
             break;
         case AnimalType::ELEPHANT:
             sfName = "enemy1-1-1.png";
@@ -105,6 +106,7 @@ bool Animal::initWithPlayerType(AnimalType type)
 			_health = 50;
 			_maxHealth =50;
 			_attack = 5;
+            _minDist = 20;
             break;
     }
     this->initWithSpriteFrameName(sfName);
@@ -221,8 +223,8 @@ int Animal::beHit(int attack){
 	{
         this->_progress->setProgress((float)_health/_maxHealth*100);
 		//be hit
-        stop();
-//		_fsm->doEvent("beHit");
+//        stop();
+		_fsm->doEvent("beHit");
         return 0;
 	}
 }
@@ -235,7 +237,8 @@ void Animal::attack()
 }
 void Animal::stop()
 {
-    this->stopAllActions();
+//    this->stopAllActions();
+    _canWalk = false;
     std::cout<<"the current status for animal attacking is: "<<is_attacking<<std::endl;
     if (is_attacking)
         attack();
@@ -346,13 +349,14 @@ Vec2 Animal::getBestAttackPosition(std::vector<Enemy*> enemys,int& index)
         
         if (index >= 0){
             auto  diff = closestEnemy->getPositionX() - curPos.x;
-            if (diff > _minDist+_speed){
+            if ( _canWalk && diff > _minDist+_speed){
                 return pos2;
             }
-            else if (diff > _minDist){
+            else if (_canWalk && diff > _minDist){
                 if (index >= 0){
                     enemys[index]->stop();
                 }
+                is_attacking = true;
                 auto pos3 = Vec2(closestEnemy->getPositionX()-_minDist, curPos.y);
                 return pos3;
             }
@@ -360,13 +364,14 @@ Vec2 Animal::getBestAttackPosition(std::vector<Enemy*> enemys,int& index)
                 if (index >= 0){
                     enemys[index]->stop();
                 }
+                is_attacking = true;
                 return pos1;
             }
         }
         else{
+            is_attacking = false;
             return pos1;
         }
-        is_attacking = index >= 0 ? true : false;
     }
 }
 /****************** End-Added by Zhe Liu *********************/

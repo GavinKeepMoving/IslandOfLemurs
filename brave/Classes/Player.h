@@ -46,6 +46,7 @@ public:
     void stop();
     Weapon* attack(float radius = 250.f);
     
+    
     void setWeapon(Weapon::WeaponType weaponType) {
         currentWeapon = weaponType;
     }
@@ -64,9 +65,18 @@ public:
 	int _maxHealth;  //total blood
 	int _attack;  //each attack harm enemy
 	void beHit(int attack);
+    
+    //Zhenni
+    Rect getAttackBox();
+    int targetEnemyIdx;
+    void attackCallback(float test);
+    void generalAttack(float radius = 250.f);
+    void playerDrop(int start, int end);
 private:
     //Action _seq;
     float _speed;
+    float _attackSpeed; //wait duration for attack //Zhenni
+    float _attackRange; //horizontal attack range // Zhenni
     PlayerType _type;
     std::string _name;
     int _animationNum;
@@ -76,6 +86,7 @@ private:
     //currentPos
     FSM *_fsm;
     Weapon::WeaponType currentWeapon;
+    //std::vector<Enemy*> *_enemys;
 
 };
 

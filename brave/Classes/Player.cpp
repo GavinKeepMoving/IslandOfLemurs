@@ -58,6 +58,8 @@ bool Player::initWithPlayerType(PlayerType type)
     money = 0;
     _type = type;
     _speed = 100;
+    _attackSpeed = 3;
+    _attackRange = 350;
 	_seq = nullptr;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
@@ -107,14 +109,21 @@ void Player::initFSM()
     auto onIdle =[&]()
     {
         log("onIdle: Enter idle");
-        //this->stopActionByTag(WALKING);
         this->stopAllActions();
+//        auto func = [&]()
+//        {
+//            this->stop();
+//        };
         auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
         auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
         this->setSpriteFrame(spriteFrame);
+        this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
+    
+        this->scheduleUpdate();
     };
     _fsm->setOnEnter("idle",onIdle);
 }
+
 
 Player* Player::create(PlayerType type)
 {
@@ -132,6 +141,28 @@ Player* Player::create(PlayerType type)
     }
 }
 
+void Player::attackCallback(float test) {
+    if(mainLayer->getEnemy(this->targetEnemyIdx)->beHit(this->_attack) == 1) {
+        mainLayer->eraseEnemy(this->targetEnemyIdx);
+    }
+}
+
+void Player::generalAttack(float radius) {
+    //log(mainLayer->_enemys.size());
+    if(this->_fsm->getState() == "idle" && mainLayer->isEnemyInRange(this)) {
+        log("Player: attacking enemy");
+        Vec2 attackTarget = mainLayer->attackTarget(this);
+        radius = attackTarget.x - this->getPositionX();
+        auto weapon = this->attack(radius);
+        auto attackTime = (attackTarget-this->getPosition()).getLength()/weapon->getSpeed();
+        this->scheduleOnce(schedule_selector(Player::attackCallback), attackTime);
+        this->scheduleUpdate();
+    }
+}
+
+void Player::playerDrop(int start, int end) {
+    log("player dropping!");
+}
 
 Weapon* Player::attack(float radius)
 {
@@ -176,22 +207,54 @@ void Player::onWalk(Vec2 dest, int boundry) {
     auto curPos = background->getPosition();
     Vector< FiniteTimeAction * > arrayOfActions;
     Vector< FiniteTimeAction * > backgroundActions;
-    Vector< FiniteTimeAction * > backgroundActions1;
-    Vec2 dest1, dest2, dest3;
+    //Vector< FiniteTimeAction * > backgroundActions1;
+    Vec2 dest1, dest2, dest3, dest4, diff4 = visibleSize/2;
     auto backgroundPos = background->getPosition();
-    auto background1Pos = background1->getPosition();
+    auto empty = Vec2(0, 0);
+    //auto background1Pos = background1->getPosition();
+    
     
     //flip when moving backward
     if(dest.x < origin.x + visibleSize.width/2) {
+        if(this->getPositionX() > origin.x + visibleSize.width/2) {
+            Vec2 dest0;
+            dest0.x = origin.x + visibleSize.width/2;
+            dest0.y = this->getPositionY();
+            auto diff0 = dest0 - this->getPosition();
+            auto time0 = diff0.getLength()/_speed;
+            auto move0 = MoveTo::create(time0, dest0);
+            auto bmove0 = MoveBy::create(time0, empty);
+            arrayOfActions.pushBack(move0);
+            backgroundActions.pushBack(bmove0);
+        }
         dest1.x = -boundry;
         dest3.x = origin.x;
         dest2.y = origin.y + visibleSize.height*Player::height*3;
+        dest4.x = origin.x;
+        if(this->getPositionX() < origin.x + visibleSize.width/2) {
+            diff4 = dest4 - Vec2(this->getPositionX(), dest4.y);
+        }
         this->setFlippedX(true);
     }
     else {
+        if(this->getPositionX() < origin.x + visibleSize.width/2) {
+            Vec2 dest0;
+            dest0.x = origin.x + visibleSize.width/2;
+            dest0.y = this->getPositionY();
+            auto diff0 = dest0 - this->getPosition();
+            auto time0 = diff0.getLength()/_speed;
+            auto move0 = MoveTo::create(time0, dest0);
+            auto bmove0 = MoveBy::create(time0, empty);
+            arrayOfActions.pushBack(move0);
+            backgroundActions.pushBack(bmove0);
+        }
         dest1.x = -boundry;
-        dest3.x = visibleSize.width*3/2 - background->getContentSize().width*2;
+        dest3.x = visibleSize.width*3/2 - background->getContentSize().width*5/4;
         dest2.y = origin.y + visibleSize.height*Player::height;
+        dest4.x = origin.x + visibleSize.width;
+        if(this->getPositionX() > origin.x + visibleSize.width/2) {
+            diff4 = dest4 - Vec2(this->getPositionX(), dest4.y);
+        }
         this->setFlippedX(false);
     }
     dest1.y = origin.y;
@@ -199,14 +262,14 @@ void Player::onWalk(Vec2 dest, int boundry) {
     dest3.y = origin.y;
     dest1 += visibleSize/2;
     dest3 += visibleSize/2;
+    dest4.y = dest2.y;
     //calculate the time needed to move
     
     auto diff1 = dest1 - curPos;
     auto time1 = diff1.getLength()/_speed;
-    auto empty = Vec2(0, 0);
     auto move1 = MoveBy::create(time1, empty);
     auto bmove1 = MoveTo::create(time1, dest1);
-    auto bmove11 = MoveTo::create(time1, dest1 + background1Pos - backgroundPos);
+    //auto bmove11 = MoveTo::create(time1, dest1 + background1Pos - backgroundPos);
     auto time2 = (dest2 - this->getPosition()).getLength()/_speed;
     auto climb = MoveTo::create(time2, dest2);
     auto bmove2 = MoveBy::create(time2, empty);
@@ -217,8 +280,8 @@ void Player::onWalk(Vec2 dest, int boundry) {
         arrayOfActions.pushBack(climb);
         backgroundActions.pushBack(bmove1);
         backgroundActions.pushBack(bmove2);
-        backgroundActions1.pushBack(bmove11);
-        backgroundActions1.pushBack(bmove2);
+        //backgroundActions1.pushBack(bmove11);
+        //backgroundActions1.pushBack(bmove2);
     }
     else {
         dest1 = curPos;
@@ -227,11 +290,17 @@ void Player::onWalk(Vec2 dest, int boundry) {
     auto time3 = diff3.getLength()/_speed;
     auto move2 = MoveBy::create(time3, empty);
     auto bmove3 = MoveTo::create(time3, dest3);
-    auto bmove31 = MoveTo::create(time3, dest3 + background1Pos - backgroundPos);
+    
+    auto time4 = diff4.getLength()/_speed;
+    auto move4 = MoveTo::create(time4, dest4);
+    auto bmove4 = MoveBy::create(time4, empty);
+    //auto bmove31 = MoveTo::create(time3, dest3 + background1Pos - backgroundPos);
     
     arrayOfActions.pushBack(move2);
     backgroundActions.pushBack(bmove3);
-    backgroundActions1.pushBack(bmove31);
+    arrayOfActions.pushBack(move4);
+    backgroundActions.pushBack(bmove4);
+    //backgroundActions1.pushBack(bmove31);
     
     //auto movePlayer = MoveTo::create(playerTime, dest);
    
@@ -249,13 +318,13 @@ void Player::onWalk(Vec2 dest, int boundry) {
     //create sequence for two backgrounds and player(some bugs)
     //auto _seqPlayer = Sequence::create(movePlayer, callback, nullptr);
     auto _bseq = Sequence::create(backgroundActions);
-    auto _bseq1 = Sequence::create(backgroundActions1);
+    //auto _bseq1 = Sequence::create(backgroundActions1);
     auto _seq = Sequence::create(arrayOfActions);
     this->runAction(_seq);
     
     //run action sequnce
     background->runAction(_bseq);
-    background1->runAction(_bseq1);
+    //background1->runAction(_bseq1);
     
     //******************************************************************************************
     //added by Wenbo Lin
@@ -317,6 +386,20 @@ Rect Player::getBoundingBox()
     int y=entityPos.y-spriteSize.height/2;
     
     return Rect(x,y,spriteSize.width/2,spriteSize.height);
+}
+Rect Player::getAttackBox() {
+    /*由于Sprite是放在Player上的，所以要检测Player的碰撞范围*/
+    Size spriteSize=getContentSize();
+    Vec2 entityPos=getCurPos();//获取player中心点
+    //获取Player attack box左下角的坐标值
+    int x=entityPos.x-spriteSize.width/4;
+    int y=0;
+    //判断攻击方向
+    if(this->isFlippedX()) {
+        x=entityPos.x+spriteSize.width/4 - _attackRange;
+    }
+    // attack range 为横向，纵向无限制条件
+    return Rect(x, y, _attackRange, Director::getInstance()->getVisibleSize().height);
 }
 //reduce the _health value of current animal Xiaojing ***************//
 void Player::beHit(int attack){

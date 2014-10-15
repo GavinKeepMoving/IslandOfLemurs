@@ -20,7 +20,7 @@ public:
     //0-6: 0 = healthy; 6 = burn up;
     int state;
     
-    static float blood;
+    float blood;
     
     //store the position of trees
     float _posX;

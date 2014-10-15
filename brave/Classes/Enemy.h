@@ -70,6 +70,7 @@ public:
     float getMinDist(){return _minDist;}
     bool closeToTree(std::vector<Tree*> trees);
     int getAttack(){return _attack;}
+    bool _canWalk = true;
     
 private:
     //Action _seq;
@@ -87,7 +88,6 @@ private:
     float _minDist; // min distance for attacking
     bool _isCanAttack;
     bool _isAttacking = false;
-
     
 	
     //blood value  Xiaojing**************************//

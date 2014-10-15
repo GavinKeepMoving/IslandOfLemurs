@@ -64,6 +64,24 @@ public:
     }
     /******************End-Added by Yafu*****************************/
 
+    /******************Begin-Added by Zhenni ************************/
+    // judge if the player can attack enemy
+    bool isEnemyInRange(Player* p);
+    
+    bool isOnTree(Player* p);
+    
+    Vec2 attackTarget(Player* p);
+    
+    Enemy * getEnemy(int i) {
+        return _enemys[i];
+    }
+    void eraseEnemy(int i) {
+        if(_enemys.size() <= i) {
+            return;
+        }
+        _enemys.erase(_enemys.begin() + i);
+    }
+    /******************End-Added by Zhenni ************************/
 private:
     Animal* _animal;
     Player* _player;
@@ -85,6 +103,10 @@ public:
     //******************************************************************************************************************
     //added by Wenbo Lin
     Progress* _progress;
+    std::vector<Sprite*> _ropes;
+    Sprite* treeBase;
+    void deleteTree();
+    //End added by Wenbo Lin
     //******************************************************************************************************************
 };
 

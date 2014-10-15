@@ -7,6 +7,7 @@
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
+#include <unistd.h>
 //******************************************************************************************************************
 #include "BananaManger.h"
 
@@ -91,18 +92,9 @@ bool MainScene::init()
     
     //********************************************************************************************************//
     //added by Wenbo Lin
+    
     //add trees to background
     this->initTrees(2);
-    
-    //add rope
-    auto rope = Sprite::create("image/trees/rope.png");
-    rope->setScale(0.7, 0.5);
-    rope->cocos2d::Node::setPosition(700 + 370, 520);
-    _background->addChild(rope);
-    
-    int curBlood = _trees[0]->setBlood(1);
-    //_background->removeChild(_trees[0]->treeSprite, true);
-    //_trees[0]->showStateAccordingtoBlood();
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
@@ -140,7 +132,7 @@ bool MainScene::init()
        
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Player::height*3);
+    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
     _player->background = _background;
     _player->background1 = _background1;
     _player->setScale(0.5);
@@ -187,7 +179,7 @@ bool MainScene::init()
 //    _animals.push_back(_animal);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
     this->schedule(schedule_selector(MainScene::animalMove), 3);
-//    this->schedule(schedule_selector(MainScene::addEnemy),20);
+    this->schedule(schedule_selector(MainScene::addEnemy),20);
     /****************** End-Added by Zhe Liu *********************/
 	
 	//*****init blood progress  xiaojing **************//
@@ -349,13 +341,30 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 700;
-    int interval = 800;
+    int beginningPos = 900;
+    int interval = 600;
     int treeNum = 2;
     
+    //add treeBase
+//    treeBase = Sprite::create("image/trees/treeBase.png");
+//    treeBase->setPosition(580, 460);
+//    _background->addChild(treeBase);
+
+    
     for(int i = 0; i < treeNum; i++) {
+        //add ropes
+        auto rope = Sprite::create("image/trees/rope.png");
+        rope->setScale(0.3 + i * 0.2, 0.5);
+        rope->cocos2d::Node::setPosition(beginningPos - 230 + i * 550, 520);
+        _ropes.push_back(rope);
+        _background->addChild(rope);
+        
+//        auto bareTree = Sprite::create("image/trees/bare_tree.png");
+//        bareTree->setPosition(beginningPos + interval * i, 180);
+//        _background->addChild(bareTree);
+        
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 450);
+        treeSprite->setPosition(beginningPos + interval * i, 430);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
         _trees[_trees.size() - 1]->_background = _background;
@@ -368,7 +377,7 @@ void MainScene::enemyMove(float dt)
 {
     if (_enemys.size() == 0){
         std::cout<<"no enemy right now, please wait"<<std::endl;
-        addEnemy(0.5);
+//        addEnemy(0.5);
         return;
     }
     std::cout<<"the size of enemy queue is: "<<_enemys.size()<<std::endl;
@@ -381,7 +390,7 @@ void MainScene::enemyMove(float dt)
             std::cout<<"the attack target of enemy i: "<<type<<std::endl;
             if (dest == enemy->getPosition()){
                 if (type >= 0){
-                    std::cout<<"the enemy is attacking"<<std::endl;
+                    std::cout<<"the enemy is attacking "<<type<<std::endl;
                     enemy->attack();
                 }
 //                std::cout<<"the attack target of enemy is: "<<type<<std::endl;
@@ -390,12 +399,15 @@ void MainScene::enemyMove(float dt)
                 if (type == 0){// lemur
                     
                 }
-                else if (type == 1){ // tree
-                    // scale need to be converted
-//                    _trees.back()->addFire(enemy->getAttack());
+                else if (type == 1){
                     int state = _trees.back()->setBlood(enemy->getAttack());
                     if (state <= 0){
+                        /*
                         _trees.pop_back();
+                        if(rope != NULL)
+                            _background->removeChild(rope, true);
+                         */
+                        deleteTree();
                     }
                 }
                 else if (type >= 200){
@@ -405,6 +417,7 @@ void MainScene::enemyMove(float dt)
                     std::cout<<"the enemy is attacking animal "<<animal_index<<std::endl;
                     if (state == 1){
                         log("this animal is dead, remove it~");
+                        enemy->_canWalk = true;
                         _animals.erase(_animals.begin()+animal_index);
                         type = -1;
                         animal_index = -1;
@@ -441,10 +454,11 @@ void MainScene::animalMove(float dt)
                 if (index != -1){
                     animal->attack();
                     std::cout<<"the hitting enemy is: "<<index<<std::endl;
-//                    _enemys[index]->stop();
+                    _enemys[index]->stop();
                     // control the blood volumn of the bihitted animal
                     int state = _enemys[index]->beHit(animal->getAttack());
                     if (state == 1){
+                        animal->_canWalk = true;
                         log("this enemy is dead, remove it~");
                         _enemys.erase(_enemys.begin()+index);
                         index = -1;
@@ -463,12 +477,17 @@ void MainScene::addEnemy(float dt)
 {
     std::cout<<"time for enemy comming out~"<<std::endl;
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
+    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY1);
     // origin.x
     //    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-    _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
+    _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
+    _enemy2->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
     _background->addChild(_enemy1);
+    _background->addChild(_enemy2);
     _enemys.push_back(_enemy1);
+    _enemys.push_back(_enemy2);
     _enemy1->addAttacker(_player);
+    _enemy2->addAttacker(_player);
 
 }
 /****************** End-Added by Zhe Liu *********************/
@@ -477,9 +496,21 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
     //TO-DO change 750 the integer to tree boundries or something
-    _player->walkTo(pos, 250);
+    _player->walkTo(pos, 550);
     log("MainScene::onTouchBegan");
     return true;
+}
+//added by Zhenni
+bool MainScene::isEnemyInRange(Player* p) {
+    Rect playerRect=p->getAttackBox();
+    for(int i=0; i<_enemys.size(); i++) {
+        Vec2 enemyPos = _background->convertToWorldSpace(_enemys[i]->getPosition());
+        if(playerRect.containsPoint(enemyPos)) {
+            _player->targetEnemyIdx = i;
+            return true;
+        }
+    }
+    return false;
 }
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
@@ -499,6 +530,10 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
         _player->climbUp(pos);*/
     log("MainScene::onTouchend");
 }
+
+Vec2 MainScene::attackTarget(Player *p) {
+    return _background->convertToWorldSpace(_enemys[0]->getPosition());
+}
 //------------------remove dead enemy--------------------------------------------------------------//
 //void MainScene::enemyDead(Ref* obj)
 //{
@@ -514,7 +549,34 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
 //	_animals.eraseObject(animal,true);		
 //}
 
-
+/*******************************Begin add by Wenbo Lin*******************************/
+void MainScene::deleteTree() {
+    Tree * target = _trees[_trees.size() - 1];
+    Sprite * rope = _ropes[_ropes.size() - 1];
+    float xPos = target->_posX;
+    float yPos = target->_posY;
+    
+    float rangeLeft = 0;
+    float rangeRight = 0;
+    
+    if(_trees.size() - 1 == 0) {
+        rangeLeft = xPos - target->getContentSize().width / 2;
+        rangeRight = xPos + target->getContentSize().width / 2;
+        _player->playerDrop(rangeLeft, rangeRight);
+    }
+    else {
+        rangeLeft = xPos - target->getContentSize().width / 2 - rope->getContentSize().width;
+        rangeRight = xPos + target->getContentSize().width / 2;
+        _player->playerDrop(rangeLeft, rangeRight);
+    }
+    
+    _trees.pop_back();
+    if(rope != NULL) {
+        _background->removeChild(rope, true);
+        _ropes.pop_back();
+    }
+}
+/*******************************Ended add by Wenbo Lin*******************************/
 
 //----------------------------------------------------------------------------------//
 void MainScene::menuCloseCallback(Ref* pSender)

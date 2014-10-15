@@ -129,6 +129,7 @@ void Enemy::walkTo(Vec2 dest)
 void Enemy::onWalk(Vec2 dest)
 {
 //    log("Enemy: Enter walk");
+    log("Enemy: Enter walk");
     auto curPos = this->getPosition();
     //    this->stopActionByTag(WALKTO_TAG);
     auto diff = dest - curPos;
@@ -171,11 +172,12 @@ void Enemy::attack()
     }
 }
 void Enemy::stop(){
-    this->stopAllActions();
     std::cout<<"the current status for enemy attacking is: "<<_isAttacking<<std::endl;
-    if (_isAttacking)
-        attack();
-    else
+    _canWalk = false;
+//    this->stopAllActions();
+//    if (_isAttacking)
+//        attack();
+//    else
         _fsm->doEvent("stop");
 }
 
@@ -228,7 +230,10 @@ void Enemy::initFSM(){
 		auto animate = getAnimateByType(BEINGHIT);
 		auto func = [&]()
 		{
-			this->_fsm->doEvent("stop");
+            if (_isAttacking == false)
+                this->_fsm->doEvent("stop");
+            else
+                this->_fsm->doEvent("attack");
 		};
 		auto wait = DelayTime::create(0.6f);
 		auto callback = CallFunc::create(func);
@@ -282,8 +287,8 @@ int Enemy::beHit(int attack){
 	else
 	{
 		this->_progress->setProgress((float)_health/_maxHealth*100);
-//		_fsm->doEvent("beHit");
-        stop();
+		_fsm->doEvent("beHit");
+//        stop();
         return 0;
 	}
 }
@@ -321,15 +326,13 @@ Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees, std
             }
         }
     }
-    // lemur
-    if ((trees.size() == 0 || (pos.x >= trees.back()->treeSprite->getPositionX()))
-        && (hasAnimal == 0 || (pos.x >= closest->getPositionX())) && curPos.x >= pos.x && std::abs(pos.y-curPos.y) <= 20){
+    if ((trees.size() == 0 || (pos.x >= trees.back()->treeSprite->getPositionX() && curPos.x >= pos.x))
+        && (hasAnimal == 0 || (pos.x >= closest->getPositionX() && curPos.x >= pos.x))){
         firstObj = pos;
         type = 0;
     }
-    // tree
-    else if (trees.size() > 0 && (hasAnimal == 0 || trees.back()->treeSprite->getPositionX() > closest->getPositionX()) && curPos.x > trees.back()->treeSprite->getPositionX() && (std::abs(pos.y-curPos.y) > 20 || pos.x < trees.back()->treeSprite->getPositionX()))
-    {
+    else if (trees.size() > 0 && (trees.back()->treeSprite->getPositionX() > pos.x && curPos.x > trees.back()->treeSprite->getPositionX()) && (hasAnimal == 0 || (trees.back()->treeSprite->getPositionX() > closest->getPositionX() && curPos.x > trees.back()->treeSprite->getPositionX()))) {// tree
+//        if (pos.x < trees.back()->getPositionX() || ){
         firstObj = Vec2(trees.back()->treeSprite->getPositionX(),curPos.y);
         type = 1;
         isTree = 1;
@@ -352,17 +355,19 @@ Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees, std
     auto pos3 = firstObj + Vec2(_minDist,0); // location with minDist
     auto diff1 = pos1.x - firstObj.x;
     // || (isTree == 0 && std::abs(firstObj.y - curPos.y) > 20)
-    if (diff1 > _minDist+_speed && isTree < 3){
+    if (_canWalk && diff1 > _minDist+_speed && isTree < 3){
 //        std::cout<< "the existence of tree is: "<<isTree<<std::endl;
         _isAttacking = false;
+        std::cout<<"enemy1: "<< this->_isAttacking << std::endl;
         return pos1-Vec2(_speed,0);
     }
     // && (isTree == 1 || (isTree == 0 && std::abs(firstObj.y - curPos.y) <= 20))
-    else if (diff1 > _minDist && isTree < 3){
+    else if (_canWalk && diff1 > _minDist && isTree < 3){
         if (type >= 200){
             animals[type%200]->stop();
             this->_isAttacking = true;
         }
+        std::cout<<"enemy2: "<< this->_isAttacking << std::endl;
         return pos3;
     }
     else{
@@ -370,6 +375,7 @@ Vec2 Enemy::getBestAttackPosition(const Vec2& pos, std::vector<Tree*> trees, std
             this->_isAttacking = true;
             animals[type%200]->stop();
         }
+        std::cout<<"enemy3: "<< this->_isAttacking << std::endl;
         return pos2;
     }
 }

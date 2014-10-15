@@ -68,6 +68,8 @@ public:
     void initFSM();
     
     int getAttack(){return _attack ;}
+    
+    bool _canWalk = true;
     /*** add by Zhe Liu ***/
 private:
     //Action _seq;
@@ -78,6 +80,7 @@ private:
     std::vector<int> _animationFrameNum;
     std::vector<std::string> _animationNames;
     Sequence* _seq;
+//    int _minDist;
     //currentPos
     //blood attribute  xiaojing
 	FSM* _fsm;
