@@ -51,7 +51,7 @@ public:
     // enemy module
     void enemyMove(float dt);
     void animalMove(float dt);
-    void addEnemy();
+    void addEnemy(float dt);
 //    void 
 //    bool closeToEnemy( obj);
 	 void enemyDead(Ref* obj);

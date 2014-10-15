@@ -182,6 +182,7 @@ bool MainScene::init()
 //    _animals.push_back(_animal);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
     this->schedule(schedule_selector(MainScene::animalMove), 3);
+    this->schedule(schedule_selector(MainScene::addEnemy),20);
     /****************** End-Added by Zhe Liu *********************/
 	
 	//*****init blood progress  xiaojing **************//
@@ -302,6 +303,7 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
         case 1:
             _animal = Animal::create(Animal::AnimalType::ELEPHANT);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+//            _animal->setFlippedX(true);
             _background->addChild(_animal);
             //add animals -------------------------------//
             _animals.push_back( _animal);
@@ -360,9 +362,9 @@ void MainScene::initTrees(int num) {
         _ropes.push_back(rope);
         _background->addChild(rope);
         
-        auto bareTree = Sprite::create("image/trees/bare_tree.png");
-        bareTree->setPosition(beginningPos + interval * i, 180);
-        _background->addChild(bareTree);
+//        auto bareTree = Sprite::create("image/trees/bare_tree.png");
+//        bareTree->setPosition(beginningPos + interval * i, 180);
+//        _background->addChild(bareTree);
         
         auto treeSprite = Sprite::create("image/trees/tree.png");
         treeSprite->setPosition(beginningPos + interval * i, 430);
@@ -378,19 +380,24 @@ void MainScene::enemyMove(float dt)
 {
     if (_enemys.size() == 0){
         std::cout<<"no enemy right now, please wait"<<std::endl;
-        addEnemy();
+//        addEnemy(0.5);
         return;
     }
+    std::cout<<"the size of enemy queue is: "<<_enemys.size()<<std::endl;
     for (auto enemy : _enemys)
     {
         if ("dead" != enemy->getState() && _player)
         {
             int type = -1;
             Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees,_animals ,type);
-            std::cout<<"current type is: "<<type<<std::endl;
+            std::cout<<"the attack target of enemy i: "<<type<<std::endl;
             if (dest == enemy->getPosition()){
-                enemy->attack();
-                std::cout<<"the attack target of enemy is: "<<type<<std::endl;
+                if (type >= 0){
+                    std::cout<<"the enemy is attacking "<<type<<std::endl;
+                    enemy->attack();
+                }
+//                std::cout<<"the attack target of enemy is: "<<type<<std::endl;
+                int animal_index  = -1;
                 // control the blood volumn of the object it hitted
                 if (type == 0){// lemur
                     
@@ -407,12 +414,22 @@ void MainScene::enemyMove(float dt)
                     }
                 }
                 else if (type >= 200){
-                    int animal_index = type%200;
-                    _animals[animal_index]->beHit(enemy->getAttack());
+                    animal_index = type%200;
+//                    _animals[animal_index]->stop();
+                    int state = _animals[animal_index]->beHit(enemy->getAttack());
+                    std::cout<<"the enemy is attacking animal "<<animal_index<<std::endl;
+                    if (state == 1){
+                        log("this animal is dead, remove it~");
+                        enemy->_canWalk = true;
+                        _animals.erase(_animals.begin()+animal_index);
+                        type = -1;
+                        animal_index = -1;
+                    }
+
                 }
-                else{
-                    
-                }
+//                else{// type = -1
+////                    enemy->walkTo(dest);
+//                }
             }
             else{
                 enemy->walkTo(dest);
@@ -434,13 +451,17 @@ void MainScene::animalMove(float dt)
         {
             int index = -1;
             Vec2 dest = animal->getBestAttackPosition(_enemys, index);
+            std::cout<<"the target of animal is: "<<index<<std::endl;
             if (dest == animal->getPosition())
             {
                 if (index != -1){
                     animal->attack();
+                    std::cout<<"the hitting enemy is: "<<index<<std::endl;
+                    _enemys[index]->stop();
                     // control the blood volumn of the bihitted animal
                     int state = _enemys[index]->beHit(animal->getAttack());
                     if (state == 1){
+                        animal->_canWalk = true;
                         log("this enemy is dead, remove it~");
                         _enemys.erase(_enemys.begin()+index);
                         index = -1;
@@ -455,15 +476,21 @@ void MainScene::animalMove(float dt)
     }
 }
 
-void MainScene::addEnemy()
+void MainScene::addEnemy(float dt)
 {
+    std::cout<<"time for enemy comming out~"<<std::endl;
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
+    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY1);
     // origin.x
     //    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-    _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
+    _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
+    _enemy2->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
     _background->addChild(_enemy1);
+    _background->addChild(_enemy2);
     _enemys.push_back(_enemy1);
+    _enemys.push_back(_enemy2);
     _enemy1->addAttacker(_player);
+    _enemy2->addAttacker(_player);
 
 }
 /****************** End-Added by Zhe Liu *********************/
