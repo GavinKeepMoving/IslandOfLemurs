@@ -44,6 +44,7 @@ bool blood::initBloodWithPlayerType(Player::PlayerType type){
 bool blood::isAlive(){
 	return _isCanAttack;
 }
+
 bool blood::isAttack(int attack){
 	
 	this->_health -= attack;
