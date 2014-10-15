@@ -161,7 +161,23 @@ void Player::generalAttack(float radius) {
 }
 
 void Player::playerDrop(int start, int end) {
-    log("player dropping!");
+    if (this->getPositionX() > start && this->getPositionX() < end) {
+        log("Player: drop!");
+        auto preStatus = this->_fsm->getState();
+        _fsm->doEvent("stop");
+        Vec2 ground;
+        Size visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        ground.y = origin.y + visibleSize.height*Player::height;
+        ground.x = this->getPositionX();
+        auto time = (this->getPosition()-ground).getLength()/_speed;
+        auto drop = MoveTo::create(time, ground);
+        Sequence::create(drop, NULL);
+        if(preStatus == "walking") {
+            
+        }
+        //auto _sep = Sequence::create(drop, onWalk, NULL);
+    }
 }
 
 Weapon* Player::attack(float radius)
