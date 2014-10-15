@@ -388,12 +388,12 @@ void MainScene::enemyMove(float dt)
                 else if (type == 1){
                     int state = _trees.back()->setBlood(enemy->getAttack());
                     if (state <= 0){
-                        
+                        /*
                         _trees.pop_back();
                         if(rope != NULL)
                             _background->removeChild(rope, true);
-                         
-                        //deleteTree();
+                         */
+                        deleteTree();
                     }
                 }
                 else if (type >= 200){
@@ -517,11 +517,22 @@ Vec2 MainScene::attackTarget(Player *p) {
 
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
-    float xPos = _trees[_trees.size() - 1]->_posX;
-    float yPos = _trees[_trees.size() - 1]->_posY;
-    Sprite* bareTree = Sprite::create("image/trees/bare_tree.png");
-    bareTree->cocos2d::Node::setPosition(xPos - 50, yPos - 270);
-    _background->addChild(bareTree, 0);
+    Tree * target = _trees[_trees.size() - 1];
+    float xPos = target->_posX;
+    float yPos = target->_posY;
+    
+    float rangeLeft = 0;
+    float rangeRight = 0;
+    
+    if(_trees.size() - 1 == 0) {
+        rangeLeft = xPos - target->getContentSize().width / 2;
+        rangeRight = xPos + target->getContentSize().width / 2;
+    }
+    else {
+        rangeLeft = xPos - target->getContentSize().width / 2 - rope->getContentSize().width;
+        rangeRight = xPos + target->getContentSize().width / 2;
+    }
+    
     _trees.pop_back();
     if(rope != NULL)
         _background->removeChild(rope, true);
