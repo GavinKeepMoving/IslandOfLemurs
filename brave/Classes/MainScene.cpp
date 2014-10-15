@@ -524,14 +524,18 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
 //added by Zhenni
 bool MainScene::isEnemyInRange(Player* p) {
     Rect playerRect=p->getAttackBox();
+    _player->targetEnemyIdx = -1;
+    float distance = INT_MAX;
     for(int i=0; i<_enemys.size(); i++) {
         Vec2 enemyPos = _background->convertToWorldSpace(_enemys[i]->getPosition());
         if(playerRect.containsPoint(enemyPos)) {
-            _player->targetEnemyIdx = i;
-            return true;
+            float _distance = (enemyPos - _player->getPosition()).getLength();
+            if( _distance < distance ) {
+                _player->targetEnemyIdx = i;
+            }
         }
     }
-    return false;
+    return _player->targetEnemyIdx == -1 ? false : true;
 }
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
@@ -553,7 +557,7 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
 }
 
 Vec2 MainScene::attackTarget(Player *p) {
-    return _background->convertToWorldSpace(_enemys[0]->getPosition());
+    return _background->convertToWorldSpace(_enemys[_player->targetEnemyIdx]->getPosition());
 }
 //------------------remove dead enemy--------------------------------------------------------------//
 //void MainScene::enemyDead(Ref* obj)

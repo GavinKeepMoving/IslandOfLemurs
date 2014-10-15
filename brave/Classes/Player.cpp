@@ -168,7 +168,7 @@ void Player::playerDrop(int start, int end) {
         Vec2 ground;
         Size visibleSize = Director::getInstance()->getVisibleSize();
         Vec2 origin = Director::getInstance()->getVisibleOrigin();
-        ground.y = origin.y + visibleSize.height*Player::height;
+        ground.y = origin.y + visibleSize.height*Player::height/2;
         ground.x = this->getPositionX();
         auto time = (this->getPosition()-ground).getLength()/400;
         auto drop = MoveTo::create(time, ground);
@@ -189,7 +189,7 @@ void Player::playerDrop(int start, int end, std::function<void()> callback) {
         Vec2 ground;
         Size visibleSize = Director::getInstance()->getVisibleSize();
         Vec2 origin = Director::getInstance()->getVisibleOrigin();
-        ground.y = origin.y + visibleSize.height*Player::height;
+        ground.y = origin.y + visibleSize.height*Player::height/2;
         ground.x = this->getPositionX();
         auto time = (this->getPosition()-ground).getLength()/400;
         auto drop = MoveTo::create(time, ground);
@@ -420,7 +420,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
     else {
         if(pPos.x - bPos.x <= boundry + 10) {
             this->constructActionArray(pPos.x - bPos.x,  boundry, arrayOfActions, backgroundActions);
-            Vec2 climbBy(0, origin.y + visibleSize.height*Player::height - pPos.y);
+            Vec2 climbBy(0, origin.y + visibleSize.height*Player::height/2 - pPos.y);
             auto time = climbBy.getLength()/_speed;
             auto climb = MoveBy::create(time, climbBy);
             auto bmove = MoveBy::create(time, empty);
