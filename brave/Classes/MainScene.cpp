@@ -572,7 +572,7 @@ void MainScene::deleteTree() {
         _player->playerDrop(rangeLeft, rangeRight);
     }
     else {
-        rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width;
+        rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.5;
         rangeRight = xPos + target->getContentSize().width / 2;
         this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
         std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
