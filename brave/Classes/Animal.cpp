@@ -72,7 +72,7 @@ bool Animal::initWithPlayerType(AnimalType type)
 			//-----assign different blood----------Xiaojing---------------//
 			_health = 20;
 			_maxHealth =20;
-			_attack = 2;
+			_attack = 15;
 			_minDist = 20;
 			//-------------------------------------------------//
             break;
@@ -369,8 +369,8 @@ Vec2 Animal::getBestAttackPosition(std::vector<Enemy*> enemys,int& index)
             }
         }
         else{
-            is_attacking = false;
-            return pos1;
+//            is_attacking = false;
+            return pos2;
         }
     }
 }

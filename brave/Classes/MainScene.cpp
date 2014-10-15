@@ -442,8 +442,9 @@ void MainScene::enemyMove(float dt)
 void MainScene::animalMove(float dt)
 {
     if (_enemys.size() == 0){
-        for (auto animal : _animals)
-            animal->stop();
+        level++;
+//        for (auto animal : _animals)
+//            animal->stop();
     }
     for (auto animal : _animals)
     {

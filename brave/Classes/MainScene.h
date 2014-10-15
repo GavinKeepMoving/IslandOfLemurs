@@ -9,7 +9,7 @@
 #include "Enemy.h"
 #include "Animal.h"
 #include <iostream>
-
+//#include "GameOverLayer.h"
 
 //******************************************************************************************************************
 //added by Wenbo Lin
@@ -104,6 +104,7 @@ public:
     Sprite *_background;
     Sprite *_background1;
     std::vector<Tree*> _trees;
+    int level = 0;
     //******************************************************************************************************************
     //added by Wenbo Lin
     Progress* _progress;
