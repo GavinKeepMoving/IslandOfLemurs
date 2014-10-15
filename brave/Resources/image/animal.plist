@@ -147,6 +147,32 @@
                 <key>sourceSize</key>
                 <string>{80,87}</string>
             </dict>
+            <key>clothe-3-3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{361,1528},{84,82}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{84,82}}</string>
+                <key>sourceSize</key>
+                <string>{84,82}</string>
+            </dict>
+            <key>clothe-3-4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{360,1385},{80,87}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{80,87}}</string>
+                <key>sourceSize</key>
+                <string>{80,87}</string>
+            </dict>
             <key>clothe-4-1.png</key>
             <dict>
                 <key>frame</key>
@@ -395,6 +421,32 @@
                 <string>{96,183}</string>
             </dict>
             <key>elephant-3-2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{152,641},{90,183}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{90,183}}</string>
+                <key>sourceSize</key>
+                <string>{90,183}</string>
+            </dict>
+            <key>elephant-3-3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{150,456},{96,183}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{96,183}}</string>
+                <key>sourceSize</key>
+                <string>{96,183}</string>
+            </dict>
+            <key>elephant-3-4.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{152,641},{90,183}}</string>
@@ -680,6 +732,32 @@
                 <key>sourceSize</key>
                 <string>{24,87}</string>
             </dict>
+            <key>fox-3-3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{419,1277},{24,84}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{24,84}}</string>
+                <key>sourceSize</key>
+                <string>{24,84}</string>
+            </dict>
+            <key>fox-3-4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{408,657},{24,87}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{24,87}}</string>
+                <key>sourceSize</key>
+                <string>{24,87}</string>
+            </dict>
             <key>fox-4-1.png</key>
             <dict>
                 <key>frame</key>
@@ -927,6 +1005,32 @@
                 <key>sourceSize</key>
                 <string>{46,121}</string>
             </dict>
+            <key>tiger-3-3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{125,2000},{46,121}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{46,121}}</string>
+                <key>sourceSize</key>
+                <string>{46,121}</string>
+            </dict>
+            <key>tiger-3-4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2000},{46,121}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{46,121}}</string>
+                <key>sourceSize</key>
+                <string>{46,121}</string>
+            </dict>
             <key>tiger-4-1.png</key>
             <dict>
                 <key>frame</key>
@@ -1028,7 +1132,7 @@
             <key>size</key>
             <string>{451,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:91faf13790eab1d4899259dca52bd7a8:c60f308c852e97a4e4c19f77cc009c1d:1a7d141dd83ab6af2e98651a16303730$</string>
+            <string>$TexturePacker:SmartUpdate:5af33d43ed98537711965ec04ef00875:3e82e620291dab2ac6e8bdb789a70380:1a7d141dd83ab6af2e98651a16303730$</string>
             <key>textureFileName</key>
             <string>animal.pvr.ccz</string>
         </dict>
