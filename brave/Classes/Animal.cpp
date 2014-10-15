@@ -56,7 +56,7 @@ bool Animal::initWithPlayerType(AnimalType type)
 {
     std::string sfName = "";
     _type = type;
-    _speed = 100;
+    _speed = 150;
     _seq = nullptr;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
@@ -73,7 +73,7 @@ bool Animal::initWithPlayerType(AnimalType type)
 			_health = 20;
 			_maxHealth =20;
 			_attack = 2;
-			
+			_minDist = 20;
 			//-------------------------------------------------//
             break;
         case AnimalType::TIGER:
@@ -81,7 +81,7 @@ bool Animal::initWithPlayerType(AnimalType type)
             _name = "tiger";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
-            
+            _minDist = 20;
 			_health = 30;
 			_maxHealth = 30;
 			_attack = 3;
@@ -94,8 +94,11 @@ bool Animal::initWithPlayerType(AnimalType type)
 			_health = 40;
 			_maxHealth =40;
 			_attack = 4 ;
+            _minDist = 20;
             break;
         case AnimalType::ELEPHANT:
+//            sfName = "enemy1-1-1.png";
+//            _name = "enemy1";
             sfName = "elephant-1-1.png";
             _name = "elephant";
             _animationNum = 4;
@@ -103,6 +106,7 @@ bool Animal::initWithPlayerType(AnimalType type)
 			_health = 50;
 			_maxHealth =50;
 			_attack = 5;
+            _minDist = 20;
             break;
     }
     this->initWithSpriteFrameName(sfName);
@@ -165,7 +169,7 @@ void Animal::walkTo(Vec2 dest)
 
 void Animal::onWalk(Vec2 dest)
 {
-    log("Enemy: Enter walk");
+//    log("Enemy: Enter walk");
     auto curPos = this->getPosition();
 //    dest.y = origin.y + visibleSize.height*Animal::height;
 //    //flip when moving backward
@@ -177,7 +181,7 @@ void Animal::onWalk(Vec2 dest)
 //        dest.x = origin.x + visibleSize.width;
 //        this->setFlippedX(false);
 //    }
-//    
+//
     
     //calculate the time needed to move
     auto diff = dest - curPos;
@@ -205,20 +209,23 @@ Vec2 Animal::getCurPos()
     return result;
 }
 //reduce the _health value of current animal Xiaojing ***************//
-void Animal::beHit(int attack){
+int Animal::beHit(int attack){
     _health -= attack;
 	if(_health <= 0)
 	{ //die
 		_health = 0;
-		
+		this->_progress->setProgress((float)_health/_maxHealth*100);
 		//do event die
 		_fsm->doEvent("die");
-		return;
+		return 1 ;
 	}
 	else
 	{
+        this->_progress->setProgress((float)_health/_maxHealth*100);
 		//be hit
+//        stop();
 		_fsm->doEvent("beHit");
+        return 0;
 	}
 }
 //***************************************************//
@@ -230,7 +237,14 @@ void Animal::attack()
 }
 void Animal::stop()
 {
-    _fsm->doEvent("stop");
+//    this->stopAllActions();
+    _canWalk = false;
+    std::cout<<"the current status for animal attacking is: "<<is_attacking<<std::endl;
+    if (is_attacking)
+        attack();
+//        _fsm->doEvent("attack");
+    else
+        _fsm->doEvent("stop");
 }
 
 void Animal::initFSM(){
@@ -239,7 +253,7 @@ void Animal::initFSM(){
     // corresponding functions
     auto onIdle =[&]()
 	{
-		log("Enemy onIdle: Enter idle");
+//		log("animal onIdle: Enter idle");
 		this->stopActionByTag(WALKING);
 		auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
 		auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
@@ -249,7 +263,7 @@ void Animal::initFSM(){
     
 	auto onAttacking =[&]()
 	{
-		log("Enemy onAttacking: Enter Attacking");
+//		log("animal onAttacking: Enter Attacking");
 		auto animate = getAnimateByType(ATTACKING);
 		auto func = [&]()
 		{
@@ -263,7 +277,7 @@ void Animal::initFSM(){
 	
 	auto onBeingHit = [&]()
 	{
-		log("Enemy onBeingHit: Enter BeingHit");
+//		log("animal onBeingHit: Enter BeingHit");
 		auto animate = getAnimateByType(BEINGHIT);
 		auto func = [&]()
 		{
@@ -279,11 +293,11 @@ void Animal::initFSM(){
     auto onDead = [&]()
     {
         //        this->setCanAttack(false);
-        log("onDead: Enter Dead");
+//        log("animal onDead: Enter Dead");
         auto animate = getAnimateByType(DEAD);
         auto func = [&]()
         {
-            log("A charactor died!");
+//            log("A charactor died!");
             NotificationCenter::getInstance()->postNotification("enemyDead",this);
             this->removeFromParentAndCleanup(true);
         };
@@ -314,6 +328,7 @@ Animate* Animal::getAnimateByType(AnimationType type){
 Vec2 Animal::getBestAttackPosition(std::vector<Enemy*> enemys,int& index)
 {
     // animal's position
+//    is_attacking = false;
     auto curPos = this->getPosition();
     auto pos1 = curPos;
     auto pos2 = curPos + Vec2(_speed,0);
@@ -321,25 +336,40 @@ Vec2 Animal::getBestAttackPosition(std::vector<Enemy*> enemys,int& index)
         return pos1;
     }
     else{
-        // find the closest enemy
-        Enemy* closestEnemy = enemys[0];
-        index = 0;
-        for (int i=1;i<enemys.size();i++){
-            if (enemys[i]->getPositionX() < closestEnemy->getPositionX()){
+        // find the closest enemy: just consider the condition that enemy is always in the right of animal
+        Enemy* closestEnemy;
+        index = -1;
+        for (int i=0;i<enemys.size();i++){
+            if (curPos.x <= enemys[i]->getPositionX() && (index < 0 ||enemys[i]->getPositionX() < closestEnemy->getPositionX())){
                 closestEnemy = enemys[i];
                 index = i;
             }
         }
         // judge for the move dest
-        auto diff = closestEnemy->getPositionX() - curPos.x;
-        if (diff > _minDist+_speed){
-            return pos2;
-        }
-        else if (diff > _minDist){
-            auto pos3 = Vec2(closestEnemy->getPositionX()-_minDist, curPos.y);
-            return pos3;
+        
+        if (index >= 0){
+            auto  diff = closestEnemy->getPositionX() - curPos.x;
+            if ( _canWalk && diff > _minDist+_speed){
+                return pos2;
+            }
+            else if (_canWalk && diff > _minDist){
+                if (index >= 0){
+                    enemys[index]->stop();
+                }
+                is_attacking = true;
+                auto pos3 = Vec2(closestEnemy->getPositionX()-_minDist, curPos.y);
+                return pos3;
+            }
+            else{
+                if (index >= 0){
+                    enemys[index]->stop();
+                }
+                is_attacking = true;
+                return pos1;
+            }
         }
         else{
+            is_attacking = false;
             return pos1;
         }
     }

@@ -62,7 +62,7 @@ public:
     void removeAttacker(Player* attacker);
     bool isInRange(Player* enemy);
     void setCanAttack(bool canAttack){_isCanAttack=canAttack;}
-	
+	void stop();
 	bool isCanAttack(){return _isCanAttack;}
     
     std::string getState(){return _fsm->getState();}
@@ -70,6 +70,7 @@ public:
     float getMinDist(){return _minDist;}
     bool closeToTree(std::vector<Tree*> trees);
     int getAttack(){return _attack;}
+    bool _canWalk = true;
     
 private:
     //Action _seq;
@@ -86,8 +87,7 @@ private:
     Vector<Player*> _attackers;
     float _minDist; // min distance for attacking
     bool _isCanAttack;
-    
-
+    bool _isAttacking = false;
     
 	
     //blood value  Xiaojing**************************//

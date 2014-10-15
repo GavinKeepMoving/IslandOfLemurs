@@ -56,7 +56,7 @@ public:
     
     void onWalk(Vec2 dest);
 	//when hit reduce blood Xiaojing
-    void beHit(int attack);
+    int beHit(int attack);
     
     /*** add by Zhe Liu ***/
     Vec2 getBestAttackPosition(std::vector<Enemy*> enemys,int& index);
@@ -68,6 +68,8 @@ public:
     void initFSM();
     
     int getAttack(){return _attack ;}
+    
+    bool _canWalk = true;
     /*** add by Zhe Liu ***/
 private:
     //Action _seq;
@@ -78,6 +80,7 @@ private:
     std::vector<int> _animationFrameNum;
     std::vector<std::string> _animationNames;
     Sequence* _seq;
+//    int _minDist;
     //currentPos
     //blood attribute  xiaojing
 	FSM* _fsm;
@@ -85,6 +88,7 @@ private:
 	int _maxHealth;  //total blood
 	int _attack;  //each attack harm enemy
     float _minDist;
+    bool is_attacking = false;
 	//****************************************//
 public:
     Sprite* background;

@@ -41,6 +41,9 @@ bool MainScene::init()
     
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
+    
+    //Zhenni
+    this->boundry = 550;
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -179,6 +182,7 @@ bool MainScene::init()
 //    _animals.push_back(_animal);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
     this->schedule(schedule_selector(MainScene::animalMove), 3);
+    this->schedule(schedule_selector(MainScene::addEnemy),20);
     /****************** End-Added by Zhe Liu *********************/
 	
 	//*****init blood progress  xiaojing **************//
@@ -299,6 +303,7 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
         case 1:
             _animal = Animal::create(Animal::AnimalType::ELEPHANT);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+//            _animal->setFlippedX(true);
             _background->addChild(_animal);
             //add animals -------------------------------//
             _animals.push_back( _animal);
@@ -357,9 +362,9 @@ void MainScene::initTrees(int num) {
         _ropes.push_back(rope);
         _background->addChild(rope);
         
-        auto bareTree = Sprite::create("image/trees/bare_tree.png");
-        bareTree->setPosition(beginningPos + interval * i, 180);
-        _background->addChild(bareTree);
+//        auto bareTree = Sprite::create("image/trees/bare_tree.png");
+//        bareTree->setPosition(beginningPos + interval * i, 180);
+//        _background->addChild(bareTree);
         
         auto treeSprite = Sprite::create("image/trees/tree.png");
         treeSprite->setPosition(beginningPos + interval * i, 430);
@@ -375,19 +380,24 @@ void MainScene::enemyMove(float dt)
 {
     if (_enemys.size() == 0){
         std::cout<<"no enemy right now, please wait"<<std::endl;
-        addEnemy();
+//        addEnemy(0.5);
         return;
     }
+    std::cout<<"the size of enemy queue is: "<<_enemys.size()<<std::endl;
     for (auto enemy : _enemys)
     {
         if ("dead" != enemy->getState() && _player)
         {
             int type = -1;
             Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees,_animals ,type);
-            std::cout<<"current type is: "<<type<<std::endl;
+            std::cout<<"the attack target of enemy i: "<<type<<std::endl;
             if (dest == enemy->getPosition()){
-                enemy->attack();
-                std::cout<<"the attack target of enemy is: "<<type<<std::endl;
+                if (type >= 0){
+                    std::cout<<"the enemy is attacking "<<type<<std::endl;
+                    enemy->attack();
+                }
+//                std::cout<<"the attack target of enemy is: "<<type<<std::endl;
+                int animal_index  = -1;
                 // control the blood volumn of the object it hitted
                 if (type == 0){// lemur
                     
@@ -404,12 +414,22 @@ void MainScene::enemyMove(float dt)
                     }
                 }
                 else if (type >= 200){
-                    int animal_index = type%200;
-                    _animals[animal_index]->beHit(enemy->getAttack());
+                    animal_index = type%200;
+//                    _animals[animal_index]->stop();
+                    int state = _animals[animal_index]->beHit(enemy->getAttack());
+                    std::cout<<"the enemy is attacking animal "<<animal_index<<std::endl;
+                    if (state == 1){
+                        log("this animal is dead, remove it~");
+                        enemy->_canWalk = true;
+                        _animals.erase(_animals.begin()+animal_index);
+                        type = -1;
+                        animal_index = -1;
+                    }
+
                 }
-                else{
-                    
-                }
+//                else{// type = -1
+////                    enemy->walkTo(dest);
+//                }
             }
             else{
                 enemy->walkTo(dest);
@@ -431,13 +451,17 @@ void MainScene::animalMove(float dt)
         {
             int index = -1;
             Vec2 dest = animal->getBestAttackPosition(_enemys, index);
+            std::cout<<"the target of animal is: "<<index<<std::endl;
             if (dest == animal->getPosition())
             {
                 if (index != -1){
                     animal->attack();
+                    std::cout<<"the hitting enemy is: "<<index<<std::endl;
+                    _enemys[index]->stop();
                     // control the blood volumn of the bihitted animal
                     int state = _enemys[index]->beHit(animal->getAttack());
                     if (state == 1){
+                        animal->_canWalk = true;
                         log("this enemy is dead, remove it~");
                         _enemys.erase(_enemys.begin()+index);
                         index = -1;
@@ -452,24 +476,31 @@ void MainScene::animalMove(float dt)
     }
 }
 
-void MainScene::addEnemy()
+void MainScene::addEnemy(float dt)
 {
+    std::cout<<"time for enemy comming out~"<<std::endl;
     _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
+    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY1);
     // origin.x
     //    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-    _enemy1->setPosition(1450, origin.y + visibleSize.height * Enemy::height);
+    _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
+    _enemy2->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
     _background->addChild(_enemy1);
+    _background->addChild(_enemy2);
     _enemys.push_back(_enemy1);
+    _enemys.push_back(_enemy2);
     _enemy1->addAttacker(_player);
+    _enemy2->addAttacker(_player);
 
 }
 /****************** End-Added by Zhe Liu *********************/
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
-    Vec2 pos = this->convertToNodeSpace(touch->getLocation());
+    this->touchPos = this->convertToNodeSpace(touch->getLocation());
     //TO-DO change 750 the integer to tree boundries or something
-    _player->walkTo(pos, 550);
+    
+    _player->walkTo(this->touchPos, this->boundry);
     log("MainScene::onTouchBegan");
     return true;
 }
@@ -525,22 +556,27 @@ Vec2 MainScene::attackTarget(Player *p) {
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
     Tree * target = _trees[_trees.size() - 1];
+    Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
+    float xPos = targetTreePos.x;
+    float yPos = targetTreePos.y;
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+
     Sprite * rope = _ropes[_ropes.size() - 1];
-    float xPos = target->_posX;
-    float yPos = target->_posY;
-    
     float rangeLeft = 0;
     float rangeRight = 0;
     
     if(_trees.size() - 1 == 0) {
         rangeLeft = xPos - target->getContentSize().width / 2;
         rangeRight = xPos + target->getContentSize().width / 2;
+        this->boundry = target->_posX - target->getContentSize().width*5/4 - visibleSize.width/2;
         _player->playerDrop(rangeLeft, rangeRight);
     }
     else {
-        rangeLeft = xPos - target->getContentSize().width / 2 - rope->getContentSize().width;
+        rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width;
         rangeRight = xPos + target->getContentSize().width / 2;
-        _player->playerDrop(rangeLeft, rangeRight);
+        this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
+        std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
+        _player->playerDrop(rangeLeft, rangeRight, onWalk);
     }
     
     _trees.pop_back();
