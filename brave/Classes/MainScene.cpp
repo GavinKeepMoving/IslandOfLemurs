@@ -155,7 +155,7 @@ bool MainScene::init()
 //    _background->addChild(_animal);
     /******************End-Added by Yafu*****************************/
     
-    BananaManger* bananaManger = BananaManger::create(_background);
+    bananaManger = BananaManger::create(_background);
     bananaManger->bindPlayer(_player);
     
     /****************** Begin-Added by Wenbo *********************/
@@ -544,6 +544,9 @@ void MainScene::deleteTree() {
     }
     
     _trees.pop_back();
+    
+    if(_trees.size() == 0) _background->removeChild(bananaManger, true);
+    
     if(rope != NULL) {
         _background->removeChild(rope, true);
         _ropes.pop_back();
