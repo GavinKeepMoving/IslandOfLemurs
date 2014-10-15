@@ -142,7 +142,7 @@ bool MainScene::init()
        
     //add player
     _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(visibleSize.width/2, origin.y + visibleSize.height*Player::height*3);
+    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
     _player->background = _background;
     _player->background1 = _background1;
     _player->setScale(0.5);
@@ -462,6 +462,15 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
     _player->walkTo(pos, 550);
     log("MainScene::onTouchBegan");
     return true;
+}
+//added by Zhenni
+bool MainScene::isEnemyInRange(Player* p) {
+    Rect playerRect=p->getAttackBox();
+    for(int i=0; i<_enemys.size(); i++) {
+        Vec2 enemyPos = _background->convertToWorldSpace(_enemys[i]->getPosition());
+        if(playerRect.containsPoint(enemyPos)) return true;
+    }
+    return false;
 }
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
