@@ -50,7 +50,9 @@ std::vector<Tree*> Tree::initWithTreeNum(int num) {
 
 //set blood value
 int Tree::setBlood(int value) {
-    this->blood -= value;
+    float convert = value/10;
+//    value /= 10;
+    this->blood -= convert;
     this->showStateAccordingtoBlood();
     return this->blood;
 }

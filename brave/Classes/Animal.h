@@ -56,7 +56,7 @@ public:
     
     void onWalk(Vec2 dest);
 	//when hit reduce blood Xiaojing
-    void beHit(int attack);
+    int beHit(int attack);
     
     /*** add by Zhe Liu ***/
     Vec2 getBestAttackPosition(std::vector<Enemy*> enemys,int& index);
@@ -85,6 +85,7 @@ private:
 	int _maxHealth;  //total blood
 	int _attack;  //each attack harm enemy
     float _minDist;
+    bool is_attacking = false;
 	//****************************************//
 public:
     Sprite* background;

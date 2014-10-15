@@ -34,7 +34,7 @@ FSM* FSM::addState(std::string state, std::function<void()> onEnter)
 {
     if("" == state)
     {
-        cocos2d::log("FSM::addState: state can't be empty string!");
+//        cocos2d::log("FSM::addState: state can't be empty string!");
         return nullptr;
     }
     _states.insert(state);
@@ -63,13 +63,13 @@ void FSM::changeToState(std::string state)
     {
         _previousState = _currentState;
         _currentState = state;
-        cocos2d::log("FSM::changeToState: %s -> %s", _previousState.c_str(), _currentState.c_str());
+//        cocos2d::log("FSM::changeToState: %s -> %s", _previousState.c_str(), _currentState.c_str());
         if(_onEnters[state])
             _onEnters[state]();
     }
     else
     {
-        cocos2d::log("FSM::changeToState: no such state as %s , state unchanged", state.c_str());
+//        cocos2d::log("FSM::changeToState: no such state as %s , state unchanged", state.c_str());
     }
 }
 
@@ -104,12 +104,12 @@ void FSM::doEvent(std::string eventName)
 {
     if(canDoEvent(eventName))
     {
-        cocos2d::log("FSM::doEvent: doing event %s", eventName.c_str());
+//        cocos2d::log("FSM::doEvent: doing event %s", eventName.c_str());
         changeToState(_events[eventName][_currentState]);
     }
     else
     {
-        cocos2d::log("FSM::doEvent: cannot do event %s", eventName.c_str());
+//        cocos2d::log("FSM::doEvent: cannot do event %s", eventName.c_str());
     }
 }
 
@@ -147,6 +147,7 @@ bool FSM::init(std::string type)
     ->addEvent("stop", "beingHit", "idle")
     ->addEvent("attack", "idle", "attacking")
     ->addEvent("attack", "walking", "attacking")
+    ->addEvent("attack", "beingHit", "attacking")
     ->addEvent("stop","walking","idle")
     ->addEvent("stop","attacking","idle");
 
