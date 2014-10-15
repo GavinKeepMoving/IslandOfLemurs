@@ -97,10 +97,10 @@ bool Animal::initWithPlayerType(AnimalType type)
             _minDist = 20;
             break;
         case AnimalType::ELEPHANT:
-            sfName = "enemy1-1-1.png";
-            _name = "enemy1";
-//            sfName = "elephant-1-1.png";
-//            _name = "elephant";
+//            sfName = "enemy1-1-1.png";
+//            _name = "enemy1";
+            sfName = "elephant-1-1.png";
+            _name = "elephant";
             _animationNum = 4;
             _animationFrameNum.assign(animationFrameNum2, animationFrameNum2 + 5);
 			_health = 50;

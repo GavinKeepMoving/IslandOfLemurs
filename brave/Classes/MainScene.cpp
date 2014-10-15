@@ -303,7 +303,7 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
         case 1:
             _animal = Animal::create(Animal::AnimalType::ELEPHANT);
             _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
-            _animal->setFlippedX(true);
+//            _animal->setFlippedX(true);
             _background->addChild(_animal);
             //add animals -------------------------------//
             _animals.push_back( _animal);
@@ -349,9 +349,9 @@ void MainScene::initTrees(int num) {
     int treeNum = 2;
     
     //add treeBase
-//    treeBase = Sprite::create("image/trees/treeBase.png");
-//    treeBase->setPosition(580, 460);
-//    _background->addChild(treeBase);
+    treeBase = Sprite::create("image/trees/treeBase.png");
+    treeBase->setPosition(580, 460);
+    _background->addChild(treeBase);
 
     
     for(int i = 0; i < treeNum; i++) {
