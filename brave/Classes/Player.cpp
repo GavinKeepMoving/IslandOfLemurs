@@ -161,7 +161,55 @@ void Player::generalAttack(float radius) {
 }
 
 void Player::playerDrop(int start, int end) {
-    log("player dropping!");
+    if (this->getPositionX() > start && this->getPositionX() < end) {
+        log("Player: drop!");
+        auto preStatus = this->_fsm->getState();
+        _fsm->doEvent("stop");
+        Vec2 ground;
+        Size visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        ground.y = origin.y + visibleSize.height*Player::height;
+        ground.x = this->getPositionX();
+        auto time = (this->getPosition()-ground).getLength()/400;
+        auto drop = MoveTo::create(time, ground);
+        auto _seq = Sequence::create(drop, NULL);
+        this->runAction(_seq);
+        if(preStatus == "walking") {
+            
+        }
+        //auto _sep = Sequence::create(drop, onWalk, NULL);
+    }
+}
+
+void Player::playerDrop(int start, int end, std::function<void()> callback) {
+    if (this->getPositionX() > start && this->getPositionX() < end) {
+        log("Player: drop!");
+        auto preStatus = this->_fsm->getState();
+        _fsm->doEvent("stop");
+        Vec2 ground;
+        Size visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        ground.y = origin.y + visibleSize.height*Player::height;
+        ground.x = this->getPositionX();
+        auto time = (this->getPosition()-ground).getLength()/400;
+        auto drop = MoveTo::create(time, ground);
+        
+        auto func = [&]()
+        {
+            callback();
+        };
+        auto _callback = CallFunc::create(func);
+        
+        if(preStatus == "walking") {
+            auto _seq = Sequence::create(drop, _callback, NULL);
+            this->runAction(_seq);
+        }
+        else {
+            auto _seq = Sequence::create(drop, NULL);
+            this->runAction(_seq);
+        }
+        //auto _sep = Sequence::create(drop, onWalk, NULL);
+    }
 }
 
 Weapon* Player::attack(float radius)
@@ -199,137 +247,347 @@ void Player::stop() {
 }
 
 //actually player stay in the center of the screeen but the background would move to the opposite position as the target
+//Move horizontally //added by Zhenni
+void Player::constructActionArray(int start, int end,
+                                  Vector< FiniteTimeAction * > &arrayOfActions,
+                                  Vector< FiniteTimeAction * > &backgroundActions) {
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    int minDiff = -visibleSize.width/2;
+    int firstChange = 0;
+    int secondChange = background->getContentSize().width*5/4 - visibleSize.width*2;
+    int maxDiff = background->getContentSize().width*5/4 - visibleSize.width*3/2;
+    auto empty = Vec2(0, 0);
+    if (start < end) {
+        if(start < firstChange) {
+            Vec2 diff;
+            if(end < firstChange) {
+                diff = Vec2(end - start, 0);
+                
+            }
+            else {
+                diff = Vec2(firstChange - start, 0);
+            }
+            auto time = diff.getLength()/_speed;
+            auto move = MoveBy::create(time, diff);
+            auto bmove = MoveBy::create(time, empty);
+            arrayOfActions.pushBack(move);
+            backgroundActions.pushBack(bmove);
+        }
+        if (start < secondChange && end > firstChange) {
+            Vec2 diff;
+            if( start > firstChange ) {
+                if( end < secondChange ) {
+                    diff = Vec2(end - start, 0);
+                }
+                else {
+                    diff = Vec2(secondChange - start, 0);
+                }
+            }
+            else {
+                if( end < secondChange ) {
+                    diff = Vec2(end - firstChange, 0);
+                }
+                else {
+                    diff = Vec2(secondChange - firstChange, 0);
+                }
+            }
+            auto time = diff.getLength()/_speed;
+            auto move = MoveBy::create(time, empty);
+            auto bmove = MoveBy::create(time, -diff);
+            arrayOfActions.pushBack(move);
+            backgroundActions.pushBack(bmove);
+        }
+        if (start < maxDiff && end > secondChange) {
+            Vec2 diff;
+            if( start > secondChange ) {
+                if( end < maxDiff ) {
+                    diff = Vec2(end - start, 0);
+                }
+                else {
+                    diff = Vec2(maxDiff - start, 0);
+                }
+            }
+            else {
+                if( end < maxDiff ) {
+                    diff = Vec2(end - secondChange, 0);
+                }
+                else {
+                    diff = Vec2(maxDiff - secondChange, 0);
+                }
+            }
+            auto time = diff.getLength()/_speed;
+            auto move = MoveBy::create(time, diff);
+            auto bmove = MoveBy::create(time, empty);
+            arrayOfActions.pushBack(move);
+            backgroundActions.pushBack(bmove);
+        }
+    }
+    else {
+        if(start > secondChange) {
+            Vec2 diff;
+            if(end > secondChange && end < maxDiff) {
+                diff = Vec2(end - start, 0);
+                
+            }
+            else {
+                diff = Vec2(secondChange - start, 0);
+            }
+            auto time = diff.getLength()/_speed;
+            auto move = MoveBy::create(time, diff);
+            auto bmove = MoveBy::create(time, empty);
+            arrayOfActions.pushBack(move);
+            backgroundActions.pushBack(bmove);
+        }
+        if (start > firstChange && end < secondChange) {
+            Vec2 diff;
+            if( start < secondChange ) {
+                if( end > firstChange ) {
+                    diff = Vec2(end - start, 0);
+                }
+                else {
+                    diff = Vec2(firstChange - start, 0);
+                }
+            }
+            else {
+                if( end > firstChange ) {
+                    diff = Vec2(end - secondChange, 0);
+                }
+                else {
+                    diff = Vec2(firstChange - secondChange, 0);
+                }
+            }
+            auto time = diff.getLength()/_speed;
+            auto move = MoveBy::create(time, empty);
+            auto bmove = MoveBy::create(time, -diff);
+            arrayOfActions.pushBack(move);
+            backgroundActions.pushBack(bmove);
+        }
+        if (start > minDiff && end < firstChange) {
+            Vec2 diff;
+            if( start < firstChange ) {
+                if( end > minDiff) {
+                    diff = Vec2(end - start, 0);
+                }
+                else {
+                    diff = Vec2(minDiff - start, 0);
+                }
+            }
+            else {
+                if( end > minDiff) {
+                    diff = Vec2(end - firstChange, 0);
+                }
+                else {
+                    diff = Vec2(minDiff - firstChange, 0);
+                }
+            }
+            auto time = diff.getLength()/_speed;
+            auto move = MoveBy::create(time, diff);
+            auto bmove = MoveBy::create(time, empty);
+            arrayOfActions.pushBack(move);
+            backgroundActions.pushBack(bmove);
+        }
+    }
+    
+}
 
 void Player::onWalk(Vec2 dest, int boundry) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    
+
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    auto curPos = background->getPosition();
     Vector< FiniteTimeAction * > arrayOfActions;
     Vector< FiniteTimeAction * > backgroundActions;
-    //Vector< FiniteTimeAction * > backgroundActions1;
-    Vec2 dest1, dest2, dest3, dest4, diff4 = visibleSize/2;
-    auto backgroundPos = background->getPosition();
+    auto pPos = this->getPosition();
+    auto bPos = background->getPosition();
     auto empty = Vec2(0, 0);
-    //auto background1Pos = background1->getPosition();
     
     
-    //flip when moving backward
     if(dest.x < origin.x + visibleSize.width/2) {
-        if(this->getPositionX() > origin.x + visibleSize.width/2) {
-            Vec2 dest0;
-            dest0.x = origin.x + visibleSize.width/2;
-            dest0.y = this->getPositionY();
-            auto diff0 = dest0 - this->getPosition();
-            auto time0 = diff0.getLength()/_speed;
-            auto move0 = MoveTo::create(time0, dest0);
-            auto bmove0 = MoveBy::create(time0, empty);
-            arrayOfActions.pushBack(move0);
-            backgroundActions.pushBack(bmove0);
+        if(pPos.x - bPos.x >= boundry) {
+            this->constructActionArray(pPos.x - bPos.x, boundry, arrayOfActions, backgroundActions);
+            Vec2 climbBy(0, origin.y + visibleSize.height*Player::height*3 - pPos.y);
+            auto time = climbBy.getLength()/_speed;
+            auto climb = MoveBy::create(time, climbBy);
+            auto bmove = MoveBy::create(time, empty);
+            arrayOfActions.pushBack(climb);
+            backgroundActions.pushBack(bmove);
+            this->constructActionArray(boundry, -visibleSize.width/2, arrayOfActions, backgroundActions);
         }
-        dest1.x = -boundry;
-        dest3.x = origin.x;
-        dest2.y = origin.y + visibleSize.height*Player::height*3;
-        dest4.x = origin.x;
-        if(this->getPositionX() < origin.x + visibleSize.width/2) {
-            diff4 = dest4 - Vec2(this->getPositionX(), dest4.y);
+        else {
+            this->constructActionArray(pPos.x - bPos.x, -visibleSize.width/2, arrayOfActions, backgroundActions);
         }
         this->setFlippedX(true);
     }
     else {
-        if(this->getPositionX() < origin.x + visibleSize.width/2) {
-            Vec2 dest0;
-            dest0.x = origin.x + visibleSize.width/2;
-            dest0.y = this->getPositionY();
-            auto diff0 = dest0 - this->getPosition();
-            auto time0 = diff0.getLength()/_speed;
-            auto move0 = MoveTo::create(time0, dest0);
-            auto bmove0 = MoveBy::create(time0, empty);
-            arrayOfActions.pushBack(move0);
-            backgroundActions.pushBack(bmove0);
+        if(pPos.x - bPos.x <= boundry) {
+            this->constructActionArray(pPos.x - bPos.x,  boundry, arrayOfActions, backgroundActions);
+            Vec2 climbBy(0, origin.y + visibleSize.height*Player::height - pPos.y);
+            auto time = climbBy.getLength()/_speed;
+            auto climb = MoveBy::create(time, climbBy);
+            auto bmove = MoveBy::create(time, empty);
+            arrayOfActions.pushBack(climb);
+            backgroundActions.pushBack(bmove);
+            this->constructActionArray(boundry,  background->getContentSize().width*5/4 - visibleSize.width/2, arrayOfActions, backgroundActions);
         }
-        dest1.x = -boundry;
-        dest3.x = visibleSize.width*3/2 - background->getContentSize().width*5/4;
-        dest2.y = origin.y + visibleSize.height*Player::height;
-        dest4.x = origin.x + visibleSize.width;
-        if(this->getPositionX() > origin.x + visibleSize.width/2) {
-            diff4 = dest4 - Vec2(this->getPositionX(), dest4.y);
+        else {
+            this->constructActionArray(pPos.x - bPos.x,  background->getContentSize().width*5/4 - visibleSize.width/2, arrayOfActions, backgroundActions);
         }
         this->setFlippedX(false);
     }
-    dest1.y = origin.y;
-    dest2.x = visibleSize.width/2;
-    dest3.y = origin.y;
-    dest1 += visibleSize/2;
-    dest3 += visibleSize/2;
-    dest4.y = dest2.y;
-    //calculate the time needed to move
-    
-    auto diff1 = dest1 - curPos;
-    auto time1 = diff1.getLength()/_speed;
-    auto move1 = MoveBy::create(time1, empty);
-    auto bmove1 = MoveTo::create(time1, dest1);
-    //auto bmove11 = MoveTo::create(time1, dest1 + background1Pos - backgroundPos);
-    auto time2 = (dest2 - this->getPosition()).getLength()/_speed;
-    auto climb = MoveTo::create(time2, dest2);
-    auto bmove2 = MoveBy::create(time2, empty);
-    
-    if((dest.x < origin.x + visibleSize.width/2 && curPos.x <= dest1.x)
-       ||(dest.x > origin.x + visibleSize.width/2 && curPos.x >= dest1.x)) {
-        arrayOfActions.pushBack(move1);
-        arrayOfActions.pushBack(climb);
-        backgroundActions.pushBack(bmove1);
-        backgroundActions.pushBack(bmove2);
-        //backgroundActions1.pushBack(bmove11);
-        //backgroundActions1.pushBack(bmove2);
-    }
-    else {
-        dest1 = curPos;
-    }
-    auto diff3 = dest3 - dest1;
-    auto time3 = diff3.getLength()/_speed;
-    auto move2 = MoveBy::create(time3, empty);
-    auto bmove3 = MoveTo::create(time3, dest3);
-    
-    auto time4 = diff4.getLength()/_speed;
-    auto move4 = MoveTo::create(time4, dest4);
-    auto bmove4 = MoveBy::create(time4, empty);
-    //auto bmove31 = MoveTo::create(time3, dest3 + background1Pos - backgroundPos);
-    
-    arrayOfActions.pushBack(move2);
-    backgroundActions.pushBack(bmove3);
-    arrayOfActions.pushBack(move4);
-    backgroundActions.pushBack(bmove4);
-    //backgroundActions1.pushBack(bmove31);
-    
-    //auto movePlayer = MoveTo::create(playerTime, dest);
-   
-    
+
     //lambda function
     auto func = [&]()
     {
         this->_fsm->doEvent("stop");
     };
     auto callback = CallFunc::create(func);
-    
+
     arrayOfActions.pushBack(callback);
     backgroundActions.pushBack(callback);
-    
+
     //create sequence for two backgrounds and player(some bugs)
-    //auto _seqPlayer = Sequence::create(movePlayer, callback, nullptr);
     auto _bseq = Sequence::create(backgroundActions);
-    //auto _bseq1 = Sequence::create(backgroundActions1);
     auto _seq = Sequence::create(arrayOfActions);
-    this->runAction(_seq);
+    
     
     //run action sequnce
+    this->runAction(_seq);
     background->runAction(_bseq);
-    //background1->runAction(_bseq1);
-    
+
     //******************************************************************************************
     //added by Wenbo Lin
     this->playAnimationForever(0);
     //******************************************************************************************
+    
+    
+//    Size visibleSize = Director::getInstance()->getVisibleSize();
+//
+//    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+//    auto curPos = background->getPosition();
+//    Vector< FiniteTimeAction * > arrayOfActions;
+//    Vector< FiniteTimeAction * > backgroundActions;
+//    //Vector< FiniteTimeAction * > backgroundActions1;
+//    Vec2 dest1, dest2, dest3, dest4, diff4 = visibleSize/2;
+//    auto backgroundPos = background->getPosition();
+//    auto empty = Vec2(0, 0);
+//    //auto background1Pos = background1->getPosition();
+//    
+//    
+//    //flip when moving backward
+//    if(dest.x < origin.x + visibleSize.width/2) {
+//        if(this->getPositionX() > origin.x + visibleSize.width/2) {
+//            Vec2 dest0;
+//            dest0.x = origin.x + visibleSize.width/2;
+//            dest0.y = this->getPositionY();
+//            auto diff0 = dest0 - this->getPosition();
+//            auto time0 = diff0.getLength()/_speed;
+//            auto move0 = MoveTo::create(time0, dest0);
+//            auto bmove0 = MoveBy::create(time0, empty);
+//            arrayOfActions.pushBack(move0);
+//            backgroundActions.pushBack(bmove0);
+//        }
+//        dest1.x = -boundry;
+//        dest3.x = origin.x;
+//        dest2.y = origin.y + visibleSize.height*Player::height*3;
+//        dest4.x = origin.x;
+//        if(this->getPositionX() < origin.x + visibleSize.width/2) {
+//            diff4 = dest4 - Vec2(this->getPositionX(), dest4.y);
+//        }
+//        this->setFlippedX(true);
+//    }
+//    else {
+//        if(this->getPositionX() < origin.x + visibleSize.width/2) {
+//            Vec2 dest0;
+//            dest0.x = origin.x + visibleSize.width/2;
+//            dest0.y = this->getPositionY();
+//            auto diff0 = dest0 - this->getPosition();
+//            auto time0 = diff0.getLength()/_speed;
+//            auto move0 = MoveTo::create(time0, dest0);
+//            auto bmove0 = MoveBy::create(time0, empty);
+//            arrayOfActions.pushBack(move0);
+//            backgroundActions.pushBack(bmove0);
+//        }
+//        dest1.x = -boundry;
+//        dest3.x = visibleSize.width*3/2 - background->getContentSize().width*5/4;
+//        dest2.y = origin.y + visibleSize.height*Player::height;
+//        dest4.x = origin.x + visibleSize.width;
+//        if(this->getPositionX() > origin.x + visibleSize.width/2) {
+//            diff4 = dest4 - Vec2(this->getPositionX(), dest4.y);
+//        }
+//        this->setFlippedX(false);
+//    }
+//    dest1.y = origin.y;
+//    dest2.x = visibleSize.width/2;
+//    dest3.y = origin.y;
+//    dest1 += visibleSize/2;
+//    dest3 += visibleSize/2;
+//    dest4.y = dest2.y;
+//    //calculate the time needed to move
+//    
+//    auto diff1 = dest1 - curPos;
+//    auto time1 = diff1.getLength()/_speed;
+//    auto move1 = MoveBy::create(time1, empty);
+//    auto bmove1 = MoveTo::create(time1, dest1);
+//    //auto bmove11 = MoveTo::create(time1, dest1 + background1Pos - backgroundPos);
+//    auto time2 = (dest2 - this->getPosition()).getLength()/_speed;
+//    auto climb = MoveTo::create(time2, dest2);
+//    auto bmove2 = MoveBy::create(time2, empty);
+//    
+//    if((dest.x < origin.x + visibleSize.width/2 && curPos.x <= dest1.x)
+//       ||(dest.x > origin.x + visibleSize.width/2 && curPos.x >= dest1.x)) {
+//        arrayOfActions.pushBack(move1);
+//        arrayOfActions.pushBack(climb);
+//        backgroundActions.pushBack(bmove1);
+//        backgroundActions.pushBack(bmove2);
+//        //backgroundActions1.pushBack(bmove11);
+//        //backgroundActions1.pushBack(bmove2);
+//    }
+//    else {
+//        dest1 = curPos;
+//    }
+//    auto diff3 = dest3 - dest1;
+//    auto time3 = diff3.getLength()/_speed;
+//    auto move2 = MoveBy::create(time3, empty);
+//    auto bmove3 = MoveTo::create(time3, dest3);
+//    
+//    auto time4 = diff4.getLength()/_speed;
+//    auto move4 = MoveTo::create(time4, dest4);
+//    auto bmove4 = MoveBy::create(time4, empty);
+//    //auto bmove31 = MoveTo::create(time3, dest3 + background1Pos - backgroundPos);
+//    
+//    arrayOfActions.pushBack(move2);
+//    backgroundActions.pushBack(bmove3);
+//    arrayOfActions.pushBack(move4);
+//    backgroundActions.pushBack(bmove4);
+//    //backgroundActions1.pushBack(bmove31);
+//    
+//    //auto movePlayer = MoveTo::create(playerTime, dest);
+//   
+//    
+//    //lambda function
+//    auto func = [&]()
+//    {
+//        this->_fsm->doEvent("stop");
+//    };
+//    auto callback = CallFunc::create(func);
+//    
+//    arrayOfActions.pushBack(callback);
+//    backgroundActions.pushBack(callback);
+//    
+//    //create sequence for two backgrounds and player(some bugs)
+//    //auto _seqPlayer = Sequence::create(movePlayer, callback, nullptr);
+//    auto _bseq = Sequence::create(backgroundActions);
+//    //auto _bseq1 = Sequence::create(backgroundActions1);
+//    auto _seq = Sequence::create(arrayOfActions);
+//    this->runAction(_seq);
+//    
+//    //run action sequnce
+//    background->runAction(_bseq);
+//    //background1->runAction(_bseq1);
+//    
+//    //******************************************************************************************
+//    //added by Wenbo Lin
+//    this->playAnimationForever(0);
+//    //******************************************************************************************
 }
 
 Vec2 Player::getCurPos()

@@ -14,6 +14,7 @@
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
+#include "BananaManger.h"
 //******************************************************************************************************************
 
 USING_NS_CC;
@@ -81,6 +82,9 @@ public:
         }
         _enemys.erase(_enemys.begin() + i);
     }
+    
+    int boundry;
+    Vec2 touchPos;
     /******************End-Added by Zhenni ************************/
 private:
     Animal* _animal;
@@ -106,6 +110,7 @@ public:
     std::vector<Sprite*> _ropes;
     Sprite* treeBase;
     void deleteTree();
+    BananaManger* bananaManger;
     //End added by Wenbo Lin
     //******************************************************************************************************************
 };

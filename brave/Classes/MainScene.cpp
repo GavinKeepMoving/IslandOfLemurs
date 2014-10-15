@@ -41,6 +41,9 @@ bool MainScene::init()
     
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
+    
+    //Zhenni
+    this->boundry = 550;
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -155,7 +158,7 @@ bool MainScene::init()
 //    _background->addChild(_animal);
     /******************End-Added by Yafu*****************************/
     
-    BananaManger* bananaManger = BananaManger::create(_background);
+    bananaManger = BananaManger::create(_background);
     bananaManger->bindPlayer(_player);
     
     /****************** Begin-Added by Wenbo *********************/
@@ -494,9 +497,10 @@ void MainScene::addEnemy(float dt)
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
 {
-    Vec2 pos = this->convertToNodeSpace(touch->getLocation());
+    this->touchPos = this->convertToNodeSpace(touch->getLocation());
     //TO-DO change 750 the integer to tree boundries or something
-    _player->walkTo(pos, 550);
+    
+    _player->walkTo(this->touchPos, this->boundry);
     log("MainScene::onTouchBegan");
     return true;
 }
@@ -552,25 +556,33 @@ Vec2 MainScene::attackTarget(Player *p) {
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
     Tree * target = _trees[_trees.size() - 1];
+    Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
+    float xPos = targetTreePos.x;
+    float yPos = targetTreePos.y;
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+
     Sprite * rope = _ropes[_ropes.size() - 1];
-    float xPos = target->_posX;
-    float yPos = target->_posY;
-    
     float rangeLeft = 0;
     float rangeRight = 0;
     
     if(_trees.size() - 1 == 0) {
         rangeLeft = xPos - target->getContentSize().width / 2;
         rangeRight = xPos + target->getContentSize().width / 2;
+        this->boundry = target->_posX - target->getContentSize().width*5/4 - visibleSize.width/2;
         _player->playerDrop(rangeLeft, rangeRight);
     }
     else {
         rangeLeft = xPos - target->getContentSize().width / 2 - rope->getContentSize().width;
         rangeRight = xPos + target->getContentSize().width / 2;
-        _player->playerDrop(rangeLeft, rangeRight);
+        this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
+        std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
+        _player->playerDrop(rangeLeft, rangeRight, onWalk);
     }
     
     _trees.pop_back();
+    
+    if(_trees.size() == 0) _background->removeChild(bananaManger, true);
+    
     if(rope != NULL) {
         _background->removeChild(rope, true);
         _ropes.pop_back();
