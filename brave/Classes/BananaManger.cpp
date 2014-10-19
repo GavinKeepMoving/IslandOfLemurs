@@ -6,7 +6,7 @@
 //
 //
 
-#include "BananaManger.h"
+
 #include "BananaManger.h"
 #include "Banana.h"
 #define max_Banana_num 3
@@ -18,9 +18,7 @@ BananaManger::~BananaManger(){}
 BananaManger* BananaManger::create(Sprite* background)
 {
     BananaManger* bananaManger = new BananaManger();
-    /******************************** Begin-Added by Wenbo Lin *********************************/
     bananaManger->_background = background;
-    /******************************** End-Added by Wenbo Lin ***********************************/
     bananaManger->init();
     return bananaManger;
 }

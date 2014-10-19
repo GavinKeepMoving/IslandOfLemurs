@@ -9,12 +9,13 @@
 #include "Enemy.h"
 #include "Animal.h"
 #include <iostream>
-
+#include "Enemy2.h"
 
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
 #include "BananaManger.h"
+#include "Enemy2Manager.h"
 //******************************************************************************************************************
 
 USING_NS_CC;
@@ -90,7 +91,7 @@ private:
     Animal* _animal;
     Player* _player;
 	Enemy* _enemy1;
-    Enemy* _enemy2;
+    Enemy2* _enemy2;
     Enemy* _enemy3;
     std::vector<Enemy*> _enemys;
     std::vector<Animal*> _animals;
@@ -111,6 +112,7 @@ public:
     Sprite* treeBase;
     void deleteTree();
     BananaManger* bananaManger;
+    Enemy2Manager* _enemy2Manager;
     bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************

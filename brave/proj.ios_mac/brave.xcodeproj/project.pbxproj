@@ -58,6 +58,8 @@
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		9C609C3719E1BD01004B375D /* Banana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3519E1BD01004B375D /* Banana.cpp */; };
 		9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3B19E1CD87004B375D /* BananaManger.cpp */; };
+		9C82A9D219F446230080515F /* Enemy2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C82A9D019F446230080515F /* Enemy2.cpp */; };
+		9C82A9D919F461B10080515F /* Enemy2Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C82A9D719F461B10080515F /* Enemy2Manager.cpp */; };
 		9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFB92C919EB2AD7000F869A /* Animal.cpp */; };
 		9CFB92CE19EB2AD7000F869A /* Fire.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFB92CB19EB2AD7000F869A /* Fire.cpp */; };
 		9CFB92F219EB4AE8000F869A /* animal1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92E319EB4AE8000F869A /* animal1.png */; };
@@ -279,6 +281,10 @@
 		9C609C3619E1BD01004B375D /* Banana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Banana.h; path = ../Classes/Banana.h; sourceTree = "<group>"; };
 		9C609C3B19E1CD87004B375D /* BananaManger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BananaManger.cpp; path = ../Classes/BananaManger.cpp; sourceTree = "<group>"; };
 		9C609C3C19E1CD87004B375D /* BananaManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BananaManger.h; path = ../Classes/BananaManger.h; sourceTree = "<group>"; };
+		9C82A9D019F446230080515F /* Enemy2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy2.cpp; path = ../Classes/Enemy2.cpp; sourceTree = "<group>"; };
+		9C82A9D119F446230080515F /* Enemy2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy2.h; path = ../Classes/Enemy2.h; sourceTree = "<group>"; };
+		9C82A9D719F461B10080515F /* Enemy2Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy2Manager.cpp; path = ../Classes/Enemy2Manager.cpp; sourceTree = "<group>"; };
+		9C82A9D819F461B10080515F /* Enemy2Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy2Manager.h; path = ../Classes/Enemy2Manager.h; sourceTree = "<group>"; };
 		9CFB92C919EB2AD7000F869A /* Animal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal.cpp; path = ../Classes/Animal.cpp; sourceTree = "<group>"; };
 		9CFB92CA19EB2AD7000F869A /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = ../Classes/Animal.h; sourceTree = "<group>"; };
 		9CFB92CB19EB2AD7000F869A /* Fire.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Fire.cpp; path = ../Classes/Fire.cpp; sourceTree = "<group>"; };
@@ -418,6 +424,10 @@
 				9C609C3619E1BD01004B375D /* Banana.h */,
 				9C609C3B19E1CD87004B375D /* BananaManger.cpp */,
 				9C609C3C19E1CD87004B375D /* BananaManger.h */,
+				9C82A9D019F446230080515F /* Enemy2.cpp */,
+				9C82A9D119F446230080515F /* Enemy2.h */,
+				9C82A9D719F461B10080515F /* Enemy2Manager.cpp */,
+				9C82A9D819F461B10080515F /* Enemy2Manager.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -764,8 +774,10 @@
 			files = (
 				9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */,
 				FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */,
+				9C82A9D219F446230080515F /* Enemy2.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				9C609C3719E1BD01004B375D /* Banana.cpp in Sources */,
+				9C82A9D919F461B10080515F /* Enemy2Manager.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */,
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,

@@ -9,7 +9,8 @@
 #include "Progress.h"
 #include <unistd.h>
 //******************************************************************************************************************
-#include "BananaManger.h"
+
+
 
 USING_NS_CC;
 
@@ -145,9 +146,29 @@ bool MainScene::init()
     
     /******************Begin-Added by Zhe Liu*****************************/
     //add enemy1
-    _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-     _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
-    _background->addChild(_enemy1);
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
+    
+    
+    
+    _enemy2Manager = Enemy2Manager::create(_background);
+    _enemy2Manager->_background = _background;
+    _background->addChild(_enemy2Manager, 2);
+    
+    //_enemy2 = new Enemy2();
+    //_enemy2->setPosition(850, 430);
+    //_enemy2->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
+    //_background->addChild(_enemy2);
+    
+    
+    
+    
+    
+    //_enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
+    // _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
+    //_background->addChild(_enemy1);
+    
+
+
     
 //    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
 //    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
@@ -175,14 +196,14 @@ bool MainScene::init()
     
     /****************** Begin-Added by Zhe Liu *********************/
     
-    _enemys.push_back(_enemy1);
+    //_enemys.push_back(_enemy1);
 //    _enemys.pushBack(_enemy2);
-    _enemy1->addAttacker(_player);
+    //_enemy1->addAttacker(_player);
 //    _enemy2->addAttacker(_player);
 //    _animals.push_back(_animal);
     this->schedule(schedule_selector(MainScene::enemyMove), 3);
     this->schedule(schedule_selector(MainScene::animalMove), 3);
-    this->schedule(schedule_selector(MainScene::addEnemy),20);
+    //this->schedule(schedule_selector(MainScene::addEnemy),20);
     /****************** End-Added by Zhe Liu *********************/
 	
 	//*****init blood progress  xiaojing **************//
@@ -205,7 +226,14 @@ void MainScene::addProgress()
 
 void MainScene::update(float delta)
 {
+    /*Point oldPos = _enemy1->getPosition();
+    if (_enemy1->getState() == "walking")
+    {
+        _enemy1->setPosition(oldPos.x -1,oldPos.y);
+    }*/
 
+    _enemy2Manager->update(delta);
+    //_enemy2->update(delta);
     label->setString(CCString::createWithFormat("Score:%d",_player->getMoney())->getCString());
 
 }
@@ -491,7 +519,7 @@ void MainScene::animalMove(float dt)
         }
     }
 }
-
+/*
 void MainScene::addEnemy(float dt)
 {
     std::cout<<"time for enemy comming out~"<<std::endl;
@@ -508,7 +536,7 @@ void MainScene::addEnemy(float dt)
     _enemy1->addAttacker(_player);
     _enemy2->addAttacker(_player);
 
-}
+}*/
 /****************** End-Added by Zhe Liu *********************/
 
 bool MainScene::onTouchBegan(Touch* touch, Event* event)
