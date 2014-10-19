@@ -99,7 +99,6 @@ private:
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
     
-    
 
 public:
     Sprite *_background;
