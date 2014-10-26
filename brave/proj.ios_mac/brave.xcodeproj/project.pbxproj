@@ -78,6 +78,9 @@
 		A601081919EB5DED00664A6C /* attackoption2.png in Resources */ = {isa = PBXBuildFile; fileRef = A601081819EB5DED00664A6C /* attackoption2.png */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
+		BE662C8519F81DF500A18AF1 /* p1.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = BE662C8219F81DF500A18AF1 /* p1.ExportJson */; };
+		BE662C8619F81DF500A18AF1 /* p10.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE662C8319F81DF500A18AF1 /* p10.plist */; };
+		BE662C8719F81DF500A18AF1 /* p10.png in Resources */ = {isa = PBXBuildFile; fileRef = BE662C8419F81DF500A18AF1 /* p10.png */; };
 		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -308,6 +311,9 @@
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FD19CF508900DA478A /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
 		A6C5B2FE19CF509500DA478A /* Weapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Weapon.cpp; sourceTree = "<group>"; };
+		BE662C8219F81DF500A18AF1 /* p1.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = p1.ExportJson; sourceTree = "<group>"; };
+		BE662C8319F81DF500A18AF1 /* p10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = p10.plist; sourceTree = "<group>"; };
+		BE662C8419F81DF500A18AF1 /* p10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p10.png; sourceTree = "<group>"; };
 		BEDF548C19DD481C00068CBA /* Tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tree.cpp; path = ../Classes/Tree.cpp; sourceTree = "<group>"; };
 		BEDF548D19DD481C00068CBA /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tree.h; path = ../Classes/Tree.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -546,6 +552,9 @@
 				9CFB92E319EB4AE8000F869A /* animal1.png */,
 				9CFB92E419EB4AE8000F869A /* animal2.png */,
 				9CFB92E519EB4AE8000F869A /* animal3.png */,
+				BE662C8219F81DF500A18AF1 /* p1.ExportJson */,
+				BE662C8319F81DF500A18AF1 /* p10.plist */,
+				BE662C8419F81DF500A18AF1 /* p10.png */,
 				9CFB92E619EB4AE8000F869A /* animal4.png */,
 				9CFB92E719EB4AE8000F869A /* attackoption1.png */,
 				A601081819EB5DED00664A6C /* attackoption2.png */,
@@ -734,13 +743,16 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				BE662C8619F81DF500A18AF1 /* p10.plist in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				BE662C8719F81DF500A18AF1 /* p10.png in Resources */,
 				9CFB92F719EB4AE8000F869A /* background.png in Resources */,
 				9CFB92F819EB4AE8000F869A /* CloseNormal.png in Resources */,
 				9CFB92F919EB4AE8000F869A /* CloseSelected.png in Resources */,
 				9CFB92FE19EB4AE8000F869A /* image in Resources */,
 				9CFB92F519EB4AE8000F869A /* animal4.png in Resources */,
 				9CFB92F319EB4AE8000F869A /* animal2.png in Resources */,
+				BE662C8519F81DF500A18AF1 /* p1.ExportJson in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				9CFB92F219EB4AE8000F869A /* animal1.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,

@@ -27,7 +27,29 @@ public:
     static cocos2d::Scene* createScene();
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-    virtual bool init();  
+    virtual bool init();
+    
+    /*********** begin add by Wenbo Lin **************/
+    void setParameters();
+    void addCloseIcon();
+    void addBackground();
+    void addWeaponOptionBar();
+    void addHelloWorldLabel();
+    
+    void addRoles();
+    //method in addRoles
+    void addAnimations();
+    void addTrees();
+    void addFires();
+    void addPlayer();
+    void addEnemies();
+    void addBananas();
+    //end of method in addRoles
+    
+    void setScheduleAndProgress();
+    
+    /*********** ended add by Wenbo Lin **************/
+    
     virtual void update(float delta);
     
     // a selector callback
