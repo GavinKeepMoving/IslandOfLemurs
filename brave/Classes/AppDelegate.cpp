@@ -1,11 +1,8 @@
 #include "AppDelegate.h"
 #include "MainScene.h"
+#include "StartScene.h"
 
 USING_NS_CC;
-
-/******************Start-Modified by Yafu****************************/
-MainScene *mainLayer;
-/******************End-Modified by Yafu*****************************/
 
 AppDelegate::AppDelegate() {
 
@@ -31,12 +28,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    Scene *scene = MainScene::createScene();
-    
-    /******************Start-Modified by Yafu****************************/
-    Vector<Node *> children = scene->getChildren();
-    mainLayer = (MainScene *)children.back();
-    /******************End-Modified by Yafu*****************************/
+    Scene *scene = StartScene::createScene();
 
     // run
     director->runWithScene(scene);
