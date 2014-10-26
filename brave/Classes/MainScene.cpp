@@ -84,6 +84,44 @@ void MainScene::addgotoItem()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 }
+bool MainScene::enemyAllDead()
+{
+	
+	log("all EnemyDead:%d", _enemys.size());
+	if(_enemys.size() == 0) return true;
+	else return false;
+}
+
+void MainScene::gotoNextLevel(Ref* obj)
+{
+	//need enable goItem in menu
+	auto goItem = this->_menu->getChildByTag(2);
+	goItem->setVisible(false);
+	goItem->stopAllActions();
+	
+	//background move 
+	//_background->move("left",_player);
+	
+	//enemy manager add new enemy to background
+		
+	/*
+	
+
+	*/		
+	}
+	
+}
+
+void MainScene::showNextLevelItem() //called by enemy manager???
+{
+	if(enemyAllDead()){//of  check by enemy manager????
+		auto goItem = this->_menu->getChildByTag(2);
+		goItem->setVisible(true);
+		goItem->runAction(RepeatForever::create(Blink::create(1,1)));
+		gamelevel = gamelevel+1;  //need add different number of enemy when enemy manager create enemy
+	}
+}
+/*****************************************************/
 void MainScene::update(float delta)
 {
     /*Point oldPos = _enemy1->getPosition();
