@@ -60,6 +60,12 @@
 		9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3B19E1CD87004B375D /* BananaManger.cpp */; };
 		9C82A9D219F446230080515F /* Enemy2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C82A9D019F446230080515F /* Enemy2.cpp */; };
 		9C82A9D919F461B10080515F /* Enemy2Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C82A9D719F461B10080515F /* Enemy2Manager.cpp */; };
+		9C9F513819FD739A004EFA88 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513319FD739A004EFA88 /* back.png */; };
+		9C9F513919FD739A004EFA88 /* cloth.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513419FD739A004EFA88 /* cloth.png */; };
+		9C9F513A19FD739A004EFA88 /* money.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513519FD739A004EFA88 /* money.png */; };
+		9C9F513B19FD739A004EFA88 /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513619FD739A004EFA88 /* panda.png */; };
+		9C9F513C19FD739A004EFA88 /* tiger2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513719FD739A004EFA88 /* tiger2.png */; };
+		9C9F514019FD787D004EFA88 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513F19FD787D004EFA88 /* banana.png */; };
 		9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFB92C919EB2AD7000F869A /* Animal.cpp */; };
 		9CFB92CE19EB2AD7000F869A /* Fire.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFB92CB19EB2AD7000F869A /* Fire.cpp */; };
 		9CFB92F219EB4AE8000F869A /* animal1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92E319EB4AE8000F869A /* animal1.png */; };
@@ -285,6 +291,12 @@
 		9C82A9D119F446230080515F /* Enemy2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy2.h; path = ../Classes/Enemy2.h; sourceTree = "<group>"; };
 		9C82A9D719F461B10080515F /* Enemy2Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy2Manager.cpp; path = ../Classes/Enemy2Manager.cpp; sourceTree = "<group>"; };
 		9C82A9D819F461B10080515F /* Enemy2Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy2Manager.h; path = ../Classes/Enemy2Manager.h; sourceTree = "<group>"; };
+		9C9F513319FD739A004EFA88 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		9C9F513419FD739A004EFA88 /* cloth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth.png; sourceTree = "<group>"; };
+		9C9F513519FD739A004EFA88 /* money.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money.png; sourceTree = "<group>"; };
+		9C9F513619FD739A004EFA88 /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
+		9C9F513719FD739A004EFA88 /* tiger2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger2.png; sourceTree = "<group>"; };
+		9C9F513F19FD787D004EFA88 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
 		9CFB92C919EB2AD7000F869A /* Animal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal.cpp; path = ../Classes/Animal.cpp; sourceTree = "<group>"; };
 		9CFB92CA19EB2AD7000F869A /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = ../Classes/Animal.h; sourceTree = "<group>"; };
 		9CFB92CB19EB2AD7000F869A /* Fire.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Fire.cpp; path = ../Classes/Fire.cpp; sourceTree = "<group>"; };
@@ -543,6 +555,12 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9C9F513F19FD787D004EFA88 /* banana.png */,
+				9C9F513319FD739A004EFA88 /* back.png */,
+				9C9F513419FD739A004EFA88 /* cloth.png */,
+				9C9F513519FD739A004EFA88 /* money.png */,
+				9C9F513619FD739A004EFA88 /* panda.png */,
+				9C9F513719FD739A004EFA88 /* tiger2.png */,
 				9CFB92E319EB4AE8000F869A /* animal1.png */,
 				9CFB92E419EB4AE8000F869A /* animal2.png */,
 				9CFB92E519EB4AE8000F869A /* animal3.png */,
@@ -727,8 +745,11 @@
 			files = (
 				9CFB92FB19EB4AE8000F869A /* fonts in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				9C9F513B19FD739A004EFA88 /* panda.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				9C9F514019FD787D004EFA88 /* banana.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				9C9F513A19FD739A004EFA88 /* money.png in Resources */,
 				9CFB92F619EB4AE8000F869A /* attackoption1.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
@@ -736,6 +757,8 @@
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				9CFB92F719EB4AE8000F869A /* background.png in Resources */,
+				9C9F513919FD739A004EFA88 /* cloth.png in Resources */,
+				9C9F513C19FD739A004EFA88 /* tiger2.png in Resources */,
 				9CFB92F819EB4AE8000F869A /* CloseNormal.png in Resources */,
 				9CFB92F919EB4AE8000F869A /* CloseSelected.png in Resources */,
 				9CFB92FE19EB4AE8000F869A /* image in Resources */,
@@ -751,6 +774,7 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				9CFB92FC19EB4AE8000F869A /* fruit.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				9C9F513819FD739A004EFA88 /* back.png in Resources */,
 				9CFB92FD19EB4AE8000F869A /* HelloWorld.png in Resources */,
 				9CFB92F419EB4AE8000F869A /* animal3.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,

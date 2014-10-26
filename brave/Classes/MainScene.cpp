@@ -66,8 +66,8 @@ bool MainScene::init()
     
     // 3. add Weapon options bar
     initWeaponOptionsBar(origin, visibleSize);
-    initAnimalOptionsBar();
-    
+    menu = initAnimalOptionsBar();
+
 
     /////////////////////////////
     // 3. add your codes below...
@@ -75,14 +75,7 @@ bool MainScene::init()
     // add a label shows "Hello World"
     // create and initialize a label
     
-    label = LabelTTF::create("Score: 0", "Arial", 24);
-    
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
 
     //add background image
     log("create background");
@@ -93,6 +86,14 @@ bool MainScene::init()
     // position the sprite on the center of the screen
     _background->setPosition(origin + visibleSize/2);
     _background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
+    auto banana = Sprite::create("banana.png");
+    banana->setPosition(Vec2(origin.x + 430 + banana->getContentSize().width/2, origin.y +banana->getContentSize().height/2));
+    this->addChild(banana,1);
+    
+
+    label = LabelTTF::create("0", "HiraKakuProN-W6", 36);
+    label->setPosition(Vec2(origin.x + 450 + banana->getContentSize().width/2, origin.y +banana->getContentSize().height/2));
+    this->addChild(label, 2);
     
     //********************************************************************************************************//
     //added by Wenbo Lin
@@ -116,7 +117,9 @@ bool MainScene::init()
     // add the sprite as a child to this layer
     this->addChild(_background, 0);
     this->addChild(_background1, 0);
+    
 
+    
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
 	
     //Lishi Jiang
@@ -234,7 +237,7 @@ void MainScene::update(float delta)
 
     _enemy2Manager->update(delta);
     //_enemy2->update(delta);
-    label->setString(CCString::createWithFormat("Score:%d",_player->getMoney())->getCString());
+    label->setString(CCString::createWithFormat("%d",_player->getMoney())->getCString());
 
 }
 
@@ -266,39 +269,39 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 }
 
 //Right top Weapon option bar
-void MainScene::initAnimalOptionsBar()
+Menu* MainScene::initAnimalOptionsBar()
 {
     // add a "close" icon to exit the progress. it's an autorelease object
     auto optionItem1 = MenuItemImage::create(
-                                            "animal1.png",
-                                            "CloseSelected.png",
+                                            "money.png",
+                                            "back.png",
                                             CC_CALLBACK_1(MainScene::callAnimalHelper, this, 1));
     
     optionItem1->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2,
                                  origin.y + optionItem1->getContentSize().height/2));
     
     auto optionItem2 = MenuItemImage::create(
-                                            "animal2.png",
-                                            "CloseSelected.png",
+                                            "tiger2.png",
+                                            "back.png",
                                             CC_CALLBACK_1(MainScene::callAnimalHelper, this, 2));
     
-    optionItem2->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width,
+    optionItem2->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width+1,
                                  origin.y + optionItem1->getContentSize().height/2));
     
     auto optionItem3 = MenuItemImage::create(
-                                             "animal3.png",
-                                             "CloseSelected.png",
+                                             "panda.png",
+                                             "back.png",
                                              CC_CALLBACK_1(MainScene::callAnimalHelper, this, 3));
     
-    optionItem3->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width*2,
+    optionItem3->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width*2+2,
                                   origin.y + optionItem1->getContentSize().height/2));
     
     auto optionItem4 = MenuItemImage::create(
-                                             "animal4.png",
-                                             "CloseSelected.png",
+                                             "cloth.png",
+                                             "back.png",
                                              CC_CALLBACK_1(MainScene::callAnimalHelper, this, 4));
     
-    optionItem4->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width*3,
+    optionItem4->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width*3+3,
                                   origin.y + optionItem1->getContentSize().height/2));
     // create menu, it's an autorelease object
     auto menu = Menu::create(optionItem1, NULL);
@@ -307,6 +310,7 @@ void MainScene::initAnimalOptionsBar()
     menu->addChild(optionItem4);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
+    return menu;
 }
 
 void MainScene::activateWeaponOption(Ref* pSender, int index)

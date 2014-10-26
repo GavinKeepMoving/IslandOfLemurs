@@ -40,7 +40,7 @@ public:
     
     //add Attack option top right bar
     void initWeaponOptionsBar(Vec2 origin, Size visibleSize);
-    void initAnimalOptionsBar();
+    Menu* initAnimalOptionsBar();
     void activateWeaponOption(Ref* pSender, int index);
     void callAnimalHelper(Ref* pSender, int index);
     LabelTTF* label;
