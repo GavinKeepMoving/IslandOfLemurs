@@ -16,6 +16,7 @@
 #include "Progress.h"
 #include "BananaManger.h"
 #include "Enemy2Manager.h"
+#include "SimpleAudioEngine.h" 
 //******************************************************************************************************************
 
 USING_NS_CC;
@@ -30,6 +31,7 @@ public:
     virtual bool init();
     
     /*********** begin add by Wenbo Lin **************/
+    void playMusic();
     void setParameters();
     void addCloseIcon();
     void addBackground();

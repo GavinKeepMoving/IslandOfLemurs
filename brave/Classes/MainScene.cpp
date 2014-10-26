@@ -40,6 +40,8 @@ bool MainScene::init()
         return false;
     }
     
+    this->playMusic();
+    
     this->setParameters();
 
     this->addCloseIcon();
@@ -483,6 +485,12 @@ void MainScene::deleteTree() {
 /*******************************Ended add by Wenbo Lin*******************************/
 
 /*******************************Begin add by Wenbo Lin*******************************/
+void MainScene::playMusic() {
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("AudioClip/Willow_and_the_Light.mp3");
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("AudioClip/Willow_and_the_Light.mp3", true);
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(1.0);
+}
+
 void MainScene::setParameters()
 {
     visibleSize = Director::getInstance()->getVisibleSize();
