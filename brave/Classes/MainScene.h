@@ -81,8 +81,7 @@ public:
 //    bool closeToEnemy( obj);
 	 void enemyDead(Ref* obj);
      void animalDead(Ref* obj);
-	//------blood progress----------------//
-	void addProgress();
+	
     
     /******************Begin-Added by Yafu*****************************/
     Vec2 getOrigin() {
@@ -111,6 +110,16 @@ public:
     int boundry;
     Vec2 touchPos;
     /******************End-Added by Zhenni ************************/
+	
+	
+	/**************added by xiaojing***************/
+	 //------blood progress----------------//
+	void addProgress();
+	bool enemyAllDead();
+	void gotoNextLevel(Ref* obj);
+	void showNextLevelItem();
+	/*********************************************/
+	
 private:
     Animal* _animal;
     Player* _player;
@@ -140,6 +149,9 @@ public:
     bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************
-};
+	int gamelevel; // used to init different number of enemy according to level
+	Menu* _menu;
+	
+	};
 
 #endif // __HELLOWORLD_SCENE_H__

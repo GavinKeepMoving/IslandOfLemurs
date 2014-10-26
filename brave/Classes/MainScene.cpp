@@ -55,7 +55,7 @@ bool MainScene::init()
     this->addRoles();
     
     this->setScheduleAndProgress();
-    
+    //this->addgotoItem();//or combine with menu create??
     return true;
 }
 
@@ -66,7 +66,62 @@ void MainScene::addProgress()
 	_progress->setPosition(origin.x + _progress->getContentSize().width/2, origin.y - _progress->getContentSize().height/2);
 	this->addChild(_progress);
 }
+void MainScene::addgotoItem()
+{
+      this->addChild(menu, 1);
+    /***************goto next level menu**************************/
+	
+	auto gotoItem =  CustomTool::createMenuItemImage("go.png", "go.png", 
+													CC_CALLBACK_1(MainScene::gotoNextLevel,this));
+	gotoItem->setVisible(false);
+	gotoItem->setTag(2);
+	//VisibleRect::right().x - goItem->getContentSize().width/2, VisibleRect::center().y
+	//just try position
+	gotoItem->setPosition(Vec2(origin.x + visibleSize.width - gotoItem->getContentSize().width/2, origin.y + visibleSize.height * 0.5 + gotoItem->getContentSize().height/2));
+    
+    // create menu, 
+    auto menu = Menu::create(gotoItem, NULL);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+}
+bool MainScene::enemyAllDead()
+{
+	
+	log("all EnemyDead:%d", _enemys.size());
+	if(_enemys.size() == 0) return true;
+	else return false;
+}
 
+void MainScene::gotoNextLevel(Ref* obj)
+{
+	//need enable goItem in menu
+	auto goItem = this->_menu->getChildByTag(2);
+	goItem->setVisible(false);
+	goItem->stopAllActions();
+	
+	//background move 
+	//_background->move("left",_player);
+	
+	//enemy manager add new enemy to background
+		
+	/*
+	
+
+	*/		
+	}
+	
+}
+
+void MainScene::showNextLevelItem() //called by enemy manager???
+{
+	if(enemyAllDead()){//of  check by enemy manager????
+		auto goItem = this->_menu->getChildByTag(2);
+		goItem->setVisible(true);
+		goItem->runAction(RepeatForever::create(Blink::create(1,1)));
+		gamelevel = gamelevel+1;  //need add different number of enemy when enemy manager create enemy
+	}
+}
+/*****************************************************/
 void MainScene::update(float delta)
 {
     /*Point oldPos = _enemy1->getPosition();
