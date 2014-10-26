@@ -76,6 +76,13 @@
 		9CFB92FE19EB4AE8000F869A /* image in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92EF19EB4AE8000F869A /* image */; };
 		A60105AC19E1C28100664A6C /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A60105AA19E1C28100664A6C /* Enemy.cpp */; };
 		A601081919EB5DED00664A6C /* attackoption2.png in Resources */ = {isa = PBXBuildFile; fileRef = A601081819EB5DED00664A6C /* attackoption2.png */; };
+		A62FF62919FD6763007EC9B3 /* p10.plist in Resources */ = {isa = PBXBuildFile; fileRef = A62FF62719FD6763007EC9B3 /* p10.plist */; };
+		A62FF62A19FD6763007EC9B3 /* p10.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF62819FD6763007EC9B3 /* p10.png */; };
+		A62FF62C19FD677A007EC9B3 /* p1.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = A62FF62B19FD677A007EC9B3 /* p1.ExportJson */; };
+		A62FF62F19FD689E007EC9B3 /* StartScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF62D19FD689E007EC9B3 /* StartScene.cpp */; };
+		A62FF63419FD6AEF007EC9B3 /* CustomTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF63019FD6AEF007EC9B3 /* CustomTool.cpp */; };
+		A62FF63519FD6AEF007EC9B3 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF63219FD6AEF007EC9B3 /* VisibleRect.cpp */; };
+		A62FF63719FD6F74007EC9B3 /* MainMenuBG.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
 		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
@@ -304,6 +311,16 @@
 		A60105AA19E1C28100664A6C /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy.cpp; path = ../Classes/Enemy.cpp; sourceTree = "<group>"; };
 		A60105AB19E1C28100664A6C /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy.h; path = ../Classes/Enemy.h; sourceTree = "<group>"; };
 		A601081819EB5DED00664A6C /* attackoption2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attackoption2.png; sourceTree = "<group>"; };
+		A62FF62719FD6763007EC9B3 /* p10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = p10.plist; sourceTree = "<group>"; };
+		A62FF62819FD6763007EC9B3 /* p10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p10.png; sourceTree = "<group>"; };
+		A62FF62B19FD677A007EC9B3 /* p1.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = p1.ExportJson; sourceTree = "<group>"; };
+		A62FF62D19FD689E007EC9B3 /* StartScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StartScene.cpp; path = ../Classes/StartScene.cpp; sourceTree = "<group>"; };
+		A62FF62E19FD689E007EC9B3 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartScene.h; path = ../Classes/StartScene.h; sourceTree = "<group>"; };
+		A62FF63019FD6AEF007EC9B3 /* CustomTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CustomTool.cpp; path = ../Classes/CustomTool.cpp; sourceTree = "<group>"; };
+		A62FF63119FD6AEF007EC9B3 /* CustomTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTool.h; path = ../Classes/CustomTool.h; sourceTree = "<group>"; };
+		A62FF63219FD6AEF007EC9B3 /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VisibleRect.cpp; path = ../Classes/VisibleRect.cpp; sourceTree = "<group>"; };
+		A62FF63319FD6AEF007EC9B3 /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VisibleRect.h; path = ../Classes/VisibleRect.h; sourceTree = "<group>"; };
+		A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MainMenuBG.png; path = image/MainMenuBG.png; sourceTree = "<group>"; };
 		A6C5B2F619CF3C0000DA478A /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FD19CF508900DA478A /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
@@ -396,6 +413,10 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A62FF63019FD6AEF007EC9B3 /* CustomTool.cpp */,
+				A62FF63119FD6AEF007EC9B3 /* CustomTool.h */,
+				A62FF63219FD6AEF007EC9B3 /* VisibleRect.cpp */,
+				A62FF63319FD6AEF007EC9B3 /* VisibleRect.h */,
 				9CFB92C919EB2AD7000F869A /* Animal.cpp */,
 				9CFB92CA19EB2AD7000F869A /* Animal.h */,
 				9CFB92CB19EB2AD7000F869A /* Fire.cpp */,
@@ -428,6 +449,8 @@
 				9C82A9D119F446230080515F /* Enemy2.h */,
 				9C82A9D719F461B10080515F /* Enemy2Manager.cpp */,
 				9C82A9D819F461B10080515F /* Enemy2Manager.h */,
+				A62FF62D19FD689E007EC9B3 /* StartScene.cpp */,
+				A62FF62E19FD689E007EC9B3 /* StartScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -543,6 +566,9 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A62FF62B19FD677A007EC9B3 /* p1.ExportJson */,
+				A62FF62719FD6763007EC9B3 /* p10.plist */,
+				A62FF62819FD6763007EC9B3 /* p10.png */,
 				9CFB92E319EB4AE8000F869A /* animal1.png */,
 				9CFB92E419EB4AE8000F869A /* animal2.png */,
 				9CFB92E519EB4AE8000F869A /* animal3.png */,
@@ -552,6 +578,7 @@
 				9CFB92E819EB4AE8000F869A /* background.png */,
 				9CFB92E919EB4AE8000F869A /* CloseNormal.png */,
 				9CFB92EA19EB4AE8000F869A /* CloseSelected.png */,
+				A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */,
 				9CFB92EC19EB4AE8000F869A /* fonts */,
 				9CFB92ED19EB4AE8000F869A /* fruit.png */,
 				9CFB92EE19EB4AE8000F869A /* HelloWorld.png */,
@@ -725,16 +752,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A62FF63719FD6F74007EC9B3 /* MainMenuBG.png in Resources */,
 				9CFB92FB19EB4AE8000F869A /* fonts in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				9CFB92F619EB4AE8000F869A /* attackoption1.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				A62FF62A19FD6763007EC9B3 /* p10.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				A62FF62919FD6763007EC9B3 /* p10.plist in Resources */,
 				9CFB92F719EB4AE8000F869A /* background.png in Resources */,
 				9CFB92F819EB4AE8000F869A /* CloseNormal.png in Resources */,
 				9CFB92F919EB4AE8000F869A /* CloseSelected.png in Resources */,
@@ -747,6 +777,7 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				A601081919EB5DED00664A6C /* attackoption2.png in Resources */,
+				A62FF62C19FD677A007EC9B3 /* p1.ExportJson in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				9CFB92FC19EB4AE8000F869A /* fruit.png in Resources */,
@@ -772,6 +803,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A62FF63519FD6AEF007EC9B3 /* VisibleRect.cpp in Sources */,
+				A62FF62F19FD689E007EC9B3 /* StartScene.cpp in Sources */,
 				9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */,
 				FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */,
 				9C82A9D219F446230080515F /* Enemy2.cpp in Sources */,
@@ -781,6 +814,7 @@
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */,
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
+				A62FF63419FD6AEF007EC9B3 /* CustomTool.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */,
 				9CFB92CE19EB2AD7000F869A /* Fire.cpp in Sources */,
