@@ -55,7 +55,7 @@ bool MainScene::init()
     this->addRoles();
     
     this->setScheduleAndProgress();
-    
+    //this->addgotoItem();//or combine with menu create??
     return true;
 }
 
@@ -66,7 +66,24 @@ void MainScene::addProgress()
 	_progress->setPosition(origin.x + _progress->getContentSize().width/2, origin.y - _progress->getContentSize().height/2);
 	this->addChild(_progress);
 }
-
+void MainScene::addgotoItem()
+{
+      this->addChild(menu, 1);
+    /***************goto next level menu**************************/
+	
+	auto gotoItem =  CustomTool::createMenuItemImage("go.png", "go.png", 
+													CC_CALLBACK_1(MainScene::gotoNextLevel,this));
+	gotoItem->setVisible(false);
+	gotoItem->setTag(2);
+	//VisibleRect::right().x - goItem->getContentSize().width/2, VisibleRect::center().y
+	//just try position
+	gotoItem->setPosition(Vec2(origin.x + visibleSize.width - gotoItem->getContentSize().width/2, origin.y + visibleSize.height * 0.5 + gotoItem->getContentSize().height/2));
+    
+    // create menu, 
+    auto menu = Menu::create(gotoItem, NULL);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+}
 void MainScene::update(float delta)
 {
     /*Point oldPos = _enemy1->getPosition();
