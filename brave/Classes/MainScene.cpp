@@ -48,111 +48,6 @@ bool MainScene::init()
     this->addCloseIcon();
     
     this->addWeaponOptionBar();
-    
-
-    // 3. add Weapon options bar
-    initWeaponOptionsBar(origin, visibleSize);
-    initAnimalOptionsBar();
-
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-
-
-    //add background image
-    log("create background");
-    _background = Sprite::create("image/background.png");
-    _background1 = Sprite::create("image/background.png");
-    log("created background");
-
-    // position the sprite on the center of the screen
-    _background->setPosition(origin + visibleSize/2);
-    _background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
-
-    
-    //********************************************************************************************************//
-    //added by Wenbo Lin
-    
-    //add trees to background
-    this->initTrees(2);
-    //finish initializing trees
-    //end of Wenbo Lin's code
-    //********************************************************************************************************//
-    //background->setPosition(origin + visibleSize/2);
-    
-    // add the sprite as a child to this layer
-    //this->addChild(background, 0);
-
-    
-    _listener_touch = EventListenerTouchOneByOne::create();
-    _listener_touch->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan,this);
-    _listener_touch->onTouchEnded = CC_CALLBACK_2(MainScene::onTouchEnded,this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(_listener_touch, this);
-
-    // add the sprite as a child to this layer
-    this->addChild(_background, 0);
-    this->addChild(_background1, 0);
-    
-
-    
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
-	
-    //Lishi Jiang
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/animal.plist", "image/animal.pvr.ccz");
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
-	//-------------------------------------//
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
-
-    
-
-    
-    //************************* Begin add by Wenbo Lin *****************************//
-    //add fire animation
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/fire/fire.plist","image/fire/fire.pvr.ccz");
-    //************************* End add by Wenbo Lin *****************************//
-       
-    //add player
-    _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
-    _player->background = _background;
-    _player->background1 = _background1;
-    _player->setScale(0.5);
-    //_player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
-    this->addChild(_player);
-    _player->retain();
-    
-    /******************Begin-Added by Zhe Liu*****************************/
-    //add enemy1
-    ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
-    
-    
-    
-    _enemy2Manager = Enemy2Manager::create(_background);
-    _enemy2Manager->_background = _background;
-    _background->addChild(_enemy2Manager, 2);
-    
-    _animal2Manager = Animal2Manager::create(_background);
-    _animal2Manager->_background = _background;
-    _background->addChild(_animal2Manager, 3);
-    
-    //_enemy2 = new Enemy2();
-    //_enemy2->setPosition(850, 430);
-    //_enemy2->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
-    //_background->addChild(_enemy2);
-    
-    
-    
-    
-    
-    //_enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    // _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
-    //_background->addChild(_enemy1);
-    
 
     this->addHelloWorldLabel();
     
@@ -172,6 +67,7 @@ void MainScene::addProgress()
 	_progress->setPosition(origin.x + _progress->getContentSize().width/2, origin.y - _progress->getContentSize().height/2);
 	this->addChild(_progress);
 }
+
 
 void MainScene::addgotoItem()
 {
@@ -200,30 +96,13 @@ bool MainScene::enemyAllDead()
 	else return false;
 }
 
-
-    //add blood progress
-    
-    /****************** Begin-Added by Zhe Liu *********************/
-    
-    //_enemys.push_back(_enemy1);
-//    _enemys.pushBack(_enemy2);
-    //_enemy1->addAttacker(_player);
-//    _enemy2->addAttacker(_player);
-//    _animals.push_back(_animal);
-    //this->schedule(schedule_selector(MainScene::enemyMove), 3);
-    //this->schedule(schedule_selector(MainScene::animalMove), 3);
-    //this->schedule(schedule_selector(MainScene::addEnemy),20);
-    /****************** End-Added by Zhe Liu *********************/
-
 void MainScene::gotoNextLevel(Ref* obj)
 {
 	//need enable goItem in menu
 	auto goItem = this->_menu->getChildByTag(2);
 	goItem->setVisible(false);
 	goItem->stopAllActions();
-	//background move 
-	//_background->move("left",_player);
-	
+
 	//enemy manager add new enemy to background
 		
 	/*
@@ -710,6 +589,7 @@ void MainScene::addWeaponOptionBar()
 
 void MainScene::addHelloWorldLabel()
 {
+
     auto banana = Sprite::create("banana.png");
     banana->setPosition(Vec2(origin.x + 430 + banana->getContentSize().width/2, origin.y +banana->getContentSize().height/2));
     this->addChild(banana,1);
@@ -818,6 +698,7 @@ void MainScene::addEnemies()
     _animal2Manager = Animal2Manager::create(_background);
     _animal2Manager->_background = _background;
     _background->addChild(_animal2Manager, 2);
+
     //_enemy2 = new Enemy2();
     //_enemy2->setPosition(850, 430);
     //_enemy2->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
