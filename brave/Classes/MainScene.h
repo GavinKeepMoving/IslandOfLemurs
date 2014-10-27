@@ -49,7 +49,7 @@ public:
     //end of method in addRoles
     
     void setScheduleAndProgress();
-    
+    void addgotoItem();
     /*********** ended add by Wenbo Lin **************/
     
     virtual void update(float delta);

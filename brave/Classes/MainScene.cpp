@@ -8,6 +8,7 @@
 //added by Wenbo Lin
 #include "Progress.h"
 #include <unistd.h>
+#include "CustomTool.h"
 //******************************************************************************************************************
 
 
@@ -66,9 +67,10 @@ void MainScene::addProgress()
 	_progress->setPosition(origin.x + _progress->getContentSize().width/2, origin.y - _progress->getContentSize().height/2);
 	this->addChild(_progress);
 }
+
 void MainScene::addgotoItem()
 {
-      this->addChild(menu, 1);
+      this->addChild(_menu, 1);
     /***************goto next level menu**************************/
 	
 	auto gotoItem =  CustomTool::createMenuItemImage("go.png", "go.png", 
@@ -84,10 +86,11 @@ void MainScene::addgotoItem()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 }
+
 bool MainScene::enemyAllDead()
 {
 	
-	log("all EnemyDead:%d", _enemys.size());
+	log("all EnemyDead:%lu", _enemys.size());
 	if(_enemys.size() == 0) return true;
 	else return false;
 }
@@ -108,9 +111,8 @@ void MainScene::gotoNextLevel(Ref* obj)
 	
 
 	*/		
-	}
-	
 }
+
 
 void MainScene::showNextLevelItem() //called by enemy manager???
 {
