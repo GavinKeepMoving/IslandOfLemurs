@@ -83,6 +83,8 @@
 		A62FF63419FD6AEF007EC9B3 /* CustomTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF63019FD6AEF007EC9B3 /* CustomTool.cpp */; };
 		A62FF63519FD6AEF007EC9B3 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF63219FD6AEF007EC9B3 /* VisibleRect.cpp */; };
 		A62FF63719FD6F74007EC9B3 /* MainMenuBG.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */; };
+		A62FF63B19FD791E007EC9B3 /* mainmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF63A19FD791E007EC9B3 /* mainmenu.png */; };
+		A62FF63E19FD7B58007EC9B3 /* iui.plist in Resources */ = {isa = PBXBuildFile; fileRef = A62FF63C19FD7B58007EC9B3 /* iui.plist */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
 		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
@@ -321,6 +323,8 @@
 		A62FF63219FD6AEF007EC9B3 /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VisibleRect.cpp; path = ../Classes/VisibleRect.cpp; sourceTree = "<group>"; };
 		A62FF63319FD6AEF007EC9B3 /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VisibleRect.h; path = ../Classes/VisibleRect.h; sourceTree = "<group>"; };
 		A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MainMenuBG.png; path = image/MainMenuBG.png; sourceTree = "<group>"; };
+		A62FF63A19FD791E007EC9B3 /* mainmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mainmenu.png; path = image/mainmenu.png; sourceTree = "<group>"; };
+		A62FF63C19FD7B58007EC9B3 /* iui.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = iui.plist; path = image/iui.plist; sourceTree = "<group>"; };
 		A6C5B2F619CF3C0000DA478A /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FD19CF508900DA478A /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
@@ -579,6 +583,8 @@
 				9CFB92E919EB4AE8000F869A /* CloseNormal.png */,
 				9CFB92EA19EB4AE8000F869A /* CloseSelected.png */,
 				A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */,
+				A62FF63A19FD791E007EC9B3 /* mainmenu.png */,
+				A62FF63C19FD7B58007EC9B3 /* iui.plist */,
 				9CFB92EC19EB4AE8000F869A /* fonts */,
 				9CFB92ED19EB4AE8000F869A /* fruit.png */,
 				9CFB92EE19EB4AE8000F869A /* HelloWorld.png */,
@@ -767,6 +773,7 @@
 				A62FF62919FD6763007EC9B3 /* p10.plist in Resources */,
 				9CFB92F719EB4AE8000F869A /* background.png in Resources */,
 				9CFB92F819EB4AE8000F869A /* CloseNormal.png in Resources */,
+				A62FF63E19FD7B58007EC9B3 /* iui.plist in Resources */,
 				9CFB92F919EB4AE8000F869A /* CloseSelected.png in Resources */,
 				9CFB92FE19EB4AE8000F869A /* image in Resources */,
 				9CFB92F519EB4AE8000F869A /* animal4.png in Resources */,
@@ -779,6 +786,7 @@
 				A601081919EB5DED00664A6C /* attackoption2.png in Resources */,
 				A62FF62C19FD677A007EC9B3 /* p1.ExportJson in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				A62FF63B19FD791E007EC9B3 /* mainmenu.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				9CFB92FC19EB4AE8000F869A /* fruit.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,

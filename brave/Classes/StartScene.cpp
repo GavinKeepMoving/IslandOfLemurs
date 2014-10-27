@@ -24,11 +24,16 @@ bool StartScene::init()
     
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/role.plist","image/role.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/iui.plist","image/iui.png");
     auto background = Sprite::create("image/MainMenuBG.png");
     background->setPosition(VisibleRect::center());
     this->addChild(background);
+//    
+//    auto menuBG = Sprite::create("MainMenu.png");
+//    menuBG->setPosition(VisibleRect::center());
+//    this->addChild(menuBG);
     
-    auto item = CustomTool::createMenuItemImage("start1.png", "start2.png", CC_CALLBACK_1(StartScene::onStart,this));
+    auto item = CustomTool::createMenuItemImage("play.png", "play.png", CC_CALLBACK_1(StartScene::onStart,this));
     auto menu = Menu::createWithItem(item);
     this->addChild(menu);
     return true;
