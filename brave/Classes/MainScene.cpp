@@ -157,6 +157,10 @@ bool MainScene::init()
     _enemy2Manager->_background = _background;
     _background->addChild(_enemy2Manager, 2);
     
+    _animal2Manager = Animal2Manager::create(_background);
+    _animal2Manager->_background = _background;
+    _background->addChild(_animal2Manager, 2);
+    
     //_enemy2 = new Enemy2();
     //_enemy2->setPosition(850, 430);
     //_enemy2->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
@@ -204,8 +208,8 @@ bool MainScene::init()
     //_enemy1->addAttacker(_player);
 //    _enemy2->addAttacker(_player);
 //    _animals.push_back(_animal);
-    this->schedule(schedule_selector(MainScene::enemyMove), 3);
-    this->schedule(schedule_selector(MainScene::animalMove), 3);
+    //this->schedule(schedule_selector(MainScene::enemyMove), 3);
+    //this->schedule(schedule_selector(MainScene::animalMove), 3);
     //this->schedule(schedule_selector(MainScene::addEnemy),20);
     /****************** End-Added by Zhe Liu *********************/
 	
@@ -236,6 +240,7 @@ void MainScene::update(float delta)
     }*/
 
     _enemy2Manager->update(delta);
+    _animal2Manager->update(delta);
     //_enemy2->update(delta);
     label->setString(CCString::createWithFormat("%d",_player->getMoney())->getCString());
 
@@ -337,12 +342,14 @@ void MainScene::callAnimalHelper(Ref* pSender, int index) {
                 break;
             }
             _player->money-=10;
-            _animal = Animal::create(Animal::AnimalType::ELEPHANT);
-            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
+            //lishijia
+            this->_animal2Manager->createAnimal2s();
+            //_animal = Animal::create(Animal::AnimalType::ELEPHANT);
+            //_animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
 //            _animal->setFlippedX(true);
-            _background->addChild(_animal);
+            //_background->addChild(_animal);
             //add animals -------------------------------//
-            _animals.push_back( _animal);
+            //_animals.push_back( _animal);
             break;
         case 2:
             if (_player->money < 20) {

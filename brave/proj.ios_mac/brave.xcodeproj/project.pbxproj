@@ -56,6 +56,8 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		9C00033319FDD549001AF185 /* Animal2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C00033119FDD549001AF185 /* Animal2.cpp */; };
+		9C00033819FDD8E7001AF185 /* Animal2Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C00033619FDD8E7001AF185 /* Animal2Manager.cpp */; };
 		9C609C3719E1BD01004B375D /* Banana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3519E1BD01004B375D /* Banana.cpp */; };
 		9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3B19E1CD87004B375D /* BananaManger.cpp */; };
 		9C82A9D219F446230080515F /* Enemy2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C82A9D019F446230080515F /* Enemy2.cpp */; };
@@ -283,6 +285,10 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		9C00033119FDD549001AF185 /* Animal2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal2.cpp; path = ../Classes/Animal2.cpp; sourceTree = "<group>"; };
+		9C00033219FDD549001AF185 /* Animal2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal2.h; path = ../Classes/Animal2.h; sourceTree = "<group>"; };
+		9C00033619FDD8E7001AF185 /* Animal2Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal2Manager.cpp; path = ../Classes/Animal2Manager.cpp; sourceTree = "<group>"; };
+		9C00033719FDD8E7001AF185 /* Animal2Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal2Manager.h; path = ../Classes/Animal2Manager.h; sourceTree = "<group>"; };
 		9C609C3519E1BD01004B375D /* Banana.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Banana.cpp; path = ../Classes/Banana.cpp; sourceTree = "<group>"; };
 		9C609C3619E1BD01004B375D /* Banana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Banana.h; path = ../Classes/Banana.h; sourceTree = "<group>"; };
 		9C609C3B19E1CD87004B375D /* BananaManger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BananaManger.cpp; path = ../Classes/BananaManger.cpp; sourceTree = "<group>"; };
@@ -408,6 +414,10 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9C00033119FDD549001AF185 /* Animal2.cpp */,
+				9C00033219FDD549001AF185 /* Animal2.h */,
+				9C00033619FDD8E7001AF185 /* Animal2Manager.cpp */,
+				9C00033719FDD8E7001AF185 /* Animal2Manager.h */,
 				9CFB92C919EB2AD7000F869A /* Animal.cpp */,
 				9CFB92CA19EB2AD7000F869A /* Animal.h */,
 				9CFB92CB19EB2AD7000F869A /* Fire.cpp */,
@@ -804,6 +814,7 @@
 				9C82A9D919F461B10080515F /* Enemy2Manager.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */,
+				9C00033819FDD8E7001AF185 /* Animal2Manager.cpp in Sources */,
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */,
@@ -813,6 +824,7 @@
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				1AFAF8B816D35DE700DB1158 /* (null) in Sources */,
 				FEDF9FE619E39E7A00484807 /* Progress.cpp in Sources */,
+				9C00033319FDD549001AF185 /* Animal2.cpp in Sources */,
 				A60105AC19E1C28100664A6C /* Enemy.cpp in Sources */,
 				BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */,
 				FEDF9FE419E39E7A00484807 /* Attack.cpp in Sources */,

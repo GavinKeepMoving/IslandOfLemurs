@@ -16,6 +16,7 @@
 #include "Progress.h"
 #include "BananaManger.h"
 #include "Enemy2Manager.h"
+#include "Animal2Manager.h"
 //******************************************************************************************************************
 
 USING_NS_CC;
@@ -113,6 +114,7 @@ public:
     void deleteTree();
     BananaManger* bananaManger;
     Enemy2Manager* _enemy2Manager;
+    Animal2Manager* _animal2Manager;
     bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************
