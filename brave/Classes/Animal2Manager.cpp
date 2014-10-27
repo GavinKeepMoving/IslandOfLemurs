@@ -47,6 +47,7 @@ void Animal2Manager::createAnimal2s()
     
     //for(int i=0;i<max_Banana_num; i++)
     //{
+    log("animal!!!!");
         auto animal2=Animal2::create();
         animal2->_background = this->_background;
         animal2->setPosition(550 , 230);
