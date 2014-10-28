@@ -9,12 +9,19 @@
 #include "Enemy.h"
 #include "Animal.h"
 #include <iostream>
+//<<<<<<< HEAD
 //#include "GameOverLayer.h"
+//=======
+#include "Enemy2.h"
+//>>>>>>> d5d27db014c320a5579e3b82d0284fc1616955e2
 
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
 #include "BananaManger.h"
+#include "Enemy2Manager.h"
+
+class Enemy2Manager;
 //******************************************************************************************************************
 
 USING_NS_CC;
@@ -49,10 +56,17 @@ public:
     void initTrees(int num);
     
     // enemy module
+    /*** added by Zhe Liu ***/
     void enemyMove(float dt);
     void animalMove(float dt);
     void addEnemy(float dt);
-//    void 
+    std::vector<Tree*> getTrees(){return _trees;}
+    void updateEnemy(float dt);
+    void updateAnimal(float dt);
+    /*** added by Zhe Liu ***/
+    
+    
+//    void
 //    bool closeToEnemy( obj);
 	 void enemyDead(Ref* obj);
      void animalDead(Ref* obj);
@@ -90,7 +104,7 @@ private:
     Animal* _animal;
     Player* _player;
 	Enemy* _enemy1;
-    Enemy* _enemy2;
+    Enemy2* _enemy2;
     Enemy* _enemy3;
     std::vector<Enemy*> _enemys;
     std::vector<Animal*> _animals;
@@ -98,6 +112,9 @@ private:
     Vec2 origin;
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
+    
+    __Array* _enemy2Arr;
+    __Array* _aniaml2Arr;
     
 
 public:
@@ -112,6 +129,7 @@ public:
     Sprite* treeBase;
     void deleteTree();
     BananaManger* bananaManger;
+    Enemy2Manager* _enemy2Manager;
     bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************
