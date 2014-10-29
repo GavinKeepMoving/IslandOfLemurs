@@ -129,7 +129,12 @@ void MainScene::update(float delta)
     {
         _enemy1->setPosition(oldPos.x -1,oldPos.y);
     }*/
-
+    if (_enemy2Arr == NULL){
+        _enemy2Arr = __Array::create();
+    }
+    if (_aniaml2Arr == NULL){
+        _aniaml2Arr = __Array::create();
+    }
 //    _enemy2Manager->update(delta);
 //    _animal2Manager->update(delta);
     this->updateEnemy(delta);
@@ -843,7 +848,7 @@ void MainScene::setScheduleAndProgress()
 //    this->schedule(schedule_selector(MainScene::enemyMove), 3);
 //    this->schedule(schedule_selector(MainScene::animalMove), 3);
     //this->schedule(schedule_selector(MainScene::addEnemy),20);
-//    this->schedule(schedule_selector(MainScene::addEnemiesAI),20);
+    this->schedule(schedule_selector(MainScene::addEnemiesAI),20);
     /****************** End-Added by Zhe Liu *********************/
     
     //*****init blood progress  xiaojing **************//
