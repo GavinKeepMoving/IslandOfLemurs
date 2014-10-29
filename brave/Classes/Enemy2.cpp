@@ -28,7 +28,7 @@ Enemy2::Enemy2()
 	//add enemy's progress
 	auto size = this->getContentSize();
 	Point enemyPos = this->getPosition();
-	enemy2->_progress->setPosition( enemyPos.x +size.width*2/3, enemyPos.y + size.height+ _progress->getContentSize().height/2);
+	_progress->setPosition( enemyPos.x +size.width*2/3, enemyPos.y + size.height+ _progress->getContentSize().height/2+130);
 	//enemy2->_progress->setPosition( 1800+size.width*2/3, 130+ size.height + enemy2->_progress->getContentSize().height/2);
 	this->addChild(_progress);
 
