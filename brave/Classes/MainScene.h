@@ -146,8 +146,8 @@ private:
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
     
-    __Array* _enemy2Arr = __Array::create();
-    __Array* _aniaml2Arr = __Array::create();
+    __Array* _enemy2Arr;
+    __Array* _aniaml2Arr;
     
 
 public:
