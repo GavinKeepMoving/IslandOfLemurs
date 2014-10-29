@@ -18,6 +18,25 @@ Enemy2::Enemy2()
     currentState = IDLE;
     newState = IDLE;
     lockState = false;
+    // 
+    _attack = 5;
+    _blood = 100;
+}
+
+void Enemy2::setBlood()
+{
+    _blood = 100;
+}
+
+int Enemy2::behit(int attack)
+{
+    _blood -= attack;
+    if (_blood <= 0){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 //设置方向

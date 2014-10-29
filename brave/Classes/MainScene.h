@@ -20,10 +20,10 @@
 #include "Progress.h"
 #include "BananaManger.h"
 #include "Enemy2Manager.h"
-
-class Enemy2Manager;
+#include "Animal2Manager.h"
+#include "SimpleAudioEngine.h" 
 //******************************************************************************************************************
-
+class Enemy2Manager;
 USING_NS_CC;
 
 class MainScene : public cocos2d::Layer
@@ -33,7 +33,31 @@ public:
     static cocos2d::Scene* createScene();
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-    virtual bool init();  
+    virtual bool init();
+    
+    /*********** begin add by Wenbo Lin **************/
+    void playMusic();
+    void setParameters();
+    void addCloseIcon();
+    void addBackground();
+    void addWeaponOptionBar();
+    void addHelloWorldLabel();
+    
+    void addRoles();
+    //method in addRoles
+    void addAnimations();
+    void addTrees();
+    void addFires();
+    void addPlayer();
+    void addEnemies();
+    void addBananas();
+    void addEnemiesAI(float dt);
+    //end of method in addRoles
+    
+    void setScheduleAndProgress();
+    void addgotoItem();
+    /*********** ended add by Wenbo Lin **************/
+    
     virtual void update(float delta);
     
     // a selector callback
@@ -57,8 +81,8 @@ public:
     
     // enemy module
     /*** added by Zhe Liu ***/
-    void enemyMove(float dt);
-    void animalMove(float dt);
+//    void enemyMove(float dt);
+//    void animalMove(float dt);
     void addEnemy(float dt);
     std::vector<Tree*> getTrees(){return _trees;}
     void updateEnemy(float dt);
@@ -70,8 +94,7 @@ public:
 //    bool closeToEnemy( obj);
 	 void enemyDead(Ref* obj);
      void animalDead(Ref* obj);
-	//------blood progress----------------//
-	void addProgress();
+	
     
     /******************Begin-Added by Yafu*****************************/
     Vec2 getOrigin() {
@@ -100,6 +123,16 @@ public:
     int boundry;
     Vec2 touchPos;
     /******************End-Added by Zhenni ************************/
+	
+	
+	/**************added by xiaojing***************/
+	 //------blood progress----------------//
+	void addProgress();
+	bool enemyAllDead();
+	void gotoNextLevel(Ref* obj);
+	void showNextLevelItem();
+	/*********************************************/
+	
 private:
     Animal* _animal;
     Player* _player;
@@ -113,8 +146,8 @@ private:
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
     
-    __Array* _enemy2Arr;
-    __Array* _aniaml2Arr;
+    __Array* _enemy2Arr = __Array::create();
+    __Array* _aniaml2Arr = __Array::create();
     
 
 public:
@@ -130,9 +163,13 @@ public:
     void deleteTree();
     BananaManger* bananaManger;
     Enemy2Manager* _enemy2Manager;
+    Animal2Manager* _animal2Manager;
     bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************
-};
+	int gamelevel; // used to init different number of enemy according to level
+	Menu* _menu;
+	
+	};
 
 #endif // __HELLOWORLD_SCENE_H__

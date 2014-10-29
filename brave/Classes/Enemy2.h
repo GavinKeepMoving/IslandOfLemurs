@@ -43,11 +43,14 @@ public:
     void setDirection(int newDirection); //设置方向
     Sprite* _background;
     /* added by Zhe Liu*/
-    double mindist = 10;
-    int getAttack(){return attack;}
+    double mindist = 20;
+    int getAttack(){return _attack;}
+    void setBlood();
+    int behit(int attack);
     
 private:
-    int attack = 2;
+    int _attack;
+    int _blood;
     Sprite* Enemy2Node;
     ArmatureAnimation* animation;     //动画变量
     Enemy2State currentState;           //当前状态

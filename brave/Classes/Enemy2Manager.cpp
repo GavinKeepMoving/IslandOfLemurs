@@ -19,7 +19,7 @@ Enemy2Manager* Enemy2Manager::create(Sprite* background)
     Enemy2Manager* enemy2Manager = new Enemy2Manager();
 //    this->getTrees();
     enemy2Manager->_background = background;
-    enemy2Manager->init();
+//    enemy2Manager->init();
     return enemy2Manager;
 }
 
@@ -66,34 +66,36 @@ Enemy2* Enemy2Manager::createEnemy2s()
 
 void Enemy2Manager::update(float dt)
 {
-    CCObject* obj=NULL;
-    Enemy2* enemy2=NULL;
     
-    CCARRAY_FOREACH(_enemy2Arr,obj)/*循环遍历怪物数组，重复出现在屏幕上*/
-    {
-        //need LIU ZHE HELP
-        //每次会遍历所有的enemy的位置。使用setState就会改变动画。
-        //但是我不会使用你的判断函数。星号里面是我需要你帮忙修改的地方。
-        //attack什么的会自己停下来的。应该和以前的状态机很相似。
-        enemy2=(Enemy2*) obj;
-        // judge for the tree, main character and helpers
-        //******
-        int index = judgeNearby(enemy2);
-        if (index == -1){
-            enemy2->setState(WALK);
-        }
-        else{
-            enemy2->setState(ATTACK);
-            int state = _trees.back()->setBlood(enemy2->getAttack());
-            if (state <= 0){
-                
-            }
-        }
-        //*****
-        enemy2->update(dt);
-    }
+//    CCObject* obj=NULL;
+//    Enemy2* enemy2=NULL;
+//    
+//    CCARRAY_FOREACH(_enemy2Arr,obj)/*循环遍历怪物数组，重复出现在屏幕上*/
+//    {
+//        //need LIU ZHE HELP
+//        //每次会遍历所有的enemy的位置。使用setState就会改变动画。
+//        //但是我不会使用你的判断函数。星号里面是我需要你帮忙修改的地方。
+//        //attack什么的会自己停下来的。应该和以前的状态机很相似。
+//        enemy2=(Enemy2*) obj;
+//        // judge for the tree, main character and helpers
+//        //******
+//        int index = judgeNearby(enemy2);
+//        if (index == -1){
+//            enemy2->setState(WALK);
+//        }
+//        else{
+//            enemy2->setState(ATTACK);
+//            int state = _trees.back()->setBlood(enemy2->getAttack());
+//            if (state <= 0){
+//                
+//            }
+//        }
+//        //*****
+//        enemy2->update(dt);
+//    }
 }
 
+// need judge for trees, animals, lemur
 int Enemy2Manager::judgeNearby(Enemy2* enemy)
 {
     int index = -1;

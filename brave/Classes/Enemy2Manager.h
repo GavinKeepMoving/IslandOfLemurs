@@ -15,6 +15,7 @@
 #include "Tree.h"
 #include "MainScene.h"
 
+class Animal;
 class MainScene;
 
 USING_NS_CC;
@@ -39,6 +40,7 @@ public:
     void createAnimal2s(int index); /* create a animal object */
     void getAnimals(std::vector<Animal*> _animals){this->_animals = _animals;}
     void setTrees(std::vector<Tree*> _trees){this->_trees = _trees;}
+    void setAnimales(__Array* _animal2Arr){this->_animal2Arr = _animal2Arr;}
     int judgeNearby(Enemy2* enemy);
     Enemy2* createEnemy2s();/*创建Monster对象*/
     /****/
@@ -49,6 +51,7 @@ private:
 private:
     std::vector<Animal*> _animals;
     std::vector<Tree*> _trees;
+    __Array* _animal2Arr;
     __Array* _enemy2Arr; /*存放怪物数组*/
     //Player* _player;
 };
