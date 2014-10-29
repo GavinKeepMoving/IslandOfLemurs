@@ -41,14 +41,20 @@ void Player::addAnimation()
 }
 void Player::playAnimationForever(int index)
 {
+    for(int i=0;i<5;i++)
+    {
+        this->stopActionByTag(i);
+    }
     if(index <0 || index >= _animationNum)
     {
         log("illegal animation index!");
         return;
     }
+    
     auto str = String::createWithFormat("%s-%s",_name.c_str(), _animationNames[index].c_str())->getCString();
     auto animation = AnimationCache::getInstance()->getAnimation(str);
     auto animate = Animate::create(animation);
+    animate->setTag(index);//bug trigger here
     this->runAction(RepeatForever::create(animate));
 }
 
@@ -109,7 +115,7 @@ void Player::initFSM()
     auto onIdle =[&]()
     {
         log("onIdle: Enter idle");
-        this->stopAllActions();
+        this->stopActionByTag(WALKTO_TAG);
 //        auto func = [&]()
 //        {
 //            this->stop();
@@ -160,27 +166,6 @@ void Player::generalAttack(float radius) {
     }
 }
 
-void Player::playerDrop(int start, int end) {
-    if (this->getPositionX() > start && this->getPositionX() < end) {
-        log("Player: drop!");
-        auto preStatus = this->_fsm->getState();
-        _fsm->doEvent("stop");
-        Vec2 ground;
-        Size visibleSize = Director::getInstance()->getVisibleSize();
-        Vec2 origin = Director::getInstance()->getVisibleOrigin();
-        ground.y = origin.y + visibleSize.height*Player::height/2;
-        ground.x = this->getPositionX();
-        auto time = (this->getPosition()-ground).getLength()/400;
-        auto drop = MoveTo::create(time, ground);
-        auto _seq = Sequence::create(drop, NULL);
-        this->runAction(_seq);
-        if(preStatus == "walking") {
-            
-        }
-        //auto _sep = Sequence::create(drop, onWalk, NULL);
-    }
-}
-
 void Player::playerDrop(int start, int end, std::function<void()> callback) {
     if (this->getPositionX() > start && this->getPositionX() < end) {
         log("Player: drop!");
@@ -193,6 +178,7 @@ void Player::playerDrop(int start, int end, std::function<void()> callback) {
         ground.x = this->getPositionX();
         auto time = (this->getPosition()-ground).getLength()/400;
         auto drop = MoveTo::create(time, ground);
+        drop->setTag(200);
         
         auto func = [&]()
         {
@@ -242,7 +228,10 @@ void Player::walkTo(Vec2 dest, int boundry)
 }
 
 void Player::stop() {
+    
+    //this->stopActionByTag(WALKTO_TAG);
     this->stopAllActions();
+    this->background->stopActionByTag(WALKTO_TAG);
     _fsm->doEvent("stop");
 }
 
@@ -334,7 +323,9 @@ void Player::constructActionArray(int start, int end,
             }
             auto time = diff.getLength()/_speed;
             auto move = MoveBy::create(time, diff);
+            //move->setTag(1);
             auto bmove = MoveBy::create(time, empty);
+            //bmove->setTag(1);
             arrayOfActions.pushBack(move);
             backgroundActions.pushBack(bmove);
         }
@@ -358,7 +349,9 @@ void Player::constructActionArray(int start, int end,
             }
             auto time = diff.getLength()/_speed;
             auto move = MoveBy::create(time, empty);
+            //move->setTag(1);
             auto bmove = MoveBy::create(time, -diff);
+            //bmove->setTag(1);
             arrayOfActions.pushBack(move);
             backgroundActions.pushBack(bmove);
         }
@@ -382,7 +375,9 @@ void Player::constructActionArray(int start, int end,
             }
             auto time = diff.getLength()/_speed;
             auto move = MoveBy::create(time, diff);
+            //move->setTag(1);
             auto bmove = MoveBy::create(time, empty);
+            //bmove->setTag(1);
             arrayOfActions.pushBack(move);
             backgroundActions.pushBack(bmove);
         }
@@ -407,6 +402,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
             Vec2 climbBy(0, origin.y + visibleSize.height*Player::height*3 - pPos.y);
             auto time = climbBy.getLength()/_speed;
             auto climb = MoveBy::create(time, climbBy);
+            //climb->setTag(1);
             auto bmove = MoveBy::create(time, empty);
             arrayOfActions.pushBack(climb);
             backgroundActions.pushBack(bmove);
@@ -423,6 +419,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
             Vec2 climbBy(0, origin.y + visibleSize.height*Player::height/2 - pPos.y);
             auto time = climbBy.getLength()/_speed;
             auto climb = MoveBy::create(time, climbBy);
+            //climb->setTag(1);
             auto bmove = MoveBy::create(time, empty);
             arrayOfActions.pushBack(climb);
             backgroundActions.pushBack(bmove);
@@ -448,6 +445,8 @@ void Player::onWalk(Vec2 dest, int boundry) {
     auto _bseq = Sequence::create(backgroundActions);
     auto _seq = Sequence::create(arrayOfActions);
     
+    _bseq->setTag(WALKTO_TAG);
+    _seq->setTag(WALKTO_TAG);
     
     //run action sequnce
     this->runAction(_seq);

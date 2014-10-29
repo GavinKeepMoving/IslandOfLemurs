@@ -71,7 +71,7 @@ public:
     int targetEnemyIdx;
     void attackCallback(float test);
     void generalAttack(float radius = 250.f);
-    void playerDrop(int start, int end);
+    //void playerDrop(int start, int end);
     void playerDrop(int start, int end, std::function<void()> callback);
     void constructActionArray(int start, int end,Vector< FiniteTimeAction * > &arrayOfActions, Vector< FiniteTimeAction * > &backgroundActions);
 private:
