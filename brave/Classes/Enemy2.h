@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
-
+#include "Progress.h"
 USING_NS_CC;
 using namespace cocostudio;
 
@@ -47,7 +47,9 @@ public:
     int getAttack(){return _attack;}
     void setBlood();
     int behit(int attack);
-    
+    //progres*****xiaojing****//
+	Progress* _progress;
+	//********************//
 private:
     int _attack;
     int _blood;

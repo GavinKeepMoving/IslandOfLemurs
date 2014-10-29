@@ -53,6 +53,15 @@ Enemy2* Enemy2Manager::createEnemy2s()
         this->addChild(enemy2);  /*将怪物添加到管理器(CCNode)中*/
 //        _enemy2Arr->addObject(enemy2);/*添加到数组中，便于管理*/
 //    }
+	//************add its progress***xiaojing**********************//
+		//add enemy's progress
+		auto size = enemy2->getContentSize();
+		//Point enemyPos = enemy2->getPosition();
+		//enemy2->_progress->setPosition( enemyPos.x +size.width*2/3, size.height + enemyPos.y + _progress->getContentSize().height/2);
+		enemy2->_progress->setPosition( 1800+size.width*2/3, 130+ size.height + enemy2->_progress->getContentSize().height/2);
+		this->addChild(enemy2->_progress);
+
+	//**********************************************************//
     return enemy2;
 }
 

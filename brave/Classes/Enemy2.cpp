@@ -7,6 +7,7 @@
 //
 
 #include "Enemy2.h"
+#include "Progress.h"
 Enemy2::Enemy2()
 {
     Armature *armature = Armature::create("p1");
@@ -21,6 +22,8 @@ Enemy2::Enemy2()
     // 
     _attack = 5;
     _blood = 100;
+	//****init progress for blood  xiaojing***********//
+	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 }
 
 void Enemy2::setBlood()
