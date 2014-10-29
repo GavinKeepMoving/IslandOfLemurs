@@ -42,6 +42,9 @@ public:
     inline void setState(Animal2State state) {newState = state;} //设置角色状态
     void setDirection(int newDirection); //设置方向
     Sprite* _background;
+    int beHit(int attack);
+    void setblood();
+    int getAttack(){return _attack;}
     
 private:
     Sprite* Animal2Node;
@@ -51,6 +54,8 @@ private:
     int direction;                      //方向
     bool lockState;                     //锁定状态
     void onAnimationEvent(Armature *pArmature, MovementEventType eventType, const char *animationID);                   //角色射击状态
+    int _blood;
+    int _attack;
 };
 
 #endif /* defined(__brave__Animal2__) */

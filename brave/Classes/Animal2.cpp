@@ -19,6 +19,23 @@ Animal2::Animal2()
     currentState = IDLE;
     newState = IDLE;
     lockState = false;
+    _attack = 5;
+}
+
+void Animal2::setblood()
+{
+    this->_blood = 100;
+}
+
+int Animal2::beHit(int attack)
+{
+    this->_blood -= attack;
+    if (_blood <= 0){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 //设置方向

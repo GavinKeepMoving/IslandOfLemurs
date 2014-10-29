@@ -9,7 +9,11 @@
 #include "Enemy.h"
 #include "Animal.h"
 #include <iostream>
+//<<<<<<< HEAD
+//#include "GameOverLayer.h"
+//=======
 #include "Enemy2.h"
+//>>>>>>> d5d27db014c320a5579e3b82d0284fc1616955e2
 
 //******************************************************************************************************************
 //added by Wenbo Lin
@@ -19,7 +23,7 @@
 #include "Animal2Manager.h"
 #include "SimpleAudioEngine.h" 
 //******************************************************************************************************************
-
+class Enemy2Manager;
 USING_NS_CC;
 
 class MainScene : public cocos2d::Layer
@@ -47,6 +51,7 @@ public:
     void addPlayer();
     void addEnemies();
     void addBananas();
+    void addEnemiesAI(float dt);
     //end of method in addRoles
     
     void setScheduleAndProgress();
@@ -75,10 +80,17 @@ public:
     void initTrees(int num);
     
     // enemy module
-    void enemyMove(float dt);
-    void animalMove(float dt);
+    /*** added by Zhe Liu ***/
+//    void enemyMove(float dt);
+//    void animalMove(float dt);
     void addEnemy(float dt);
-//    void 
+    std::vector<Tree*> getTrees(){return _trees;}
+    void updateEnemy(float dt);
+    void updateAnimal(float dt);
+    /*** added by Zhe Liu ***/
+    
+    
+//    void
 //    bool closeToEnemy( obj);
 	 void enemyDead(Ref* obj);
      void animalDead(Ref* obj);
@@ -134,11 +146,15 @@ private:
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
     
+    __Array* _enemy2Arr = __Array::create();
+    __Array* _aniaml2Arr = __Array::create();
+    
 
 public:
     Sprite *_background;
     Sprite *_background1;
     std::vector<Tree*> _trees;
+    int level = 0;
     //******************************************************************************************************************
     //added by Wenbo Lin
     Progress* _progress;
