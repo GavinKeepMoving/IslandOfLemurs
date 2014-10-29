@@ -44,6 +44,7 @@ public:
     void onWalk(Vec2 dest, int boundry);
     void initFSM();
     void stop();
+    void stop(float r);
     Weapon* attack(float radius = 250.f);
     
     

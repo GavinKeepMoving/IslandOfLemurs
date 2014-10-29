@@ -9,12 +9,15 @@
 #include "Enemy.h"
 #include "Animal.h"
 #include <iostream>
-
+#include "Enemy2.h"
 
 //******************************************************************************************************************
 //added by Wenbo Lin
 #include "Progress.h"
 #include "BananaManger.h"
+#include "Enemy2Manager.h"
+#include "Animal2Manager.h"
+#include "SimpleAudioEngine.h" 
 //******************************************************************************************************************
 
 USING_NS_CC;
@@ -26,7 +29,30 @@ public:
     static cocos2d::Scene* createScene();
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-    virtual bool init();  
+    virtual bool init();
+    
+    /*********** begin add by Wenbo Lin **************/
+    void playMusic();
+    void setParameters();
+    void addCloseIcon();
+    void addBackground();
+    void addWeaponOptionBar();
+    void addHelloWorldLabel();
+    
+    void addRoles();
+    //method in addRoles
+    void addAnimations();
+    void addTrees();
+    void addFires();
+    void addPlayer();
+    void addEnemies();
+    void addBananas();
+    //end of method in addRoles
+    
+    void setScheduleAndProgress();
+    void addgotoItem();
+    /*********** ended add by Wenbo Lin **************/
+    
     virtual void update(float delta);
     
     // a selector callback
@@ -56,8 +82,7 @@ public:
 //    bool closeToEnemy( obj);
 	 void enemyDead(Ref* obj);
      void animalDead(Ref* obj);
-	//------blood progress----------------//
-	void addProgress();
+	
     
     /******************Begin-Added by Yafu*****************************/
     Vec2 getOrigin() {
@@ -86,11 +111,21 @@ public:
     int boundry;
     Vec2 touchPos;
     /******************End-Added by Zhenni ************************/
+	
+	
+	/**************added by xiaojing***************/
+	 //------blood progress----------------//
+	void addProgress();
+	bool enemyAllDead();
+	void gotoNextLevel(Ref* obj);
+	void showNextLevelItem();
+	/*********************************************/
+	
 private:
     Animal* _animal;
     Player* _player;
 	Enemy* _enemy1;
-    Enemy* _enemy2;
+    Enemy2* _enemy2;
     Enemy* _enemy3;
     std::vector<Enemy*> _enemys;
     std::vector<Animal*> _animals;
@@ -111,9 +146,14 @@ public:
     Sprite* treeBase;
     void deleteTree();
     BananaManger* bananaManger;
+    Enemy2Manager* _enemy2Manager;
+    Animal2Manager* _animal2Manager;
     bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************
-};
+	int gamelevel; // used to init different number of enemy according to level
+	Menu* _menu;
+	
+	};
 
 #endif // __HELLOWORLD_SCENE_H__

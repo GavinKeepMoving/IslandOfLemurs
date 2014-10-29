@@ -227,12 +227,41 @@ void Player::walkTo(Vec2 dest, int boundry)
     _fsm->doEvent("walk");
 }
 
-void Player::stop() {
+void Player::stop(float r) {
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    float upGround = origin.y + visibleSize.height*Player::height*3;
+    float downGround = origin.y + visibleSize.height*Player::height/2;
     
-    //this->stopActionByTag(WALKTO_TAG);
-    this->stopAllActions();
-    this->background->stopActionByTag(WALKTO_TAG);
-    _fsm->doEvent("stop");
+    if(this->getPositionY() < upGround - 20 &&
+       this->getPositionY() > downGround + 20) {
+    }
+    else {
+        this->unschedule(schedule_selector(Player::stop));
+        //this->scheduleUpdate();
+        //this->stopActionByTag(WALKTO_TAG);
+        this->stopAllActions();
+        this->background->stopActionByTag(WALKTO_TAG);
+        _fsm->doEvent("stop");
+    }
+}
+
+void Player::stop() {
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    float upGround = origin.y + visibleSize.height*Player::height*3;
+    float downGround = origin.y + visibleSize.height*Player::height/2;
+    
+    if(this->getPositionY() < upGround - 20 &&
+       this->getPositionY() > downGround + 20) {
+        float waitTime = 0.1;
+        this->schedule(schedule_selector(Player::stop), waitTime);
+        this->scheduleUpdate();
+    }
+    else {
+        this->stop(0.1);
+    }
+    
 }
 
 //actually player stay in the center of the screeen but the background would move to the opposite position as the target

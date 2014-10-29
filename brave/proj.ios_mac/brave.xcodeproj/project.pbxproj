@@ -17,7 +17,6 @@
 		1AC6FB30180E99EB004C840B /* libcocos2dx iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2dx iOS.a */; };
 		1AC6FB31180E99EB004C840B /* libcocos2dx-extensions iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB09180E9839004C840B /* libcocos2dx-extensions iOS.a */; };
 		1AC6FB32180E99EB004C840B /* libCocosDenshion iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB0F180E9839004C840B /* libCocosDenshion iOS.a */; };
-		1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
 		1AFAF8B816D35DE700DB1158 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -29,7 +28,6 @@
 		503AE10517EB98FF00D1A890 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503AE10317EB98FF00D1A890 /* main.cpp */; };
 		503AE11217EB99EE00D1A890 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11117EB99EE00D1A890 /* libcurl.dylib */; };
 		503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11A17EB9C5A00D1A890 /* IOKit.framework */; };
-		5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
 		5087E75817EB910900C73F5D /* (null) in Sources */ = {isa = PBXBuildFile; };
 		5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		5087E76517EB910900C73F5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -56,10 +54,33 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
-		9C609C3719E1BD01004B375D /* Banana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3519E1BD01004B375D /* Banana.cpp */; };
-		9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C609C3B19E1CD87004B375D /* BananaManger.cpp */; };
-		9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFB92C919EB2AD7000F869A /* Animal.cpp */; };
-		9CFB92CE19EB2AD7000F869A /* Fire.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFB92CB19EB2AD7000F869A /* Fire.cpp */; };
+		9C0003CD19FDE556001AF185 /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003A119FDE556001AF185 /* Animal.cpp */; };
+		9C0003CE19FDE556001AF185 /* Animal2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003A319FDE556001AF185 /* Animal2.cpp */; };
+		9C0003CF19FDE556001AF185 /* Animal2Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003A519FDE556001AF185 /* Animal2Manager.cpp */; };
+		9C0003D019FDE556001AF185 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003A719FDE556001AF185 /* AppDelegate.cpp */; };
+		9C0003D119FDE556001AF185 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003A919FDE556001AF185 /* Attack.cpp */; };
+		9C0003D219FDE556001AF185 /* Banana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003AB19FDE556001AF185 /* Banana.cpp */; };
+		9C0003D319FDE556001AF185 /* BananaManger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003AD19FDE556001AF185 /* BananaManger.cpp */; };
+		9C0003D419FDE556001AF185 /* blood.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003AF19FDE556001AF185 /* blood.cpp */; };
+		9C0003D519FDE556001AF185 /* CustomTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003B119FDE556001AF185 /* CustomTool.cpp */; };
+		9C0003D619FDE556001AF185 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003B319FDE556001AF185 /* Enemy.cpp */; };
+		9C0003D719FDE556001AF185 /* Enemy2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003B519FDE556001AF185 /* Enemy2.cpp */; };
+		9C0003D819FDE556001AF185 /* Enemy2Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003B719FDE556001AF185 /* Enemy2Manager.cpp */; };
+		9C0003D919FDE556001AF185 /* Fire.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003B919FDE556001AF185 /* Fire.cpp */; };
+		9C0003DA19FDE556001AF185 /* FSM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003BB19FDE556001AF185 /* FSM.cpp */; };
+		9C0003DB19FDE556001AF185 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003BD19FDE556001AF185 /* MainScene.cpp */; };
+		9C0003DE19FDE556001AF185 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003C119FDE556001AF185 /* Player.cpp */; };
+		9C0003DF19FDE556001AF185 /* Progress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003C319FDE556001AF185 /* Progress.cpp */; };
+		9C0003E019FDE556001AF185 /* StartScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003C519FDE556001AF185 /* StartScene.cpp */; };
+		9C0003E119FDE556001AF185 /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003C719FDE556001AF185 /* Tree.cpp */; };
+		9C0003E219FDE556001AF185 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003C919FDE556001AF185 /* VisibleRect.cpp */; };
+		9C0003E319FDE556001AF185 /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C0003CB19FDE556001AF185 /* Weapon.cpp */; };
+		9C9F513819FD739A004EFA88 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513319FD739A004EFA88 /* back.png */; };
+		9C9F513919FD739A004EFA88 /* cloth.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513419FD739A004EFA88 /* cloth.png */; };
+		9C9F513A19FD739A004EFA88 /* money.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513519FD739A004EFA88 /* money.png */; };
+		9C9F513B19FD739A004EFA88 /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513619FD739A004EFA88 /* panda.png */; };
+		9C9F513C19FD739A004EFA88 /* tiger2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513719FD739A004EFA88 /* tiger2.png */; };
+		9C9F514019FD787D004EFA88 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513F19FD787D004EFA88 /* banana.png */; };
 		9CFB92F219EB4AE8000F869A /* animal1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92E319EB4AE8000F869A /* animal1.png */; };
 		9CFB92F319EB4AE8000F869A /* animal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92E419EB4AE8000F869A /* animal2.png */; };
 		9CFB92F419EB4AE8000F869A /* animal3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92E519EB4AE8000F869A /* animal3.png */; };
@@ -72,11 +93,7 @@
 		9CFB92FC19EB4AE8000F869A /* fruit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92ED19EB4AE8000F869A /* fruit.png */; };
 		9CFB92FD19EB4AE8000F869A /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92EE19EB4AE8000F869A /* HelloWorld.png */; };
 		9CFB92FE19EB4AE8000F869A /* image in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92EF19EB4AE8000F869A /* image */; };
-		A60105AC19E1C28100664A6C /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A60105AA19E1C28100664A6C /* Enemy.cpp */; };
 		A601081919EB5DED00664A6C /* attackoption2.png in Resources */ = {isa = PBXBuildFile; fileRef = A601081819EB5DED00664A6C /* attackoption2.png */; };
-		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
-		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
-		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -84,11 +101,126 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
-		FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE2E259D19D73D9400AC8DB5 /* FSM.cpp */; };
-		FEAA762019C6201400E8ED22 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEAA761F19C6201400E8ED22 /* Player.cpp */; };
-		FEDF9FE419E39E7A00484807 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FDE19E39E7A00484807 /* Attack.cpp */; };
-		FEDF9FE519E39E7A00484807 /* blood.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FE019E39E7A00484807 /* blood.cpp */; };
-		FEDF9FE619E39E7A00484807 /* Progress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FE219E39E7A00484807 /* Progress.cpp */; };
+		FE9CBC521A009B060007023A /* AcornDrop.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBD91A009B060007023A /* AcornDrop.wav */; };
+		FE9CBC531A009B060007023A /* ActionDrop.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBDA1A009B060007023A /* ActionDrop.wav */; };
+		FE9CBC541A009B060007023A /* animalCheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBDB1A009B060007023A /* animalCheer.wav */; };
+		FE9CBC551A009B060007023A /* ApeDead.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBDC1A009B060007023A /* ApeDead.wav */; };
+		FE9CBC561A009B060007023A /* ApeGrunt1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBDD1A009B060007023A /* ApeGrunt1.wav */; };
+		FE9CBC571A009B060007023A /* ApeGrunt2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBDE1A009B060007023A /* ApeGrunt2.wav */; };
+		FE9CBC581A009B060007023A /* ApeStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBDF1A009B060007023A /* ApeStart.wav */; };
+		FE9CBC591A009B060007023A /* AxeFlesh.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE01A009B060007023A /* AxeFlesh.wav */; };
+		FE9CBC5A1A009B060007023A /* AxeFleshDouble1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE11A009B060007023A /* AxeFleshDouble1.wav */; };
+		FE9CBC5B1A009B060007023A /* AxeTree1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE21A009B060007023A /* AxeTree1.wav */; };
+		FE9CBC5C1A009B060007023A /* AxeTree2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE31A009B060007023A /* AxeTree2.wav */; };
+		FE9CBC5D1A009B060007023A /* AxeTreeDouble1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE41A009B060007023A /* AxeTreeDouble1.wav */; };
+		FE9CBC5E1A009B060007023A /* AxeTreeDouble2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE51A009B060007023A /* AxeTreeDouble2.wav */; };
+		FE9CBC5F1A009B060007023A /* Beaver.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE61A009B060007023A /* Beaver.wav */; };
+		FE9CBC601A009B060007023A /* Bees.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE71A009B060007023A /* Bees.wav */; };
+		FE9CBC611A009B060007023A /* BigTruckAccelerate.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE81A009B060007023A /* BigTruckAccelerate.wav */; };
+		FE9CBC621A009B060007023A /* CageBreak.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBE91A009B060007023A /* CageBreak.wav */; };
+		FE9CBC631A009B060007023A /* ChainSaw1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBEA1A009B060007023A /* ChainSaw1.wav */; };
+		FE9CBC641A009B060007023A /* Chainsaw2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBEB1A009B060007023A /* Chainsaw2.wav */; };
+		FE9CBC651A009B060007023A /* ChainSawIdle.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBEC1A009B060007023A /* ChainSawIdle.wav */; };
+		FE9CBC661A009B060007023A /* Chee Zee Jungle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBED1A009B060007023A /* Chee Zee Jungle.mp3 */; };
+		FE9CBC671A009B060007023A /* Click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBEE1A009B060007023A /* Click.wav */; };
+		FE9CBC681A009B060007023A /* Cling.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBEF1A009B060007023A /* Cling.wav */; };
+		FE9CBC691A009B060007023A /* CrocodileStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF01A009B060007023A /* CrocodileStart.wav */; };
+		FE9CBC6A1A009B060007023A /* Crunch.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF11A009B060007023A /* Crunch.wav */; };
+		FE9CBC6B1A009B060007023A /* DeerHeal.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF21A009B060007023A /* DeerHeal.wav */; };
+		FE9CBC6C1A009B060007023A /* DeerStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF31A009B060007023A /* DeerStart.wav */; };
+		FE9CBC6D1A009B060007023A /* DefeatBrass.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF41A009B060007023A /* DefeatBrass.wav */; };
+		FE9CBC6E1A009B060007023A /* Explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF51A009B060007023A /* Explosion.wav */; };
+		FE9CBC6F1A009B060007023A /* Fanfare.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF61A009B060007023A /* Fanfare.wav */; };
+		FE9CBC701A009B060007023A /* FoodDrop.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF71A009B060007023A /* FoodDrop.wav */; };
+		FE9CBC711A009B060007023A /* GorillaDead.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF81A009B060007023A /* GorillaDead.wav */; };
+		FE9CBC721A009B060007023A /* GorillaGrunt1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBF91A009B060007023A /* GorillaGrunt1.wav */; };
+		FE9CBC731A009B060007023A /* GorillaGrunt2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBFA1A009B060007023A /* GorillaGrunt2.wav */; };
+		FE9CBC741A009B060007023A /* GorillaStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBFB1A009B060007023A /* GorillaStart.wav */; };
+		FE9CBC751A009B060007023A /* Harp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBFC1A009B060007023A /* Harp.wav */; };
+		FE9CBC761A009B060007023A /* HomeTreeBroken.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBFD1A009B060007023A /* HomeTreeBroken.wav */; };
+		FE9CBC771A009B060007023A /* InstantBanana.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBFE1A009B060007023A /* InstantBanana.wav */; };
+		FE9CBC781A009B060007023A /* JackBoost.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBBFF1A009B060007023A /* JackBoost.wav */; };
+		FE9CBC791A009B060007023A /* JackCheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC001A009B060007023A /* JackCheer.wav */; };
+		FE9CBC7A1A009B060007023A /* JackDamage1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC011A009B060007023A /* JackDamage1.wav */; };
+		FE9CBC7B1A009B060007023A /* JackDamage2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC021A009B060007023A /* JackDamage2.wav */; };
+		FE9CBC7C1A009B060007023A /* JackDamage3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC031A009B060007023A /* JackDamage3.wav */; };
+		FE9CBC7D1A009B060007023A /* JackDamage4.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC041A009B060007023A /* JackDamage4.wav */; };
+		FE9CBC7E1A009B060007023A /* JackDead1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC051A009B060007023A /* JackDead1.wav */; };
+		FE9CBC7F1A009B060007023A /* JackDead2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC061A009B060007023A /* JackDead2.wav */; };
+		FE9CBC801A009B060007023A /* JackDead3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC071A009B060007023A /* JackDead3.wav */; };
+		FE9CBC811A009B060007023A /* JackDead4.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC081A009B060007023A /* JackDead4.wav */; };
+		FE9CBC821A009B060007023A /* JackGrunt1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC091A009B060007023A /* JackGrunt1.wav */; };
+		FE9CBC831A009B060007023A /* JackGrunt2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC0A1A009B060007023A /* JackGrunt2.wav */; };
+		FE9CBC841A009B060007023A /* JackGrunt3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC0B1A009B060007023A /* JackGrunt3.wav */; };
+		FE9CBC851A009B060007023A /* JackGrunt4.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC0C1A009B060007023A /* JackGrunt4.wav */; };
+		FE9CBC861A009B060007023A /* JackGrunt5.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC0D1A009B060007023A /* JackGrunt5.wav */; };
+		FE9CBC871A009B060007023A /* JackGrunt6.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC0E1A009B060007023A /* JackGrunt6.wav */; };
+		FE9CBC881A009B060007023A /* JackHeal.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC0F1A009B060007023A /* JackHeal.wav */; };
+		FE9CBC891A009B060007023A /* JackTimber1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC101A009B060007023A /* JackTimber1.wav */; };
+		FE9CBC8A1A009B060007023A /* JackTimber2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC111A009B060007023A /* JackTimber2.wav */; };
+		FE9CBC8B1A009B060007023A /* JackTimber3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC121A009B060007023A /* JackTimber3.wav */; };
+		FE9CBC8C1A009B060007023A /* KangarooHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC131A009B060007023A /* KangarooHit.wav */; };
+		FE9CBC8D1A009B060007023A /* KangarooStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC141A009B060007023A /* KangarooStart.wav */; };
+		FE9CBC8E1A009B060007023A /* LionStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC151A009B060007023A /* LionStart.wav */; };
+		FE9CBC8F1A009B060007023A /* MapLevelSelect.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC161A009B060007023A /* MapLevelSelect.wav */; };
+		FE9CBC901A009B060007023A /* PandaBoing.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC171A009B060007023A /* PandaBoing.wav */; };
+		FE9CBC911A009B060007023A /* PandaDead.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC181A009B060007023A /* PandaDead.wav */; };
+		FE9CBC921A009B060007023A /* PandaStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC191A009B060007023A /* PandaStart.wav */; };
+		FE9CBC931A009B060007023A /* Pelican.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC1A1A009B060007023A /* Pelican.wav */; };
+		FE9CBC941A009B060007023A /* Pickup.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC1B1A009B060007023A /* Pickup.wav */; };
+		FE9CBC951A009B060007023A /* Pickup2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC1C1A009B060007023A /* Pickup2.wav */; };
+		FE9CBC961A009B060007023A /* PlayerBig.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC1D1A009B060007023A /* PlayerBig.wav */; };
+		FE9CBC971A009B060007023A /* PlayerBigStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC1E1A009B060007023A /* PlayerBigStart.wav */; };
+		FE9CBC981A009B060007023A /* PlayerBoost.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC1F1A009B060007023A /* PlayerBoost.wav */; };
+		FE9CBC991A009B070007023A /* PlayerCollect1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC201A009B060007023A /* PlayerCollect1.wav */; };
+		FE9CBC9A1A009B070007023A /* PlayerCollect2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC211A009B060007023A /* PlayerCollect2.wav */; };
+		FE9CBC9B1A009B070007023A /* PlayerDamage1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC221A009B060007023A /* PlayerDamage1.wav */; };
+		FE9CBC9C1A009B070007023A /* PlayerDamage2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC231A009B060007023A /* PlayerDamage2.wav */; };
+		FE9CBC9D1A009B070007023A /* PlayerDamage3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC241A009B060007023A /* PlayerDamage3.wav */; };
+		FE9CBC9E1A009B070007023A /* PlayerDead.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC251A009B060007023A /* PlayerDead.wav */; };
+		FE9CBC9F1A009B070007023A /* PlayerStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC261A009B060007023A /* PlayerStart.wav */; };
+		FE9CBCA01A009B070007023A /* Punch-Heavy.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC271A009B060007023A /* Punch-Heavy.wav */; };
+		FE9CBCA11A009B070007023A /* Punch-Heavy2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC281A009B060007023A /* Punch-Heavy2.wav */; };
+		FE9CBCA21A009B070007023A /* Punch-Heavy3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC291A009B060007023A /* Punch-Heavy3.wav */; };
+		FE9CBCA31A009B070007023A /* Punch-Light.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC2A1A009B060007023A /* Punch-Light.wav */; };
+		FE9CBCA41A009B070007023A /* Punch-Light2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC2B1A009B060007023A /* Punch-Light2.wav */; };
+		FE9CBCA51A009B070007023A /* Punch-Light3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC2C1A009B060007023A /* Punch-Light3.wav */; };
+		FE9CBCA61A009B070007023A /* Punch-Medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC2D1A009B060007023A /* Punch-Medium.wav */; };
+		FE9CBCA71A009B070007023A /* Punch-Medium2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC2E1A009B060007023A /* Punch-Medium2.wav */; };
+		FE9CBCA81A009B070007023A /* Punch-Medium3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC2F1A009B060007023A /* Punch-Medium3.wav */; };
+		FE9CBCA91A009B070007023A /* RhinoDead.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC301A009B060007023A /* RhinoDead.wav */; };
+		FE9CBCAA1A009B070007023A /* RhinoGrunt1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC311A009B060007023A /* RhinoGrunt1.wav */; };
+		FE9CBCAB1A009B070007023A /* RhinoStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC321A009B060007023A /* RhinoStart.wav */; };
+		FE9CBCAC1A009B070007023A /* RifleShoot.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC331A009B060007023A /* RifleShoot.wav */; };
+		FE9CBCAD1A009B070007023A /* Saw.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC341A009B060007023A /* Saw.wav */; };
+		FE9CBCAE1A009B070007023A /* Saw2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC351A009B060007023A /* Saw2.wav */; };
+		FE9CBCAF1A009B070007023A /* SawFlesh.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC361A009B060007023A /* SawFlesh.wav */; };
+		FE9CBCB01A009B070007023A /* SawFlesh2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC371A009B060007023A /* SawFlesh2.wav */; };
+		FE9CBCB11A009B070007023A /* SnakeDead.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC381A009B060007023A /* SnakeDead.wav */; };
+		FE9CBCB21A009B070007023A /* SnakeSpit.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC391A009B060007023A /* SnakeSpit.wav */; };
+		FE9CBCB31A009B070007023A /* SnakeStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC3A1A009B060007023A /* SnakeStart.wav */; };
+		FE9CBCB41A009B070007023A /* Throw.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC3B1A009B060007023A /* Throw.wav */; };
+		FE9CBCB51A009B070007023A /* Throw2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC3C1A009B060007023A /* Throw2.wav */; };
+		FE9CBCB61A009B070007023A /* TigerDead.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC3D1A009B060007023A /* TigerDead.wav */; };
+		FE9CBCB71A009B070007023A /* TigerGrunt1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC3E1A009B060007023A /* TigerGrunt1.wav */; };
+		FE9CBCB81A009B070007023A /* TigerGrunt2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC3F1A009B060007023A /* TigerGrunt2.wav */; };
+		FE9CBCB91A009B070007023A /* TigerStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC401A009B060007023A /* TigerStart.wav */; };
+		FE9CBCBA1A009B070007023A /* TreeFall.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC411A009B060007023A /* TreeFall.wav */; };
+		FE9CBCBB1A009B070007023A /* Truck.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC421A009B060007023A /* Truck.wav */; };
+		FE9CBCBC1A009B070007023A /* TruckDead.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC431A009B060007023A /* TruckDead.wav */; };
+		FE9CBCBD1A009B070007023A /* TruckHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC441A009B060007023A /* TruckHit.wav */; };
+		FE9CBCBE1A009B070007023A /* TruckIdle.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC451A009B060007023A /* TruckIdle.wav */; };
+		FE9CBCBF1A009B070007023A /* WaveFinal.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC461A009B060007023A /* WaveFinal.wav */; };
+		FE9CBCC01A009B070007023A /* WaveMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC471A009B060007023A /* WaveMessage.wav */; };
+		FE9CBCC11A009B070007023A /* Willow_and_the_Light.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC481A009B060007023A /* Willow_and_the_Light.mp3 */; };
+		FE9CBCC21A009B070007023A /* fire.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC4A1A009B060007023A /* fire.plist */; };
+		FE9CBCC31A009B070007023A /* fire.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC4B1A009B060007023A /* fire.pvr.ccz */; };
+		FE9CBCC41A009B070007023A /* flame.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC4C1A009B060007023A /* flame.png */; };
+		FE9CBCC51A009B070007023A /* p1.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC4D1A009B060007023A /* p1.ExportJson */; };
+		FE9CBCC61A009B070007023A /* p10.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC4E1A009B060007023A /* p10.plist */; };
+		FE9CBCC71A009B070007023A /* p10.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC4F1A009B060007023A /* p10.png */; };
+		FE9CBCC81A009B070007023A /* weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC501A009B060007023A /* weapons.plist */; };
+		FE9CBCC91A009B070007023A /* weapons.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FE9CBC511A009B060007023A /* weapons.pvr.ccz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,8 +369,6 @@
 /* Begin PBXFileReference section */
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
-		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
-		1AFAF8B416D35DE700DB1158 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* brave iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "brave iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -275,14 +405,54 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
-		9C609C3519E1BD01004B375D /* Banana.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Banana.cpp; path = ../Classes/Banana.cpp; sourceTree = "<group>"; };
-		9C609C3619E1BD01004B375D /* Banana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Banana.h; path = ../Classes/Banana.h; sourceTree = "<group>"; };
-		9C609C3B19E1CD87004B375D /* BananaManger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BananaManger.cpp; path = ../Classes/BananaManger.cpp; sourceTree = "<group>"; };
-		9C609C3C19E1CD87004B375D /* BananaManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BananaManger.h; path = ../Classes/BananaManger.h; sourceTree = "<group>"; };
-		9CFB92C919EB2AD7000F869A /* Animal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal.cpp; path = ../Classes/Animal.cpp; sourceTree = "<group>"; };
-		9CFB92CA19EB2AD7000F869A /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = ../Classes/Animal.h; sourceTree = "<group>"; };
-		9CFB92CB19EB2AD7000F869A /* Fire.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Fire.cpp; path = ../Classes/Fire.cpp; sourceTree = "<group>"; };
-		9CFB92CC19EB2AD7000F869A /* Fire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fire.h; path = ../Classes/Fire.h; sourceTree = "<group>"; };
+		9C0003A119FDE556001AF185 /* Animal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal.cpp; path = ../Classes/Animal.cpp; sourceTree = "<group>"; };
+		9C0003A219FDE556001AF185 /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = ../Classes/Animal.h; sourceTree = "<group>"; };
+		9C0003A319FDE556001AF185 /* Animal2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal2.cpp; path = ../Classes/Animal2.cpp; sourceTree = "<group>"; };
+		9C0003A419FDE556001AF185 /* Animal2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal2.h; path = ../Classes/Animal2.h; sourceTree = "<group>"; };
+		9C0003A519FDE556001AF185 /* Animal2Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal2Manager.cpp; path = ../Classes/Animal2Manager.cpp; sourceTree = "<group>"; };
+		9C0003A619FDE556001AF185 /* Animal2Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal2Manager.h; path = ../Classes/Animal2Manager.h; sourceTree = "<group>"; };
+		9C0003A719FDE556001AF185 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
+		9C0003A819FDE556001AF185 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
+		9C0003A919FDE556001AF185 /* Attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Attack.cpp; path = ../Classes/Attack.cpp; sourceTree = "<group>"; };
+		9C0003AA19FDE556001AF185 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attack.h; path = ../Classes/Attack.h; sourceTree = "<group>"; };
+		9C0003AB19FDE556001AF185 /* Banana.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Banana.cpp; path = ../Classes/Banana.cpp; sourceTree = "<group>"; };
+		9C0003AC19FDE556001AF185 /* Banana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Banana.h; path = ../Classes/Banana.h; sourceTree = "<group>"; };
+		9C0003AD19FDE556001AF185 /* BananaManger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BananaManger.cpp; path = ../Classes/BananaManger.cpp; sourceTree = "<group>"; };
+		9C0003AE19FDE556001AF185 /* BananaManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BananaManger.h; path = ../Classes/BananaManger.h; sourceTree = "<group>"; };
+		9C0003AF19FDE556001AF185 /* blood.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = blood.cpp; path = ../Classes/blood.cpp; sourceTree = "<group>"; };
+		9C0003B019FDE556001AF185 /* blood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blood.h; path = ../Classes/blood.h; sourceTree = "<group>"; };
+		9C0003B119FDE556001AF185 /* CustomTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CustomTool.cpp; path = ../Classes/CustomTool.cpp; sourceTree = "<group>"; };
+		9C0003B219FDE556001AF185 /* CustomTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTool.h; path = ../Classes/CustomTool.h; sourceTree = "<group>"; };
+		9C0003B319FDE556001AF185 /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy.cpp; path = ../Classes/Enemy.cpp; sourceTree = "<group>"; };
+		9C0003B419FDE556001AF185 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy.h; path = ../Classes/Enemy.h; sourceTree = "<group>"; };
+		9C0003B519FDE556001AF185 /* Enemy2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy2.cpp; path = ../Classes/Enemy2.cpp; sourceTree = "<group>"; };
+		9C0003B619FDE556001AF185 /* Enemy2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy2.h; path = ../Classes/Enemy2.h; sourceTree = "<group>"; };
+		9C0003B719FDE556001AF185 /* Enemy2Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy2Manager.cpp; path = ../Classes/Enemy2Manager.cpp; sourceTree = "<group>"; };
+		9C0003B819FDE556001AF185 /* Enemy2Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy2Manager.h; path = ../Classes/Enemy2Manager.h; sourceTree = "<group>"; };
+		9C0003B919FDE556001AF185 /* Fire.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Fire.cpp; path = ../Classes/Fire.cpp; sourceTree = "<group>"; };
+		9C0003BA19FDE556001AF185 /* Fire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fire.h; path = ../Classes/Fire.h; sourceTree = "<group>"; };
+		9C0003BB19FDE556001AF185 /* FSM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FSM.cpp; path = ../Classes/FSM.cpp; sourceTree = "<group>"; };
+		9C0003BC19FDE556001AF185 /* FSM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSM.h; path = ../Classes/FSM.h; sourceTree = "<group>"; };
+		9C0003BD19FDE556001AF185 /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
+		9C0003BF19FDE556001AF185 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
+		9C0003C119FDE556001AF185 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = ../Classes/Player.cpp; sourceTree = "<group>"; };
+		9C0003C219FDE556001AF185 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Classes/Player.h; sourceTree = "<group>"; };
+		9C0003C319FDE556001AF185 /* Progress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Progress.cpp; path = ../Classes/Progress.cpp; sourceTree = "<group>"; };
+		9C0003C419FDE556001AF185 /* Progress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Progress.h; path = ../Classes/Progress.h; sourceTree = "<group>"; };
+		9C0003C519FDE556001AF185 /* StartScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StartScene.cpp; path = ../Classes/StartScene.cpp; sourceTree = "<group>"; };
+		9C0003C619FDE556001AF185 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartScene.h; path = ../Classes/StartScene.h; sourceTree = "<group>"; };
+		9C0003C719FDE556001AF185 /* Tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tree.cpp; path = ../Classes/Tree.cpp; sourceTree = "<group>"; };
+		9C0003C819FDE556001AF185 /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tree.h; path = ../Classes/Tree.h; sourceTree = "<group>"; };
+		9C0003C919FDE556001AF185 /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VisibleRect.cpp; path = ../Classes/VisibleRect.cpp; sourceTree = "<group>"; };
+		9C0003CA19FDE556001AF185 /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VisibleRect.h; path = ../Classes/VisibleRect.h; sourceTree = "<group>"; };
+		9C0003CB19FDE556001AF185 /* Weapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Weapon.cpp; path = ../Classes/Weapon.cpp; sourceTree = "<group>"; };
+		9C0003CC19FDE556001AF185 /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Weapon.h; path = ../Classes/Weapon.h; sourceTree = "<group>"; };
+		9C9F513319FD739A004EFA88 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		9C9F513419FD739A004EFA88 /* cloth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth.png; sourceTree = "<group>"; };
+		9C9F513519FD739A004EFA88 /* money.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money.png; sourceTree = "<group>"; };
+		9C9F513619FD739A004EFA88 /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
+		9C9F513719FD739A004EFA88 /* tiger2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger2.png; sourceTree = "<group>"; };
+		9C9F513F19FD787D004EFA88 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
 		9CFB92E319EB4AE8000F869A /* animal1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal1.png; sourceTree = "<group>"; };
 		9CFB92E419EB4AE8000F869A /* animal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal2.png; sourceTree = "<group>"; };
 		9CFB92E519EB4AE8000F869A /* animal3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal3.png; sourceTree = "<group>"; };
@@ -295,15 +465,7 @@
 		9CFB92ED19EB4AE8000F869A /* fruit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fruit.png; sourceTree = "<group>"; };
 		9CFB92EE19EB4AE8000F869A /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		9CFB92EF19EB4AE8000F869A /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
-		A60105AA19E1C28100664A6C /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enemy.cpp; path = ../Classes/Enemy.cpp; sourceTree = "<group>"; };
-		A60105AB19E1C28100664A6C /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy.h; path = ../Classes/Enemy.h; sourceTree = "<group>"; };
 		A601081819EB5DED00664A6C /* attackoption2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attackoption2.png; sourceTree = "<group>"; };
-		A6C5B2F619CF3C0000DA478A /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
-		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
-		A6C5B2FD19CF508900DA478A /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
-		A6C5B2FE19CF509500DA478A /* Weapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Weapon.cpp; sourceTree = "<group>"; };
-		BEDF548C19DD481C00068CBA /* Tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tree.cpp; path = ../Classes/Tree.cpp; sourceTree = "<group>"; };
-		BEDF548D19DD481C00068CBA /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tree.h; path = ../Classes/Tree.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -311,16 +473,126 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
-		FE2E259A19D73D5200AC8DB5 /* FSM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FSM.h; path = ../Classes/FSM.h; sourceTree = "<group>"; };
-		FE2E259D19D73D9400AC8DB5 /* FSM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FSM.cpp; path = ../Classes/FSM.cpp; sourceTree = "<group>"; };
-		FEAA761D19C61BC800E8ED22 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Classes/Player.h; sourceTree = "<group>"; };
-		FEAA761F19C6201400E8ED22 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
-		FEDF9FDE19E39E7A00484807 /* Attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Attack.cpp; path = ../Classes/Attack.cpp; sourceTree = "<group>"; };
-		FEDF9FDF19E39E7A00484807 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attack.h; path = ../Classes/Attack.h; sourceTree = "<group>"; };
-		FEDF9FE019E39E7A00484807 /* blood.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = blood.cpp; path = ../Classes/blood.cpp; sourceTree = "<group>"; };
-		FEDF9FE119E39E7A00484807 /* blood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blood.h; path = ../Classes/blood.h; sourceTree = "<group>"; };
-		FEDF9FE219E39E7A00484807 /* Progress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Progress.cpp; path = ../Classes/Progress.cpp; sourceTree = "<group>"; };
-		FEDF9FE319E39E7A00484807 /* Progress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Progress.h; path = ../Classes/Progress.h; sourceTree = "<group>"; };
+		FE9CBBD91A009B060007023A /* AcornDrop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AcornDrop.wav; sourceTree = "<group>"; };
+		FE9CBBDA1A009B060007023A /* ActionDrop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ActionDrop.wav; sourceTree = "<group>"; };
+		FE9CBBDB1A009B060007023A /* animalCheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = animalCheer.wav; sourceTree = "<group>"; };
+		FE9CBBDC1A009B060007023A /* ApeDead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ApeDead.wav; sourceTree = "<group>"; };
+		FE9CBBDD1A009B060007023A /* ApeGrunt1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ApeGrunt1.wav; sourceTree = "<group>"; };
+		FE9CBBDE1A009B060007023A /* ApeGrunt2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ApeGrunt2.wav; sourceTree = "<group>"; };
+		FE9CBBDF1A009B060007023A /* ApeStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ApeStart.wav; sourceTree = "<group>"; };
+		FE9CBBE01A009B060007023A /* AxeFlesh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AxeFlesh.wav; sourceTree = "<group>"; };
+		FE9CBBE11A009B060007023A /* AxeFleshDouble1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AxeFleshDouble1.wav; sourceTree = "<group>"; };
+		FE9CBBE21A009B060007023A /* AxeTree1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AxeTree1.wav; sourceTree = "<group>"; };
+		FE9CBBE31A009B060007023A /* AxeTree2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AxeTree2.wav; sourceTree = "<group>"; };
+		FE9CBBE41A009B060007023A /* AxeTreeDouble1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AxeTreeDouble1.wav; sourceTree = "<group>"; };
+		FE9CBBE51A009B060007023A /* AxeTreeDouble2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AxeTreeDouble2.wav; sourceTree = "<group>"; };
+		FE9CBBE61A009B060007023A /* Beaver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Beaver.wav; sourceTree = "<group>"; };
+		FE9CBBE71A009B060007023A /* Bees.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Bees.wav; sourceTree = "<group>"; };
+		FE9CBBE81A009B060007023A /* BigTruckAccelerate.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BigTruckAccelerate.wav; sourceTree = "<group>"; };
+		FE9CBBE91A009B060007023A /* CageBreak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CageBreak.wav; sourceTree = "<group>"; };
+		FE9CBBEA1A009B060007023A /* ChainSaw1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ChainSaw1.wav; sourceTree = "<group>"; };
+		FE9CBBEB1A009B060007023A /* Chainsaw2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chainsaw2.wav; sourceTree = "<group>"; };
+		FE9CBBEC1A009B060007023A /* ChainSawIdle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ChainSawIdle.wav; sourceTree = "<group>"; };
+		FE9CBBED1A009B060007023A /* Chee Zee Jungle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chee Zee Jungle.mp3"; sourceTree = "<group>"; };
+		FE9CBBEE1A009B060007023A /* Click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click.wav; sourceTree = "<group>"; };
+		FE9CBBEF1A009B060007023A /* Cling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Cling.wav; sourceTree = "<group>"; };
+		FE9CBBF01A009B060007023A /* CrocodileStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CrocodileStart.wav; sourceTree = "<group>"; };
+		FE9CBBF11A009B060007023A /* Crunch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Crunch.wav; sourceTree = "<group>"; };
+		FE9CBBF21A009B060007023A /* DeerHeal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DeerHeal.wav; sourceTree = "<group>"; };
+		FE9CBBF31A009B060007023A /* DeerStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DeerStart.wav; sourceTree = "<group>"; };
+		FE9CBBF41A009B060007023A /* DefeatBrass.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DefeatBrass.wav; sourceTree = "<group>"; };
+		FE9CBBF51A009B060007023A /* Explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Explosion.wav; sourceTree = "<group>"; };
+		FE9CBBF61A009B060007023A /* Fanfare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Fanfare.wav; sourceTree = "<group>"; };
+		FE9CBBF71A009B060007023A /* FoodDrop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = FoodDrop.wav; sourceTree = "<group>"; };
+		FE9CBBF81A009B060007023A /* GorillaDead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GorillaDead.wav; sourceTree = "<group>"; };
+		FE9CBBF91A009B060007023A /* GorillaGrunt1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GorillaGrunt1.wav; sourceTree = "<group>"; };
+		FE9CBBFA1A009B060007023A /* GorillaGrunt2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GorillaGrunt2.wav; sourceTree = "<group>"; };
+		FE9CBBFB1A009B060007023A /* GorillaStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GorillaStart.wav; sourceTree = "<group>"; };
+		FE9CBBFC1A009B060007023A /* Harp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Harp.wav; sourceTree = "<group>"; };
+		FE9CBBFD1A009B060007023A /* HomeTreeBroken.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = HomeTreeBroken.wav; sourceTree = "<group>"; };
+		FE9CBBFE1A009B060007023A /* InstantBanana.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = InstantBanana.wav; sourceTree = "<group>"; };
+		FE9CBBFF1A009B060007023A /* JackBoost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackBoost.wav; sourceTree = "<group>"; };
+		FE9CBC001A009B060007023A /* JackCheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackCheer.wav; sourceTree = "<group>"; };
+		FE9CBC011A009B060007023A /* JackDamage1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackDamage1.wav; sourceTree = "<group>"; };
+		FE9CBC021A009B060007023A /* JackDamage2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackDamage2.wav; sourceTree = "<group>"; };
+		FE9CBC031A009B060007023A /* JackDamage3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackDamage3.wav; sourceTree = "<group>"; };
+		FE9CBC041A009B060007023A /* JackDamage4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackDamage4.wav; sourceTree = "<group>"; };
+		FE9CBC051A009B060007023A /* JackDead1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackDead1.wav; sourceTree = "<group>"; };
+		FE9CBC061A009B060007023A /* JackDead2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackDead2.wav; sourceTree = "<group>"; };
+		FE9CBC071A009B060007023A /* JackDead3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackDead3.wav; sourceTree = "<group>"; };
+		FE9CBC081A009B060007023A /* JackDead4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackDead4.wav; sourceTree = "<group>"; };
+		FE9CBC091A009B060007023A /* JackGrunt1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackGrunt1.wav; sourceTree = "<group>"; };
+		FE9CBC0A1A009B060007023A /* JackGrunt2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackGrunt2.wav; sourceTree = "<group>"; };
+		FE9CBC0B1A009B060007023A /* JackGrunt3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackGrunt3.wav; sourceTree = "<group>"; };
+		FE9CBC0C1A009B060007023A /* JackGrunt4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackGrunt4.wav; sourceTree = "<group>"; };
+		FE9CBC0D1A009B060007023A /* JackGrunt5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackGrunt5.wav; sourceTree = "<group>"; };
+		FE9CBC0E1A009B060007023A /* JackGrunt6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackGrunt6.wav; sourceTree = "<group>"; };
+		FE9CBC0F1A009B060007023A /* JackHeal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackHeal.wav; sourceTree = "<group>"; };
+		FE9CBC101A009B060007023A /* JackTimber1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackTimber1.wav; sourceTree = "<group>"; };
+		FE9CBC111A009B060007023A /* JackTimber2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackTimber2.wav; sourceTree = "<group>"; };
+		FE9CBC121A009B060007023A /* JackTimber3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JackTimber3.wav; sourceTree = "<group>"; };
+		FE9CBC131A009B060007023A /* KangarooHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = KangarooHit.wav; sourceTree = "<group>"; };
+		FE9CBC141A009B060007023A /* KangarooStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = KangarooStart.wav; sourceTree = "<group>"; };
+		FE9CBC151A009B060007023A /* LionStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = LionStart.wav; sourceTree = "<group>"; };
+		FE9CBC161A009B060007023A /* MapLevelSelect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MapLevelSelect.wav; sourceTree = "<group>"; };
+		FE9CBC171A009B060007023A /* PandaBoing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PandaBoing.wav; sourceTree = "<group>"; };
+		FE9CBC181A009B060007023A /* PandaDead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PandaDead.wav; sourceTree = "<group>"; };
+		FE9CBC191A009B060007023A /* PandaStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PandaStart.wav; sourceTree = "<group>"; };
+		FE9CBC1A1A009B060007023A /* Pelican.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pelican.wav; sourceTree = "<group>"; };
+		FE9CBC1B1A009B060007023A /* Pickup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pickup.wav; sourceTree = "<group>"; };
+		FE9CBC1C1A009B060007023A /* Pickup2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pickup2.wav; sourceTree = "<group>"; };
+		FE9CBC1D1A009B060007023A /* PlayerBig.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerBig.wav; sourceTree = "<group>"; };
+		FE9CBC1E1A009B060007023A /* PlayerBigStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerBigStart.wav; sourceTree = "<group>"; };
+		FE9CBC1F1A009B060007023A /* PlayerBoost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerBoost.wav; sourceTree = "<group>"; };
+		FE9CBC201A009B060007023A /* PlayerCollect1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerCollect1.wav; sourceTree = "<group>"; };
+		FE9CBC211A009B060007023A /* PlayerCollect2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerCollect2.wav; sourceTree = "<group>"; };
+		FE9CBC221A009B060007023A /* PlayerDamage1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDamage1.wav; sourceTree = "<group>"; };
+		FE9CBC231A009B060007023A /* PlayerDamage2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDamage2.wav; sourceTree = "<group>"; };
+		FE9CBC241A009B060007023A /* PlayerDamage3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDamage3.wav; sourceTree = "<group>"; };
+		FE9CBC251A009B060007023A /* PlayerDead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDead.wav; sourceTree = "<group>"; };
+		FE9CBC261A009B060007023A /* PlayerStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerStart.wav; sourceTree = "<group>"; };
+		FE9CBC271A009B060007023A /* Punch-Heavy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Heavy.wav"; sourceTree = "<group>"; };
+		FE9CBC281A009B060007023A /* Punch-Heavy2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Heavy2.wav"; sourceTree = "<group>"; };
+		FE9CBC291A009B060007023A /* Punch-Heavy3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Heavy3.wav"; sourceTree = "<group>"; };
+		FE9CBC2A1A009B060007023A /* Punch-Light.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Light.wav"; sourceTree = "<group>"; };
+		FE9CBC2B1A009B060007023A /* Punch-Light2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Light2.wav"; sourceTree = "<group>"; };
+		FE9CBC2C1A009B060007023A /* Punch-Light3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Light3.wav"; sourceTree = "<group>"; };
+		FE9CBC2D1A009B060007023A /* Punch-Medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Medium.wav"; sourceTree = "<group>"; };
+		FE9CBC2E1A009B060007023A /* Punch-Medium2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Medium2.wav"; sourceTree = "<group>"; };
+		FE9CBC2F1A009B060007023A /* Punch-Medium3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Punch-Medium3.wav"; sourceTree = "<group>"; };
+		FE9CBC301A009B060007023A /* RhinoDead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RhinoDead.wav; sourceTree = "<group>"; };
+		FE9CBC311A009B060007023A /* RhinoGrunt1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RhinoGrunt1.wav; sourceTree = "<group>"; };
+		FE9CBC321A009B060007023A /* RhinoStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RhinoStart.wav; sourceTree = "<group>"; };
+		FE9CBC331A009B060007023A /* RifleShoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RifleShoot.wav; sourceTree = "<group>"; };
+		FE9CBC341A009B060007023A /* Saw.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Saw.wav; sourceTree = "<group>"; };
+		FE9CBC351A009B060007023A /* Saw2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Saw2.wav; sourceTree = "<group>"; };
+		FE9CBC361A009B060007023A /* SawFlesh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SawFlesh.wav; sourceTree = "<group>"; };
+		FE9CBC371A009B060007023A /* SawFlesh2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SawFlesh2.wav; sourceTree = "<group>"; };
+		FE9CBC381A009B060007023A /* SnakeDead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SnakeDead.wav; sourceTree = "<group>"; };
+		FE9CBC391A009B060007023A /* SnakeSpit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SnakeSpit.wav; sourceTree = "<group>"; };
+		FE9CBC3A1A009B060007023A /* SnakeStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SnakeStart.wav; sourceTree = "<group>"; };
+		FE9CBC3B1A009B060007023A /* Throw.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Throw.wav; sourceTree = "<group>"; };
+		FE9CBC3C1A009B060007023A /* Throw2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Throw2.wav; sourceTree = "<group>"; };
+		FE9CBC3D1A009B060007023A /* TigerDead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TigerDead.wav; sourceTree = "<group>"; };
+		FE9CBC3E1A009B060007023A /* TigerGrunt1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TigerGrunt1.wav; sourceTree = "<group>"; };
+		FE9CBC3F1A009B060007023A /* TigerGrunt2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TigerGrunt2.wav; sourceTree = "<group>"; };
+		FE9CBC401A009B060007023A /* TigerStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TigerStart.wav; sourceTree = "<group>"; };
+		FE9CBC411A009B060007023A /* TreeFall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TreeFall.wav; sourceTree = "<group>"; };
+		FE9CBC421A009B060007023A /* Truck.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Truck.wav; sourceTree = "<group>"; };
+		FE9CBC431A009B060007023A /* TruckDead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TruckDead.wav; sourceTree = "<group>"; };
+		FE9CBC441A009B060007023A /* TruckHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TruckHit.wav; sourceTree = "<group>"; };
+		FE9CBC451A009B060007023A /* TruckIdle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TruckIdle.wav; sourceTree = "<group>"; };
+		FE9CBC461A009B060007023A /* WaveFinal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WaveFinal.wav; sourceTree = "<group>"; };
+		FE9CBC471A009B060007023A /* WaveMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WaveMessage.wav; sourceTree = "<group>"; };
+		FE9CBC481A009B060007023A /* Willow_and_the_Light.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Willow_and_the_Light.mp3; sourceTree = "<group>"; };
+		FE9CBC4A1A009B060007023A /* fire.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fire.plist; sourceTree = "<group>"; };
+		FE9CBC4B1A009B060007023A /* fire.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = fire.pvr.ccz; sourceTree = "<group>"; };
+		FE9CBC4C1A009B060007023A /* flame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame.png; sourceTree = "<group>"; };
+		FE9CBC4D1A009B060007023A /* p1.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = p1.ExportJson; sourceTree = "<group>"; };
+		FE9CBC4E1A009B060007023A /* p10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = p10.plist; sourceTree = "<group>"; };
+		FE9CBC4F1A009B060007023A /* p10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p10.png; sourceTree = "<group>"; };
+		FE9CBC501A009B060007023A /* weapons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = weapons.plist; sourceTree = "<group>"; };
+		FE9CBC511A009B060007023A /* weapons.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = weapons.pvr.ccz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,34 +662,48 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9CFB92C919EB2AD7000F869A /* Animal.cpp */,
-				9CFB92CA19EB2AD7000F869A /* Animal.h */,
-				9CFB92CB19EB2AD7000F869A /* Fire.cpp */,
-				9CFB92CC19EB2AD7000F869A /* Fire.h */,
-				FEDF9FDE19E39E7A00484807 /* Attack.cpp */,
-				FEDF9FDF19E39E7A00484807 /* Attack.h */,
-				FEDF9FE019E39E7A00484807 /* blood.cpp */,
-				FEDF9FE119E39E7A00484807 /* blood.h */,
-				FEDF9FE219E39E7A00484807 /* Progress.cpp */,
-				FEDF9FE319E39E7A00484807 /* Progress.h */,
-				A6C5B2F619CF3C0000DA478A /* MainScene.cpp */,
-				A6C5B2F719CF3C0000DA478A /* MainScene.h */,
-				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
-				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
-				FEAA761D19C61BC800E8ED22 /* Player.h */,
-				FEAA761F19C6201400E8ED22 /* Player.cpp */,
-				A6C5B2FD19CF508900DA478A /* Weapon.h */,
-				A6C5B2FE19CF509500DA478A /* Weapon.cpp */,
-				FE2E259A19D73D5200AC8DB5 /* FSM.h */,
-				FE2E259D19D73D9400AC8DB5 /* FSM.cpp */,
-				BEDF548C19DD481C00068CBA /* Tree.cpp */,
-				BEDF548D19DD481C00068CBA /* Tree.h */,
-				A60105AA19E1C28100664A6C /* Enemy.cpp */,
-				A60105AB19E1C28100664A6C /* Enemy.h */,
-				9C609C3519E1BD01004B375D /* Banana.cpp */,
-				9C609C3619E1BD01004B375D /* Banana.h */,
-				9C609C3B19E1CD87004B375D /* BananaManger.cpp */,
-				9C609C3C19E1CD87004B375D /* BananaManger.h */,
+				9C0003A119FDE556001AF185 /* Animal.cpp */,
+				9C0003A219FDE556001AF185 /* Animal.h */,
+				9C0003A319FDE556001AF185 /* Animal2.cpp */,
+				9C0003A419FDE556001AF185 /* Animal2.h */,
+				9C0003A519FDE556001AF185 /* Animal2Manager.cpp */,
+				9C0003A619FDE556001AF185 /* Animal2Manager.h */,
+				9C0003A719FDE556001AF185 /* AppDelegate.cpp */,
+				9C0003A819FDE556001AF185 /* AppDelegate.h */,
+				9C0003A919FDE556001AF185 /* Attack.cpp */,
+				9C0003AA19FDE556001AF185 /* Attack.h */,
+				9C0003AB19FDE556001AF185 /* Banana.cpp */,
+				9C0003AC19FDE556001AF185 /* Banana.h */,
+				9C0003AD19FDE556001AF185 /* BananaManger.cpp */,
+				9C0003AE19FDE556001AF185 /* BananaManger.h */,
+				9C0003AF19FDE556001AF185 /* blood.cpp */,
+				9C0003B019FDE556001AF185 /* blood.h */,
+				9C0003B119FDE556001AF185 /* CustomTool.cpp */,
+				9C0003B219FDE556001AF185 /* CustomTool.h */,
+				9C0003B319FDE556001AF185 /* Enemy.cpp */,
+				9C0003B419FDE556001AF185 /* Enemy.h */,
+				9C0003B519FDE556001AF185 /* Enemy2.cpp */,
+				9C0003B619FDE556001AF185 /* Enemy2.h */,
+				9C0003B719FDE556001AF185 /* Enemy2Manager.cpp */,
+				9C0003B819FDE556001AF185 /* Enemy2Manager.h */,
+				9C0003B919FDE556001AF185 /* Fire.cpp */,
+				9C0003BA19FDE556001AF185 /* Fire.h */,
+				9C0003BB19FDE556001AF185 /* FSM.cpp */,
+				9C0003BC19FDE556001AF185 /* FSM.h */,
+				9C0003BD19FDE556001AF185 /* MainScene.cpp */,
+				9C0003BF19FDE556001AF185 /* MainScene.h */,
+				9C0003C119FDE556001AF185 /* Player.cpp */,
+				9C0003C219FDE556001AF185 /* Player.h */,
+				9C0003C319FDE556001AF185 /* Progress.cpp */,
+				9C0003C419FDE556001AF185 /* Progress.h */,
+				9C0003C519FDE556001AF185 /* StartScene.cpp */,
+				9C0003C619FDE556001AF185 /* StartScene.h */,
+				9C0003C719FDE556001AF185 /* Tree.cpp */,
+				9C0003C819FDE556001AF185 /* Tree.h */,
+				9C0003C919FDE556001AF185 /* VisibleRect.cpp */,
+				9C0003CA19FDE556001AF185 /* VisibleRect.h */,
+				9C0003CB19FDE556001AF185 /* Weapon.cpp */,
+				9C0003CC19FDE556001AF185 /* Weapon.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -533,6 +819,19 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE9CBBD81A009B060007023A /* AudioClip */,
+				FE9CBC491A009B060007023A /* fire */,
+				FE9CBC4D1A009B060007023A /* p1.ExportJson */,
+				FE9CBC4E1A009B060007023A /* p10.plist */,
+				FE9CBC4F1A009B060007023A /* p10.png */,
+				FE9CBC501A009B060007023A /* weapons.plist */,
+				FE9CBC511A009B060007023A /* weapons.pvr.ccz */,
+				9C9F513F19FD787D004EFA88 /* banana.png */,
+				9C9F513319FD739A004EFA88 /* back.png */,
+				9C9F513419FD739A004EFA88 /* cloth.png */,
+				9C9F513519FD739A004EFA88 /* money.png */,
+				9C9F513619FD739A004EFA88 /* panda.png */,
+				9C9F513719FD739A004EFA88 /* tiger2.png */,
 				9CFB92E319EB4AE8000F869A /* animal1.png */,
 				9CFB92E419EB4AE8000F869A /* animal2.png */,
 				9CFB92E519EB4AE8000F869A /* animal3.png */,
@@ -549,6 +848,135 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		FE9CBBD81A009B060007023A /* AudioClip */ = {
+			isa = PBXGroup;
+			children = (
+				FE9CBBD91A009B060007023A /* AcornDrop.wav */,
+				FE9CBBDA1A009B060007023A /* ActionDrop.wav */,
+				FE9CBBDB1A009B060007023A /* animalCheer.wav */,
+				FE9CBBDC1A009B060007023A /* ApeDead.wav */,
+				FE9CBBDD1A009B060007023A /* ApeGrunt1.wav */,
+				FE9CBBDE1A009B060007023A /* ApeGrunt2.wav */,
+				FE9CBBDF1A009B060007023A /* ApeStart.wav */,
+				FE9CBBE01A009B060007023A /* AxeFlesh.wav */,
+				FE9CBBE11A009B060007023A /* AxeFleshDouble1.wav */,
+				FE9CBBE21A009B060007023A /* AxeTree1.wav */,
+				FE9CBBE31A009B060007023A /* AxeTree2.wav */,
+				FE9CBBE41A009B060007023A /* AxeTreeDouble1.wav */,
+				FE9CBBE51A009B060007023A /* AxeTreeDouble2.wav */,
+				FE9CBBE61A009B060007023A /* Beaver.wav */,
+				FE9CBBE71A009B060007023A /* Bees.wav */,
+				FE9CBBE81A009B060007023A /* BigTruckAccelerate.wav */,
+				FE9CBBE91A009B060007023A /* CageBreak.wav */,
+				FE9CBBEA1A009B060007023A /* ChainSaw1.wav */,
+				FE9CBBEB1A009B060007023A /* Chainsaw2.wav */,
+				FE9CBBEC1A009B060007023A /* ChainSawIdle.wav */,
+				FE9CBBED1A009B060007023A /* Chee Zee Jungle.mp3 */,
+				FE9CBBEE1A009B060007023A /* Click.wav */,
+				FE9CBBEF1A009B060007023A /* Cling.wav */,
+				FE9CBBF01A009B060007023A /* CrocodileStart.wav */,
+				FE9CBBF11A009B060007023A /* Crunch.wav */,
+				FE9CBBF21A009B060007023A /* DeerHeal.wav */,
+				FE9CBBF31A009B060007023A /* DeerStart.wav */,
+				FE9CBBF41A009B060007023A /* DefeatBrass.wav */,
+				FE9CBBF51A009B060007023A /* Explosion.wav */,
+				FE9CBBF61A009B060007023A /* Fanfare.wav */,
+				FE9CBBF71A009B060007023A /* FoodDrop.wav */,
+				FE9CBBF81A009B060007023A /* GorillaDead.wav */,
+				FE9CBBF91A009B060007023A /* GorillaGrunt1.wav */,
+				FE9CBBFA1A009B060007023A /* GorillaGrunt2.wav */,
+				FE9CBBFB1A009B060007023A /* GorillaStart.wav */,
+				FE9CBBFC1A009B060007023A /* Harp.wav */,
+				FE9CBBFD1A009B060007023A /* HomeTreeBroken.wav */,
+				FE9CBBFE1A009B060007023A /* InstantBanana.wav */,
+				FE9CBBFF1A009B060007023A /* JackBoost.wav */,
+				FE9CBC001A009B060007023A /* JackCheer.wav */,
+				FE9CBC011A009B060007023A /* JackDamage1.wav */,
+				FE9CBC021A009B060007023A /* JackDamage2.wav */,
+				FE9CBC031A009B060007023A /* JackDamage3.wav */,
+				FE9CBC041A009B060007023A /* JackDamage4.wav */,
+				FE9CBC051A009B060007023A /* JackDead1.wav */,
+				FE9CBC061A009B060007023A /* JackDead2.wav */,
+				FE9CBC071A009B060007023A /* JackDead3.wav */,
+				FE9CBC081A009B060007023A /* JackDead4.wav */,
+				FE9CBC091A009B060007023A /* JackGrunt1.wav */,
+				FE9CBC0A1A009B060007023A /* JackGrunt2.wav */,
+				FE9CBC0B1A009B060007023A /* JackGrunt3.wav */,
+				FE9CBC0C1A009B060007023A /* JackGrunt4.wav */,
+				FE9CBC0D1A009B060007023A /* JackGrunt5.wav */,
+				FE9CBC0E1A009B060007023A /* JackGrunt6.wav */,
+				FE9CBC0F1A009B060007023A /* JackHeal.wav */,
+				FE9CBC101A009B060007023A /* JackTimber1.wav */,
+				FE9CBC111A009B060007023A /* JackTimber2.wav */,
+				FE9CBC121A009B060007023A /* JackTimber3.wav */,
+				FE9CBC131A009B060007023A /* KangarooHit.wav */,
+				FE9CBC141A009B060007023A /* KangarooStart.wav */,
+				FE9CBC151A009B060007023A /* LionStart.wav */,
+				FE9CBC161A009B060007023A /* MapLevelSelect.wav */,
+				FE9CBC171A009B060007023A /* PandaBoing.wav */,
+				FE9CBC181A009B060007023A /* PandaDead.wav */,
+				FE9CBC191A009B060007023A /* PandaStart.wav */,
+				FE9CBC1A1A009B060007023A /* Pelican.wav */,
+				FE9CBC1B1A009B060007023A /* Pickup.wav */,
+				FE9CBC1C1A009B060007023A /* Pickup2.wav */,
+				FE9CBC1D1A009B060007023A /* PlayerBig.wav */,
+				FE9CBC1E1A009B060007023A /* PlayerBigStart.wav */,
+				FE9CBC1F1A009B060007023A /* PlayerBoost.wav */,
+				FE9CBC201A009B060007023A /* PlayerCollect1.wav */,
+				FE9CBC211A009B060007023A /* PlayerCollect2.wav */,
+				FE9CBC221A009B060007023A /* PlayerDamage1.wav */,
+				FE9CBC231A009B060007023A /* PlayerDamage2.wav */,
+				FE9CBC241A009B060007023A /* PlayerDamage3.wav */,
+				FE9CBC251A009B060007023A /* PlayerDead.wav */,
+				FE9CBC261A009B060007023A /* PlayerStart.wav */,
+				FE9CBC271A009B060007023A /* Punch-Heavy.wav */,
+				FE9CBC281A009B060007023A /* Punch-Heavy2.wav */,
+				FE9CBC291A009B060007023A /* Punch-Heavy3.wav */,
+				FE9CBC2A1A009B060007023A /* Punch-Light.wav */,
+				FE9CBC2B1A009B060007023A /* Punch-Light2.wav */,
+				FE9CBC2C1A009B060007023A /* Punch-Light3.wav */,
+				FE9CBC2D1A009B060007023A /* Punch-Medium.wav */,
+				FE9CBC2E1A009B060007023A /* Punch-Medium2.wav */,
+				FE9CBC2F1A009B060007023A /* Punch-Medium3.wav */,
+				FE9CBC301A009B060007023A /* RhinoDead.wav */,
+				FE9CBC311A009B060007023A /* RhinoGrunt1.wav */,
+				FE9CBC321A009B060007023A /* RhinoStart.wav */,
+				FE9CBC331A009B060007023A /* RifleShoot.wav */,
+				FE9CBC341A009B060007023A /* Saw.wav */,
+				FE9CBC351A009B060007023A /* Saw2.wav */,
+				FE9CBC361A009B060007023A /* SawFlesh.wav */,
+				FE9CBC371A009B060007023A /* SawFlesh2.wav */,
+				FE9CBC381A009B060007023A /* SnakeDead.wav */,
+				FE9CBC391A009B060007023A /* SnakeSpit.wav */,
+				FE9CBC3A1A009B060007023A /* SnakeStart.wav */,
+				FE9CBC3B1A009B060007023A /* Throw.wav */,
+				FE9CBC3C1A009B060007023A /* Throw2.wav */,
+				FE9CBC3D1A009B060007023A /* TigerDead.wav */,
+				FE9CBC3E1A009B060007023A /* TigerGrunt1.wav */,
+				FE9CBC3F1A009B060007023A /* TigerGrunt2.wav */,
+				FE9CBC401A009B060007023A /* TigerStart.wav */,
+				FE9CBC411A009B060007023A /* TreeFall.wav */,
+				FE9CBC421A009B060007023A /* Truck.wav */,
+				FE9CBC431A009B060007023A /* TruckDead.wav */,
+				FE9CBC441A009B060007023A /* TruckHit.wav */,
+				FE9CBC451A009B060007023A /* TruckIdle.wav */,
+				FE9CBC461A009B060007023A /* WaveFinal.wav */,
+				FE9CBC471A009B060007023A /* WaveMessage.wav */,
+				FE9CBC481A009B060007023A /* Willow_and_the_Light.mp3 */,
+			);
+			path = AudioClip;
+			sourceTree = "<group>";
+		};
+		FE9CBC491A009B060007023A /* fire */ = {
+			isa = PBXGroup;
+			children = (
+				FE9CBC4A1A009B060007023A /* fire.plist */,
+				FE9CBC4B1A009B060007023A /* fire.pvr.ccz */,
+				FE9CBC4C1A009B060007023A /* flame.png */,
+			);
+			path = fire;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -715,35 +1143,161 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE9CBCB71A009B070007023A /* TigerGrunt1.wav in Resources */,
+				FE9CBC721A009B060007023A /* GorillaGrunt1.wav in Resources */,
+				FE9CBC7E1A009B060007023A /* JackDead1.wav in Resources */,
+				FE9CBC781A009B060007023A /* JackBoost.wav in Resources */,
 				9CFB92FB19EB4AE8000F869A /* fonts in Resources */,
+				FE9CBC521A009B060007023A /* AcornDrop.wav in Resources */,
+				FE9CBC711A009B060007023A /* GorillaDead.wav in Resources */,
+				FE9CBC911A009B060007023A /* PandaDead.wav in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				9C9F513B19FD739A004EFA88 /* panda.png in Resources */,
+				FE9CBC6F1A009B060007023A /* Fanfare.wav in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				FE9CBC7B1A009B060007023A /* JackDamage2.wav in Resources */,
+				FE9CBC8D1A009B060007023A /* KangarooStart.wav in Resources */,
+				FE9CBCAC1A009B070007023A /* RifleShoot.wav in Resources */,
+				FE9CBC851A009B060007023A /* JackGrunt4.wav in Resources */,
+				FE9CBCBE1A009B070007023A /* TruckIdle.wav in Resources */,
+				FE9CBC531A009B060007023A /* ActionDrop.wav in Resources */,
+				FE9CBCB01A009B070007023A /* SawFlesh2.wav in Resources */,
+				9C9F514019FD787D004EFA88 /* banana.png in Resources */,
+				FE9CBCC31A009B070007023A /* fire.pvr.ccz in Resources */,
+				FE9CBC661A009B060007023A /* Chee Zee Jungle.mp3 in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				FE9CBC831A009B060007023A /* JackGrunt2.wav in Resources */,
+				FE9CBC8A1A009B060007023A /* JackTimber2.wav in Resources */,
+				FE9CBC5D1A009B060007023A /* AxeTreeDouble1.wav in Resources */,
+				FE9CBC6E1A009B060007023A /* Explosion.wav in Resources */,
+				FE9CBC791A009B060007023A /* JackCheer.wav in Resources */,
+				FE9CBCC61A009B070007023A /* p10.plist in Resources */,
+				FE9CBCAD1A009B070007023A /* Saw.wav in Resources */,
+				FE9CBC641A009B060007023A /* Chainsaw2.wav in Resources */,
+				FE9CBCA61A009B070007023A /* Punch-Medium.wav in Resources */,
+				FE9CBC751A009B060007023A /* Harp.wav in Resources */,
+				FE9CBCA71A009B070007023A /* Punch-Medium2.wav in Resources */,
+				FE9CBC731A009B060007023A /* GorillaGrunt2.wav in Resources */,
+				FE9CBCBD1A009B070007023A /* TruckHit.wav in Resources */,
+				FE9CBC5E1A009B060007023A /* AxeTreeDouble2.wav in Resources */,
+				FE9CBC9A1A009B070007023A /* PlayerCollect2.wav in Resources */,
+				9C9F513A19FD739A004EFA88 /* money.png in Resources */,
+				FE9CBCB91A009B070007023A /* TigerStart.wav in Resources */,
+				FE9CBC891A009B060007023A /* JackTimber1.wav in Resources */,
+				FE9CBC6A1A009B060007023A /* Crunch.wav in Resources */,
+				FE9CBCA21A009B070007023A /* Punch-Heavy3.wav in Resources */,
 				9CFB92F619EB4AE8000F869A /* attackoption1.png in Resources */,
+				FE9CBCA51A009B070007023A /* Punch-Light3.wav in Resources */,
+				FE9CBCC91A009B070007023A /* weapons.pvr.ccz in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				FE9CBC801A009B060007023A /* JackDead3.wav in Resources */,
+				FE9CBC5B1A009B060007023A /* AxeTree1.wav in Resources */,
+				FE9CBC8F1A009B060007023A /* MapLevelSelect.wav in Resources */,
+				FE9CBC9F1A009B070007023A /* PlayerStart.wav in Resources */,
+				FE9CBCA91A009B070007023A /* RhinoDead.wav in Resources */,
+				FE9CBC5F1A009B060007023A /* Beaver.wav in Resources */,
+				FE9CBCBF1A009B070007023A /* WaveFinal.wav in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				FE9CBC821A009B060007023A /* JackGrunt1.wav in Resources */,
+				FE9CBCA81A009B070007023A /* Punch-Medium3.wav in Resources */,
+				FE9CBC871A009B060007023A /* JackGrunt6.wav in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				FE9CBCA11A009B070007023A /* Punch-Heavy2.wav in Resources */,
+				FE9CBC571A009B060007023A /* ApeGrunt2.wav in Resources */,
+				FE9CBC8E1A009B060007023A /* LionStart.wav in Resources */,
 				9CFB92F719EB4AE8000F869A /* background.png in Resources */,
+				9C9F513919FD739A004EFA88 /* cloth.png in Resources */,
+				FE9CBC771A009B060007023A /* InstantBanana.wav in Resources */,
+				9C9F513C19FD739A004EFA88 /* tiger2.png in Resources */,
+				FE9CBC9C1A009B070007023A /* PlayerDamage2.wav in Resources */,
+				FE9CBCC21A009B070007023A /* fire.plist in Resources */,
+				FE9CBCA41A009B070007023A /* Punch-Light2.wav in Resources */,
+				FE9CBC901A009B060007023A /* PandaBoing.wav in Resources */,
+				FE9CBCB81A009B070007023A /* TigerGrunt2.wav in Resources */,
+				FE9CBCC11A009B070007023A /* Willow_and_the_Light.mp3 in Resources */,
+				FE9CBC8C1A009B060007023A /* KangarooHit.wav in Resources */,
+				FE9CBC761A009B060007023A /* HomeTreeBroken.wav in Resources */,
+				FE9CBC5A1A009B060007023A /* AxeFleshDouble1.wav in Resources */,
+				FE9CBCB61A009B070007023A /* TigerDead.wav in Resources */,
 				9CFB92F819EB4AE8000F869A /* CloseNormal.png in Resources */,
+				FE9CBC811A009B060007023A /* JackDead4.wav in Resources */,
+				FE9CBC9D1A009B070007023A /* PlayerDamage3.wav in Resources */,
+				FE9CBCC81A009B070007023A /* weapons.plist in Resources */,
+				FE9CBC991A009B070007023A /* PlayerCollect1.wav in Resources */,
+				FE9CBC5C1A009B060007023A /* AxeTree2.wav in Resources */,
 				9CFB92F919EB4AE8000F869A /* CloseSelected.png in Resources */,
+				FE9CBC691A009B060007023A /* CrocodileStart.wav in Resources */,
 				9CFB92FE19EB4AE8000F869A /* image in Resources */,
+				FE9CBCA01A009B070007023A /* Punch-Heavy.wav in Resources */,
+				FE9CBC681A009B060007023A /* Cling.wav in Resources */,
 				9CFB92F519EB4AE8000F869A /* animal4.png in Resources */,
+				FE9CBC541A009B060007023A /* animalCheer.wav in Resources */,
+				FE9CBC621A009B060007023A /* CageBreak.wav in Resources */,
+				FE9CBC551A009B060007023A /* ApeDead.wav in Resources */,
+				FE9CBC981A009B060007023A /* PlayerBoost.wav in Resources */,
+				FE9CBC951A009B060007023A /* Pickup2.wav in Resources */,
+				FE9CBC591A009B060007023A /* AxeFlesh.wav in Resources */,
+				FE9CBC561A009B060007023A /* ApeGrunt1.wav in Resources */,
+				FE9CBCC01A009B070007023A /* WaveMessage.wav in Resources */,
+				FE9CBCBC1A009B070007023A /* TruckDead.wav in Resources */,
+				FE9CBC7D1A009B060007023A /* JackDamage4.wav in Resources */,
 				9CFB92F319EB4AE8000F869A /* animal2.png in Resources */,
+				FE9CBCBB1A009B070007023A /* Truck.wav in Resources */,
+				FE9CBC671A009B060007023A /* Click.wav in Resources */,
+				FE9CBCBA1A009B070007023A /* TreeFall.wav in Resources */,
+				FE9CBC841A009B060007023A /* JackGrunt3.wav in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				9CFB92F219EB4AE8000F869A /* animal1.png in Resources */,
+				FE9CBC971A009B060007023A /* PlayerBigStart.wav in Resources */,
+				FE9CBC701A009B060007023A /* FoodDrop.wav in Resources */,
+				FE9CBCC51A009B070007023A /* p1.ExportJson in Resources */,
+				FE9CBC931A009B060007023A /* Pelican.wav in Resources */,
+				FE9CBCB51A009B070007023A /* Throw2.wav in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				FE9CBC881A009B060007023A /* JackHeal.wav in Resources */,
+				FE9CBC6D1A009B060007023A /* DefeatBrass.wav in Resources */,
+				FE9CBC941A009B060007023A /* Pickup.wav in Resources */,
+				FE9CBCC71A009B070007023A /* p10.png in Resources */,
+				FE9CBCAF1A009B070007023A /* SawFlesh.wav in Resources */,
+				FE9CBC611A009B060007023A /* BigTruckAccelerate.wav in Resources */,
+				FE9CBCAE1A009B070007023A /* Saw2.wav in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				FE9CBCAA1A009B070007023A /* RhinoGrunt1.wav in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				FE9CBCB21A009B070007023A /* SnakeSpit.wav in Resources */,
 				A601081919EB5DED00664A6C /* attackoption2.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				FE9CBC921A009B060007023A /* PandaStart.wav in Resources */,
+				FE9CBC601A009B060007023A /* Bees.wav in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				FE9CBC861A009B060007023A /* JackGrunt5.wav in Resources */,
+				FE9CBC6C1A009B060007023A /* DeerStart.wav in Resources */,
+				FE9CBC7A1A009B060007023A /* JackDamage1.wav in Resources */,
+				FE9CBC8B1A009B060007023A /* JackTimber3.wav in Resources */,
+				FE9CBC9B1A009B070007023A /* PlayerDamage1.wav in Resources */,
+				FE9CBCC41A009B070007023A /* flame.png in Resources */,
 				9CFB92FC19EB4AE8000F869A /* fruit.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				FE9CBCAB1A009B070007023A /* RhinoStart.wav in Resources */,
+				FE9CBCB11A009B070007023A /* SnakeDead.wav in Resources */,
+				9C9F513819FD739A004EFA88 /* back.png in Resources */,
+				FE9CBC581A009B060007023A /* ApeStart.wav in Resources */,
+				FE9CBC9E1A009B070007023A /* PlayerDead.wav in Resources */,
+				FE9CBC7C1A009B060007023A /* JackDamage3.wav in Resources */,
 				9CFB92FD19EB4AE8000F869A /* HelloWorld.png in Resources */,
+				FE9CBC961A009B060007023A /* PlayerBig.wav in Resources */,
+				FE9CBC631A009B060007023A /* ChainSaw1.wav in Resources */,
+				FE9CBCB41A009B070007023A /* Throw.wav in Resources */,
+				FE9CBC6B1A009B060007023A /* DeerHeal.wav in Resources */,
+				FE9CBC741A009B060007023A /* GorillaStart.wav in Resources */,
 				9CFB92F419EB4AE8000F869A /* animal3.png in Resources */,
+				FE9CBC7F1A009B060007023A /* JackDead2.wav in Resources */,
+				FE9CBC651A009B060007023A /* ChainSawIdle.wav in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+				FE9CBCA31A009B070007023A /* Punch-Light.wav in Resources */,
+				FE9CBCB31A009B070007023A /* SnakeStart.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,24 +1316,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */,
-				FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */,
+				9C0003DA19FDE556001AF185 /* FSM.cpp in Sources */,
+				9C0003CD19FDE556001AF185 /* Animal.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
-				9C609C3719E1BD01004B375D /* Banana.cpp in Sources */,
+				9C0003D919FDE556001AF185 /* Fire.cpp in Sources */,
+				9C0003DE19FDE556001AF185 /* Player.cpp in Sources */,
+				9C0003DB19FDE556001AF185 /* MainScene.cpp in Sources */,
+				9C0003D619FDE556001AF185 /* Enemy.cpp in Sources */,
+				9C0003E319FDE556001AF185 /* Weapon.cpp in Sources */,
+				9C0003E119FDE556001AF185 /* Tree.cpp in Sources */,
+				9C0003D419FDE556001AF185 /* blood.cpp in Sources */,
+				9C0003D319FDE556001AF185 /* BananaManger.cpp in Sources */,
+				9C0003D219FDE556001AF185 /* Banana.cpp in Sources */,
+				9C0003CF19FDE556001AF185 /* Animal2Manager.cpp in Sources */,
+				9C0003CE19FDE556001AF185 /* Animal2.cpp in Sources */,
+				9C0003D019FDE556001AF185 /* AppDelegate.cpp in Sources */,
+				9C0003D719FDE556001AF185 /* Enemy2.cpp in Sources */,
+				9C0003D119FDE556001AF185 /* Attack.cpp in Sources */,
+				9C0003E019FDE556001AF185 /* StartScene.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
-				9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */,
-				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
-				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
-				A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */,
-				9CFB92CE19EB2AD7000F869A /* Fire.cpp in Sources */,
-				FEDF9FE519E39E7A00484807 /* blood.cpp in Sources */,
-				A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				9C0003DF19FDE556001AF185 /* Progress.cpp in Sources */,
+				9C0003E219FDE556001AF185 /* VisibleRect.cpp in Sources */,
+				9C0003D819FDE556001AF185 /* Enemy2Manager.cpp in Sources */,
+				9C0003D519FDE556001AF185 /* CustomTool.cpp in Sources */,
 				1AFAF8B816D35DE700DB1158 /* (null) in Sources */,
-				FEDF9FE619E39E7A00484807 /* Progress.cpp in Sources */,
-				A60105AC19E1C28100664A6C /* Enemy.cpp in Sources */,
-				BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */,
-				FEDF9FE419E39E7A00484807 /* Attack.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,7 +1348,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
 				5087E75817EB910900C73F5D /* (null) in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 			);
