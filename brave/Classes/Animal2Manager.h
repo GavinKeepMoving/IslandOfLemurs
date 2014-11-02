@@ -30,9 +30,9 @@ public:
     
     void bindBackground(Sprite* background);
     Sprite* _background;
-    void createAnimal2s();/*创建Monster对象*/
+    Animal2* createAnimal2s();/*创建Monster对象*/
     void setEnemy(__Array* _enemy2Arr){this->_enemy2Arr = _enemy2Arr;}
-    int judgeNeayBy(Animal2* animal);
+    int judgeNeayBy(Animal2* animal,std::vector<Enemy2*> enemys);
     Enemy2* getNearestEnemy(Animal2* animal);
     
     private:

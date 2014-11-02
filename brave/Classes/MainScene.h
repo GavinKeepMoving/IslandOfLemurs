@@ -146,11 +146,12 @@ private:
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
     
-    __Array* _enemy2Arr;
-    __Array* _aniaml2Arr;
-    
 
 public:
+//    __Array* _enemy2Arr;
+//    __Array* _animal2Arr;
+    std::vector<Enemy2*> _enemy2Arr;
+    std::vector<Animal2*> _animal2Arr;
     Sprite *_background;
     Sprite *_background1;
     std::vector<Tree*> _trees;
