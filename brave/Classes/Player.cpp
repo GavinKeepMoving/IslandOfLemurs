@@ -67,6 +67,7 @@ bool Player::initWithPlayerType(PlayerType type)
     _attackSpeed = 3;
     _attackRange = 350;
 	_seq = nullptr;
+    DROPING = false;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
     
@@ -115,7 +116,10 @@ void Player::initFSM()
     auto onIdle =[&]()
     {
         log("onIdle: Enter idle");
-        this->stopActionByTag(WALKTO_TAG);
+        this->stopAllActions();
+        this->background->stopAllActions();
+        //this->stopActionByTag(WALKTO_TAG);
+        //this->stop();
 //        auto func = [&]()
 //        {
 //            this->stop();
@@ -166,11 +170,20 @@ void Player::generalAttack(float radius) {
     }
 }
 
-void Player::playerDrop(int start, int end, std::function<void()> callback) {
-    if (this->getPositionX() > start && this->getPositionX() < end) {
+void Player::playerDrop(int start, int end, std::function<void ()> callback) {
+    std::function<void()> onDrop = CC_CALLBACK_0(Player::onDrop, this, start, end, callback);
+    _fsm->setOnEnter("droping", onDrop);
+    _fsm->doEvent("drop");
+}
+
+void Player::onDrop(int start, int end, std::function<void()> callback) {
+    if (this->getPositionX() > start-this->getContentSize().width/2 && this->getPositionX()+-this->getContentSize().width/2 < end) {
         log("Player: drop!");
+        //DROPING = true;
         auto preStatus = this->_fsm->getState();
-        _fsm->doEvent("stop");
+        //_fsm->doEvent("stop");
+        this->stopAllActions();
+        background->stopAllActions();
         Vec2 ground;
         Size visibleSize = Director::getInstance()->getVisibleSize();
         Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -178,20 +191,28 @@ void Player::playerDrop(int start, int end, std::function<void()> callback) {
         ground.x = this->getPositionX();
         auto time = (this->getPosition()-ground).getLength()/400;
         auto drop = MoveTo::create(time, ground);
-        drop->setTag(200);
+        //drop->setTag(200);
         
-        auto func = [&]()
+        
+        _fsm->setOnEnter("walking", callback);
+        auto funcwalk = [&]()
         {
-            callback();
+            _fsm->doEvent("dropwalk");
         };
-        auto _callback = CallFunc::create(func);
+        auto _callbackwalk = CallFunc::create(funcwalk);
+        
+        auto funcstop = [&]()
+        {
+            _fsm->doEvent("dropstop");
+        };
+        auto _callbackstop = CallFunc::create(funcstop);
         
         if(preStatus == "walking") {
-            auto _seq = Sequence::create(drop, _callback, NULL);
+            auto _seq = Sequence::create(drop, _callbackwalk, NULL);
             this->runAction(_seq);
         }
         else {
-            auto _seq = Sequence::create(drop, NULL);
+            auto _seq = Sequence::create(drop, _callbackstop, NULL);
             this->runAction(_seq);
         }
         //auto _sep = Sequence::create(drop, onWalk, NULL);
@@ -240,28 +261,33 @@ void Player::stop(float r) {
         this->unschedule(schedule_selector(Player::stop));
         //this->scheduleUpdate();
         //this->stopActionByTag(WALKTO_TAG);
-        this->stopAllActions();
-        this->background->stopActionByTag(WALKTO_TAG);
+        //this->stopAllActions();
+        //this->background->stopAllActions();
+        //this->background->stopActionByTag(WALKTO_TAG);
         _fsm->doEvent("stop");
     }
 }
 
+//void Player::stop() {
+//    Size visibleSize = Director::getInstance()->getVisibleSize();
+//    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+//    float upGround = origin.y + visibleSize.height*Player::height*3;
+//    float downGround = origin.y + visibleSize.height*Player::height/2;
+//    
+//    if(this->getPositionY() < upGround - 20 &&
+//       this->getPositionY() > downGround + 20) {
+//        float waitTime = 0.1;
+//        this->schedule(schedule_selector(Player::stop), waitTime);
+//        this->scheduleUpdate();
+//    }
+//    else {
+//        this->stop(0.1);
+//    }
+//    
+//}
+
 void Player::stop() {
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    float upGround = origin.y + visibleSize.height*Player::height*3;
-    float downGround = origin.y + visibleSize.height*Player::height/2;
-    
-    if(this->getPositionY() < upGround - 20 &&
-       this->getPositionY() > downGround + 20) {
-        float waitTime = 0.1;
-        this->schedule(schedule_selector(Player::stop), waitTime);
-        this->scheduleUpdate();
-    }
-    else {
-        this->stop(0.1);
-    }
-    
+    _fsm->doEvent("stop");
 }
 
 //actually player stay in the center of the screeen but the background would move to the opposite position as the target

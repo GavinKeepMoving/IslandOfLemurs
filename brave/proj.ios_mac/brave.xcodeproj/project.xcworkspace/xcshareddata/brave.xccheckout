@@ -11,17 +11,17 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C513B90C3199D6EDA801C6DAA64450B3D6AD5B95</key>
-		<string>github.com:GavinKeepMoving/IslandOfLemurs.git</string>
+		<string>https://github.com/GavinKeepMoving/IslandOfLemurs.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>brave/proj.ios_mac/brave.xcodeproj</string>
+	<string>brave/proj.ios_mac/brave.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C513B90C3199D6EDA801C6DAA64450B3D6AD5B95</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:GavinKeepMoving/IslandOfLemurs.git</string>
+	<string>https://github.com/GavinKeepMoving/IslandOfLemurs.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

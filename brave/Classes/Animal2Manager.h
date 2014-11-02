@@ -11,6 +11,8 @@
 
 #include "cocos2d.h"
 #include "Animal2.h"
+#include "Enemy2.h"
+class Enemy2;
 USING_NS_CC;
 
 
@@ -29,9 +31,14 @@ public:
     void bindBackground(Sprite* background);
     Sprite* _background;
     void createAnimal2s();/*创建Monster对象*/
-
+    void setEnemy(__Array* _enemy2Arr){this->_enemy2Arr = _enemy2Arr;}
+    int judgeNeayBy(Animal2* animal);
+    Enemy2* getNearestEnemy(Animal2* animal);
+    
     private:
+    __Array* _enemy2Arr;
     __Array* _animal2Arr;/*存放怪物数组*/
+    int mindist = 10;
     //Player* _player;
 };
 
