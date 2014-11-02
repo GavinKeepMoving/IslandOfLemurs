@@ -53,6 +53,7 @@ Enemy2* Enemy2Manager::createEnemy2s()
         this->addChild(enemy2);  /*将怪物添加到管理器(CCNode)中*/
 //        _enemy2Arr->addObject(enemy2);/*添加到数组中，便于管理*/
 //    }
+	
     return enemy2;
 }
 
