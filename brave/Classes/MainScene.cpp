@@ -541,8 +541,8 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
     _player->stop();
     //********************************************************************************
     //added by Wenbo Lin
-    _background->stopAllActions();
-    _background1->stopAllActions();
+    //_background->stopAllActions();
+    //_background1->stopAllActions(); // commented by Zhenni
     //********************************************************************************
     /*if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
         _player->climbDown(pos);
@@ -582,8 +582,6 @@ void MainScene::deleteTree() {
     float rangeLeft = 0;
     float rangeRight = 0;
     
-    //rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.5;
-
     int i = _ropes.size() - 1;
     rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * (0.4 + i * 0.1);
     rangeRight = xPos + target->getContentSize().width / 2;

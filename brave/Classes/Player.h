@@ -44,6 +44,7 @@ public:
     void onWalk(Vec2 dest, int boundry);
     void initFSM();
     void stop();
+    void stop(float r);
     Weapon* attack(float radius = 250.f);
     
     
@@ -71,8 +72,9 @@ public:
     int targetEnemyIdx;
     void attackCallback(float test);
     void generalAttack(float radius = 250.f);
-    void playerDrop(int start, int end);
+    //void playerDrop(int start, int end);
     void playerDrop(int start, int end, std::function<void()> callback);
+    void onDrop(int start, int end, std::function<void()> callback);
     void constructActionArray(int start, int end,Vector< FiniteTimeAction * > &arrayOfActions, Vector< FiniteTimeAction * > &backgroundActions);
 private:
     //Action _seq;
@@ -88,6 +90,7 @@ private:
     //currentPos
     FSM *_fsm;
     Weapon::WeaponType currentWeapon;
+    bool DROPING;
     //std::vector<Enemy*> *_enemys;
 
 };
