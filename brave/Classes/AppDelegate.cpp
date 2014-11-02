@@ -1,6 +1,8 @@
 #include "AppDelegate.h"
 #include "MainScene.h"
 #include "StartScene.h"
+#include "SimpleAudioEngine.h"
+
 
 USING_NS_CC;
 
@@ -27,6 +29,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
+    //Begin added by Wenbo Lin
+    //CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("AudioClip/Willow_and_the_Light.mp3");
+    //CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("AudioClip/Willow_and_the_Light.mp3", true);
+    //Ended added by Wenbo Lin
+    
     // create a scene. it's an autorelease object
     Scene *scene = StartScene::createScene();
 
@@ -48,6 +55,11 @@ void AppDelegate::applicationDidEnterBackground() {
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
+    //Begin added by Wenbo Lin
+    //CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("AudioClip/Willow_and_the_Light.mp3");
+    //CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("AudioClip/Willow_and_the_Light.mp3", true);
+    //Ended added by Wenbo Lin
+    
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

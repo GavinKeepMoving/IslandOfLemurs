@@ -40,179 +40,22 @@ bool MainScene::init()
         return false;
     }
     
-    visibleSize = Director::getInstance()->getVisibleSize();
-    origin = Director::getInstance()->getVisibleOrigin();
+    this->playMusic();
     
-    //Zhenni
-    this->boundry = 550;
+    this->setParameters();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(MainScene::menuCloseCallback, this));
+    this->addCloseIcon();
     
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    this->addWeaponOptionBar();
     
-    // 3. add Weapon options bar
-    initWeaponOptionsBar(origin, visibleSize);
-    initAnimalOptionsBar();
+    this->addHelloWorldLabel();
     
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
+    this->addBackground();
     
-    label = LabelTTF::create("Score: 0", "Arial", 24);
+    this->addRoles();
     
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
-
-    // add the label as a child to this layer
-    this->addChild(label, 1);
-
-    //add background image
-    log("create background");
-    _background = Sprite::create("image/background.png");
-    _background1 = Sprite::create("image/background.png");
-    log("created background");
-
-    // position the sprite on the center of the screen
-    _background->setPosition(origin + visibleSize/2);
-    _background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
-    
-    //********************************************************************************************************//
-    //added by Wenbo Lin
-    
-    //add trees to background
-    this->initTrees(2);
-    //finish initializing trees
-    //end of Wenbo Lin's code
-    //********************************************************************************************************//
-    //background->setPosition(origin + visibleSize/2);
-    
-    // add the sprite as a child to this layer
-    //this->addChild(background, 0);
-
-    
-    _listener_touch = EventListenerTouchOneByOne::create();
-    _listener_touch->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan,this);
-    _listener_touch->onTouchEnded = CC_CALLBACK_2(MainScene::onTouchEnded,this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(_listener_touch, this);
-
-    // add the sprite as a child to this layer
-    this->addChild(_background, 0);
-    this->addChild(_background1, 0);
-
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
-	
-    //Lishi Jiang
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/animal.plist", "image/animal.pvr.ccz");
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
-	//-------------------------------------//
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
-
-    
-
-    
-    //************************* Begin add by Wenbo Lin *****************************//
-    //add fire animation
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/fire/fire.plist","image/fire/fire.pvr.ccz");
-    //************************* End add by Wenbo Lin *****************************//
-       
-    //add player
-    _player = Player::create(Player::PlayerType::PLAYER);
-    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
-    _player->background = _background;
-    _player->background1 = _background1;
-    _player->setScale(0.5);
-    //_player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
-    this->addChild(_player);
-    _player->retain();
-    
-    /******************Begin-Added by Zhe Liu*****************************/
-    //add enemy1
-    ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
-    
-    
-    
-    _enemy2Manager = Enemy2Manager::create(_background);
-    _enemy2Manager->_background = _background;
-    _background->addChild(_enemy2Manager, 2);
-    
-    //_enemy2 = new Enemy2();
-    //_enemy2->setPosition(850, 430);
-    //_enemy2->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
-    //_background->addChild(_enemy2);
-    
-    
-    
-    
-    
-    //_enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    // _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
-    //_background->addChild(_enemy1);
-    
-
-
-    
-//    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
-//    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-     //_background->addChild(_enemy2);
-    
-//    _animal = Animal::create(Animal::AnimalType::ELEPHANT);
-//    _animal->setPosition(1450, origin.y + visibleSize.height * Animal::height);
-//    _background->addChild(_animal);
-    /******************End-Added by Yafu*****************************/
-    
-    bananaManger = BananaManger::create(_background);
-    bananaManger->bindPlayer(_player);
-    
-    /****************** Begin-Added by Wenbo *********************/
-    //Original Version
-    //this->addChild(bananaManger,4);
-    
-    //Edit Version
-    bananaManger->_background = _background;
-    _background->addChild(bananaManger, 2);
-    /****************** End-Added by Wenbo *********************/
-    
-
-    //add blood progress
-    
-    /****************** Begin-Added by Zhe Liu *********************/
-    
-    //_enemys.push_back(_enemy1);
-//    _enemys.pushBack(_enemy2);
-    //_enemy1->addAttacker(_player);
-//    _enemy2->addAttacker(_player);
-//    _animals.push_back(_animal);
-    this->schedule(schedule_selector(MainScene::enemyMove), 3);
-    this->schedule(schedule_selector(MainScene::animalMove), 3);
-    //this->schedule(schedule_selector(MainScene::addEnemy),20);
-    /****************** End-Added by Zhe Liu *********************/
-	
-	//*****init blood progress  xiaojing **************//
-    addProgress();
-	
-	
-    //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
-    
-    this->scheduleUpdate();
+    this->setScheduleAndProgress();
+    //this->addgotoItem();//or combine with menu create??
     return true;
 }
 
@@ -223,7 +66,62 @@ void MainScene::addProgress()
 	_progress->setPosition(origin.x + _progress->getContentSize().width/2, origin.y - _progress->getContentSize().height/2);
 	this->addChild(_progress);
 }
+void MainScene::addgotoItem()
+{
+      this->addChild(menu, 1);
+    /***************goto next level menu**************************/
+	
+	auto gotoItem =  CustomTool::createMenuItemImage("go.png", "go.png", 
+													CC_CALLBACK_1(MainScene::gotoNextLevel,this));
+	gotoItem->setVisible(false);
+	gotoItem->setTag(2);
+	//VisibleRect::right().x - goItem->getContentSize().width/2, VisibleRect::center().y
+	//just try position
+	gotoItem->setPosition(Vec2(origin.x + visibleSize.width - gotoItem->getContentSize().width/2, origin.y + visibleSize.height * 0.5 + gotoItem->getContentSize().height/2));
+    
+    // create menu, 
+    auto menu = Menu::create(gotoItem, NULL);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+}
+bool MainScene::enemyAllDead()
+{
+	
+	log("all EnemyDead:%d", _enemys.size());
+	if(_enemys.size() == 0) return true;
+	else return false;
+}
 
+void MainScene::gotoNextLevel(Ref* obj)
+{
+	//need enable goItem in menu
+	auto goItem = this->_menu->getChildByTag(2);
+	goItem->setVisible(false);
+	goItem->stopAllActions();
+	
+	//background move 
+	//_background->move("left",_player);
+	
+	//enemy manager add new enemy to background
+		
+	/*
+	
+
+	*/		
+	}
+	
+}
+
+void MainScene::showNextLevelItem() //called by enemy manager???
+{
+	if(enemyAllDead()){//of  check by enemy manager????
+		auto goItem = this->_menu->getChildByTag(2);
+		goItem->setVisible(true);
+		goItem->runAction(RepeatForever::create(Blink::create(1,1)));
+		gamelevel = gamelevel+1;  //need add different number of enemy when enemy manager create enemy
+	}
+}
+/*****************************************************/
 void MainScene::update(float delta)
 {
     /*Point oldPos = _enemy1->getPosition();
@@ -638,6 +536,231 @@ void MainScene::deleteTree() {
         _background->removeChild(rope, true);
         _ropes.pop_back();
     }
+}
+/*******************************Ended add by Wenbo Lin*******************************/
+
+/*******************************Begin add by Wenbo Lin*******************************/
+void MainScene::playMusic() {
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("AudioClip/Willow_and_the_Light.mp3");
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("AudioClip/Willow_and_the_Light.mp3", true);
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(1.0);
+}
+
+void MainScene::setParameters()
+{
+    visibleSize = Director::getInstance()->getVisibleSize();
+    origin = Director::getInstance()->getVisibleOrigin();
+    
+    //Zhenni
+    this->boundry = 550;
+}
+
+void MainScene::addCloseIcon()
+{
+    /////////////////////////////
+    // 2. add a menu item with "X" image, which is clicked to quit the program
+    //    you may modify it.
+    
+    // add a "close" icon to exit the progress. it's an autorelease object
+    auto closeItem = MenuItemImage::create(
+                                           "CloseNormal.png",
+                                           "CloseSelected.png",
+                                           CC_CALLBACK_1(MainScene::menuCloseCallback, this));
+    
+    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
+                                origin.y + closeItem->getContentSize().height/2));
+    
+    // create menu, it's an autorelease object
+    auto menu = Menu::create(closeItem, NULL);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+}
+
+void MainScene::addWeaponOptionBar()
+{
+    // 3. add Weapon options bar
+    initWeaponOptionsBar(origin, visibleSize);
+    initAnimalOptionsBar();
+}
+
+void MainScene::addHelloWorldLabel()
+{
+    /////////////////////////////
+    // 3. add your codes below...
+    
+    // add a label shows "Hello World"
+    // create and initialize a label
+    
+    label = LabelTTF::create("Score: 0", "Arial", 24);
+    
+    // position the label on the center of the screen
+    label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                            origin.y + visibleSize.height - label->getContentSize().height));
+    
+    // add the label as a child to this layer
+    this->addChild(label, 1);
+}
+
+void MainScene::addBackground()
+{
+    //add background image
+    log("create background");
+    _background = Sprite::create("image/background.png");
+    _background1 = Sprite::create("image/background.png");
+    log("created background");
+    
+    // position the sprite on the center of the screen
+    _background->setPosition(origin + visibleSize/2);
+    _background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
+    // add the sprite as a child to this layer
+    this->addChild(_background, 0);
+    this->addChild(_background1, 0);
+}
+
+void MainScene::addRoles()
+{
+    this->addTrees();
+    this->addAnimations();
+    this->addFires();
+    this->addPlayer();
+    this->addEnemies();
+    this->addBananas();
+}
+
+//method in addRoles
+
+void MainScene::addTrees()
+{
+    //********************************************************************************************************//
+    //added by Wenbo Lin
+    
+    //add trees to background
+    this->initTrees(2);
+    //finish initializing trees
+    //end of Wenbo Lin's code
+    //********************************************************************************************************//
+    
+}
+
+void MainScene::addAnimations()
+{
+    _listener_touch = EventListenerTouchOneByOne::create();
+    _listener_touch->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan,this);
+    _listener_touch->onTouchEnded = CC_CALLBACK_2(MainScene::onTouchEnded,this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(_listener_touch, this);
+    
+    
+    
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("role.plist","role.pvr.ccz");
+    
+    //Lishi Jiang
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/animal.plist", "image/animal.pvr.ccz");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
+    //-------------------------------------//
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
+    
+
+}
+
+void MainScene::addFires()
+{
+    //************************* Begin add by Wenbo Lin *****************************//
+    //add fire animation
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/fire/fire.plist","image/fire/fire.pvr.ccz");
+    //************************* End add by Wenbo Lin *****************************//
+}
+
+void MainScene::addPlayer()
+{
+    //add player
+    _player = Player::create(Player::PlayerType::PLAYER);
+    _player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
+    _player->background = _background;
+    _player->background1 = _background1;
+    _player->setScale(0.5);
+    //_player->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height*3);
+    this->addChild(_player);
+    _player->retain();
+}
+
+void MainScene::addEnemies()
+{
+    /******************Begin-Added by Zhe Liu*****************************/
+    //add enemy1
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
+    
+    
+    
+    _enemy2Manager = Enemy2Manager::create(_background);
+    _enemy2Manager->_background = _background;
+    _background->addChild(_enemy2Manager, 2);
+    
+    //_enemy2 = new Enemy2();
+    //_enemy2->setPosition(850, 430);
+    //_enemy2->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
+    //_background->addChild(_enemy2);
+    
+    
+    
+    
+    
+    //_enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
+    // _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
+    //_background->addChild(_enemy1);
+    
+    
+    
+    
+    //    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY2);
+    //    _enemy2->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
+    //_background->addChild(_enemy2);
+    
+    //    _animal = Animal::create(Animal::AnimalType::ELEPHANT);
+    //    _animal->setPosition(1450, origin.y + visibleSize.height * Animal::height);
+    //    _background->addChild(_animal);
+    /******************End-Added by Yafu*****************************/
+}
+
+void MainScene::addBananas()
+{
+    bananaManger = BananaManger::create(_background);
+    bananaManger->bindPlayer(_player);
+    
+    /****************** Begin-Added by Wenbo *********************/
+    //Original Version
+    //this->addChild(bananaManger,4);
+    
+    //Edit Version
+    bananaManger->_background = _background;
+    _background->addChild(bananaManger, 2);
+    /****************** End-Added by Wenbo *********************/
+}
+//end of method in addRoles
+
+void MainScene::setScheduleAndProgress()
+{
+    //add blood progress
+    
+    /****************** Begin-Added by Zhe Liu *********************/
+    
+    //_enemys.push_back(_enemy1);
+    //    _enemys.pushBack(_enemy2);
+    //_enemy1->addAttacker(_player);
+    //    _enemy2->addAttacker(_player);
+    //    _animals.push_back(_animal);
+    this->schedule(schedule_selector(MainScene::enemyMove), 3);
+    this->schedule(schedule_selector(MainScene::animalMove), 3);
+    //this->schedule(schedule_selector(MainScene::addEnemy),20);
+    /****************** End-Added by Zhe Liu *********************/
+    
+    //*****init blood progress  xiaojing **************//
+    addProgress();
+    
+    
+    //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
+    
+    this->scheduleUpdate();
 }
 /*******************************Ended add by Wenbo Lin*******************************/
 
