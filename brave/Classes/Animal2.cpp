@@ -10,8 +10,8 @@
 
 Animal2::Animal2()
 {
-    Armature *armature = Armature::create("p1");
-    //armature->setScaleX(-1);
+    Armature *armature = Armature::create("animal");
+    armature->setScaleX(-1);
     this->animation = armature->getAnimation();
     this->animation->setMovementEventCallFunc(this, movementEvent_selector(Animal2::onAnimationEvent));
     direction = WALK_RIGHT;
@@ -63,7 +63,7 @@ void Animal2::updateMovement()
     Point oldPos = this->getPosition();
     if (currentState == WALK)
     {
-        this->setPosition(oldPos.x + -direction * WALK_SPEED,oldPos.y);
+        this->setPosition(oldPos.x -direction * WALK_SPEED,oldPos.y);
     }
 }
 
@@ -75,16 +75,16 @@ void Animal2::updateAnimation()
             animation->stop();
             break;
         case WALK:
-            animation->play("enemy_walk");
+            animation->play("animalwalk");
             break;
         case ATTACK:
-            animation->play("hit");
+            animation->play("animalhit");
             break;
         case BEHIT:
-            animation->play("behit");
+            animation->play("animalbehit");
             break;
         case DEAD:
-            animation->play("dead");
+            animation->play("animaldead");
             lockState = true;
             break;
         default:

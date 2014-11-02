@@ -17,7 +17,6 @@
 		1AC6FB30180E99EB004C840B /* libcocos2dx iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2dx iOS.a */; };
 		1AC6FB31180E99EB004C840B /* libcocos2dx-extensions iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB09180E9839004C840B /* libcocos2dx-extensions iOS.a */; };
 		1AC6FB32180E99EB004C840B /* libCocosDenshion iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB0F180E9839004C840B /* libCocosDenshion iOS.a */; };
-		1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
 		1AFAF8B816D35DE700DB1158 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -82,6 +81,12 @@
 		9C9F513B19FD739A004EFA88 /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513619FD739A004EFA88 /* panda.png */; };
 		9C9F513C19FD739A004EFA88 /* tiger2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513719FD739A004EFA88 /* tiger2.png */; };
 		9C9F514019FD787D004EFA88 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F513F19FD787D004EFA88 /* banana.png */; };
+		9CC89F671A06B8D900CDA6D1 /* p1.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = 9CC89F641A06B8D900CDA6D1 /* p1.ExportJson */; };
+		9CC89F681A06B8D900CDA6D1 /* p10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CC89F651A06B8D900CDA6D1 /* p10.plist */; };
+		9CC89F691A06B8D900CDA6D1 /* p10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CC89F661A06B8D900CDA6D1 /* p10.png */; };
+		9CC89F6D1A06B94200CDA6D1 /* animal.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = 9CC89F6A1A06B94100CDA6D1 /* animal.ExportJson */; };
+		9CC89F6E1A06B94200CDA6D1 /* animal0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CC89F6B1A06B94100CDA6D1 /* animal0.plist */; };
+		9CC89F6F1A06B94200CDA6D1 /* animal0.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CC89F6C1A06B94200CDA6D1 /* animal0.png */; };
 		9CFB92F219EB4AE8000F869A /* animal1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92E319EB4AE8000F869A /* animal1.png */; };
 		9CFB92F319EB4AE8000F869A /* animal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92E419EB4AE8000F869A /* animal2.png */; };
 		9CFB92F419EB4AE8000F869A /* animal3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB92E519EB4AE8000F869A /* animal3.png */; };
@@ -334,6 +339,12 @@
 		9C9F513619FD739A004EFA88 /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
 		9C9F513719FD739A004EFA88 /* tiger2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger2.png; sourceTree = "<group>"; };
 		9C9F513F19FD787D004EFA88 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
+		9CC89F641A06B8D900CDA6D1 /* p1.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = p1.ExportJson; sourceTree = "<group>"; };
+		9CC89F651A06B8D900CDA6D1 /* p10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = p10.plist; sourceTree = "<group>"; };
+		9CC89F661A06B8D900CDA6D1 /* p10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p10.png; sourceTree = "<group>"; };
+		9CC89F6A1A06B94100CDA6D1 /* animal.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = animal.ExportJson; sourceTree = "<group>"; };
+		9CC89F6B1A06B94100CDA6D1 /* animal0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = animal0.plist; sourceTree = "<group>"; };
+		9CC89F6C1A06B94200CDA6D1 /* animal0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal0.png; sourceTree = "<group>"; };
 		9CFB92E319EB4AE8000F869A /* animal1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal1.png; sourceTree = "<group>"; };
 		9CFB92E419EB4AE8000F869A /* animal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal2.png; sourceTree = "<group>"; };
 		9CFB92E519EB4AE8000F869A /* animal3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal3.png; sourceTree = "<group>"; };
@@ -580,6 +591,12 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9CC89F6A1A06B94100CDA6D1 /* animal.ExportJson */,
+				9CC89F6B1A06B94100CDA6D1 /* animal0.plist */,
+				9CC89F6C1A06B94200CDA6D1 /* animal0.png */,
+				9CC89F641A06B8D900CDA6D1 /* p1.ExportJson */,
+				9CC89F651A06B8D900CDA6D1 /* p10.plist */,
+				9CC89F661A06B8D900CDA6D1 /* p10.png */,
 				9C9F513F19FD787D004EFA88 /* banana.png */,
 				9C9F513319FD739A004EFA88 /* back.png */,
 				9C9F513419FD739A004EFA88 /* cloth.png */,
@@ -769,29 +786,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CFB92FB19EB4AE8000F869A /* fonts in Resources */,
+				9CC89F6E1A06B94200CDA6D1 /* animal0.plist in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				9C9F513B19FD739A004EFA88 /* panda.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				9CC89F671A06B8D900CDA6D1 /* p1.ExportJson in Resources */,
 				9C9F514019FD787D004EFA88 /* banana.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				9C9F513A19FD739A004EFA88 /* money.png in Resources */,
 				9CFB92F619EB4AE8000F869A /* attackoption1.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				9CC89F6F1A06B94200CDA6D1 /* animal0.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
-				AE28F47719FD6BAF0047A213 /* p10.plist in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
-				AE28F47819FD6BAF0047A213 /* p10.png in Resources */,
 				9CFB92F719EB4AE8000F869A /* background.png in Resources */,
 				9C9F513919FD739A004EFA88 /* cloth.png in Resources */,
 				9C9F513C19FD739A004EFA88 /* tiger2.png in Resources */,
+				9CC89F691A06B8D900CDA6D1 /* p10.png in Resources */,
 				9CFB92F819EB4AE8000F869A /* CloseNormal.png in Resources */,
+				9CC89F681A06B8D900CDA6D1 /* p10.plist in Resources */,
 				9CFB92F919EB4AE8000F869A /* CloseSelected.png in Resources */,
+				9CC89F6D1A06B94200CDA6D1 /* animal.ExportJson in Resources */,
 				9CFB92FE19EB4AE8000F869A /* image in Resources */,
 				9CFB92F519EB4AE8000F869A /* animal4.png in Resources */,
 				9CFB92F319EB4AE8000F869A /* animal2.png in Resources */,
-				AE28F47619FD6BAF0047A213 /* p1.ExportJson in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				9CFB92F219EB4AE8000F869A /* animal1.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
