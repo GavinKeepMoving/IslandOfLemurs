@@ -136,7 +136,7 @@ void MainScene::update(float delta)
         _aniaml2Arr = __Array::create();
     }
 //    _enemy2Manager->update(delta);
-//    _animal2Manager->update(delta);
+    _animal2Manager->update(delta);
     this->updateEnemy(delta);
 //    this->updateAnimal(delta);
     //_enemy2->update(delta);
@@ -174,6 +174,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 //Right top Weapon option bar
 void MainScene::initAnimalOptionsBar()
 {
+    
     // add a "close" icon to exit the progress. it's an autorelease object
     auto optionItem1 = MenuItemImage::create(
                                             "money.png",
@@ -540,8 +541,8 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
     _player->stop();
     //********************************************************************************
     //added by Wenbo Lin
-    _background->stopAllActions();
-    _background1->stopAllActions();
+    //_background->stopAllActions();
+    //_background1->stopAllActions(); // commented by Zhenni
     //********************************************************************************
     /*if (_player->getPosition().y > origin.y + visibleSize.height*Player::height) {
         _player->climbDown(pos);
@@ -581,8 +582,6 @@ void MainScene::deleteTree() {
     float rangeLeft = 0;
     float rangeRight = 0;
     
-    //rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.5;
-
     int i = _ropes.size() - 1;
     rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * (0.4 + i * 0.1);
     rangeRight = xPos + target->getContentSize().width / 2;
@@ -717,6 +716,8 @@ void MainScene::addAnimations()
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/animal.plist", "image/animal.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
     //-------------------------------------//
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("animal0.png" , "animal0.plist" , "animal.ExportJson");
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
     
@@ -748,7 +749,7 @@ void MainScene::addEnemies()
 {
     /******************Begin-Added by Zhe Liu*****************************/
     //add enemy1
-    ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
+    
     
     
     
