@@ -592,6 +592,9 @@ void MainScene::deleteTree() {
     
     _trees.pop_back();
     
+    //add sound
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/TreeFall.wav");
+    
     if(_trees.size() == 0) _background->removeChild(bananaManger, true);
     
     if(rope != NULL) {

@@ -13,7 +13,7 @@
 extern MainScene *mainLayer;
 
 //float Tree::blood = 6;
-#define originalBlood 10
+#define originalBlood 100
 
 //constructor1
 Tree::Tree () {
@@ -106,6 +106,14 @@ void Tree::showAnimation() {
     //healthy
     
     Fire *fire = NULL;
+    
+    //add sound
+    if(state < 6 && state > 1) {
+        _soundEffectId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/Fire.wav", true);
+    }
+    else {
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(_soundEffectId);
+    }
     
     if(state == 6) {
         if(fire != NULL)
