@@ -30,7 +30,7 @@ public:
     
     void bindBackground(Sprite* background);
     Sprite* _background;
-    void createAnimal2s();/*创建Monster对象*/
+    void createAnimal2s(int i);/*创建Monster对象*/
     void setEnemy(__Array* _enemy2Arr){this->_enemy2Arr = _enemy2Arr;}
     int judgeNeayBy(Animal2* animal);
     Enemy2* getNearestEnemy(Animal2* animal);
