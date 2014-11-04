@@ -148,7 +148,10 @@ private:
     
     __Array* _enemy2Arr;
     __Array* _aniaml2Arr;
-    
+    MenuItemImage* a_optionItem1;
+    MenuItemImage* a_optionItem2;
+    MenuItemImage* a_optionItem3;
+    MenuItemImage* a_optionItem4;
 
 public:
     Sprite *_background;

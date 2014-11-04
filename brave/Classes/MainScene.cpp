@@ -140,6 +140,10 @@ void MainScene::update(float delta)
     this->updateEnemy(delta);
 //    this->updateAnimal(delta);
     //_enemy2->update(delta);
+    a_optionItem1->setEnabled(_player->getMoney() >= 20 ? true : false);
+    a_optionItem2->setEnabled(_player->getMoney() >= 40 ? true : false);
+    a_optionItem3->setEnabled(_player->getMoney() >= 40 ? true : false);
+    a_optionItem4->setEnabled(_player->getMoney() >= 60 ? true : false);
     label->setString(CCString::createWithFormat("%d",_player->getMoney())->getCString());
 
 }
@@ -176,42 +180,46 @@ void MainScene::initAnimalOptionsBar()
 {
     
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto optionItem1 = MenuItemImage::create(
+    a_optionItem1 = MenuItemImage::create(
                                             "money.png",
-                                            "back.png",
+                                            "back.png","moneygrey.png",
                                             CC_CALLBACK_1(MainScene::callAnimalHelper, this, 1));
     
-    optionItem1->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2,
-                                 origin.y + optionItem1->getContentSize().height/2));
+    a_optionItem1->setPosition(Vec2(origin.x + a_optionItem1->getContentSize().width/2,
+                                 origin.y + a_optionItem1->getContentSize().height/2));
     
-    auto optionItem2 = MenuItemImage::create(
+    a_optionItem2 = MenuItemImage::create(
                                             "tiger2.png",
-                                            "back.png",
+                                            "back.png","tiger2grey.png",
                                             CC_CALLBACK_1(MainScene::callAnimalHelper, this, 2));
     
-    optionItem2->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width+1,
-                                 origin.y + optionItem1->getContentSize().height/2));
+    a_optionItem2->setPosition(Vec2(origin.x + a_optionItem1->getContentSize().width/2 + a_optionItem1->getContentSize().width+1,
+                                 origin.y + a_optionItem1->getContentSize().height/2));
     
-    auto optionItem3 = MenuItemImage::create(
+    a_optionItem3 = MenuItemImage::create(
                                              "panda.png",
-                                             "back.png",
+                                             "back.png","pandagrey.png",
                                              CC_CALLBACK_1(MainScene::callAnimalHelper, this, 3));
     
-    optionItem3->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width*2+2,
-                                  origin.y + optionItem1->getContentSize().height/2));
+    a_optionItem3->setPosition(Vec2(origin.x + a_optionItem1->getContentSize().width/2 + a_optionItem1->getContentSize().width*2+2,
+                                  origin.y + a_optionItem1->getContentSize().height/2));
     
-    auto optionItem4 = MenuItemImage::create(
+    a_optionItem4 = MenuItemImage::create(
                                              "cloth.png",
-                                             "back.png",
+                                             "back.png","clothgrey.png",
                                              CC_CALLBACK_1(MainScene::callAnimalHelper, this, 4));
     
-    optionItem4->setPosition(Vec2(origin.x + optionItem1->getContentSize().width/2 + optionItem1->getContentSize().width*3+3,
-                                  origin.y + optionItem1->getContentSize().height/2));
+    a_optionItem4->setPosition(Vec2(origin.x + a_optionItem1->getContentSize().width/2 + a_optionItem1->getContentSize().width*3+3,
+                                  origin.y + a_optionItem1->getContentSize().height/2));
     // create menu, it's an autorelease object
-    auto menu = Menu::create(optionItem1, NULL);
-    menu->addChild(optionItem2);
-    menu->addChild(optionItem3);
-    menu->addChild(optionItem4);
+    a_optionItem1->setEnabled(false);
+    a_optionItem2->setEnabled(false);
+    a_optionItem3->setEnabled(false);
+    a_optionItem4->setEnabled(false);
+    auto menu = Menu::create(a_optionItem1, NULL);
+    menu->addChild(a_optionItem2);
+    menu->addChild(a_optionItem3);
+    menu->addChild(a_optionItem4);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     //return menu;
@@ -237,51 +245,32 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
 void MainScene::callAnimalHelper(Ref* pSender, int index) {
     switch (index) {
         case 1:
-            if (_player->money < 10) {
-                break;
-            }
-            _player->money-=10;
-            //lishijia
-            this->_animal2Manager->createAnimal2s();
-            //_animal = Animal::create(Animal::AnimalType::ELEPHANT);
-            //_animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
-//            _animal->setFlippedX(true);
-            //_background->addChild(_animal);
-            //add animals -------------------------------//
-            //_animals.push_back( _animal);
-            break;
-        case 2:
             if (_player->money < 20) {
                 break;
             }
             _player->money-=20;
-            _animal = Animal::create(Animal::AnimalType::CLOTHE);
-            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
-            _background->addChild(_animal);
-            //add animals -------------------------------//
-            _animals.push_back( _animal);
+            this->_animal2Manager->createAnimal2s(0);
             break;
-        case 3:
-            if (_player->money < 30) {
-                break;
-            }
-            _player->money-=30;
-            _animal = Animal::create(Animal::AnimalType::TIGER);
-            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
-            _background->addChild(_animal);
-            //add animals -------------------------------//
-            _animals.push_back( _animal);
-            break;
-        case 4:
+        case 2:
             if (_player->money < 40) {
                 break;
             }
             _player->money-=40;
-            _animal = Animal::create(Animal::AnimalType::FOX);
-            _animal->setPosition(100, origin.y + visibleSize.height*Animal::height);
-            _background->addChild(_animal);
-            //add animals -------------------------------//
-            _animals.push_back( _animal);
+            this->_animal2Manager->createAnimal2s(1);
+            break;
+        case 3:
+            if (_player->money < 40) {
+                break;
+            }
+            _player->money-=40;
+            this->_animal2Manager->createAnimal2s(2);
+            break;
+        case 4:
+            if (_player->money < 60) {
+                break;
+            }
+            _player->money-=60;
+            this->_animal2Manager->createAnimal2s(3);
             break;
         default:
             break;
@@ -717,6 +706,7 @@ void MainScene::addAnimations()
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
     //-------------------------------------//
     ArmatureDataManager::getInstance()->addArmatureFileInfo("animal0.png" , "animal0.plist" , "animal.ExportJson");
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("monkey20.png" , "monkey20.plist" , "monkey2.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
