@@ -7,6 +7,7 @@
 //
 
 #include "Animal2.h"
+//#include "Progress.h"
 
 Animal2::Animal2(int i)
 {
@@ -37,6 +38,15 @@ Animal2::Animal2(int i)
     newState = IDLE;
     lockState = false;
     _attack = 5;
+    _maxHealth = 400;
+    _blood = 400;
+    // add progress
+    _progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
+    Point animalPos = this->getPosition();
+    auto size = this->getContentSize();
+	_progress->setPosition( animalPos.x +size.width*2/3, animalPos.y + size.height+ _progress->getContentSize().height/2+230);
+    this->addChild(_progress);
+    // add progress
 }
 
 Animal2* Animal2::create(int i){
@@ -53,9 +63,12 @@ int Animal2::beHit(int attack)
 {
     this->_blood -= attack;
     if (_blood <= 0){
+        _blood = 0;
+		this->_progress->setProgress((float)_blood/_maxHealth*100);
         return 1;
     }
     else{
+        this->_progress->setProgress((float)_blood/_maxHealth*100);
         return 0;
     }
 }

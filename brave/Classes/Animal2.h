@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
-
+#include "Progress.h"
 USING_NS_CC;
 using namespace cocostudio;
 
@@ -47,6 +47,8 @@ public:
     void setblood();
     int getAttack(){return _attack;}
     
+    Progress* _progress;
+    
 private:
     Sprite* Animal2Node;
     ArmatureAnimation* animation;     //动画变量
@@ -56,6 +58,7 @@ private:
     bool lockState;                     //锁定状态
     void onAnimationEvent(Armature *pArmature, MovementEventType eventType, const char *animationID);                   //角色射击状态
     int _blood;
+    int _maxHealth;
     int _attack;
 };
 
