@@ -40,12 +40,8 @@ bool Enemy2Manager::init()
 
 Enemy2* Enemy2Manager::createEnemy2s()
 {
-//    _enemy2Arr=__Array::create();
-//    _enemy2Arr->retain();
 
     
-//    for(int i=0;i<max_Banana_num; i++)
-//    {
         auto enemy2=Enemy2::create();
         enemy2->_background = this->_background;
 //        enemy2->setPosition(950 + i * 70, 430);
@@ -142,7 +138,7 @@ int Enemy2Manager::judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> 
         index = -1;
     }
     // judge for the nearby
-    std::cout<<"the current nearby oppoent is: "<<index<<std::endl;
+//    std::cout<<"the current nearby oppoent is: "<<index<<std::endl;
     return index;
     
 }

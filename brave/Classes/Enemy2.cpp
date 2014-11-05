@@ -9,6 +9,7 @@
 #include "Enemy2.h"
 //#include "Progress.h"
 #include "Progress.h"
+#include <iostream>
 Enemy2::Enemy2()
 {
     Armature *armature = Armature::create("p1");
@@ -21,9 +22,9 @@ Enemy2::Enemy2()
     newState = IDLE;
     lockState = false;
     // 
-    _attack = 5;
-    _blood = 1000;
-	_maxblood = 1000;
+    _attack = 1;
+    _blood = 100;
+	_maxblood = 100;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//
@@ -45,6 +46,7 @@ void Enemy2::setBlood()
 int Enemy2::behit(int attack)
 {
     _blood -= attack;
+    std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
     if (_blood <= 0){
 		_progress->setProgress((float)0.0/_maxblood*100);
         return 1;

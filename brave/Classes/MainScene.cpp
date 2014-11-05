@@ -145,9 +145,9 @@ void MainScene::update(float delta)
 //        _aniaml2Arr = __Array::create();
 //    }
 //    _enemy2Manager->update(delta);
-    _animal2Manager->update(delta);
-    this->updateEnemy(delta);
+//    _animal2Manager->update(delta);
     this->updateAnimal(delta);
+    this->updateEnemy(delta);
     //_enemy2->update(delta);
     a_optionItem1->setEnabled(_player->getMoney() >= 20 ? true : false);
     a_optionItem2->setEnabled(_player->getMoney() >= 40 ? true : false);
@@ -447,6 +447,7 @@ void MainScene::updateAnimal(float dt)
             }
             else{
                 _animal2Arr[i]->setState(Animal2::ATTACK);
+                _enemy2Arr[index]->setState(BEHIT);
                 int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
                 if (state == 1){// enemy is dead, remove it
                     eraseEnemy(index);
@@ -460,6 +461,7 @@ void MainScene::updateAnimal(float dt)
 }
 //Zhenni
 void MainScene::eraseEnemy(int index) {
+    MainScene::removeChild(_enemy2Arr[index]);
     _enemy2Arr[index]->removeFromParentAndCleanup(true);
     _enemy2Arr[index]->setState(DEAD);
     _enemy2Arr.erase(_enemy2Arr.begin()+index);
@@ -476,8 +478,8 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
-        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
+//        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+//        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
