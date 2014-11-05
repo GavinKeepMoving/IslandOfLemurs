@@ -110,15 +110,10 @@ public:
     
     Vec2 attackTarget(Player* p);
     
-    Enemy * getEnemy(int i) {
-        return _enemys[i];
-    }
-    void eraseEnemy(int i) {
-        if(_enemys.size() <= i) {
-            return;
-        }
-        _enemys.erase(_enemys.begin() + i);
-    }
+//    Enemy * getEnemy(int i) {
+//        return _enemys[i];
+//    }
+    void eraseEnemy(int index);
     
     int boundry;
     Vec2 touchPos;

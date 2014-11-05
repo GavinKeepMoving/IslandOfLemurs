@@ -11,6 +11,7 @@
 #include "cocos2d.h"
 #include "FSM.h"
 #include "Weapon.h"
+#include "Enemy2.h"
 USING_NS_CC;
 
 class Player : public Sprite
@@ -69,7 +70,8 @@ public:
     
     //Zhenni
     Rect getAttackBox();
-    int targetEnemyIdx;
+    Enemy2* targetEnemy;
+    int targetEnemyIndex;
     void attackCallback(float test);
     void generalAttack(float radius = 250.f);
     //void playerDrop(int start, int end);

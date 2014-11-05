@@ -9,6 +9,7 @@
 #include "Animal2.h"
 //#include "Progress.h"
 
+#include "Progress.h"
 Animal2::Animal2(int i)
 {
     armature = nullptr;
@@ -38,20 +39,23 @@ Animal2::Animal2(int i)
     newState = IDLE;
     lockState = false;
     _attack = 5;
-    _maxHealth = 400;
-    _blood = 400;
-    // add progress
-    _progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
-    Point animalPos = this->getPosition();
-    auto size = this->getContentSize();
+	_maxblood = 100;
+	
+	//****init progress for blood  xiaojing***********//
+	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
+	//************add its progress***xiaojing**********************//
+	//add enemy's progress
+	auto size = this->getContentSize();
+	Point animalPos = this->getPosition();
 	_progress->setPosition( animalPos.x +size.width*2/3, animalPos.y + size.height+ _progress->getContentSize().height/2+230);
-    this->addChild(_progress);
-    // add progress
+	this->addChild(_progress);
+
+	//**********************************************************//
 }
 Animal2::~Animal2()
 {
     delete _progress;
-    delete armature;
+//    delete armature;
 }
 
 Animal2* Animal2::create(int i){

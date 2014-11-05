@@ -152,8 +152,8 @@ Player* Player::create(PlayerType type)
 }
 
 void Player::attackCallback(float test) {
-    if(mainLayer->getEnemy(this->targetEnemyIdx)->beHit(this->_attack) == 1) {
-        mainLayer->eraseEnemy(this->targetEnemyIdx);
+    if(this->targetEnemy->behit(this->_attack) == 1) {
+        mainLayer->eraseEnemy(this->targetEnemyIndex);
     }
 }
 
@@ -711,7 +711,7 @@ Rect Player::getAttackBox() {
         x=entityPos.x+spriteSize.width/4 - _attackRange;
     }
     // attack range 为横向，纵向无限制条件
-    return Rect(x, y, _attackRange, Director::getInstance()->getVisibleSize().height);
+    return Rect(x, y, _attackRange, Director::getInstance()->getVisibleSize().height*2);
 }
 //reduce the _health value of current animal Xiaojing ***************//
 void Player::beHit(int attack){

@@ -47,9 +47,10 @@ public:
     int beHit(int attack);
     void setblood();
     int getAttack(){return _attack;}
-    
-    Progress* _progress;
-    Armature *armature;
+    //progres*****xiaojing****//
+	Progress* _progress;
+    Armature* armature;
+	//********************//
 private:
     Sprite* Animal2Node;
     ArmatureAnimation* animation;     //动画变量
@@ -61,6 +62,7 @@ private:
     int _blood;
     int _maxHealth;
     int _attack;
+	int _maxblood;
 };
 
 #endif /* defined(__brave__Animal2__) */

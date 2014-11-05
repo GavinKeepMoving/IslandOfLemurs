@@ -477,11 +477,19 @@ void MainScene::updateAnimal(float dt)
     }
 
 }
+//Zhenni
+void MainScene::eraseEnemy(int index) {
+    _enemy2Arr[index]->setState(DEAD);
+    _enemy2Arr.erase(_enemy2Arr.begin()+index);
+//    _enemy2Arr->removeObject(enemy);
+    // use interface for the dead
+//    _animal2Manager->setEnemy(_enemy2Arr);
+}
 
 void MainScene::updateEnemy(float dt)
 {
-    CCObject* obj = NULL;
-    Enemy2* enemy2 = NULL;
+//    CCObject* obj = NULL;
+//    Enemy2* enemy2 = NULL;
 //    if (_enemy2Arr != NULL)
 //        std::cout<<"the size of enemy is: "<<_enemy2Arr->count()<<std::endl;
 //    if (_enemy2Arr != NULL && _enemy2Arr->count() > 0){
@@ -553,19 +561,25 @@ bool MainScene::onTouchBegan(Touch* touch, Event* event)
 }
 //added by Zhenni
 bool MainScene::isEnemyInRange(Player* p) {
-    Rect playerRect=p->getAttackBox();
-    _player->targetEnemyIdx = -1;
+    _player->targetEnemy = NULL;
     float distance = INT_MAX;
-    for(int i=0; i<_enemys.size(); i++) {
-        Vec2 enemyPos = _background->convertToWorldSpace(_enemys[i]->getPosition());
+    Rect playerRect=p->getAttackBox();
+//    CCObject* obj = NULL;
+//    Enemy2* enemy2 = NULL;
+    int i;
+    for (i=0;i<_enemy2Arr.size();i++)
+    {
+//        enemy2 = (Enemy2*) obj;
+        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         if(playerRect.containsPoint(enemyPos)) {
             float _distance = (enemyPos - _player->getPosition()).getLength();
             if( _distance < distance ) {
-                _player->targetEnemyIdx = i;
+                _player->targetEnemy = _enemy2Arr[i];
+                _player->targetEnemyIndex = i;
             }
         }
     }
-    return _player->targetEnemyIdx == -1 ? false : true;
+    return _player->targetEnemy == NULL ? false : true;
 }
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
@@ -587,7 +601,7 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
 }
 
 Vec2 MainScene::attackTarget(Player *p) {
-    return _background->convertToWorldSpace(_enemys[_player->targetEnemyIdx]->getPosition());
+    return _background->convertToWorldSpace(_player->targetEnemy->getPosition());
 }
 //------------------remove dead enemy--------------------------------------------------------------//
 //void MainScene::enemyDead(Ref* obj)
