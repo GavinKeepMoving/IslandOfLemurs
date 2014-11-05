@@ -313,8 +313,8 @@ void MainScene::initTrees(int num) {
     for(int i = 0; i < treeNum; i++) {
         //add ropes
         auto rope = Sprite::create("image/trees/rope.png");
-        rope->setScale(0.3 + i * 0.2, 0.5);
-        rope->cocos2d::Node::setPosition(beginningPos - 230 + i * 550, 520);
+        rope->setScale(0.2 + i * 0.3, 0.5);
+        rope->cocos2d::Node::setPosition(beginningPos - 180 + i * 520, 520);
         _ropes.push_back(rope);
         _background->addChild(rope);
         
@@ -591,7 +591,7 @@ void MainScene::deleteTree() {
     float rangeRight = 0;
     
     int i = _ropes.size() - 1;
-    rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * (0.4 + i * 0.1);
+    rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
     rangeRight = xPos + target->getContentSize().width / 2;
     this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
