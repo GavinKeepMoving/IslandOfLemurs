@@ -1,48 +1,35 @@
 //
-//  Enemy2.cpp
+//  Animal2.cpp
 //  brave
 //
-//  Created by Lishi Jiang on 10/19/14.
+//  Created by Lishi Jiang on 10/26/14.
 //
 //
 
-#include "Enemy2.h"
-#include "Progress.h"
-Enemy2::Enemy2()
+#include "Animal2.h"
+
+Animal2::Animal2()
 {
     Armature *armature = Armature::create("p1");
-    armature->setScaleX(-1);
+    //armature->setScaleX(-1);
     this->animation = armature->getAnimation();
-    this->animation->setMovementEventCallFunc(this, movementEvent_selector(Enemy2::onAnimationEvent));
-    direction = WALK_LEFT;
+    this->animation->setMovementEventCallFunc(this, movementEvent_selector(Animal2::onAnimationEvent));
+    direction = WALK_RIGHT;
     this->addChild(armature);
     currentState = IDLE;
     newState = IDLE;
     lockState = false;
-    // 
     _attack = 5;
-    _blood = 100;
-	//****init progress for blood  xiaojing***********//
-	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
-	//************add its progress***xiaojing**********************//
-	//add enemy's progress
-	auto size = this->getContentSize();
-	Point enemyPos = this->getPosition();
-	_progress->setPosition( enemyPos.x +size.width*2/3, enemyPos.y + size.height+ _progress->getContentSize().height/2+130);
-	//enemy2->_progress->setPosition( 1800+size.width*2/3, 130+ size.height + enemy2->_progress->getContentSize().height/2);
-	this->addChild(_progress);
-
-	//**********************************************************//
 }
 
-void Enemy2::setBlood()
+void Animal2::setblood()
 {
-    _blood = 100;
+    this->_blood = 100;
 }
 
-int Enemy2::behit(int attack)
+int Animal2::beHit(int attack)
 {
-    _blood -= attack;
+    this->_blood -= attack;
     if (_blood <= 0){
         return 1;
     }
@@ -52,13 +39,13 @@ int Enemy2::behit(int attack)
 }
 
 //设置方向
-void Enemy2::setDirection(int newDirection)
+void Animal2::setDirection(int newDirection)
 {
     direction = newDirection;
     this->setScaleX(direction * fabs(this->getScaleX()));
 }
 
-void Enemy2::update(float dt)
+void Animal2::update(float dt)
 {
     if (currentState == newState || isLockState())
     {
@@ -71,7 +58,7 @@ void Enemy2::update(float dt)
     }
 }
 
-void Enemy2::updateMovement()
+void Animal2::updateMovement()
 {
     Point oldPos = this->getPosition();
     if (currentState == WALK)
@@ -80,7 +67,7 @@ void Enemy2::updateMovement()
     }
 }
 
-void Enemy2::updateAnimation()
+void Animal2::updateAnimation()
 {
     switch (currentState)
     {
@@ -105,12 +92,12 @@ void Enemy2::updateAnimation()
     }
 }
 
-bool Enemy2::isLockState()
+bool Animal2::isLockState()
 {
     return lockState;
 }
 
-void Enemy2::onAnimationEvent(Armature *pArmature, MovementEventType eventType, const char *animationID)
+void Animal2::onAnimationEvent(Armature *pArmature, MovementEventType eventType, const char *animationID)
 {
     if (eventType == LOOP_COMPLETE) {
         if (strcmp(animationID, "grenade") == 0)

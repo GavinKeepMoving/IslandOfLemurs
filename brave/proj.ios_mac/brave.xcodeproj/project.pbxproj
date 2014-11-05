@@ -85,6 +85,12 @@
 		A62FF63719FD6F74007EC9B3 /* MainMenuBG.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */; };
 		A62FF63B19FD791E007EC9B3 /* mainmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF63A19FD791E007EC9B3 /* mainmenu.png */; };
 		A62FF63E19FD7B58007EC9B3 /* iui.plist in Resources */ = {isa = PBXBuildFile; fileRef = A62FF63C19FD7B58007EC9B3 /* iui.plist */; };
+		A62FF6451A06B2D0007EC9B3 /* Animal2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF6411A06B2D0007EC9B3 /* Animal2.cpp */; };
+		A62FF6461A06B2D0007EC9B3 /* Animal2Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF6431A06B2D0007EC9B3 /* Animal2Manager.cpp */; };
+		A62FF64A1A06B314007EC9B3 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF6491A06B314007EC9B3 /* banana.png */; };
+		A62FF64D1A06B7B8007EC9B3 /* MapScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF64B1A06B7B8007EC9B3 /* MapScene.cpp */; };
+		A62FF64F1A06BB8D007EC9B3 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF64E1A06BB8D007EC9B3 /* map.png */; };
+		A62FF6511A06C128007EC9B3 /* mark.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF6501A06C128007EC9B3 /* mark.png */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
 		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
@@ -325,6 +331,15 @@
 		A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MainMenuBG.png; path = image/MainMenuBG.png; sourceTree = "<group>"; };
 		A62FF63A19FD791E007EC9B3 /* mainmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mainmenu.png; path = image/mainmenu.png; sourceTree = "<group>"; };
 		A62FF63C19FD7B58007EC9B3 /* iui.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = iui.plist; path = image/iui.plist; sourceTree = "<group>"; };
+		A62FF6411A06B2D0007EC9B3 /* Animal2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal2.cpp; path = ../Classes/Animal2.cpp; sourceTree = "<group>"; };
+		A62FF6421A06B2D0007EC9B3 /* Animal2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal2.h; path = ../Classes/Animal2.h; sourceTree = "<group>"; };
+		A62FF6431A06B2D0007EC9B3 /* Animal2Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal2Manager.cpp; path = ../Classes/Animal2Manager.cpp; sourceTree = "<group>"; };
+		A62FF6441A06B2D0007EC9B3 /* Animal2Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal2Manager.h; path = ../Classes/Animal2Manager.h; sourceTree = "<group>"; };
+		A62FF6491A06B314007EC9B3 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
+		A62FF64B1A06B7B8007EC9B3 /* MapScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MapScene.cpp; path = ../Classes/MapScene.cpp; sourceTree = "<group>"; };
+		A62FF64C1A06B7B8007EC9B3 /* MapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapScene.h; path = ../Classes/MapScene.h; sourceTree = "<group>"; };
+		A62FF64E1A06BB8D007EC9B3 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
+		A62FF6501A06C128007EC9B3 /* mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mark.png; sourceTree = "<group>"; };
 		A6C5B2F619CF3C0000DA478A /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FD19CF508900DA478A /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
@@ -417,6 +432,10 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A62FF6411A06B2D0007EC9B3 /* Animal2.cpp */,
+				A62FF6421A06B2D0007EC9B3 /* Animal2.h */,
+				A62FF6431A06B2D0007EC9B3 /* Animal2Manager.cpp */,
+				A62FF6441A06B2D0007EC9B3 /* Animal2Manager.h */,
 				A62FF63019FD6AEF007EC9B3 /* CustomTool.cpp */,
 				A62FF63119FD6AEF007EC9B3 /* CustomTool.h */,
 				A62FF63219FD6AEF007EC9B3 /* VisibleRect.cpp */,
@@ -455,6 +474,8 @@
 				9C82A9D819F461B10080515F /* Enemy2Manager.h */,
 				A62FF62D19FD689E007EC9B3 /* StartScene.cpp */,
 				A62FF62E19FD689E007EC9B3 /* StartScene.h */,
+				A62FF64B1A06B7B8007EC9B3 /* MapScene.cpp */,
+				A62FF64C1A06B7B8007EC9B3 /* MapScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -585,6 +606,9 @@
 				A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */,
 				A62FF63A19FD791E007EC9B3 /* mainmenu.png */,
 				A62FF63C19FD7B58007EC9B3 /* iui.plist */,
+				A62FF6491A06B314007EC9B3 /* banana.png */,
+				A62FF64E1A06BB8D007EC9B3 /* map.png */,
+				A62FF6501A06C128007EC9B3 /* mark.png */,
 				9CFB92EC19EB4AE8000F869A /* fonts */,
 				9CFB92ED19EB4AE8000F869A /* fruit.png */,
 				9CFB92EE19EB4AE8000F869A /* HelloWorld.png */,
@@ -768,7 +792,9 @@
 				A62FF62A19FD6763007EC9B3 /* p10.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
+				A62FF64F1A06BB8D007EC9B3 /* map.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				A62FF6511A06C128007EC9B3 /* mark.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				A62FF62919FD6763007EC9B3 /* p10.plist in Resources */,
 				9CFB92F719EB4AE8000F869A /* background.png in Resources */,
@@ -784,6 +810,7 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				A601081919EB5DED00664A6C /* attackoption2.png in Resources */,
+				A62FF64A1A06B314007EC9B3 /* banana.png in Resources */,
 				A62FF62C19FD677A007EC9B3 /* p1.ExportJson in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				A62FF63B19FD791E007EC9B3 /* mainmenu.png in Resources */,
@@ -816,9 +843,11 @@
 				9CFB92CD19EB2AD7000F869A /* Animal.cpp in Sources */,
 				FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */,
 				9C82A9D219F446230080515F /* Enemy2.cpp in Sources */,
+				A62FF6461A06B2D0007EC9B3 /* Animal2Manager.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				9C609C3719E1BD01004B375D /* Banana.cpp in Sources */,
 				9C82A9D919F461B10080515F /* Enemy2Manager.cpp in Sources */,
+				A62FF6451A06B2D0007EC9B3 /* Animal2.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */,
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
@@ -832,6 +861,7 @@
 				1AFAF8B816D35DE700DB1158 /* (null) in Sources */,
 				FEDF9FE619E39E7A00484807 /* Progress.cpp in Sources */,
 				A60105AC19E1C28100664A6C /* Enemy.cpp in Sources */,
+				A62FF64D1A06B7B8007EC9B3 /* MapScene.cpp in Sources */,
 				BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */,
 				FEDF9FE419E39E7A00484807 /* Attack.cpp in Sources */,
 			);

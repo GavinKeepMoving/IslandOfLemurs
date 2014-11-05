@@ -17,10 +17,23 @@
                 <key>sourceSize</key>
                 <string>{442,552}</string>
             </dict>
+            <key>mark.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,556},{76,73}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{76,73}}</string>
+                <key>sourceSize</key>
+                <string>{76,73}</string>
+            </dict>
             <key>play.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,556},{210,118}}</string>
+                <string>{{80,556},{210,118}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -40,7 +53,7 @@
             <key>size</key>
             <string>{446,676}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a26feb41dd25e1aa5e2d74cbe111c79f:e1a6c66d22e9d8c6d8961a9cfac28ace:b10f372061d1457637dba18ab73d7022$</string>
+            <string>$TexturePacker:SmartUpdate:f0f8828e08f1a5fa4eb3ec9a9d3d15f8:578d3fd314fe640b7dc6ee66414e0f91:b10f372061d1457637dba18ab73d7022$</string>
             <key>textureFileName</key>
             <string>iui.png</string>
         </dict>

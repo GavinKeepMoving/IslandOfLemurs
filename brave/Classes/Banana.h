@@ -22,7 +22,8 @@ public:
     CREATE_FUNC(Banana);
     
 public:
-    void show();
+    void timeshow();
+    void show(float dt);
     void hide();
     void reset(int i);//重置怪物数据
     bool isAlive();//是否活动状态
