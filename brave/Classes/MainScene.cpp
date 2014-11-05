@@ -494,15 +494,8 @@ void MainScene::eraseAnimal(int index){
 
 void MainScene::updateEnemy(float dt)
 {
-//    CCObject* obj = NULL;
-//    Enemy2* enemy2 = NULL;
-//    if (_enemy2Arr != NULL)
-//        std::cout<<"the size of enemy is: "<<_enemy2Arr->count()<<std::endl;
-//    if (_enemy2Arr != NULL && _enemy2Arr->count() > 0){
-//        CCARRAY_FOREACH(_enemy2Arr, obj)
     for (int i=0;i<_enemy2Arr.size();i++)
     {
-//        enemy2 = (Enemy2*) obj;
         int index = _enemy2Manager->judgeNearby(_player->getPosition(),_enemy2Arr[i],_trees,_animal2Arr);
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
@@ -512,7 +505,12 @@ void MainScene::updateEnemy(float dt)
                 if (_enemy2Arr[i]->getPositionX()-_player->getPositionX()< _enemy2Arr[i]->mindist && std::abs(_enemy2Arr[i]->getPositionY()-_player->getPositionY()) < 10)
                 {
                     _enemy2Arr[i]->setState(ATTACK);
+                    int status = _player->beHit(_enemy2Arr[i]->getAttack());
                     // behit for the lemur
+                    if (status == 1){// lemur is dead
+                        // game over!!
+                        _player->removeFromParentAndCleanup(true);
+                    }
                 }
                 else{
                     _enemy2Arr[i]->setState(WALK);
@@ -531,16 +529,11 @@ void MainScene::updateEnemy(float dt)
                 }
             }
             else if (index >= 200){ // animal
-//                CCObject* target = _animal2Arr->getObjectAtIndex(index%200);
                 int target = index%200;
-//                Animal2* targetAni = (Animal2*) target;
                 if (_enemy2Arr[i]->getPositionX()-_animal2Arr[target]->getPositionX() <= _enemy2Arr[i]->mindist){
                     _enemy2Arr[i]->setState(ATTACK);
                     int state = _animal2Arr[target]->beHit(_enemy2Arr[i]->getAttack());
                     if (state == 1){
-                        // delete this animal from scene !!
-//                        Animal2* deleted = _animal2Arr[target];
-//                        _animal2Arr.erase(_animal2Arr.begin()+target);
                         eraseAnimal(target);
                         index = -1;
                     }
