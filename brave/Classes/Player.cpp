@@ -152,8 +152,8 @@ Player* Player::create(PlayerType type)
 }
 
 void Player::attackCallback(float test) {
-    if(mainLayer->getEnemy(this->targetEnemyIdx)->beHit(this->_attack) == 1) {
-        mainLayer->eraseEnemy(this->targetEnemyIdx);
+    if(this->targetEnemy->behit(this->_attack) == 1) {
+        mainLayer->eraseEnemy(this->targetEnemy);
     }
 }
 
