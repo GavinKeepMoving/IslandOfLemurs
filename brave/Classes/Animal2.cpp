@@ -123,7 +123,7 @@ void Animal2::updateAnimation()
             animation->play("animalwalk");
             break;
         case ATTACK:
-            animation->play("animalhit");
+            animation->play("animalattack");
             break;
         case BEHIT:
             animation->play("animalbehit");
