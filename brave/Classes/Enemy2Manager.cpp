@@ -102,8 +102,6 @@ int Enemy2Manager::judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> 
     int index = -1;
     int isTree = 0;
     int hasAnimal = 0;
-    CCObject* obj = NULL;
-    Animal2* animal = NULL;
     Animal2* closest = NULL;
     Vec2 firstObj;
     int animal_index = -1;
@@ -120,20 +118,20 @@ int Enemy2Manager::judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> 
         }
     }
     // lemur
-    if ((trees.size() == 0 || (pos.x >= trees.back()->treeSprite->getPositionX() &&
+    if ( pos.y == 160 &&(trees.size() == 0 || (pos.x >= trees.back()->treeSprite->getPositionX() &&
          enemy->getPositionX() >= pos.x))
         && (hasAnimal == 0 || (pos.x >= closest->getPositionX() && enemy->getPositionX() >= pos.x))){
         firstObj = pos;
         index = 0;
     }
     // tree
-    else if (trees.size() > 0 && (trees.back()->treeSprite->getPositionX() > pos.x && enemy->getPositionX() > trees.back()->treeSprite->getPositionX()) && (hasAnimal == 0 || (trees.back()->treeSprite->getPositionX() > closest->getPositionX() && enemy->getPositionX() > trees.back()->treeSprite->getPositionX()))){
+    else if (trees.size() > 0 && (enemy->getPositionX() > trees.back()->treeSprite->getPositionX()) && (hasAnimal == 0 || (trees.back()->treeSprite->getPositionX() > closest->getPositionX()))&&(pos.y > 160 || pos.x < trees.back()->treeSprite->getPositionX())){
         firstObj = Vec2(trees.back()->treeSprite->getPositionX(),enemy->getPositionY());
         index = 1;
         isTree = 1;
     }
     // animal
-    else if (hasAnimal > 0 && (trees.size() == 0 || closest->getPositionX() > trees.back()->treeSprite->getPositionX()) && (std::abs(pos.y-enemy->getPositionY()) > 20 || closest->getPositionX() > pos.x) && enemy->getPositionX() >= closest->getPositionX())
+    else if (hasAnimal > 0 && (trees.size() == 0 || closest->getPositionX() > trees.back()->treeSprite->getPositionX()) && (pos.y > 160 || closest->getPositionX() > pos.x) && enemy->getPositionX() >= closest->getPositionX())
     {
         isTree = 2;
         firstObj = Vec2(closest->getPositionX(),enemy->getPositionY());
@@ -147,13 +145,6 @@ int Enemy2Manager::judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> 
     std::cout<<"the current nearby oppoent is: "<<index<<std::endl;
     return index;
     
-//    if (trees.size() != 0 && enemy->getPositionX() > trees.back()->treeSprite->getPositionX() &&
-//       enemy->getPositionX() - trees.back()->treeSprite->getPositionX() == enemy->mindist)
-//    {
-//        return 1;
-//    }
-//    else
-//        return -1;
 }
 
 

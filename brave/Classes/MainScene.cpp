@@ -474,13 +474,17 @@ void MainScene::updateEnemy(float dt)
 {
     for (int i=0;i<_enemy2Arr.size();i++)
     {
-        int index = _enemy2Manager->judgeNearby(_player->getPosition(),_enemy2Arr[i],_trees,_animal2Arr);
+//        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
+        Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
+        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
+        int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
         }
         else{
             if (index == 0){ // lemur
-                if (_enemy2Arr[i]->getPositionX()-_player->getPositionX()< _enemy2Arr[i]->mindist && std::abs(_enemy2Arr[i]->getPositionY()-_player->getPositionY()) < 10)
+                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 160)
                 {
                     _enemy2Arr[i]->setState(ATTACK);
                     int status = _player->beHit(_enemy2Arr[i]->getAttack());
@@ -488,6 +492,7 @@ void MainScene::updateEnemy(float dt)
                     if (status == 1){// lemur is dead
                         // game over!!
                         _player->removeFromParentAndCleanup(true);
+                        index = -1;
                     }
                 }
                 else{
@@ -500,6 +505,7 @@ void MainScene::updateEnemy(float dt)
                     int state = _trees.back()->setBlood(_enemy2Arr[i]->getAttack());
                     if (state <= 0){
                         deleteTree();
+                        index = -1;
                     }
                 }
                 else{
