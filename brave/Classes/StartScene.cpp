@@ -7,7 +7,6 @@
 //
 
 #include "StartScene.h"
-#include "MapScene.h"
 
 #include "MainScene.h"
 #include "VisibleRect.h"
@@ -25,16 +24,11 @@ bool StartScene::init()
     
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/role.plist","image/role.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/ui.plist","image/ui.pvr.ccz");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/iui.plist","image/iui.png");
     auto background = Sprite::create("image/MainMenuBG.png");
     background->setPosition(VisibleRect::center());
     this->addChild(background);
-//    
-//    auto menuBG = Sprite::create("MainMenu.png");
-//    menuBG->setPosition(VisibleRect::center());
-//    this->addChild(menuBG);
     
-    auto item = CustomTool::createMenuItemImage("play.png", "play.png", CC_CALLBACK_1(StartScene::onStart,this));
+    auto item = CustomTool::createMenuItemImage("start1.png", "start2.png", CC_CALLBACK_1(StartScene::onStart,this));
     auto menu = Menu::createWithItem(item);
     this->addChild(menu);
     return true;
@@ -53,9 +47,11 @@ Scene* StartScene::createScene()
 void StartScene::onStart(Ref* obj)
 {
     log("StartLayer::onStart");
-    /******************Start-Modified by Yafu****************************/
-    auto scene = MapScene::createScene();
+    auto scene = MainScene::createScene();
     
+    /******************Start-Modified by Yafu****************************/
+    Vector<Node *> children = scene->getChildren();
+    mainLayer = (MainScene *)children.back();
     /******************End-Modified by Yafu*****************************/
     
     Director::getInstance()->replaceScene(scene);
