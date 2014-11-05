@@ -11,11 +11,11 @@
 
 #include "cocos2d.h"
 #include "Enemy2.h"
-#include "Animal.h"
+#include "Animal2.h"
 #include "Tree.h"
 #include "MainScene.h"
-
-class Animal;
+#include <iostream>
+class Animal2;
 class MainScene;
 
 USING_NS_CC;
@@ -41,7 +41,7 @@ public:
     void getAnimals(std::vector<Animal*> _animals){this->_animals = _animals;}
     void setTrees(std::vector<Tree*> _trees){this->_trees = _trees;}
     void setAnimales(__Array* _animal2Arr){this->_animal2Arr = _animal2Arr;}
-    int judgeNearby(Enemy2* enemy);
+    int judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> trees,std::vector<Animal2*> animal);
     Enemy2* createEnemy2s();/*创建Monster对象*/
     /****/
     

@@ -38,8 +38,8 @@ bool Animal2Manager::init()
     
 }
 
-
-void Animal2Manager::createAnimal2s(int i)
+//Animal2* Animal2Manager::createAnimal2s()
+Animal2* Animal2Manager::createAnimal2s(int index)
 {
     //_animal2Arr=__Array::create();
     //_animal2Arr->retain();
@@ -48,47 +48,43 @@ void Animal2Manager::createAnimal2s(int i)
     //for(int i=0;i<max_Banana_num; i++)
     //{
     log("animal!!!!");
-        auto animal2=Animal2::create(i);
-        animal2->setblood();
+        auto animal2=Animal2::create(index);
+//        animal2->setblood();
         animal2->_background = this->_background;
-        animal2->setPosition(350 , 130);
+        animal2->setPosition(350, 100);
         this->addChild(animal2);  /*将怪物添加到管理器(CCNode)中*/
-        _animal2Arr->addObject(animal2);  /*添加到数组中，便于管理*/
+
+//        _animal2Arr->addObject(animal2);/*添加到数组中，便于管理*/
+    return animal2;
+
+//        _animal2Arr->addObject(animal2);  /*添加到数组中，便于管理*/
+
     //}
 }
 
-int Animal2Manager::judgeNeayBy(Animal2 *animal)
+int Animal2Manager::judgeNeayBy(Animal2 *animal,std::vector<Enemy2*> enemys)
 {
     int index = -1;
-    if (this->_enemy2Arr->count() == 0){
+    if (enemys.size() == 0){
         return index;
     }
     else{
         // find the nearest enemy and judge whether it is in the attacking scope
-        CCObject* obj = NULL;
-        Enemy2* enemy = NULL;
-        Enemy2* nearest = NULL;
         int min = -1;
         int enemy_index = -1;
         int i = 0;
-        CCARRAY_FOREACH(_enemy2Arr, obj)
-        {
-            enemy = (Enemy2*) obj;
-            if (min == -1 || min < std::abs(animal->getPositionX()-enemy->getPositionX())){
-                min = std::abs(animal->getPositionX()-enemy->getPositionX());
-                nearest = enemy;
-                enemy_index = i;
-            }
-            i++;
-        }
-
-//        Enemy2* nearest = getNearestEnemy(animal);
-        if (mindist < std::abs(animal->getPositionX()-nearest->getPositionX())){
-            animal->setState(Animal2::WALK);
+        if (enemys.size() == 0){
+            return index;
         }
         else{
-            animal->setState(Animal2::ATTACK);
-            index = enemy_index;
+            Enemy2* nearest = NULL;
+            for (i=0;i<enemys.size();i++){
+                if (animal->getPositionX() <= enemys[i]->getPositionX() && (index < 0 || enemys[i]->getPositionX() < nearest->getPositionX())){
+                    nearest = enemys[i];
+                    index = i;
+                }
+            }
+            
         }
         return index;
     }

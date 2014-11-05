@@ -58,6 +58,8 @@ public:
 private:
     int _attack;
     int _blood;
+    int _maxHealth;
+	int _maxblood;
     Sprite* Enemy2Node;
     ArmatureAnimation* animation;     //动画变量
     Enemy2State currentState;           //当前状态

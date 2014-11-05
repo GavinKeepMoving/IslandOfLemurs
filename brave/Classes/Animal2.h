@@ -11,7 +11,8 @@
 
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
-
+#include "Progress.h"
+#include <iostream>
 USING_NS_CC;
 using namespace cocostudio;
 
@@ -32,6 +33,7 @@ public:
         DEAD        //子弹
     };
     Animal2(int i);
+    ~Animal2();
     static Animal2* create(int i);
     //CREATE_FUNC(Animal2);
     void update(float dt);              //更新角色状态
@@ -44,9 +46,13 @@ public:
     void setDirection(int newDirection); //设置方向
     Sprite* _background;
     int beHit(int attack);
-    void setblood();
+//    void setblood(); 
     int getAttack(){return _attack;}
-    
+    //progres*****xiaojing****//
+	Progress* _progress;
+    Armature* armature;
+    double mindist = 20;
+	//********************//
 private:
     Sprite* Animal2Node;
     ArmatureAnimation* animation;     //动画变量
@@ -56,7 +62,9 @@ private:
     bool lockState;                     //锁定状态
     void onAnimationEvent(Armature *pArmature, MovementEventType eventType, const char *animationID);                   //角色射击状态
     int _blood;
+    int _maxHealth;
     int _attack;
+	int _maxblood;
 };
 
 #endif /* defined(__brave__Animal2__) */

@@ -7,6 +7,7 @@
 //
 
 #include "Enemy2.h"
+//#include "Progress.h"
 #include "Progress.h"
 Enemy2::Enemy2()
 {
@@ -21,7 +22,8 @@ Enemy2::Enemy2()
     lockState = false;
     // 
     _attack = 5;
-    _blood = 100;
+    _blood = 1000;
+	_maxblood = 1000;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//
@@ -44,9 +46,11 @@ int Enemy2::behit(int attack)
 {
     _blood -= attack;
     if (_blood <= 0){
+		_progress->setProgress((float)0.0/_maxblood*100);
         return 1;
     }
     else{
+		_progress->setProgress((float)_blood/_maxblood*100);
         return 0;
     }
 }
