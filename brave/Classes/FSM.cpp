@@ -131,6 +131,14 @@ bool FSM::init(std::string type)
     ->addState("dead",[](){cocos2d::log("Enter dead");})
     ->addState("attacking",[](){cocos2d::log("Enter attacking");})
     ->addState("beingHit",[](){cocos2d::log("Enter beingHit");});
+    //if(type == "Player") {
+        this->addState("droping", [](){cocos2d::log("Enter droping");});
+        this->addEvent("dropstop", "droping", "idle");
+        this->addEvent("dropwalk", "droping", "walking");
+        this->addEvent("drop", "idle", "droping");
+        this->addEvent("drop", "walking", "droping");
+        
+    //}
     
     this->addEvent("walk","idle","walking")
     ->addEvent("die","idle","dead")

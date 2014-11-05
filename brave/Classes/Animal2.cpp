@@ -8,10 +8,27 @@
 
 #include "Animal2.h"
 
-Animal2::Animal2()
+Animal2::Animal2(int i)
 {
-    Armature *armature = Armature::create("p1");
-    //armature->setScaleX(-1);
+    Armature *armature = nullptr;
+    switch (i)
+    {
+        case 0:
+            armature = Armature::create("animal");
+            break;
+        case 1:
+            armature = Armature::create("monkey2");
+            break;
+        case 2:
+            armature = Armature::create("monkey2");
+            break;
+        case 3:
+            armature = Armature::create("monkey2");
+            break;
+        default:
+            break;
+    }
+    armature->setScaleX(-1);
     this->animation = armature->getAnimation();
     this->animation->setMovementEventCallFunc(this, movementEvent_selector(Animal2::onAnimationEvent));
     direction = WALK_RIGHT;
@@ -20,6 +37,11 @@ Animal2::Animal2()
     newState = IDLE;
     lockState = false;
     _attack = 5;
+}
+
+Animal2* Animal2::create(int i){
+    Animal2* animal2 = new Animal2(i);
+    return animal2;
 }
 
 void Animal2::setblood()
@@ -63,7 +85,7 @@ void Animal2::updateMovement()
     Point oldPos = this->getPosition();
     if (currentState == WALK)
     {
-        this->setPosition(oldPos.x + -direction * WALK_SPEED,oldPos.y);
+        this->setPosition(oldPos.x -direction * WALK_SPEED,oldPos.y);
     }
 }
 
@@ -75,16 +97,16 @@ void Animal2::updateAnimation()
             animation->stop();
             break;
         case WALK:
-            animation->play("enemy_walk");
+            animation->play("animalwalk");
             break;
         case ATTACK:
-            animation->play("hit");
+            animation->play("animalhit");
             break;
         case BEHIT:
-            animation->play("behit");
+            animation->play("animalbehit");
             break;
         case DEAD:
-            animation->play("dead");
+            animation->play("animaldead");
             lockState = true;
             break;
         default:

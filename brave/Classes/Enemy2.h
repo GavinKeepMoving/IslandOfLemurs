@@ -50,6 +50,11 @@ public:
     //progres*****xiaojing****//
 	Progress* _progress;
 	//********************//
+    
+    //add by wenbo
+    void playSound();
+    //end add by wenbo
+    
 private:
     int _attack;
     int _blood;
@@ -59,6 +64,8 @@ private:
     Enemy2State newState;               //更换状态
     int direction;                      //方向
     bool lockState;                     //锁定状态
+    //add by wenbo
+    unsigned int _enemySoundEffectId;
     void onAnimationEvent(Armature *pArmature, MovementEventType eventType, const char *animationID);                   //角色射击状态
 };
 

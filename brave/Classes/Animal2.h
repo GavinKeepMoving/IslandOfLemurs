@@ -31,8 +31,9 @@ public:
         BEHIT,
         DEAD        //子弹
     };
-    Animal2();
-    CREATE_FUNC(Animal2);
+    Animal2(int i);
+    static Animal2* create(int i);
+    //CREATE_FUNC(Animal2);
     void update(float dt);              //更新角色状态
     void updateAnimation();             //状态判断及播放动画
     void updateMovement();              //行走状态
