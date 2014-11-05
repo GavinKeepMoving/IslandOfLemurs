@@ -22,8 +22,8 @@ Enemy2::Enemy2()
     lockState = false;
     // 
     _attack = 5;
-    _blood = 100;
-	_maxblood = 100;
+    _blood = 1000;
+	_maxblood = 1000;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//

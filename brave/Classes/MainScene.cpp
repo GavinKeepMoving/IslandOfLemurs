@@ -465,12 +465,10 @@ void MainScene::updateAnimal(float dt)
             _animal2Arr[i]->setState(Animal2::ATTACK);
             int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
             if (state == 1){// enemy is dead, remove it
-                _enemy2Arr[index]->setState(DEAD);
-                _enemy2Arr.erase(_enemy2Arr.begin()+index);
+//                _enemy2Arr[index]->setState(DEAD);
+//                _enemy2Arr.erase(_enemy2Arr.begin()+index);
+                eraseEnemy(index);
                 index = -1;
-//                _enemy2Arr->removeObjectAtIndex(index);
-                // use interface for the dead
-//                _animal2Manager->setEnemy(_enemy2Arr);
             }
         }
         _animal2Arr[i]->update(dt);
@@ -479,11 +477,19 @@ void MainScene::updateAnimal(float dt)
 }
 //Zhenni
 void MainScene::eraseEnemy(int index) {
+//    Enemy2* deleted = _enemy2Arr[index];
+    _enemy2Arr[index]->removeFromParentAndCleanup(true);
+//    MainScene::removeChild(_enemy2Arr[index]);
+    
     _enemy2Arr[index]->setState(DEAD);
     _enemy2Arr.erase(_enemy2Arr.begin()+index);
-//    _enemy2Arr->removeObject(enemy);
-    // use interface for the dead
-//    _animal2Manager->setEnemy(_enemy2Arr);
+}
+void MainScene::eraseAnimal(int index){
+//    Animal2* deleted = _animal2Arr[index];
+//    MainScene::removeChild(deleted);
+    _animal2Arr[index]->removeFromParentAndCleanup(true);
+    _animal2Arr[index]->setState(Animal2::DEAD);
+    _animal2Arr.erase(_animal2Arr.begin()+index);
 }
 
 void MainScene::updateEnemy(float dt)
@@ -533,9 +539,9 @@ void MainScene::updateEnemy(float dt)
                     int state = _animal2Arr[target]->beHit(_enemy2Arr[i]->getAttack());
                     if (state == 1){
                         // delete this animal from scene !!
-                        Animal2* deleted = _animal2Arr[target];
-                        _animal2Arr.erase(_animal2Arr.begin()+target);
-                        delete(deleted);
+//                        Animal2* deleted = _animal2Arr[target];
+//                        _animal2Arr.erase(_animal2Arr.begin()+target);
+                        eraseAnimal(target);
                         index = -1;
                     }
                 }

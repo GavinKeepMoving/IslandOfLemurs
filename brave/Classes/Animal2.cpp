@@ -39,8 +39,8 @@ Animal2::Animal2(int i)
     newState = IDLE;
     lockState = false;
     _attack = 5;
-	_maxblood = 100;
-	
+	_maxHealth = 1000;
+	_blood = 1000;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//

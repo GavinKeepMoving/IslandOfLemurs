@@ -114,6 +114,7 @@ public:
 //        return _enemys[i];
 //    }
     void eraseEnemy(int index);
+    void eraseAnimal(int index);
     
     int boundry;
     Vec2 touchPos;
