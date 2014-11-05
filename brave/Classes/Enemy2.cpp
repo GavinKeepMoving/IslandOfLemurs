@@ -68,6 +68,10 @@ void Enemy2::update(float dt)
     {
         currentState = newState;
         updateAnimation();
+        
+        //add by wenbo
+        //change state
+        playSound();
     }
 }
 
@@ -104,6 +108,32 @@ void Enemy2::updateAnimation()
             break;
     }
 }
+
+//add by wenbo
+void Enemy2::playSound()
+{
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(_enemySoundEffectId);
+    switch (currentState)
+    {
+        case IDLE:
+            break;
+        case WALK:
+            break;
+        case ATTACK:
+            _enemySoundEffectId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/CageBreak.wav", true);
+            break;
+        case BEHIT:
+            _enemySoundEffectId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/JackDamage4.wav", true);
+            break;
+        case DEAD:
+            CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/JackDead4.wav");
+            break;
+        default:
+            break;
+    }
+}
+
+//end adding by wenbo
 
 bool Enemy2::isLockState()
 {

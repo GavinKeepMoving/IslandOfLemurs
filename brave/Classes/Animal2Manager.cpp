@@ -38,8 +38,8 @@ bool Animal2Manager::init()
     
 }
 
-
-Animal2* Animal2Manager::createAnimal2s()
+//Animal2* Animal2Manager::createAnimal2s()
+Animal2* Animal2Manager::createAnimal2s(int index)
 {
     //_animal2Arr=__Array::create();
     //_animal2Arr->retain();
@@ -48,13 +48,17 @@ Animal2* Animal2Manager::createAnimal2s()
     //for(int i=0;i<max_Banana_num; i++)
     //{
     log("animal!!!!");
-        auto animal2=Animal2::create();
+        auto animal2=Animal2::create(index);
         animal2->setblood();
         animal2->_background = this->_background;
-        animal2->setPosition(350 , 130);
+        animal2->setPosition(350, 100);
         this->addChild(animal2);  /*将怪物添加到管理器(CCNode)中*/
+
 //        _animal2Arr->addObject(animal2);/*添加到数组中，便于管理*/
     return animal2;
+
+//        _animal2Arr->addObject(animal2);  /*添加到数组中，便于管理*/
+
     //}
 }
 

@@ -14,7 +14,7 @@
 #include "Animal2.h"
 #include "Tree.h"
 #include "MainScene.h"
-
+#include <iostream>
 class Animal2;
 class MainScene;
 

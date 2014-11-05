@@ -144,7 +144,7 @@ int Enemy2Manager::judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> 
         index = -1;
     }
     // judge for the nearby
-    
+    std::cout<<"the current nearby oppoent is: "<<index<<std::endl;
     return index;
     
 //    if (trees.size() != 0 && enemy->getPositionX() > trees.back()->treeSprite->getPositionX() &&

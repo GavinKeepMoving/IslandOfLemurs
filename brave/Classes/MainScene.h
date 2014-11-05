@@ -146,6 +146,12 @@ private:
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
     
+//    __Array* _enemy2Arr;
+//    __Array* _aniaml2Arr;
+    MenuItemImage* a_optionItem1;
+    MenuItemImage* a_optionItem2;
+    MenuItemImage* a_optionItem3;
+    MenuItemImage* a_optionItem4;
 
 public:
 //    __Array* _enemy2Arr;
