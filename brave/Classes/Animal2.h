@@ -32,6 +32,7 @@ public:
         DEAD        //子弹
     };
     Animal2(int i);
+    ~Animal2();
     static Animal2* create(int i);
     //CREATE_FUNC(Animal2);
     void update(float dt);              //更新角色状态
@@ -48,7 +49,7 @@ public:
     int getAttack(){return _attack;}
     
     Progress* _progress;
-    
+    Armature *armature;
 private:
     Sprite* Animal2Node;
     ArmatureAnimation* animation;     //动画变量

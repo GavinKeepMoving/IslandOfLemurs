@@ -11,7 +11,7 @@
 
 Animal2::Animal2(int i)
 {
-    Armature *armature = nullptr;
+    armature = nullptr;
     switch (i)
     {
         case 0:
@@ -47,6 +47,11 @@ Animal2::Animal2(int i)
 	_progress->setPosition( animalPos.x +size.width*2/3, animalPos.y + size.height+ _progress->getContentSize().height/2+230);
     this->addChild(_progress);
     // add progress
+}
+Animal2::~Animal2()
+{
+    delete _progress;
+    delete armature;
 }
 
 Animal2* Animal2::create(int i){

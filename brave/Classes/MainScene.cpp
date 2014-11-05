@@ -524,7 +524,7 @@ void MainScene::updateEnemy(float dt)
                     _enemy2Arr[i]->setState(ATTACK);
                     int state = _animal2Arr[target]->beHit(_enemy2Arr[i]->getAttack());
                     if (state == 1){
-                        // delete this animal from array and scene
+                        // delete this animal from scene !!
                         Animal2* deleted = _animal2Arr[target];
                         _animal2Arr.erase(_animal2Arr.begin()+target);
                         delete(deleted);
