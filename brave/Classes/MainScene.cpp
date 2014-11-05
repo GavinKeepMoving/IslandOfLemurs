@@ -734,6 +734,7 @@ void MainScene::addAnimations()
     //-------------------------------------//
     ArmatureDataManager::getInstance()->addArmatureFileInfo("animal0.png" , "animal0.plist" , "animal.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("monkey20.png" , "monkey20.plist" , "monkey2.ExportJson");
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("panada0.png" , "panada0.plist" , "panada.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
