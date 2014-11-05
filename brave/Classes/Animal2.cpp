@@ -63,14 +63,15 @@ Animal2* Animal2::create(int i){
     return animal2;
 }
 
-void Animal2::setblood()
-{
-    this->_blood = 100;
-}
+//void Animal2::setblood()
+//{
+//    this->_blood = 100;
+//}
 
 int Animal2::beHit(int attack)
 {
     this->_blood -= attack;
+    std::cout<<"current blood is: "<<_blood<<std::endl;
     if (_blood <= 0){
         _blood = 0;
 		this->_progress->setProgress((float)_blood/_maxHealth*100);

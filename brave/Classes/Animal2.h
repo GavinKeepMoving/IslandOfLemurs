@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "Progress.h"
+#include <iostream>
 USING_NS_CC;
 using namespace cocostudio;
 
@@ -45,11 +46,12 @@ public:
     void setDirection(int newDirection); //设置方向
     Sprite* _background;
     int beHit(int attack);
-    void setblood();
+//    void setblood(); 
     int getAttack(){return _attack;}
     //progres*****xiaojing****//
 	Progress* _progress;
     Armature* armature;
+    double mindist = 20;
 	//********************//
 private:
     Sprite* Animal2Node;

@@ -49,7 +49,7 @@ Animal2* Animal2Manager::createAnimal2s(int index)
     //{
     log("animal!!!!");
         auto animal2=Animal2::create(index);
-        animal2->setblood();
+//        animal2->setblood();
         animal2->_background = this->_background;
         animal2->setPosition(350, 100);
         this->addChild(animal2);  /*将怪物添加到管理器(CCNode)中*/
@@ -70,26 +70,21 @@ int Animal2Manager::judgeNeayBy(Animal2 *animal,std::vector<Enemy2*> enemys)
     }
     else{
         // find the nearest enemy and judge whether it is in the attacking scope
-        Enemy2* enemy = NULL;
-        Enemy2* nearest = NULL;
         int min = -1;
         int enemy_index = -1;
         int i = 0;
-        for (i=0;i<enemys.size();i++)
-        {
-            if (min == -1 || min < std::abs(animal->getPositionX()-enemys[i]->getPositionX())){
-                min = std::abs(animal->getPositionX()-enemys[i]->getPositionX());
-                nearest = enemys[i];
-                enemy_index = i;
-            }
-        }
-
-        if (mindist < std::abs(animal->getPositionX()-nearest->getPositionX())){
-            animal->setState(Animal2::WALK);
+        if (enemys.size() == 0){
+            return index;
         }
         else{
-            animal->setState(Animal2::ATTACK);
-            index = enemy_index;
+            Enemy2* nearest = NULL;
+            for (i=0;i<enemys.size();i++){
+                if (animal->getPositionX() <= enemys[i]->getPositionX() && (index < 0 || enemys[i]->getPositionX() < nearest->getPositionX())){
+                    nearest = enemys[i];
+                    index = i;
+                }
+            }
+            
         }
         return index;
     }

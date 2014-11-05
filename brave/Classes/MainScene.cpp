@@ -296,7 +296,6 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 {
     CCSprite *sprite = (CCSprite *)sender;
     this->removeChild(sprite);
-    //enemyArray->removeObject(sprite);
 }
 
 void MainScene::initTrees(int num) {
@@ -433,42 +432,26 @@ void MainScene::initTrees(int num) {
 //        }
 //    }
 //}
-/*
-void MainScene::addEnemy(float dt)
-{
-    std::cout<<"time for enemy comming out~"<<std::endl;
-    _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    // origin.x
-    //    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-    _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
-    _enemy2->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
-    _background->addChild(_enemy1);
-    _background->addChild(_enemy2);
-    _enemys.push_back(_enemy1);
-    _enemys.push_back(_enemy2);
-    _enemy1->addAttacker(_player);
-    _enemy2->addAttacker(_player);
-
-}*/
 
 void MainScene::updateAnimal(float dt)
 {
     for (int i=0;i<_animal2Arr.size();i++)
     {
-//        animal2 = (Animal2*) obj;
         int index = _animal2Manager->judgeNeayBy(_animal2Arr[i],_enemy2Arr);
         if (index == -1){
             _animal2Arr[i]->setState(Animal2::WALK);
         }
         else{
-            _animal2Arr[i]->setState(Animal2::ATTACK);
-            int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
-            if (state == 1){// enemy is dead, remove it
-//                _enemy2Arr[index]->setState(DEAD);
-//                _enemy2Arr.erase(_enemy2Arr.begin()+index);
-                eraseEnemy(index);
-                index = -1;
+            if (_enemy2Arr[index]->getPositionX()-_animal2Arr[i]->getPositionX() > _animal2Arr[i]->mindist){
+                _animal2Arr[i]->setState(Animal2::WALK);
+            }
+            else{
+                _animal2Arr[i]->setState(Animal2::ATTACK);
+                int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
+                if (state == 1){// enemy is dead, remove it
+                    eraseEnemy(index);
+                    index = -1;
+                }
             }
         }
         _animal2Arr[i]->update(dt);
@@ -477,16 +460,11 @@ void MainScene::updateAnimal(float dt)
 }
 //Zhenni
 void MainScene::eraseEnemy(int index) {
-//    Enemy2* deleted = _enemy2Arr[index];
     _enemy2Arr[index]->removeFromParentAndCleanup(true);
-//    MainScene::removeChild(_enemy2Arr[index]);
-    
     _enemy2Arr[index]->setState(DEAD);
     _enemy2Arr.erase(_enemy2Arr.begin()+index);
 }
 void MainScene::eraseAnimal(int index){
-//    Animal2* deleted = _animal2Arr[index];
-//    MainScene::removeChild(deleted);
     _animal2Arr[index]->removeFromParentAndCleanup(true);
     _animal2Arr[index]->setState(Animal2::DEAD);
     _animal2Arr.erase(_animal2Arr.begin()+index);
@@ -563,12 +541,9 @@ bool MainScene::isEnemyInRange(Player* p) {
     _player->targetEnemy = NULL;
     float distance = INT_MAX;
     Rect playerRect=p->getAttackBox();
-//    CCObject* obj = NULL;
-//    Enemy2* enemy2 = NULL;
     int i;
     for (i=0;i<_enemy2Arr.size();i++)
     {
-//        enemy2 = (Enemy2*) obj;
         Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         if(playerRect.containsPoint(enemyPos)) {
             float _distance = (enemyPos - _player->getPosition()).getLength();
@@ -602,20 +577,6 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
 Vec2 MainScene::attackTarget(Player *p) {
     return _background->convertToWorldSpace(_player->targetEnemy->getPosition());
 }
-//------------------remove dead enemy--------------------------------------------------------------//
-//void MainScene::enemyDead(Ref* obj)
-//{
-//	auto enemy= (Enemy*)obj;
-//	_enemys.eraseObject(enemy,true);
-//	log("onEnemyDead:%d", _enemys.size());
-//	//if(_enemys.size() == 0) //show success or go to next level
-//}
-
-//void MainScene::animalDead(Ref* obj)
-//{
-//	auto animal= (Animal*)obj;
-//	_animals.eraseObject(animal,true);		
-//}
 
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
