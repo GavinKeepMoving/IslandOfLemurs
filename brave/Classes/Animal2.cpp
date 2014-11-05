@@ -7,7 +7,7 @@
 //
 
 #include "Animal2.h"
-
+#include "Progress.h"
 Animal2::Animal2(int i)
 {
     Armature *armature = nullptr;
