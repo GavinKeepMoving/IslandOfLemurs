@@ -7,7 +7,7 @@
 //
 
 #include "Animal2.h"
-
+#include "Progress.h"
 Animal2::Animal2(int i)
 {
     Armature *armature = nullptr;
@@ -37,6 +37,18 @@ Animal2::Animal2(int i)
     newState = IDLE;
     lockState = false;
     _attack = 5;
+	_maxblood = 100;
+	
+	//****init progress for blood  xiaojing***********//
+	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
+	//************add its progress***xiaojing**********************//
+	//add enemy's progress
+	auto size = this->getContentSize();
+	Point animalPos = this->getPosition();
+	_progress->setPosition( animalPos.x +size.width*2/3, animalPos.y + size.height+ _progress->getContentSize().height/2+130);
+	this->addChild(_progress);
+
+	//**********************************************************//
 }
 
 Animal2* Animal2::create(int i){
