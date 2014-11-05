@@ -711,7 +711,7 @@ Rect Player::getAttackBox() {
         x=entityPos.x+spriteSize.width/4 - _attackRange;
     }
     // attack range 为横向，纵向无限制条件
-    return Rect(x, y, _attackRange, Director::getInstance()->getVisibleSize().height);
+    return Rect(x, y, _attackRange, Director::getInstance()->getVisibleSize().height*2);
 }
 //reduce the _health value of current animal Xiaojing ***************//
 void Player::beHit(int attack){
