@@ -300,9 +300,9 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 0;
+    int beginningPos = 400;
     int interval = 600;
-    int treeNum = 2;
+    int treeNum = num;
     
     //add treeBase
     treeBase = Sprite::create("image/trees/treeBase.png");
@@ -314,9 +314,20 @@ void MainScene::initTrees(int num) {
     for(int i = 0; i < treeNum; i++) {
         //add ropes
         auto rope = Sprite::create("image/trees/rope.png");
-        rope->setScale(0.2 + i * 0.3, 0.5);
         rope->cocos2d::Node::setAnchorPoint(ccp(0, 0));
-        rope->cocos2d::Node::setPosition(i * 520, 220);
+        if(_ropes.size() == 0) {
+            rope->setScale(0.35, 0.5);
+            rope->cocos2d::Node::setPosition(200, 360);
+        }
+        else if(_ropes.size() == 1) {
+            rope->setScale(0.43, 0.5);
+            rope->cocos2d::Node::setPosition(710, 360);
+        }
+        else {
+            rope->setScale(0.43, 0.5);
+            rope->cocos2d::Node::setPosition(710 + (i - 1) * interval, 360);
+        }
+        
         _ropes.push_back(rope);
         _background->addChild(rope);
         
@@ -326,7 +337,7 @@ void MainScene::initTrees(int num) {
         
         auto treeSprite = Sprite::create("image/trees/tree.png");
         treeSprite->setAnchorPoint(ccp(0, 0));
-        treeSprite->setPosition(beginningPos + interval * i, 100);
+        treeSprite->setPosition(beginningPos + interval * i, 50);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
         _trees[_trees.size() - 1]->_background = _background;
