@@ -325,7 +325,7 @@ void MainScene::initTrees(int num) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
         treeSprite->setPosition(beginningPos + interval * i, 430);
         _background->addChild(treeSprite);
-        _trees.push_back(new Tree(treeSprite));
+        _trees.push_back(new Tree(treeSprite,bananaManger,_background));
         _trees[_trees.size() - 1]->_background = _background;
     }
 }
@@ -607,6 +607,7 @@ void MainScene::deleteTree() {
     
     _trees.pop_back();
     
+    
     //add sound
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/TreeFall.wav");
     
@@ -694,12 +695,13 @@ void MainScene::addBackground()
 
 void MainScene::addRoles()
 {
-    this->addTrees();
+    
     this->addAnimations();
     this->addFires();
     this->addPlayer();
     this->addEnemies();
     this->addBananas();
+    this->addTrees();
 }
 
 //method in addRoles
