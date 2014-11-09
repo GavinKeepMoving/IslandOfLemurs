@@ -64,6 +64,7 @@ bool MainScene::init()
     
     this->addRoles();
     
+    this->addEnemyNumber();
 //    this->addEnemiesAI(0.5);
     
     this->setScheduleAndProgress();
@@ -739,6 +740,8 @@ void MainScene::addAnimations()
     //-------------------------------------//
     ArmatureDataManager::getInstance()->addArmatureFileInfo("animal0.png" , "animal0.plist" , "animal.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("monkey20.png" , "monkey20.plist" , "monkey2.ExportJson");
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("tiger20.png" , "tiger20.plist" , "tiger2.ExportJson");
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("panada0.png" , "panada0.plist" , "panada.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
@@ -818,15 +821,32 @@ void MainScene::addEnemies()
 
 void MainScene::addEnemiesAI(float dt)
 {
-//    _enemy2Arr = __Array::create();
-//    _enemy2Arr->retain();
-    Enemy2* enemy1 = _enemy2Manager->createEnemy2s(100);
-    Enemy2* enemy2 = _enemy2Manager->createEnemy2s(200);
-    _enemy2Arr.push_back(enemy1);
-    _enemy2Arr.push_back(enemy2);
+    int i;
+    Enemy2* enemy;
+    int dist = 25;
+    if (level < dispatch.size()){
+        for (i=0;i<dispatch[level];i++){
+            enemy = _enemy2Manager->createEnemy2s(dist);
+            _enemy2Arr.push_back(enemy);
+            dist += 25;
+        }
+        level++;
+    }
+    else{
+        // the game ends
+    }
+//    Enemy2* enemy1 = _enemy2Manager->createEnemy2s(100);
+//    Enemy2* enemy2 = _enemy2Manager->createEnemy2s(200);
+//    _enemy2Arr.push_back(enemy1);
+//    _enemy2Arr.push_back(enemy2);
 //    _enemy2Arr->addObject(enemy1);
 //    _enemy2Arr->addObject(enemy2);
 //    _animal2Manager->setEnemy(_enemy2Arr);
+}
+
+void MainScene::addEnemyNumber()
+{
+    dispatch = {3,4,5,6,6};
 }
 
 void MainScene::addBananas()

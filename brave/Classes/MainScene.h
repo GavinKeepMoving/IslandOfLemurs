@@ -52,6 +52,8 @@ public:
     void addEnemies();
     void addBananas();
     void addEnemiesAI(float dt);
+    void addEnemyNumber();
+    int level = 0;
     //end of method in addRoles
     
     void setScheduleAndProgress();
@@ -85,6 +87,7 @@ public:
 //    void animalMove(float dt);
     void addEnemy(float dt);
     std::vector<Tree*> getTrees(){return _trees;}
+    std::vector<int> dispatch;
     void updateEnemy(float dt);
     void updateAnimal(float dt);
     /*** added by Zhe Liu ***/
@@ -157,7 +160,7 @@ public:
     Sprite *_background;
     Sprite *_background1;
     std::vector<Tree*> _trees;
-    int level = 0;
+    int curr = 0;
     //******************************************************************************************************************
     //added by Wenbo Lin
     Progress* _progress;
