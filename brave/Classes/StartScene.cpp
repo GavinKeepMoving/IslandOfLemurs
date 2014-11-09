@@ -7,10 +7,11 @@
 //
 
 #include "StartScene.h"
-
+#include "MapScene.h"
 #include "MainScene.h"
 #include "VisibleRect.h"
 #include "CustomTool.h"
+#include "WinScene.h"
 
 /******************Start-Modified by Yafu****************************/
 MainScene *mainLayer;
@@ -47,12 +48,12 @@ Scene* StartScene::createScene()
 void StartScene::onStart(Ref* obj)
 {
     log("StartLayer::onStart");
-    auto scene = MainScene::createScene();
-    
-    /******************Start-Modified by Yafu****************************/
-    Vector<Node *> children = scene->getChildren();
-    mainLayer = (MainScene *)children.back();
-    /******************End-Modified by Yafu*****************************/
+    auto scene = MapScene::createScene();
+    //auto scene = WinScene::createScene();
+//    /******************Start-Modified by Yafu****************************/
+//    Vector<Node *> children = scene->getChildren();
+//    mainLayer = (MainScene *)children.back();
+//    /******************End-Modified by Yafu*****************************/
     
     Director::getInstance()->replaceScene(scene);
 }

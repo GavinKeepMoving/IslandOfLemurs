@@ -45,6 +45,7 @@ public:
     void showStateAccordingtoBlood();
     void showAnimation();//show burning or burndown, need to call getState to know which animations to play
     Fire* addFire(int scale);
+    float getRightBoundary();
     
     //sound effect
     unsigned int _soundEffectId;
