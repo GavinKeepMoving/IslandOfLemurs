@@ -301,7 +301,7 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
     int beginningPos = 400;
-    int interval = 600;
+    int interval = 560;
     int treeNum = num;
     
     //add treeBase
@@ -725,7 +725,7 @@ void MainScene::addTrees()
     //added by Wenbo Lin
     
     //add trees to background
-    this->initTrees(5);
+    this->initTrees(4);
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
