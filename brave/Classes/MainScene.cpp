@@ -304,7 +304,7 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
     int beginningPos = 400;
-    int interval = 600;
+    int interval = 560;
     int treeNum = num;
     
     //add treeBase
@@ -501,12 +501,13 @@ void MainScene::updateEnemy(float dt)
         std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
+        std::cout<<"current target is: "<<index<<std::endl;
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
         }
         else{
             if (index == 0){ // lemur
-                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 160)
+                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 80)
                 {
                     _enemy2Arr[i]->setState(ATTACK);
                     int status = _player->beHit(_enemy2Arr[i]->getAttack());
@@ -731,7 +732,7 @@ void MainScene::addTrees()
     //added by Wenbo Lin
     
     //add trees to background
-    this->initTrees(5);
+    this->initTrees(4);
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//

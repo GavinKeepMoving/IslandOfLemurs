@@ -45,7 +45,7 @@ Enemy2* Enemy2Manager::createEnemy2s(int order)
         auto enemy2=Enemy2::create();
         enemy2->_background = this->_background;
 //        enemy2->setPosition(950 + i * 70, 430);
-        enemy2->setPosition(1800+order,70);
+        enemy2->setPosition(2800+order,70);
         this->addChild(enemy2);  /*将怪物添加到管理器(CCNode)中*/
 //        _enemy2Arr->addObject(enemy2);/*添加到数组中，便于管理*/
 //    }
@@ -114,20 +114,20 @@ int Enemy2Manager::judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> 
         }
     }
     // lemur
-    if ( pos.y == 160 &&(trees.size() == 0 || (pos.x >= trees.back()->treeSprite->getPositionX() &&
+    if ( pos.y == 80 &&(trees.size() == 0 || (pos.x >= trees.back()->treeSprite->getPositionX() &&
          enemy->getPositionX() >= pos.x))
         && (hasAnimal == 0 || (pos.x >= closest->getPositionX() && enemy->getPositionX() >= pos.x))){
         firstObj = pos;
         index = 0;
     }
     // tree
-    else if (trees.size() > 0 && (enemy->getPositionX() > trees.back()->treeSprite->getPositionX()) && (hasAnimal == 0 || (trees.back()->treeSprite->getPositionX() > closest->getPositionX()))&&(pos.y > 160 || pos.x < trees.back()->treeSprite->getPositionX())){
+    else if (trees.size() > 0 && (enemy->getPositionX() > trees.back()->treeSprite->getPositionX()) && (hasAnimal == 0 || (trees.back()->treeSprite->getPositionX() > closest->getPositionX()))&&(pos.y > 80 || pos.x < trees.back()->treeSprite->getPositionX())){
         firstObj = Vec2(trees.back()->treeSprite->getPositionX(),enemy->getPositionY());
         index = 1;
         isTree = 1;
     }
     // animal
-    else if (hasAnimal > 0 && (trees.size() == 0 || closest->getPositionX() > trees.back()->treeSprite->getPositionX()) && (pos.y > 160 || closest->getPositionX() > pos.x) && enemy->getPositionX() >= closest->getPositionX())
+    else if (hasAnimal > 0 && (trees.size() == 0 || closest->getPositionX() > trees.back()->treeSprite->getPositionX()) && (pos.y > 80 || closest->getPositionX() > pos.x) && enemy->getPositionX() >= closest->getPositionX())
     {
         isTree = 2;
         firstObj = Vec2(closest->getPositionX(),enemy->getPositionY());

@@ -62,7 +62,7 @@ private:
     bool lockState;                     //锁定状态
     void onAnimationEvent(Armature *pArmature, MovementEventType eventType, const char *animationID);                   //角色射击状态
     int _blood;
-    int _maxHealth;
+    
     int _attack;
 	int _maxblood;
 };
