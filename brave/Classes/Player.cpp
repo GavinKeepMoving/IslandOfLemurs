@@ -84,7 +84,7 @@ bool Player::initWithPlayerType(PlayerType type)
 			//init player's blood value xiaojing
 			_health = 100;
 			_maxHealth =100;
-			_attack = 20;
+			_attack = 200;
 			//-----------------------------------//
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 5);
             break;
@@ -255,6 +255,7 @@ void Player::walkTo(Vec2 dest, int boundry)
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, this, dest, boundry);
     _fsm->setOnEnter("walking", onWalk);
     _fsm->doEvent("walk");
+    std::cout<<"currentState"<<this->_fsm->getState();
 }
 
 void Player::stop(float r) {

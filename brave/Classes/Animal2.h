@@ -16,7 +16,7 @@
 USING_NS_CC;
 using namespace cocostudio;
 
-#define WALK_SPEED 1
+#define WALK_SPEED 3
 #define WALK_LEFT 1
 #define WALK_RIGHT -1
 

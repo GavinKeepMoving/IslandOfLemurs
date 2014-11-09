@@ -64,6 +64,8 @@ bool MainScene::init()
     
     this->addRoles();
     
+//    this->addEnemiesAI(0.5);
+    
     this->setScheduleAndProgress();
     //this->addgotoItem();//or combine with menu create??
     return true;
@@ -451,6 +453,9 @@ void MainScene::updateAnimal(float dt)
                 int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
                 if (state == 1){// enemy is dead, remove it
                     eraseEnemy(index);
+//                    _enemy2Arr[index]->removeFromParentAndCleanup(true);
+//                    _enemy2Arr[index]->setState(DEAD);
+//                    _enemy2Arr.erase(_enemy2Arr.begin()+index);
                     index = -1;
                 }
             }
@@ -815,8 +820,8 @@ void MainScene::addEnemiesAI(float dt)
 {
 //    _enemy2Arr = __Array::create();
 //    _enemy2Arr->retain();
-    Enemy2* enemy1 = _enemy2Manager->createEnemy2s();
-    Enemy2* enemy2 = _enemy2Manager->createEnemy2s();
+    Enemy2* enemy1 = _enemy2Manager->createEnemy2s(100);
+    Enemy2* enemy2 = _enemy2Manager->createEnemy2s(200);
     _enemy2Arr.push_back(enemy1);
     _enemy2Arr.push_back(enemy2);
 //    _enemy2Arr->addObject(enemy1);
