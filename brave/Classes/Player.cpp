@@ -305,10 +305,14 @@ void Player::constructActionArray(int start, int end,
                                   Vector< FiniteTimeAction * > &arrayOfActions,
                                   Vector< FiniteTimeAction * > &backgroundActions) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    int minDiff = -visibleSize.width/2;
-    int firstChange = 0;
-    int secondChange = background->getContentSize().width*5/4 - visibleSize.width*2;
-    int maxDiff = background->getContentSize().width*5/4 - visibleSize.width*3/2;
+//    int minDiff = -visibleSize.width/2;
+//    int firstChange = 0;
+//    int secondChange = background->getContentSize().width*5/4 - visibleSize.width*2;
+//    int maxDiff = background->getContentSize().width*5/4 - visibleSize.width*3/2;
+    int minDiff = 0;
+    int firstChange = visibleSize.width/2;
+    int secondChange = background->getContentSize().width - visibleSize.width/2;
+    int maxDiff = background->getContentSize().width;
     auto empty = Vec2(0, 0);
     if (start < end) {
         if(start < firstChange) {
