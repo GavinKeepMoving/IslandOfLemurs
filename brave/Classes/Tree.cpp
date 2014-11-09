@@ -177,6 +177,14 @@ Fire* Tree::addFire(int scale) {
     fire->setFire();
 }
 
+//return tree right boundary
+float Tree::getRightBoundary() {
+    auto leftCorner = treeSprite->getPosition();
+    auto leftX = leftCorner.x;
+    auto rightX = leftCorner.x + this->getContentSize().width;
+    return rightX;
+}
+
 //get blood values
 int Tree::getBlood(Tree* tree) {
     //call status function
