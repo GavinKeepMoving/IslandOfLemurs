@@ -19,7 +19,7 @@ Animal2::Animal2(int i)
             armature = Armature::create("monkey2");
             break;
         case 1:
-            armature = Armature::create("monkey2");
+            armature = Armature::create("tiger2");
             break;
         case 2:
             armature = Armature::create("panada");
