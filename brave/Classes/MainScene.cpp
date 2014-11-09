@@ -303,21 +303,34 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 900;
+    int beginningPos = 400;
     int interval = 600;
-    int treeNum = 2;
+    int treeNum = num;
     
     //add treeBase
     treeBase = Sprite::create("image/trees/treeBase.png");
-    treeBase->setPosition(580, 460);
+    treeBase->cocos2d::Node::setAnchorPoint(ccp(0, 0));
+    treeBase->setPosition(0, 100);
     _background->addChild(treeBase);
 
     
     for(int i = 0; i < treeNum; i++) {
         //add ropes
         auto rope = Sprite::create("image/trees/rope.png");
-        rope->setScale(0.2 + i * 0.3, 0.5);
-        rope->cocos2d::Node::setPosition(beginningPos - 180 + i * 520, 520);
+        rope->cocos2d::Node::setAnchorPoint(ccp(0, 0));
+        if(_ropes.size() == 0) {
+            rope->setScale(0.35, 0.5);
+            rope->cocos2d::Node::setPosition(200, 360);
+        }
+        else if(_ropes.size() == 1) {
+            rope->setScale(0.43, 0.5);
+            rope->cocos2d::Node::setPosition(710, 360);
+        }
+        else {
+            rope->setScale(0.43, 0.5);
+            rope->cocos2d::Node::setPosition(710 + (i - 1) * interval, 360);
+        }
+        
         _ropes.push_back(rope);
         _background->addChild(rope);
         
@@ -326,7 +339,8 @@ void MainScene::initTrees(int num) {
 //        _background->addChild(bareTree);
         
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 430);
+        treeSprite->setAnchorPoint(ccp(0, 0));
+        treeSprite->setPosition(beginningPos + interval * i, 50);
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite));
         _trees[_trees.size() - 1]->_background = _background;
@@ -687,15 +701,16 @@ void MainScene::addBackground()
     //add background image
     log("create background");
     _background = Sprite::create("image/background.png");
-    _background1 = Sprite::create("image/background.png");
+    //_background1 = Sprite::create("image/background.png");
     log("created background");
     
     // position the sprite on the center of the screen
-    _background->setPosition(origin + visibleSize/2);
-    _background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
+    _background->setAnchorPoint(ccp(0,0));
+    _background->setPosition(0,0);
+    //_background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
     // add the sprite as a child to this layer
     this->addChild(_background, 0);
-    this->addChild(_background1, 0);
+    //this->addChild(_background1, 0);
 }
 
 void MainScene::addRoles()
@@ -716,7 +731,7 @@ void MainScene::addTrees()
     //added by Wenbo Lin
     
     //add trees to background
-    this->initTrees(2);
+    this->initTrees(5);
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
