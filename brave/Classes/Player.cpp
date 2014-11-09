@@ -727,7 +727,7 @@ void Player::beHit(int attack){
 	else
 	{
 		//be hit
-		_fsm->doEvent("beHit");
+		//_fsm->doEvent("beHit");
 	}
 }
 //***************************************************//
