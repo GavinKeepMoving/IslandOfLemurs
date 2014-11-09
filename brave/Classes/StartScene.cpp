@@ -11,6 +11,7 @@
 #include "MainScene.h"
 #include "VisibleRect.h"
 #include "CustomTool.h"
+#include "WinScene.h"
 
 /******************Start-Modified by Yafu****************************/
 MainScene *mainLayer;
@@ -48,7 +49,7 @@ void StartScene::onStart(Ref* obj)
 {
     log("StartLayer::onStart");
     auto scene = MapScene::createScene();
-    
+    //auto scene = WinScene::createScene();
 //    /******************Start-Modified by Yafu****************************/
 //    Vector<Node *> children = scene->getChildren();
 //    mainLayer = (MainScene *)children.back();

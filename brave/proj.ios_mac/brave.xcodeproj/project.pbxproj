@@ -89,6 +89,8 @@
 		A62FF6511A06C128007EC9B3 /* mark.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF6501A06C128007EC9B3 /* mark.png */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
+		BE5CA7C21A10279200BB7EE5 /* WinScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE5CA7C01A10279200BB7EE5 /* WinScene.cpp */; };
+		BE5CA7C71A102B2D00BB7EE5 /* win.png in Resources */ = {isa = PBXBuildFile; fileRef = BE5CA7C61A102B2D00BB7EE5 /* win.png */; };
 		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -363,6 +365,9 @@
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FD19CF508900DA478A /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
 		A6C5B2FE19CF509500DA478A /* Weapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Weapon.cpp; sourceTree = "<group>"; };
+		BE5CA7C01A10279200BB7EE5 /* WinScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WinScene.cpp; path = ../Classes/WinScene.cpp; sourceTree = "<group>"; };
+		BE5CA7C11A10279200BB7EE5 /* WinScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WinScene.h; path = ../Classes/WinScene.h; sourceTree = "<group>"; };
+		BE5CA7C61A102B2D00BB7EE5 /* win.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = win.png; sourceTree = "<group>"; };
 		BEDF548C19DD481C00068CBA /* Tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tree.cpp; path = ../Classes/Tree.cpp; sourceTree = "<group>"; };
 		BEDF548D19DD481C00068CBA /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tree.h; path = ../Classes/Tree.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -520,8 +525,10 @@
 				9C82A9D819F461B10080515F /* Enemy2Manager.h */,
 				A62FF62D19FD689E007EC9B3 /* StartScene.cpp */,
 				A62FF62E19FD689E007EC9B3 /* StartScene.h */,
-				A62FF64B1A06B7B8007EC9B3 /* MapScene.cpp */,
 				A62FF64C1A06B7B8007EC9B3 /* MapScene.h */,
+				A62FF64B1A06B7B8007EC9B3 /* MapScene.cpp */,
+				BE5CA7C01A10279200BB7EE5 /* WinScene.cpp */,
+				BE5CA7C11A10279200BB7EE5 /* WinScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -668,6 +675,7 @@
 				9CFB92E719EB4AE8000F869A /* attackoption1.png */,
 				A601081819EB5DED00664A6C /* attackoption2.png */,
 				9CFB92E819EB4AE8000F869A /* background.png */,
+				BE5CA7C61A102B2D00BB7EE5 /* win.png */,
 				9CFB92E919EB4AE8000F869A /* CloseNormal.png */,
 				9CFB92EA19EB4AE8000F869A /* CloseSelected.png */,
 				A62FF63619FD6F74007EC9B3 /* MainMenuBG.png */,
@@ -891,6 +899,7 @@
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				FED2F3451A0FF84700CA53B6 /* panada0.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				BE5CA7C71A102B2D00BB7EE5 /* win.png in Resources */,
 				FED2F3401A0FF84700CA53B6 /* monkey2.ExportJson in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
@@ -953,6 +962,7 @@
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
 				A62FF63419FD6AEF007EC9B3 /* CustomTool.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				BE5CA7C21A10279200BB7EE5 /* WinScene.cpp in Sources */,
 				A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */,
 				9CFB92CE19EB2AD7000F869A /* Fire.cpp in Sources */,
 				FEDF9FE519E39E7A00484807 /* blood.cpp in Sources */,
