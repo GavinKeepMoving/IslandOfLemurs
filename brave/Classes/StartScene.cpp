@@ -8,7 +8,6 @@
 
 #include "StartScene.h"
 #include "MapScene.h"
-
 #include "MainScene.h"
 #include "VisibleRect.h"
 #include "CustomTool.h"
@@ -50,7 +49,10 @@ void StartScene::onStart(Ref* obj)
     log("StartLayer::onStart");
     auto scene = MapScene::createScene();
     
-
+//    /******************Start-Modified by Yafu****************************/
+//    Vector<Node *> children = scene->getChildren();
+//    mainLayer = (MainScene *)children.back();
+//    /******************End-Modified by Yafu*****************************/
     
     Director::getInstance()->replaceScene(scene);
 }

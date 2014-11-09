@@ -99,6 +99,33 @@
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		FE2E259E19D73D9400AC8DB5 /* FSM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE2E259D19D73D9400AC8DB5 /* FSM.cpp */; };
 		FEAA762019C6201400E8ED22 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEAA761F19C6201400E8ED22 /* Player.cpp */; };
+		FED2F3351A0FF84700CA53B6 /* animal.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = FED2F31A1A0FF84700CA53B6 /* animal.ExportJson */; };
+		FED2F3361A0FF84700CA53B6 /* animal0.plist in Resources */ = {isa = PBXBuildFile; fileRef = FED2F31B1A0FF84700CA53B6 /* animal0.plist */; };
+		FED2F3371A0FF84700CA53B6 /* animal0.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F31C1A0FF84700CA53B6 /* animal0.png */; };
+		FED2F3381A0FF84700CA53B6 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F31D1A0FF84700CA53B6 /* back.png */; };
+		FED2F3391A0FF84700CA53B6 /* cloth.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F31E1A0FF84700CA53B6 /* cloth.png */; };
+		FED2F33A1A0FF84700CA53B6 /* clothgrey.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F31F1A0FF84700CA53B6 /* clothgrey.png */; };
+		FED2F33B1A0FF84700CA53B6 /* fire.plist in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3211A0FF84700CA53B6 /* fire.plist */; };
+		FED2F33C1A0FF84700CA53B6 /* fire.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3221A0FF84700CA53B6 /* fire.pvr.ccz */; };
+		FED2F33D1A0FF84700CA53B6 /* flame.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3231A0FF84700CA53B6 /* flame.png */; };
+		FED2F33E1A0FF84700CA53B6 /* money.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3241A0FF84700CA53B6 /* money.png */; };
+		FED2F33F1A0FF84700CA53B6 /* moneygrey.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3251A0FF84700CA53B6 /* moneygrey.png */; };
+		FED2F3401A0FF84700CA53B6 /* monkey2.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3261A0FF84700CA53B6 /* monkey2.ExportJson */; };
+		FED2F3411A0FF84700CA53B6 /* monkey20.plist in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3271A0FF84700CA53B6 /* monkey20.plist */; };
+		FED2F3421A0FF84700CA53B6 /* monkey20.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3281A0FF84700CA53B6 /* monkey20.png */; };
+		FED2F3431A0FF84700CA53B6 /* panada.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3291A0FF84700CA53B6 /* panada.ExportJson */; };
+		FED2F3441A0FF84700CA53B6 /* panada0.plist in Resources */ = {isa = PBXBuildFile; fileRef = FED2F32A1A0FF84700CA53B6 /* panada0.plist */; };
+		FED2F3451A0FF84700CA53B6 /* panada0.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F32B1A0FF84700CA53B6 /* panada0.png */; };
+		FED2F3461A0FF84700CA53B6 /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F32C1A0FF84700CA53B6 /* panda.png */; };
+		FED2F3471A0FF84700CA53B6 /* pandagrey.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F32D1A0FF84700CA53B6 /* pandagrey.png */; };
+		FED2F3481A0FF84700CA53B6 /* tiger2.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = FED2F32E1A0FF84700CA53B6 /* tiger2.ExportJson */; };
+		FED2F3491A0FF84700CA53B6 /* tiger2.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F32F1A0FF84700CA53B6 /* tiger2.png */; };
+		FED2F34A1A0FF84700CA53B6 /* tiger2grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3301A0FF84700CA53B6 /* tiger2grey.png */; };
+		FED2F34B1A0FF84700CA53B6 /* tiger20.plist in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3311A0FF84700CA53B6 /* tiger20.plist */; };
+		FED2F34C1A0FF84700CA53B6 /* tiger20.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3321A0FF84700CA53B6 /* tiger20.png */; };
+		FED2F34D1A0FF84700CA53B6 /* weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3331A0FF84700CA53B6 /* weapons.plist */; };
+		FED2F34E1A0FF84700CA53B6 /* weapons.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3341A0FF84700CA53B6 /* weapons.pvr.ccz */; };
+		FED2F3541A0FFC3600CA53B6 /* iui.png in Resources */ = {isa = PBXBuildFile; fileRef = FED2F3531A0FFC3600CA53B6 /* iui.png */; };
 		FEDF9FE419E39E7A00484807 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FDE19E39E7A00484807 /* Attack.cpp */; };
 		FEDF9FE519E39E7A00484807 /* blood.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FE019E39E7A00484807 /* blood.cpp */; };
 		FEDF9FE619E39E7A00484807 /* Progress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEDF9FE219E39E7A00484807 /* Progress.cpp */; };
@@ -349,6 +376,33 @@
 		FE2E259D19D73D9400AC8DB5 /* FSM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FSM.cpp; path = ../Classes/FSM.cpp; sourceTree = "<group>"; };
 		FEAA761D19C61BC800E8ED22 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Classes/Player.h; sourceTree = "<group>"; };
 		FEAA761F19C6201400E8ED22 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		FED2F31A1A0FF84700CA53B6 /* animal.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = animal.ExportJson; sourceTree = "<group>"; };
+		FED2F31B1A0FF84700CA53B6 /* animal0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = animal0.plist; sourceTree = "<group>"; };
+		FED2F31C1A0FF84700CA53B6 /* animal0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal0.png; sourceTree = "<group>"; };
+		FED2F31D1A0FF84700CA53B6 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		FED2F31E1A0FF84700CA53B6 /* cloth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth.png; sourceTree = "<group>"; };
+		FED2F31F1A0FF84700CA53B6 /* clothgrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clothgrey.png; sourceTree = "<group>"; };
+		FED2F3211A0FF84700CA53B6 /* fire.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fire.plist; sourceTree = "<group>"; };
+		FED2F3221A0FF84700CA53B6 /* fire.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = fire.pvr.ccz; sourceTree = "<group>"; };
+		FED2F3231A0FF84700CA53B6 /* flame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame.png; sourceTree = "<group>"; };
+		FED2F3241A0FF84700CA53B6 /* money.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money.png; sourceTree = "<group>"; };
+		FED2F3251A0FF84700CA53B6 /* moneygrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moneygrey.png; sourceTree = "<group>"; };
+		FED2F3261A0FF84700CA53B6 /* monkey2.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monkey2.ExportJson; sourceTree = "<group>"; };
+		FED2F3271A0FF84700CA53B6 /* monkey20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = monkey20.plist; sourceTree = "<group>"; };
+		FED2F3281A0FF84700CA53B6 /* monkey20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monkey20.png; sourceTree = "<group>"; };
+		FED2F3291A0FF84700CA53B6 /* panada.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = panada.ExportJson; sourceTree = "<group>"; };
+		FED2F32A1A0FF84700CA53B6 /* panada0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = panada0.plist; sourceTree = "<group>"; };
+		FED2F32B1A0FF84700CA53B6 /* panada0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panada0.png; sourceTree = "<group>"; };
+		FED2F32C1A0FF84700CA53B6 /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
+		FED2F32D1A0FF84700CA53B6 /* pandagrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pandagrey.png; sourceTree = "<group>"; };
+		FED2F32E1A0FF84700CA53B6 /* tiger2.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tiger2.ExportJson; sourceTree = "<group>"; };
+		FED2F32F1A0FF84700CA53B6 /* tiger2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger2.png; sourceTree = "<group>"; };
+		FED2F3301A0FF84700CA53B6 /* tiger2grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger2grey.png; sourceTree = "<group>"; };
+		FED2F3311A0FF84700CA53B6 /* tiger20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tiger20.plist; sourceTree = "<group>"; };
+		FED2F3321A0FF84700CA53B6 /* tiger20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiger20.png; sourceTree = "<group>"; };
+		FED2F3331A0FF84700CA53B6 /* weapons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = weapons.plist; sourceTree = "<group>"; };
+		FED2F3341A0FF84700CA53B6 /* weapons.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = weapons.pvr.ccz; sourceTree = "<group>"; };
+		FED2F3531A0FFC3600CA53B6 /* iui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iui.png; path = image/iui.png; sourceTree = "<group>"; };
 		FEDF9FDE19E39E7A00484807 /* Attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Attack.cpp; path = ../Classes/Attack.cpp; sourceTree = "<group>"; };
 		FEDF9FDF19E39E7A00484807 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attack.h; path = ../Classes/Attack.h; sourceTree = "<group>"; };
 		FEDF9FE019E39E7A00484807 /* blood.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = blood.cpp; path = ../Classes/blood.cpp; sourceTree = "<group>"; };
@@ -583,6 +637,31 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FED2F3531A0FFC3600CA53B6 /* iui.png */,
+				FED2F31A1A0FF84700CA53B6 /* animal.ExportJson */,
+				FED2F31B1A0FF84700CA53B6 /* animal0.plist */,
+				FED2F31C1A0FF84700CA53B6 /* animal0.png */,
+				FED2F31D1A0FF84700CA53B6 /* back.png */,
+				FED2F31E1A0FF84700CA53B6 /* cloth.png */,
+				FED2F31F1A0FF84700CA53B6 /* clothgrey.png */,
+				FED2F3201A0FF84700CA53B6 /* fire */,
+				FED2F3241A0FF84700CA53B6 /* money.png */,
+				FED2F3251A0FF84700CA53B6 /* moneygrey.png */,
+				FED2F3261A0FF84700CA53B6 /* monkey2.ExportJson */,
+				FED2F3271A0FF84700CA53B6 /* monkey20.plist */,
+				FED2F3281A0FF84700CA53B6 /* monkey20.png */,
+				FED2F3291A0FF84700CA53B6 /* panada.ExportJson */,
+				FED2F32A1A0FF84700CA53B6 /* panada0.plist */,
+				FED2F32B1A0FF84700CA53B6 /* panada0.png */,
+				FED2F32C1A0FF84700CA53B6 /* panda.png */,
+				FED2F32D1A0FF84700CA53B6 /* pandagrey.png */,
+				FED2F32E1A0FF84700CA53B6 /* tiger2.ExportJson */,
+				FED2F32F1A0FF84700CA53B6 /* tiger2.png */,
+				FED2F3301A0FF84700CA53B6 /* tiger2grey.png */,
+				FED2F3311A0FF84700CA53B6 /* tiger20.plist */,
+				FED2F3321A0FF84700CA53B6 /* tiger20.png */,
+				FED2F3331A0FF84700CA53B6 /* weapons.plist */,
+				FED2F3341A0FF84700CA53B6 /* weapons.pvr.ccz */,
 				A62FF62B19FD677A007EC9B3 /* p1.ExportJson */,
 				A62FF62719FD6763007EC9B3 /* p10.plist */,
 				A62FF62819FD6763007EC9B3 /* p10.png */,
@@ -604,6 +683,16 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		FED2F3201A0FF84700CA53B6 /* fire */ = {
+			isa = PBXGroup;
+			children = (
+				FED2F3211A0FF84700CA53B6 /* fire.plist */,
+				FED2F3221A0FF84700CA53B6 /* fire.pvr.ccz */,
+				FED2F3231A0FF84700CA53B6 /* flame.png */,
+			);
+			path = fire;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -770,11 +859,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FED2F3391A0FF84700CA53B6 /* cloth.png in Resources */,
 				A62FF63719FD6F74007EC9B3 /* MainMenuBG.png in Resources */,
 				9CFB92FB19EB4AE8000F869A /* fonts in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				FED2F3421A0FF84700CA53B6 /* monkey20.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				FED2F3411A0FF84700CA53B6 /* monkey20.plist in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				FED2F3491A0FF84700CA53B6 /* tiger2.png in Resources */,
+				FED2F3481A0FF84700CA53B6 /* tiger2.ExportJson in Resources */,
 				9CFB92F619EB4AE8000F869A /* attackoption1.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				A62FF62A19FD6763007EC9B3 /* p10.png in Resources */,
@@ -782,25 +876,47 @@
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				A62FF64F1A06BB8D007EC9B3 /* map.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				FED2F3381A0FF84700CA53B6 /* back.png in Resources */,
 				A62FF6511A06C128007EC9B3 /* mark.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				A62FF62919FD6763007EC9B3 /* p10.plist in Resources */,
 				9CFB92F719EB4AE8000F869A /* background.png in Resources */,
 				9CFB92F819EB4AE8000F869A /* CloseNormal.png in Resources */,
+				FED2F3361A0FF84700CA53B6 /* animal0.plist in Resources */,
 				A62FF63E19FD7B58007EC9B3 /* iui.plist in Resources */,
 				9CFB92F919EB4AE8000F869A /* CloseSelected.png in Resources */,
+				FED2F3441A0FF84700CA53B6 /* panada0.plist in Resources */,
 				9CFB92FE19EB4AE8000F869A /* image in Resources */,
+				FED2F3471A0FF84700CA53B6 /* pandagrey.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				FED2F3451A0FF84700CA53B6 /* panada0.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				FED2F3401A0FF84700CA53B6 /* monkey2.ExportJson in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				FED2F34B1A0FF84700CA53B6 /* tiger20.plist in Resources */,
+				FED2F3351A0FF84700CA53B6 /* animal.ExportJson in Resources */,
+				FED2F3371A0FF84700CA53B6 /* animal0.png in Resources */,
+				FED2F34A1A0FF84700CA53B6 /* tiger2grey.png in Resources */,
+				FED2F3541A0FFC3600CA53B6 /* iui.png in Resources */,
 				A601081919EB5DED00664A6C /* attackoption2.png in Resources */,
+				FED2F34E1A0FF84700CA53B6 /* weapons.pvr.ccz in Resources */,
+				FED2F3431A0FF84700CA53B6 /* panada.ExportJson in Resources */,
+				FED2F33C1A0FF84700CA53B6 /* fire.pvr.ccz in Resources */,
 				A62FF64A1A06B314007EC9B3 /* banana.png in Resources */,
+				FED2F33F1A0FF84700CA53B6 /* moneygrey.png in Resources */,
+				FED2F33E1A0FF84700CA53B6 /* money.png in Resources */,
 				A62FF62C19FD677A007EC9B3 /* p1.ExportJson in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				FED2F33A1A0FF84700CA53B6 /* clothgrey.png in Resources */,
 				A62FF63B19FD791E007EC9B3 /* mainmenu.png in Resources */,
+				FED2F34D1A0FF84700CA53B6 /* weapons.plist in Resources */,
+				FED2F3461A0FF84700CA53B6 /* panda.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				9CFB92FC19EB4AE8000F869A /* fruit.png in Resources */,
+				FED2F33D1A0FF84700CA53B6 /* flame.png in Resources */,
+				FED2F34C1A0FF84700CA53B6 /* tiger20.png in Resources */,
+				FED2F33B1A0FF84700CA53B6 /* fire.plist in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				9CFB92FD19EB4AE8000F869A /* HelloWorld.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
@@ -921,7 +1037,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yanwen Cheng (HZ8WZLL2PS)";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -952,7 +1068,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yanwen Cheng (HZ8WZLL2PS)";
 				COMPRESS_PNG_FILES = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

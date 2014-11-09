@@ -180,52 +180,52 @@ void Player::generalAttack(float radius) {
 }
 
 void Player::playerDrop(int start, int end, std::function<void ()> callback) {
-    std::function<void()> onDrop = CC_CALLBACK_0(Player::onDrop, this, start, end, callback);
-    _fsm->setOnEnter("droping", onDrop);
-    _fsm->doEvent("drop");
+    if (this->getPositionX() > start-this->getContentSize().width/2 && this->getPositionX()+-this->getContentSize().width/2 < end) {
+        std::function<void()> onDrop = CC_CALLBACK_0(Player::onDrop, this, start, end, callback);
+        _fsm->setOnEnter("droping", onDrop);
+        _fsm->doEvent("drop");
+    }
 }
 
 void Player::onDrop(int start, int end, std::function<void()> callback) {
-    if (this->getPositionX() > start-this->getContentSize().width/2 && this->getPositionX()+-this->getContentSize().width/2 < end) {
-        log("Player: drop!");
-        //DROPING = true;
-        auto preStatus = this->_fsm->getState();
-        //_fsm->doEvent("stop");
-        this->stopAllActions();
-        background->stopAllActions();
-        Vec2 ground;
-        Size visibleSize = Director::getInstance()->getVisibleSize();
-        Vec2 origin = Director::getInstance()->getVisibleOrigin();
-        ground.y = origin.y + visibleSize.height*Player::height/2;
-        ground.x = this->getPositionX();
-        auto time = (this->getPosition()-ground).getLength()/400;
-        auto drop = MoveTo::create(time, ground);
-        //drop->setTag(200);
-        
-        
-        _fsm->setOnEnter("walking", callback);
-        auto funcwalk = [&]()
-        {
-            _fsm->doEvent("dropwalk");
-        };
-        auto _callbackwalk = CallFunc::create(funcwalk);
-        
-        auto funcstop = [&]()
-        {
-            _fsm->doEvent("dropstop");
-        };
-        auto _callbackstop = CallFunc::create(funcstop);
-        
-        if(preStatus == "walking") {
-            auto _seq = Sequence::create(drop, _callbackwalk, NULL);
-            this->runAction(_seq);
-        }
-        else {
-            auto _seq = Sequence::create(drop, _callbackstop, NULL);
-            this->runAction(_seq);
-        }
-        //auto _sep = Sequence::create(drop, onWalk, NULL);
+    log("Player: drop!");
+    //DROPING = true;
+    auto preStatus = this->_fsm->getState();
+    //_fsm->doEvent("stop");
+    this->stopAllActions();
+    background->stopAllActions();
+    Vec2 ground;
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    ground.y = origin.y + visibleSize.height*Player::height/2;
+    ground.x = this->getPositionX();
+    auto time = (this->getPosition()-ground).getLength()/400;
+    auto drop = MoveTo::create(time, ground);
+    //drop->setTag(200);
+    
+    
+    _fsm->setOnEnter("walking", callback);
+    auto funcwalk = [&]()
+    {
+        _fsm->doEvent("dropwalk");
+    };
+    auto _callbackwalk = CallFunc::create(funcwalk);
+    
+    auto funcstop = [&]()
+    {
+        _fsm->doEvent("dropstop");
+    };
+    auto _callbackstop = CallFunc::create(funcstop);
+    
+    if(preStatus == "walking") {
+        auto _seq = Sequence::create(drop, _callbackwalk, NULL);
+        this->runAction(_seq);
     }
+    else {
+        auto _seq = Sequence::create(drop, _callbackstop, NULL);
+        this->runAction(_seq);
+    }
+        //auto _sep = Sequence::create(drop, onWalk, NULL);
 }
 
 Weapon* Player::attack(float radius)
@@ -737,7 +737,7 @@ int Player::beHit(int attack){
 	{
 		//be hit
         this->_progress->setProgress((float)_blood/_maxHealth*100);
-		_fsm->doEvent("beHit");
+		//_fsm->doEvent("beHit");
         return 0;
 	}
 }
