@@ -45,7 +45,7 @@ Enemy2* Enemy2Manager::createEnemy2s(int order)
         auto enemy2=Enemy2::create();
         enemy2->_background = this->_background;
 //        enemy2->setPosition(950 + i * 70, 430);
-        enemy2->setPosition(1800+order,130);
+        enemy2->setPosition(1800+order,70);
         this->addChild(enemy2);  /*将怪物添加到管理器(CCNode)中*/
 //        _enemy2Arr->addObject(enemy2);/*添加到数组中，便于管理*/
 //    }

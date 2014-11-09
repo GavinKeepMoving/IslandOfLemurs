@@ -498,7 +498,7 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-//        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
         if (index == -1){
@@ -838,12 +838,13 @@ void MainScene::addEnemiesAI(float dt)
 {
     int i;
     Enemy2* enemy;
-    int dist = 25;
+//    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
+    int dist = 100;
     if (level < dispatch.size()){
         for (i=0;i<dispatch[level];i++){
-            enemy = _enemy2Manager->createEnemy2s(dist);
+            enemy = _enemy2Manager->createEnemy2s(2*dist);
             _enemy2Arr.push_back(enemy);
-            dist += 25;
+            dist += 50;
         }
         level++;
     }
