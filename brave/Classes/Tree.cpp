@@ -109,10 +109,7 @@ void Tree::showAnimation() {
     
     //add sound
     if(state < 6 && state > 1) {
-        _soundEffectId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/Fire.wav", true);
-    }
-    else {
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(_soundEffectId);
+        _soundEffectId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/Fire.wav");
     }
     
     if(state == 6) {

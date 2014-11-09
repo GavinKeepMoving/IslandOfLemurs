@@ -12,6 +12,7 @@
 #include "FSM.h"
 #include "Weapon.h"
 #include "Enemy2.h"
+#include "Progress.h"
 USING_NS_CC;
 
 class Player : public Sprite
@@ -65,12 +66,15 @@ public:
 	//blood attribute  xiaojing
 	int _health;  //current blood 
 	int _maxHealth;  //total blood
+    int _blood;
 	int _attack;  //each attack harm enemy
-	void beHit(int attack);
+    Progress* _progress;
+	int beHit(int attack);
     
     //Zhenni
     Rect getAttackBox();
     Enemy2* targetEnemy;
+    int targetEnemyIndex;
     void attackCallback(float test);
     void generalAttack(float radius = 250.f);
     //void playerDrop(int start, int end);

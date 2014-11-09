@@ -41,6 +41,15 @@ bool MainScene::init()
         return false;
     }
     
+//    if (_enemy2Arr == NULL){
+//    _enemy2Arr = __Array::create();
+//    _enemy2Arr->init();
+//    }
+//    if (_animal2Arr == NULL){
+//    _animal2Arr = __Array::create();
+//    _animal2Arr->init();
+    
+//    }
     this->playMusic();
     
     this->setParameters();
@@ -129,16 +138,16 @@ void MainScene::update(float delta)
     {
         _enemy1->setPosition(oldPos.x -1,oldPos.y);
     }*/
-    if (_enemy2Arr == NULL){
-        _enemy2Arr = __Array::create();
-    }
-    if (_aniaml2Arr == NULL){
-        _aniaml2Arr = __Array::create();
-    }
+//    if (_enemy2Arr == NULL){
+//        _enemy2Arr = __Array::create();
+//    }
+//    if (_aniaml2Arr == NULL){
+//        _aniaml2Arr = __Array::create();
+//    }
 //    _enemy2Manager->update(delta);
-    _animal2Manager->update(delta);
+//    _animal2Manager->update(delta);
+    this->updateAnimal(delta);
     this->updateEnemy(delta);
-//    this->updateAnimal(delta);
     //_enemy2->update(delta);
     a_optionItem1->setEnabled(_player->getMoney() >= 20 ? true : false);
     a_optionItem2->setEnabled(_player->getMoney() >= 40 ? true : false);
@@ -243,34 +252,39 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
 }
 // 1450, origin.y + visibleSize.height * Enemy::height
 void MainScene::callAnimalHelper(Ref* pSender, int index) {
+    Animal2* animal;
     switch (index) {
         case 1:
             if (_player->money < 20) {
                 break;
             }
             _player->money-=20;
-            this->_animal2Manager->createAnimal2s(0);
+            animal = this->_animal2Manager->createAnimal2s(0);
+            _animal2Arr.push_back(animal);
             break;
         case 2:
             if (_player->money < 40) {
                 break;
             }
             _player->money-=40;
-            this->_animal2Manager->createAnimal2s(1);
+            animal = this->_animal2Manager->createAnimal2s(1);
+            _animal2Arr.push_back(animal);
             break;
         case 3:
             if (_player->money < 40) {
                 break;
             }
             _player->money-=40;
-            this->_animal2Manager->createAnimal2s(2);
+            animal = this->_animal2Manager->createAnimal2s(2);
+            _animal2Arr.push_back(animal);
             break;
         case 4:
             if (_player->money < 60) {
                 break;
             }
             _player->money-=60;
-            this->_animal2Manager->createAnimal2s(3);
+            animal = this->_animal2Manager->createAnimal2s(3);
+            _animal2Arr.push_back(animal);
             break;
         default:
             break;
@@ -282,7 +296,6 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 {
     CCSprite *sprite = (CCSprite *)sender;
     this->removeChild(sprite);
-    //enemyArray->removeObject(sprite);
 }
 
 void MainScene::initTrees(int num) {
@@ -300,8 +313,8 @@ void MainScene::initTrees(int num) {
     for(int i = 0; i < treeNum; i++) {
         //add ropes
         auto rope = Sprite::create("image/trees/rope.png");
-        rope->setScale(0.3 + i * 0.2, 0.5);
-        rope->cocos2d::Node::setPosition(beginningPos - 230 + i * 550, 520);
+        rope->setScale(0.2 + i * 0.3, 0.5);
+        rope->cocos2d::Node::setPosition(beginningPos - 180 + i * 520, 520);
         _ropes.push_back(rope);
         _background->addChild(rope);
         
@@ -419,87 +432,105 @@ void MainScene::initTrees(int num) {
 //        }
 //    }
 //}
-/*
-void MainScene::addEnemy(float dt)
-{
-    std::cout<<"time for enemy comming out~"<<std::endl;
-    _enemy1 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    _enemy2 = Enemy::create(Enemy::EnemyType::ENEMY1);
-    // origin.x
-    //    _enemy1->setPosition(origin.x + visibleSize.width - _enemy1->getContentSize().width/2, origin.y + visibleSize.height * Enemy::height);
-    _enemy1->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
-    _enemy2->setPosition(1600, origin.y + visibleSize.height * Enemy::height);
-    _background->addChild(_enemy1);
-    _background->addChild(_enemy2);
-    _enemys.push_back(_enemy1);
-    _enemys.push_back(_enemy2);
-    _enemy1->addAttacker(_player);
-    _enemy2->addAttacker(_player);
-
-}*/
 
 void MainScene::updateAnimal(float dt)
 {
-    CCObject* obj = NULL;
-    Animal2* animal2 = NULL;
-    if (_aniaml2Arr != NULL){
-        CCARRAY_FOREACH(_aniaml2Arr, obj)
-        {
-            animal2 = (Animal2*) obj;
-            int index = _animal2Manager->judgeNeayBy(animal2);
-            if (index == -1){
-                animal2->setState(Animal2::WALK);
+    for (int i=0;i<_animal2Arr.size();i++)
+    {
+        int index = _animal2Manager->judgeNeayBy(_animal2Arr[i],_enemy2Arr);
+        if (index == -1){
+            _animal2Arr[i]->setState(Animal2::WALK);
+        }
+        else{
+            if (_enemy2Arr[index]->getPositionX()-_animal2Arr[i]->getPositionX() > _animal2Arr[i]->mindist){
+                _animal2Arr[i]->setState(Animal2::WALK);
             }
             else{
-                animal2->setState(Animal2::ATTACK);
-                CCObject* en = _enemy2Arr->getObjectAtIndex(index);
-                Enemy2* enemy = (Enemy2*) en;
-                int state = enemy->behit(animal2->getAttack());
+                _animal2Arr[i]->setState(Animal2::ATTACK);
+                _enemy2Arr[index]->setState(BEHIT);
+                int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
                 if (state == 1){// enemy is dead, remove it
-                    enemy->setState(DEAD);
-                    _enemy2Arr->removeObjectAtIndex(index);
-                    // use interface for the dead
-                    _animal2Manager->setEnemy(_enemy2Arr);
+                    eraseEnemy(index);
+                    index = -1;
                 }
             }
         }
+        _animal2Arr[i]->update(dt);
     }
+
 }
 //Zhenni
-void MainScene::eraseEnemy(Enemy2 *enemy) {
-    enemy->setState(DEAD);
-    _enemy2Arr->removeObject(enemy);
-    // use interface for the dead
-    _animal2Manager->setEnemy(_enemy2Arr);
+void MainScene::eraseEnemy(int index) {
+    MainScene::removeChild(_enemy2Arr[index]);
+    _enemy2Arr[index]->removeFromParentAndCleanup(true);
+    _enemy2Arr[index]->setState(DEAD);
+    _enemy2Arr.erase(_enemy2Arr.begin()+index);
+}
+void MainScene::eraseAnimal(int index){
+    _animal2Arr[index]->removeFromParentAndCleanup(true);
+    _animal2Arr[index]->setState(Animal2::DEAD);
+    _animal2Arr.erase(_animal2Arr.begin()+index);
 }
 
 void MainScene::updateEnemy(float dt)
 {
-    CCObject* obj = NULL;
-    Enemy2* enemy2 = NULL;
-//    if (_enemy2Arr != NULL)
-//        std::cout<<"the size of enemy is: "<<_enemy2Arr->count()<<std::endl;
-//    if (_enemy2Arr != NULL && _enemy2Arr->count() > 0){
-        CCARRAY_FOREACH(_enemy2Arr, obj)
-        {
-            enemy2 = (Enemy2*) obj;
-            int index = _enemy2Manager->judgeNearby(enemy2);
-            if (index == -1){
-                enemy2->setState(WALK);
-            }
-            else{
-                enemy2->setState(ATTACK);
-                int state = _trees.back()->setBlood(enemy2->getAttack());
-                if (state <= 0){
-                    //                _trees.pop_back();
-                    deleteTree();
-                    std::cout<<"the current size of tree is "<<_trees.size()<<std::endl;
-                    _enemy2Manager->setTrees(_trees);
+    for (int i=0;i<_enemy2Arr.size();i++)
+    {
+//        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
+        Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
+//        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+//        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
+        int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
+        if (index == -1){
+            _enemy2Arr[i]->setState(WALK);
+        }
+        else{
+            if (index == 0){ // lemur
+                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 160)
+                {
+                    _enemy2Arr[i]->setState(ATTACK);
+                    int status = _player->beHit(_enemy2Arr[i]->getAttack());
+                    // behit for the lemur
+                    if (status == 1){// lemur is dead
+                        // game over!!
+                        _player->removeFromParentAndCleanup(true);
+                        index = -1;
+                    }
+                }
+                else{
+                    _enemy2Arr[i]->setState(WALK);
                 }
             }
-            enemy2->update(dt);
+            else if (index == 1){ // tree
+                if (_enemy2Arr[i]->getPositionX()-_trees.back()->treeSprite->getPositionX() < _enemy2Arr[i]->mindist){
+                    _enemy2Arr[i]->setState(ATTACK);
+                    int state = _trees.back()->setBlood(_enemy2Arr[i]->getAttack());
+                    if (state <= 0){
+                        deleteTree();
+                        index = -1;
+                    }
+                }
+                else{
+                    _enemy2Arr[i]->setState(WALK);
+                }
+            }
+            else if (index >= 200){ // animal
+                int target = index%200;
+                if (_enemy2Arr[i]->getPositionX()-_animal2Arr[target]->getPositionX() <= _enemy2Arr[i]->mindist){
+                    _enemy2Arr[i]->setState(ATTACK);
+                    int state = _animal2Arr[target]->beHit(_enemy2Arr[i]->getAttack());
+                    if (state == 1){
+                        eraseAnimal(target);
+                        index = -1;
+                    }
+                }
+                else{
+                    _enemy2Arr[i]->setState(WALK);
+                }
+            }
         }
-//    }
+        _enemy2Arr[i]->update(dt);
+    }
 }
 
 /****************** End-Added by Zhe Liu *********************/
@@ -518,16 +549,15 @@ bool MainScene::isEnemyInRange(Player* p) {
     _player->targetEnemy = NULL;
     float distance = INT_MAX;
     Rect playerRect=p->getAttackBox();
-    CCObject* obj = NULL;
-    Enemy2* enemy2 = NULL;
-    CCARRAY_FOREACH(_enemy2Arr, obj)
+    int i;
+    for (i=0;i<_enemy2Arr.size();i++)
     {
-        enemy2 = (Enemy2*) obj;
-        Vec2 enemyPos = _background->convertToWorldSpace(enemy2->getPosition());
+        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         if(playerRect.containsPoint(enemyPos)) {
             float _distance = (enemyPos - _player->getPosition()).getLength();
             if( _distance < distance ) {
-                _player->targetEnemy = enemy2;
+                _player->targetEnemy = _enemy2Arr[i];
+                _player->targetEnemyIndex = i;
             }
         }
     }
@@ -555,20 +585,6 @@ void MainScene::onTouchEnded(Touch* touch, Event* event)
 Vec2 MainScene::attackTarget(Player *p) {
     return _background->convertToWorldSpace(_player->targetEnemy->getPosition());
 }
-//------------------remove dead enemy--------------------------------------------------------------//
-//void MainScene::enemyDead(Ref* obj)
-//{
-//	auto enemy= (Enemy*)obj;
-//	_enemys.eraseObject(enemy,true);
-//	log("onEnemyDead:%d", _enemys.size());
-//	//if(_enemys.size() == 0) //show success or go to next level
-//}
-
-//void MainScene::animalDead(Ref* obj)
-//{
-//	auto animal= (Animal*)obj;
-//	_animals.eraseObject(animal,true);		
-//}
 
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
@@ -583,7 +599,7 @@ void MainScene::deleteTree() {
     float rangeRight = 0;
     
     int i = _ropes.size() - 1;
-    rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * (0.4 + i * 0.1);
+    rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
     rangeRight = xPos + target->getContentSize().width / 2;
     this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
@@ -718,6 +734,7 @@ void MainScene::addAnimations()
     //-------------------------------------//
     ArmatureDataManager::getInstance()->addArmatureFileInfo("animal0.png" , "animal0.plist" , "animal.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("monkey20.png" , "monkey20.plist" , "monkey2.ExportJson");
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("panada0.png" , "panada0.plist" , "panada.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
@@ -762,12 +779,13 @@ void MainScene::addEnemies()
     _animal2Manager->_background = _background;
     _background->addChild(_animal2Manager, 2);
 
-    _enemy2Manager->setTrees(_trees);
+//    _enemy2Manager->setTrees(_trees);
 //    _enemy2Arr = __Array::create();
-    Enemy2* enemy1 = _enemy2Manager->createEnemy2s();
-    _enemy2Arr = __Array::create();
-    _enemy2Arr->retain();
-    _enemy2Arr->addObject(enemy1);
+//    Enemy2* enemy1 = _enemy2Manager->createEnemy2s();
+//    _enemy2Arr.push_back(enemy1);
+//    _enemy2Arr = __Array::create();
+//    _enemy2Arr->retain();
+//    _enemy2Arr->addObject(enemy1);
     //_enemy2 = new Enemy2();
     //_enemy2->setPosition(850, 430);
     //_enemy2->setPosition(origin.x + _player->getContentSize().width/2, origin.y + visibleSize.height*Player::height);
@@ -797,11 +815,14 @@ void MainScene::addEnemies()
 void MainScene::addEnemiesAI(float dt)
 {
 //    _enemy2Arr = __Array::create();
-    _enemy2Arr->retain();
+//    _enemy2Arr->retain();
     Enemy2* enemy1 = _enemy2Manager->createEnemy2s();
     Enemy2* enemy2 = _enemy2Manager->createEnemy2s();
-    _enemy2Arr->addObject(enemy1);
-    _enemy2Arr->addObject(enemy2);
+    _enemy2Arr.push_back(enemy1);
+    _enemy2Arr.push_back(enemy2);
+//    _enemy2Arr->addObject(enemy1);
+//    _enemy2Arr->addObject(enemy2);
+//    _animal2Manager->setEnemy(_enemy2Arr);
 }
 
 void MainScene::addBananas()

@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "Animal2.h"
 #include "Enemy2.h"
+#include "Animal2.h"
 class Enemy2;
 USING_NS_CC;
 
@@ -30,9 +31,10 @@ public:
     
     void bindBackground(Sprite* background);
     Sprite* _background;
-    void createAnimal2s(int i);/*创建Monster对象*/
+    Animal2* createAnimal2s(int index);/*创建Monster对象*/
+//    void createAnimal2s(int i);/*创建Monster对象*/
     void setEnemy(__Array* _enemy2Arr){this->_enemy2Arr = _enemy2Arr;}
-    int judgeNeayBy(Animal2* animal);
+    int judgeNeayBy(Animal2* animal,std::vector<Enemy2*> enemys);
     Enemy2* getNearestEnemy(Animal2* animal);
     
     private:

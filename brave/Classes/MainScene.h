@@ -113,7 +113,8 @@ public:
 //    Enemy * getEnemy(int i) {
 //        return _enemys[i];
 //    }
-    void eraseEnemy(Enemy2* enemy);
+    void eraseEnemy(int index);
+    void eraseAnimal(int index);
     
     int boundry;
     Vec2 touchPos;
@@ -141,14 +142,18 @@ private:
     EventListenerTouchOneByOne* _listener_touch;
     EventListenerPhysicsContact* _listener_contact;
     
-    __Array* _enemy2Arr;
-    __Array* _aniaml2Arr;
+//    __Array* _enemy2Arr;
+//    __Array* _aniaml2Arr;
     MenuItemImage* a_optionItem1;
     MenuItemImage* a_optionItem2;
     MenuItemImage* a_optionItem3;
     MenuItemImage* a_optionItem4;
 
 public:
+//    __Array* _enemy2Arr;
+//    __Array* _animal2Arr;
+    std::vector<Enemy2*> _enemy2Arr;
+    std::vector<Animal2*> _animal2Arr;
     Sprite *_background;
     Sprite *_background1;
     std::vector<Tree*> _trees;

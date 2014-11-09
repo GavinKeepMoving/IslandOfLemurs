@@ -7,23 +7,25 @@
 //
 
 #include "Animal2.h"
+//#include "Progress.h"
+
 #include "Progress.h"
 Animal2::Animal2(int i)
 {
-    Armature *armature = nullptr;
+    armature = nullptr;
     switch (i)
     {
         case 0:
-            armature = Armature::create("animal");
+            armature = Armature::create("monkey2");
             break;
         case 1:
             armature = Armature::create("monkey2");
             break;
         case 2:
-            armature = Armature::create("monkey2");
+            armature = Armature::create("panada");
             break;
         case 3:
-            armature = Armature::create("monkey2");
+            armature = Armature::create("animal");
             break;
         default:
             break;
@@ -36,19 +38,24 @@ Animal2::Animal2(int i)
     currentState = IDLE;
     newState = IDLE;
     lockState = false;
-    _attack = 5;
-	_maxblood = 100;
-	
+    _attack = 2;
+	_maxHealth = 100;
+	_blood = 100;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//
 	//add enemy's progress
 	auto size = this->getContentSize();
 	Point animalPos = this->getPosition();
-	_progress->setPosition( animalPos.x +size.width*2/3, animalPos.y + size.height+ _progress->getContentSize().height/2+130);
+	_progress->setPosition( animalPos.x +size.width*2/3, animalPos.y + size.height+ _progress->getContentSize().height/2+230);
 	this->addChild(_progress);
 
 	//**********************************************************//
+}
+Animal2::~Animal2()
+{
+    delete _progress;
+//    delete armature;
 }
 
 Animal2* Animal2::create(int i){
@@ -56,18 +63,22 @@ Animal2* Animal2::create(int i){
     return animal2;
 }
 
-void Animal2::setblood()
-{
-    this->_blood = 100;
-}
+//void Animal2::setblood()
+//{
+//    this->_blood = 100;
+//}
 
 int Animal2::beHit(int attack)
 {
     this->_blood -= attack;
+//    std::cout<<"current blood is: "<<_blood<<std::endl;
     if (_blood <= 0){
+        _blood = 0;
+		this->_progress->setProgress((float)_blood/_maxHealth*100);
         return 1;
     }
     else{
+        this->_progress->setProgress((float)_blood/_maxHealth*100);
         return 0;
     }
 }
@@ -112,7 +123,7 @@ void Animal2::updateAnimation()
             animation->play("animalwalk");
             break;
         case ATTACK:
-            animation->play("animalhit");
+            animation->play("animalattack");
             break;
         case BEHIT:
             animation->play("animalbehit");
