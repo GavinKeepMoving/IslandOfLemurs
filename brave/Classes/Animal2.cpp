@@ -39,7 +39,7 @@ Animal2::Animal2(int i)
     newState = IDLE;
     lockState = false;
     _attack = 2;
-	_maxHealth = 100;
+	_maxblood = 100;
 	_blood = 100;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
@@ -74,11 +74,11 @@ int Animal2::beHit(int attack)
 //    std::cout<<"current blood is: "<<_blood<<std::endl;
     if (_blood <= 0){
         _blood = 0;
-		this->_progress->setProgress((float)_blood/_maxHealth*100);
+		this->_progress->setProgress((float)0.0/_maxblood*100);
         return 1;
     }
     else{
-        this->_progress->setProgress((float)_blood/_maxHealth*100);
+        this->_progress->setProgress((float)_blood/_maxblood*100);
         return 0;
     }
 }
