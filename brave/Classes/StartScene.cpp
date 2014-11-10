@@ -49,8 +49,7 @@ void StartScene::onStart(Ref* obj)
 {
     log("StartLayer::onStart");
     auto scene = MapScene::createScene();
-    //auto scene = WinScene::createScene();
-//    /******************Start-Modified by Yafu****************************/
+    //    /******************Start-Modified by Yafu****************************/
 //    Vector<Node *> children = scene->getChildren();
 //    mainLayer = (MainScene *)children.back();
 //    /******************End-Modified by Yafu*****************************/
