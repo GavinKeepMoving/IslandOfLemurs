@@ -139,6 +139,9 @@ void Tree::showAnimation() {
     if(state < 6 && state > 1) {
         _soundEffectId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/Fire.wav");
     }
+    else {
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(_soundEffectId);
+    }
     
     if(state == 6) {
         if(fire != NULL)
@@ -211,8 +214,9 @@ Fire* Tree::addFire(int scale) {
 
 //return tree right boundary
 float Tree::getRightBoundary() {
-    auto leftCorner = this->_posX;
-    auto rightX = leftCorner + this->getContentSize().width + beginningPos;
+    auto leftCorner = this->treeSprite->getPosition();
+    auto leftX = leftCorner.x;
+    auto rightX = leftCorner.x + this->getContentSize().width + 300;
     return rightX;
 }
 

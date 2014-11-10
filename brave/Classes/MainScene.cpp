@@ -64,6 +64,9 @@ bool MainScene::init()
     
     this->addRoles();
     
+    this->addEnemyNumber();
+//    this->addEnemiesAI(0.5);
+    
     this->setScheduleAndProgress();
     //this->addgotoItem();//or combine with menu create??
     return true;
@@ -465,6 +468,9 @@ void MainScene::updateAnimal(float dt)
                 int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
                 if (state == 1){// enemy is dead, remove it
                     eraseEnemy(index);
+//                    _enemy2Arr[index]->removeFromParentAndCleanup(true);
+//                    _enemy2Arr[index]->setState(DEAD);
+//                    _enemy2Arr.erase(_enemy2Arr.begin()+index);
                     index = -1;
                 }
             }
@@ -492,15 +498,16 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-//        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
+        std::cout<<"current target is: "<<index<<std::endl;
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
         }
         else{
             if (index == 0){ // lemur
-                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 160)
+                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 80)
                 {
                     _enemy2Arr[i]->setState(ATTACK);
                     int status = _player->beHit(_enemy2Arr[i]->getAttack());
@@ -516,7 +523,7 @@ void MainScene::updateEnemy(float dt)
                 }
             }
             else if (index == 1){ // tree
-                if (_enemy2Arr[i]->getPositionX()-_trees.back()->treeSprite->getPositionX() < _enemy2Arr[i]->mindist){
+                if (_enemy2Arr[i]->getPositionX()-_trees.back()->getRightBoundary() < _enemy2Arr[i]->mindist){
                     _enemy2Arr[i]->setState(ATTACK);
                     int state = _trees.back()->setBlood(_enemy2Arr[i]->getAttack());
                     if (state <= 0){
@@ -842,15 +849,33 @@ void MainScene::addEnemies()
 
 void MainScene::addEnemiesAI(float dt)
 {
-//    _enemy2Arr = __Array::create();
-//    _enemy2Arr->retain();
-    Enemy2* enemy1 = _enemy2Manager->createEnemy2s();
-    Enemy2* enemy2 = _enemy2Manager->createEnemy2s();
-    _enemy2Arr.push_back(enemy1);
-    _enemy2Arr.push_back(enemy2);
+    int i;
+    Enemy2* enemy;
+//    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
+    int dist = 100;
+    if (level < dispatch.size()){
+        for (i=0;i<dispatch[level];i++){
+            enemy = _enemy2Manager->createEnemy2s(2*dist);
+            _enemy2Arr.push_back(enemy);
+            dist += 50;
+        }
+        level++;
+    }
+    else{
+        // the game ends
+    }
+//    Enemy2* enemy1 = _enemy2Manager->createEnemy2s(100);
+//    Enemy2* enemy2 = _enemy2Manager->createEnemy2s(200);
+//    _enemy2Arr.push_back(enemy1);
+//    _enemy2Arr.push_back(enemy2);
 //    _enemy2Arr->addObject(enemy1);
 //    _enemy2Arr->addObject(enemy2);
 //    _animal2Manager->setEnemy(_enemy2Arr);
+}
+
+void MainScene::addEnemyNumber()
+{
+    dispatch = {3,4,5,6,6};
 }
 
 void MainScene::addBananas()
