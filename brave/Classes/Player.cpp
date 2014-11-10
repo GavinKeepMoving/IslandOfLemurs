@@ -114,6 +114,9 @@ bool Player::initWithPlayerType(PlayerType type)
 	_progress->setPosition( LemurPos.x +size.width*2/3, LemurPos.y + size.height+ _progress->getContentSize().height/2+30);
 	this->addChild(_progress);
 
+    this->_groundHeight = 100 + this->getContentSize().width/2;
+    this->_treeHeight = Director::getInstance()->getVisibleSize().height*Player::height*3;
+    
     // add progress end
     return true;
 }
@@ -197,7 +200,7 @@ void Player::onDrop(int start, int end, std::function<void()> callback) {
     Vec2 ground;
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    ground.y = origin.y + visibleSize.height*Player::height/2;
+    ground.y = _groundHeight;
     ground.x = this->getPositionX();
     auto time = (this->getPosition()-ground).getLength()/400;
     auto drop = MoveTo::create(time, ground);
@@ -260,8 +263,8 @@ void Player::walkTo(Vec2 dest, int boundry)
 void Player::stop(float r) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    float upGround = origin.y + visibleSize.height*Player::height*3;
-    float downGround = origin.y + visibleSize.height*Player::height/2;
+    float upGround = _treeHeight;//origin.y + visibleSize.height*Player::height*3;
+    float downGround = _groundHeight;//origin.y + visibleSize.height*Player::height/2;
     
     if(this->getPositionY() < upGround - 20 &&
        this->getPositionY() > downGround + 20) {
@@ -467,7 +470,8 @@ void Player::onWalk(Vec2 dest, int boundry) {
     if(dest.x < origin.x + visibleSize.width/2) {
         if(pPos.x - bPos.x >= boundry - 10) {
             this->constructActionArray(pPos.x - bPos.x, boundry, arrayOfActions, backgroundActions);
-            Vec2 climbBy(0, origin.y + visibleSize.height*Player::height*3 - pPos.y);
+            //Vec2 climbBy(0, origin.y + visibleSize.height*Player::height*3 - pPos.y);
+            Vec2 climbBy(0, _treeHeight - pPos.y);
             auto time = climbBy.getLength()/_speed;
             auto climb = MoveBy::create(time, climbBy);
             //climb->setTag(1);
@@ -484,7 +488,8 @@ void Player::onWalk(Vec2 dest, int boundry) {
     else {
         if(pPos.x - bPos.x <= boundry + 10) {
             this->constructActionArray(pPos.x - bPos.x,  boundry, arrayOfActions, backgroundActions);
-            Vec2 climbBy(0, origin.y + visibleSize.height*Player::height/2 - pPos.y);
+            //Vec2 climbBy(0, origin.y + visibleSize.height*Player::height/2 - pPos.y);
+            Vec2 climbBy(0, _groundHeight - pPos.y);
             auto time = climbBy.getLength()/_speed;
             auto climb = MoveBy::create(time, climbBy);
             //climb->setTag(1);
