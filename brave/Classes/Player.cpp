@@ -67,7 +67,6 @@ bool Player::initWithPlayerType(PlayerType type)
     _attackSpeed = 3;
     _attackRange = 350;
 	_seq = nullptr;
-    DROPING = false;
     _blood = 100;
     _maxHealth = 100;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
@@ -114,7 +113,7 @@ bool Player::initWithPlayerType(PlayerType type)
 	_progress->setPosition( LemurPos.x +size.width*2/3, LemurPos.y + size.height+ _progress->getContentSize().height/2+30);
 	this->addChild(_progress);
 
-    this->_groundHeight = 100 + this->getContentSize().width/2;
+    this->_groundHeight = 100;
     this->_treeHeight = Director::getInstance()->getVisibleSize().height*Player::height*3;
     
     // add progress end
