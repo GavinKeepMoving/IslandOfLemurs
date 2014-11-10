@@ -511,10 +511,10 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+        //std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
-        std::cout<<"current target is: "<<index<<std::endl;
+        //std::cout<<"current target is: "<<index<<std::endl;
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
         }

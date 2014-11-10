@@ -66,6 +66,7 @@ bool Player::initWithPlayerType(PlayerType type)
     _speed = 100;
     _attackSpeed = 3;
     _attackRange = 350;
+    _attackEnemyCount = 0;
 	_seq = nullptr;
     _blood = 100;
     _maxHealth = 100;
@@ -116,6 +117,11 @@ bool Player::initWithPlayerType(PlayerType type)
     this->_groundHeight = 100;
     this->_treeHeight = Director::getInstance()->getVisibleSize().height*Player::height*3;
     
+    //auto attack
+    auto attackSpeed = _attackSpeed;
+    this->schedule(schedule_selector(Player::generalAttack), attackSpeed);
+    this->scheduleUpdate();
+    
     // add progress end
     return true;
 }
@@ -138,11 +144,24 @@ void Player::initFSM()
 //        auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
 //        auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
 //        this->setSpriteFrame(spriteFrame);
-        this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
-    
-        this->scheduleUpdate();
+        
+        //this->generalAttack(0);
+//        if (true) {
+//            this->generalAttack(0);
+//            this->scheduleOnce(schedule_selector(Player::generalAttack), _attackSpeed/2);
+//            //this->scheduleOnce(schedule_selector(Player::generalAttack), _attackSpeed*3/2);
+//            //this->scheduleOnce(schedule_selector(Player::generalAttack), _attackSpeed*5/2);
+//        }
+        //static CCRepeat* CCRepeat::actionWithAction
     };
+    auto onMove = [&]()
+    {
+        log("onChange: Leave idle");
+        this->unschedule(schedule_selector(Player::generalAttack));
+    };
+    
     _fsm->setOnEnter("idle",onIdle);
+    //_fsm->setOnChange("idle", onMove);
 }
 
 
@@ -168,14 +187,34 @@ void Player::attackCallback(float test) {
     }
 }
 
+void Player::buffAttack(int attackBuff) {
+    switch (attackBuff) {
+        case ACCELERATE:
+            _attackEnemyCount = 0;
+            this->unschedule(schedule_selector(Player::generalAttack));
+            auto attackSpeed = _attackSpeed/3;
+            this->schedule(schedule_selector(Player::generalAttack), attackSpeed);
+            break;
+            
+        //default:
+            //break;
+    }
+}
+
 void Player::generalAttack(float radius) {
+    //std::cout<<_attackEnemyCount++<<std::endl;
+    _attackEnemyCount++;
+    if (_attackEnemyCount == 6) {
+        this->unschedule(schedule_selector(Player::generalAttack));
+        this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
+    }
     //log(mainLayer->_enemys.size());
     if(this->_fsm->getState() == "idle" && mainLayer->isEnemyInRange(this)) {
-        log("Player: attacking enemy");
+        cocos2d::log("Player: attacking enemy");
         Vec2 attackTarget = mainLayer->attackTarget(this);
         radius = attackTarget.x - this->getPositionX();
         auto weapon = this->attack(radius);
-        auto attackTime = (attackTarget-this->getPosition()).getLength()/weapon->getSpeed();
+        auto attackTime = (float)(attackTarget-this->getPosition()).getLength()/weapon->getSpeed();
         this->scheduleOnce(schedule_selector(Player::attackCallback), attackTime);
         this->scheduleUpdate();
     }

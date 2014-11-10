@@ -61,6 +61,9 @@ void FSM::changeToState(std::string state)
 {
     if(isContainState(state))
     {
+        if (_onChanges[_currentState]) {
+            _onChanges[_currentState];
+        }
         _previousState = _currentState;
         _currentState = state;
 //        cocos2d::log("FSM::changeToState: %s -> %s", _previousState.c_str(), _currentState.c_str());
@@ -122,6 +125,12 @@ void FSM::setOnEnter(std::string state, std::function<void()> onEnter)
     else
     {
         cocos2d::log("FSM::setOnEnter: no state named %s", state.c_str());
+    }
+}
+
+void FSM::setOnChange(std::string state, std::function<void()> onChange) {
+    if (isContainState(state)) {
+        _onChanges[state] = onChange;
     }
 }
 
