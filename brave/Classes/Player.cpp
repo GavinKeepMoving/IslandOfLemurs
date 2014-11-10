@@ -474,7 +474,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
             auto bmove = MoveBy::create(time, empty);
             arrayOfActions.pushBack(climb);
             backgroundActions.pushBack(bmove);
-            this->constructActionArray(boundry, -visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(boundry, 0, arrayOfActions, backgroundActions);
         }
         else {
             this->constructActionArray(pPos.x - bPos.x, -visibleSize.width/2, arrayOfActions, backgroundActions);
@@ -491,10 +491,10 @@ void Player::onWalk(Vec2 dest, int boundry) {
             auto bmove = MoveBy::create(time, empty);
             arrayOfActions.pushBack(climb);
             backgroundActions.pushBack(bmove);
-            this->constructActionArray(boundry,  background->getContentSize().width*5/4 - visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(boundry,  background->getContentSize().width, arrayOfActions, backgroundActions);
         }
         else {
-            this->constructActionArray(pPos.x - bPos.x,  background->getContentSize().width*5/4 - visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(pPos.x - bPos.x,  background->getContentSize().width, arrayOfActions, backgroundActions);
         }
         this->setFlippedX(false);
     }

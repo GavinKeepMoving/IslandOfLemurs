@@ -106,6 +106,8 @@ public:
     // judge if the player can attack enemy
     bool isEnemyInRange(Player* p);
     
+    void updateBoundry();
+    
     bool isOnTree(Player* p);
     
     Vec2 attackTarget(Player* p);
