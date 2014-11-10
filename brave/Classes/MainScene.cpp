@@ -342,7 +342,7 @@ void MainScene::initTrees(int num) {
         treeSprite->setAnchorPoint(ccp(0, 0));
         treeSprite->setPosition(beginningPos + interval * i, 50);
         _background->addChild(treeSprite);
-        _trees.push_back(new Tree(treeSprite));
+        _trees.push_back(new Tree(treeSprite,bananaManger,_background));
         _trees[_trees.size() - 1]->_background = _background;
     }
 }
@@ -622,12 +622,14 @@ void MainScene::deleteTree() {
     int i = _ropes.size() - 1;
     rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
     rangeRight = xPos + target->getContentSize().width / 2;
-    this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
+    //this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
     _player->playerDrop(rangeLeft, rangeRight, onWalk);
     
     _trees.pop_back();
-    
+    //Zhenni
+    updateBoundry();
+
     //add sound
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/TreeFall.wav");
     
@@ -651,9 +653,6 @@ void MainScene::setParameters()
 {
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
-    
-    //Zhenni
-    this->boundry = 550;
 }
 
 void MainScene::addCloseIcon()
@@ -716,12 +715,13 @@ void MainScene::addBackground()
 
 void MainScene::addRoles()
 {
-    this->addTrees();
+    
     this->addAnimations();
     this->addFires();
     this->addPlayer();
     this->addEnemies();
     this->addBananas();
+    this->addTrees();
 }
 
 //method in addRoles
@@ -736,8 +736,20 @@ void MainScene::addTrees()
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
+    //Zhenni
+    updateBoundry();
     
 }
+
+void MainScene::updateBoundry() {
+    if (this->_trees.empty() ) {
+        this->boundry = 0;
+    }
+    else {
+        this->boundry = this->_trees[this->_trees.size()-1]->getRightBoundary();
+    }
+}
+
 
 void MainScene::addAnimations()
 {

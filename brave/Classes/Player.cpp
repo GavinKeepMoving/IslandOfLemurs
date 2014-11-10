@@ -475,7 +475,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
             auto bmove = MoveBy::create(time, empty);
             arrayOfActions.pushBack(climb);
             backgroundActions.pushBack(bmove);
-            this->constructActionArray(boundry, -visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(boundry, 0, arrayOfActions, backgroundActions);
         }
         else {
             this->constructActionArray(pPos.x - bPos.x, -visibleSize.width/2, arrayOfActions, backgroundActions);
@@ -492,10 +492,10 @@ void Player::onWalk(Vec2 dest, int boundry) {
             auto bmove = MoveBy::create(time, empty);
             arrayOfActions.pushBack(climb);
             backgroundActions.pushBack(bmove);
-            this->constructActionArray(boundry,  background->getContentSize().width*5/4 - visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(boundry,  background->getContentSize().width, arrayOfActions, backgroundActions);
         }
         else {
-            this->constructActionArray(pPos.x - bPos.x,  background->getContentSize().width*5/4 - visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(pPos.x - bPos.x,  background->getContentSize().width, arrayOfActions, backgroundActions);
         }
         this->setFlippedX(false);
     }
@@ -703,8 +703,7 @@ int Player::getMoney()
 
 Rect Player::getBoundingBox()
 {
-    /*由于Sprite是放在Player上的，所以要检测Player的碰撞范围*/
-    Size spriteSize=getContentSize();
+        Size spriteSize=getContentSize();
     Vec2 entityPos=getCurPos();//获取player中心点
     
     //获取Player左下角的坐标值

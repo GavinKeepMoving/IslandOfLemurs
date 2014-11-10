@@ -7,13 +7,13 @@
 //
 
 #include "Tree.h"
-#include "Fire.h"
 #include "MainScene.h"
 
 extern MainScene *mainLayer;
 
 //float Tree::blood = 6;
 #define originalBlood 100
+#define beginningPos 300
 
 //constructor1
 Tree::Tree () {
@@ -21,11 +21,37 @@ Tree::Tree () {
 }
 
 //constructor2
-Tree::Tree(Sprite* tree) {
+Tree::Tree(Sprite* tree, BananaManger* bm, Sprite* background) {
     this->treeSprite = tree;
-    _posX = tree->getPosition().x;
-    _posY = tree->getPosition().y;
+    _posX = this->treeSprite->getPosition().x;
+    _posY = this->treeSprite->getPosition().y;
     blood = (float)originalBlood;
+    auto s = tree->getContentSize();
+
+
+    
+    _bananaArr = bm->_bananaArr;
+    auto banana=Banana::create();
+    banana->bindSprite(Sprite::create("fruit.png"));
+    banana->_background = background;
+    banana->setPosition(Vec2(s.width*0.35,s.height*0.75));
+    this->treeSprite->addChild(banana);
+    bm->_bananaArr->addObject(banana);
+    
+    banana=Banana::create();
+    banana->bindSprite(Sprite::create("fruit.png"));
+    banana->_background = background;
+    banana->setPosition(Vec2(s.width*0.50,s.height*0.75));
+    this->treeSprite->addChild(banana);
+    bm->_bananaArr->addObject(banana);
+    
+    banana=Banana::create();
+    banana->bindSprite(Sprite::create("fruit.png"));
+    banana->_background = background;
+    banana->setPosition(Vec2(s.width*0.65,s.height*0.75));
+    this->treeSprite->addChild(banana);
+    bm->_bananaArr->addObject(banana);/*添加到数组中，便于管理*/
+    
     state = 6;
 }
 
@@ -165,6 +191,13 @@ void Tree::showAnimation() {
         this->treeSprite->removeChild(fire, true);
         //delete this tree
         printf("should delete tree in next step");
+        //for(auto b : this->treeSprite->getChildren()){
+        //    delete b;
+        //}
+        _bananaArr->removeLastObject();
+        _bananaArr->removeLastObject();
+        _bananaArr->removeLastObject();
+        this->treeSprite->removeAllChildrenWithCleanup(true);
         _background->removeChild(this->treeSprite, true);
     }
 }
