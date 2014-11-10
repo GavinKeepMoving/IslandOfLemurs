@@ -16,6 +16,7 @@ Animal2::Animal2(int i)
     switch (i)
     {
         case 0:
+//            armature = Armature::create("animal");
             armature = Armature::create("monkey2");
             break;
         case 1:
@@ -39,8 +40,8 @@ Animal2::Animal2(int i)
     newState = IDLE;
     lockState = false;
     _attack = 2;
-	_maxblood = 100;
-	_blood = 100;
+	_maxblood = 1000;
+	_blood = 1000;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//

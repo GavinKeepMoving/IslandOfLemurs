@@ -13,6 +13,7 @@ extern MainScene *mainLayer;
 
 //float Tree::blood = 6;
 #define originalBlood 100
+#define beginningPos 300
 
 //constructor1
 Tree::Tree () {
@@ -22,8 +23,8 @@ Tree::Tree () {
 //constructor2
 Tree::Tree(Sprite* tree, BananaManger* bm, Sprite* background) {
     this->treeSprite = tree;
-    _posX = tree->getPosition().x;
-    _posY = tree->getPosition().y;
+    _posX = this->treeSprite->getPosition().x;
+    _posY = this->treeSprite->getPosition().y;
     blood = (float)originalBlood;
     auto s = tree->getContentSize();
 
@@ -136,6 +137,9 @@ void Tree::showAnimation() {
     if(state < 6 && state > 1) {
         _soundEffectId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/Fire.wav");
     }
+    else {
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(_soundEffectId);
+    }
     
     if(state == 6) {
         if(fire != NULL)
@@ -208,9 +212,9 @@ Fire* Tree::addFire(int scale) {
 
 //return tree right boundary
 float Tree::getRightBoundary() {
-    auto leftCorner = treeSprite->getPosition();
+    auto leftCorner = this->treeSprite->getPosition();
     auto leftX = leftCorner.x;
-    auto rightX = leftCorner.x + this->getContentSize().width;
+    auto rightX = leftCorner.x + this->getContentSize().width + 300;
     return rightX;
 }
 
