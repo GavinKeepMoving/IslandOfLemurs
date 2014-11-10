@@ -179,9 +179,9 @@ Fire* Tree::addFire(int scale) {
 
 //return tree right boundary
 float Tree::getRightBoundary() {
-    auto leftCorner = treeSprite->getPosition();
+    auto leftCorner = this->treeSprite->getPosition();
     auto leftX = leftCorner.x;
-    auto rightX = leftCorner.x + this->getContentSize().width;
+    auto rightX = leftCorner.x + this->getContentSize().width + 300;
     return rightX;
 }
 

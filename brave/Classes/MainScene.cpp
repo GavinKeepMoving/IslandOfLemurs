@@ -523,7 +523,7 @@ void MainScene::updateEnemy(float dt)
                 }
             }
             else if (index == 1){ // tree
-                if (_enemy2Arr[i]->getPositionX()-_trees.back()->treeSprite->getPositionX() < _enemy2Arr[i]->mindist){
+                if (_enemy2Arr[i]->getPositionX()-_trees.back()->getRightBoundary() < _enemy2Arr[i]->mindist){
                     _enemy2Arr[i]->setState(ATTACK);
                     int state = _trees.back()->setBlood(_enemy2Arr[i]->getAttack());
                     if (state <= 0){
