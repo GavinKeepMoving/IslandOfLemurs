@@ -55,8 +55,6 @@ bool MainScene::init()
     this->setParameters();
 
     this->addCloseIcon();
-    
-    this->addWeaponOptionBar();
 
     this->addHelloWorldLabel();
     
@@ -64,6 +62,7 @@ bool MainScene::init()
     
     this->addRoles();
     
+    this->addWeaponOptionBar();
     this->addEnemyNumber();
 //    this->addEnemiesAI(0.5);
     
@@ -163,6 +162,9 @@ void MainScene::update(float delta)
 //Right top Weapon option bar
 void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 {
+    _weaponManager = WeaponManager::create(_background);
+    _weaponManager->bindPlayer(_player);
+    
     // add a "close" icon to exit the progress. it's an autorelease object
     auto optionItem = MenuItemImage::create(
                                            "attackoption1.png",
@@ -250,7 +252,18 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
             break;
     }
     
-    this->_player->attack();
+    //put out fire
+    if (index == 2) {
+        Tree* t = _weaponManager->getNearestTree(_trees);
+        
+        if (t) {            
+            this->_player->attack(_weaponManager->getAttackRadius(t));
+            t->setBlood(-20.);
+        }
+
+    }
+    
+    
 
 }
 // 1450, origin.y + visibleSize.height * Enemy::height

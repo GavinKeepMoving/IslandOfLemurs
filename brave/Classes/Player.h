@@ -36,6 +36,10 @@ public:
     {
         WALKTO_TAG =100
     };
+    enum buffType
+    {
+        
+    };
     static float height;
     bool initWithPlayerType(PlayerType type);
     static Player* create(PlayerType type);
@@ -96,6 +100,8 @@ private:
     FSM *_fsm;
     Weapon::WeaponType currentWeapon;
     bool DROPING;
+    int _groundHeight;
+    int _treeHeight;
     //std::vector<Enemy*> *_enemys;
 
 };
