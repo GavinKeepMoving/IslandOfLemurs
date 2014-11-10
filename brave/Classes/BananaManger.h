@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 #include "Player.h"
+#include "Banana.h"
 USING_NS_CC;
 
 #define MAX_MONSTER_NUM 10
@@ -33,11 +34,11 @@ public:
     void bindBackground(Sprite* background);
     Sprite* _background;
     /******************************** End-Added by Wenbo Lin ***********************************/
-    
+    CCArray* _bananaArr;/*存放怪物数组*/
 private:
     void createBananas();/*创建Monster对象*/
 private:
-    CCArray* _bananaArr;/*存放怪物数组*/
+    
     Player* _player;
 };
 

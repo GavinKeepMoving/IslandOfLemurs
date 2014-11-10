@@ -702,8 +702,7 @@ int Player::getMoney()
 
 Rect Player::getBoundingBox()
 {
-    /*由于Sprite是放在Player上的，所以要检测Player的碰撞范围*/
-    Size spriteSize=getContentSize();
+        Size spriteSize=getContentSize();
     Vec2 entityPos=getCurPos();//获取player中心点
     
     //获取Player左下角的坐标值
