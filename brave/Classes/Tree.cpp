@@ -14,6 +14,7 @@ extern MainScene *mainLayer;
 
 //float Tree::blood = 6;
 #define originalBlood 100
+#define beginningPos 400
 
 //constructor1
 Tree::Tree () {
@@ -23,8 +24,8 @@ Tree::Tree () {
 //constructor2
 Tree::Tree(Sprite* tree) {
     this->treeSprite = tree;
-    _posX = tree->getPosition().x;
-    _posY = tree->getPosition().y;
+    _posX = this->treeSprite->getPosition().x;
+    _posY = this->treeSprite->getPosition().y;
     blood = (float)originalBlood;
     state = 6;
 }
@@ -176,9 +177,8 @@ Fire* Tree::addFire(int scale) {
 
 //return tree right boundary
 float Tree::getRightBoundary() {
-    auto leftCorner = treeSprite->getPosition();
-    auto leftX = leftCorner.x;
-    auto rightX = leftCorner.x + this->getContentSize().width;
+    auto leftCorner = this->_posX;
+    auto rightX = leftCorner + this->getContentSize().width + beginningPos;
     return rightX;
 }
 
