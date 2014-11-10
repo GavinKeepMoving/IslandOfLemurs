@@ -21,6 +21,7 @@
 #include "BananaManger.h"
 #include "Enemy2Manager.h"
 #include "Animal2Manager.h"
+#include "WeaponManager.h"
 #include "SimpleAudioEngine.h" 
 //******************************************************************************************************************
 class Enemy2Manager;
@@ -167,6 +168,7 @@ public:
     BananaManger* bananaManger;
     Enemy2Manager* _enemy2Manager;
     Animal2Manager* _animal2Manager;
+    WeaponManager * _weaponManager;
     bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************

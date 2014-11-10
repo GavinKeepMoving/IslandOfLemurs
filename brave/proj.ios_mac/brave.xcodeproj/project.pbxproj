@@ -87,6 +87,7 @@
 		A62FF64D1A06B7B8007EC9B3 /* MapScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF64B1A06B7B8007EC9B3 /* MapScene.cpp */; };
 		A62FF64F1A06BB8D007EC9B3 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF64E1A06BB8D007EC9B3 /* map.png */; };
 		A62FF6511A06C128007EC9B3 /* mark.png in Resources */ = {isa = PBXBuildFile; fileRef = A62FF6501A06C128007EC9B3 /* mark.png */; };
+		A62FF6611A1024E4007EC9B3 /* WeaponManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A62FF65F1A1024E4007EC9B3 /* WeaponManager.cpp */; };
 		A6C5B2F819CF3C0000DA478A /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2F619CF3C0000DA478A /* MainScene.cpp */; };
 		A6C5B2FF19CF509500DA478A /* Weapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C5B2FE19CF509500DA478A /* Weapon.cpp */; };
 		BEDF548E19DD481C00068CBA /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEDF548C19DD481C00068CBA /* Tree.cpp */; };
@@ -359,6 +360,8 @@
 		A62FF64C1A06B7B8007EC9B3 /* MapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapScene.h; path = ../Classes/MapScene.h; sourceTree = "<group>"; };
 		A62FF64E1A06BB8D007EC9B3 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		A62FF6501A06C128007EC9B3 /* mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mark.png; sourceTree = "<group>"; };
+		A62FF65F1A1024E4007EC9B3 /* WeaponManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WeaponManager.cpp; path = ../Classes/WeaponManager.cpp; sourceTree = "<group>"; };
+		A62FF6601A1024E4007EC9B3 /* WeaponManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeaponManager.h; path = ../Classes/WeaponManager.h; sourceTree = "<group>"; };
 		A6C5B2F619CF3C0000DA478A /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScene.cpp; path = ../Classes/MainScene.cpp; sourceTree = "<group>"; };
 		A6C5B2F719CF3C0000DA478A /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = ../Classes/MainScene.h; sourceTree = "<group>"; };
 		A6C5B2FD19CF508900DA478A /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
@@ -504,6 +507,8 @@
 				FEAA761F19C6201400E8ED22 /* Player.cpp */,
 				A6C5B2FD19CF508900DA478A /* Weapon.h */,
 				A6C5B2FE19CF509500DA478A /* Weapon.cpp */,
+				A62FF6601A1024E4007EC9B3 /* WeaponManager.h */,
+				A62FF65F1A1024E4007EC9B3 /* WeaponManager.cpp */,
 				FE2E259A19D73D5200AC8DB5 /* FSM.h */,
 				FE2E259D19D73D9400AC8DB5 /* FSM.cpp */,
 				BEDF548C19DD481C00068CBA /* Tree.cpp */,
@@ -949,6 +954,7 @@
 				9C82A9D919F461B10080515F /* Enemy2Manager.cpp in Sources */,
 				A62FF6451A06B2D0007EC9B3 /* Animal2.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				A62FF6611A1024E4007EC9B3 /* WeaponManager.cpp in Sources */,
 				9C609C3D19E1CD87004B375D /* BananaManger.cpp in Sources */,
 				FEAA762019C6201400E8ED22 /* Player.cpp in Sources */,
 				A62FF63419FD6AEF007EC9B3 /* CustomTool.cpp in Sources */,
