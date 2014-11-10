@@ -49,18 +49,11 @@ void StartScene::onStart(Ref* obj)
 {
     log("StartLayer::onStart");
     auto scene = MapScene::createScene();
-    /*
-    auto winSprite = Sprite::create("win.png");
-    winSprite->setAnchorPoint(ccp(0, 0));
-    winSprite->setScale(0.5, 0.5);
-    winSprite->setPosition(250, 250);
-    this->addChild(winSprite);
-     */
-//    /******************Start-Modified by Yafu****************************/
+    //    /******************Start-Modified by Yafu****************************/
 //    Vector<Node *> children = scene->getChildren();
 //    mainLayer = (MainScene *)children.back();
 //    /******************End-Modified by Yafu*****************************/
     
-    Director::getInstance()->replaceScene(scene);
+    //Director::getInstance()->replaceScene(scene);
 }
 

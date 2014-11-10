@@ -15,40 +15,12 @@ extern MainScene *mainLayer;
 
 using namespace std;
 
-bool WinScene::init()
+void WinScene::createScene(Layer* father)
 {
-    if(!Layer::init())
-        return false;
-    log("WinScene::init");
-    
-    screen = VisibleRect::rightTop() - VisibleRect::leftBottom();
-    
-    auto background = Sprite::create("win.png");
-    
-    background->setPosition(VisibleRect::center());
-    
-    this->addChild(background);
-
-    return true;
-}
-
-Scene* WinScene::createScene()
-{
-    auto scene = Scene::create();
-    auto layer = WinScene::create();
-    scene->addChild(layer);
-    return scene;
-}
-
-void WinScene::onWin(Ref* obj)
-{
-    log("StartLayer::onWin");
-    auto scene = MainScene::createScene();
-    
-    /******************Start-Modified by Yafu****************************/
-    Vector<Node *> children = scene->getChildren();
-    mainLayer = (MainScene *)children.back();
-    /******************End-Modified by Yafu*****************************/
-    
-    Director::getInstance()->replaceScene(scene);
+     auto winSprite = Sprite::create("win.png");
+     //winSprite->setAnchorPoint(ccp(0, 0));
+     auto targetPos = Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
+     winSprite->setScale(0.5, 0.5);
+     winSprite->setPosition(targetPos);
+    father->addChild(winSprite);
 }

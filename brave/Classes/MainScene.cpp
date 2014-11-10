@@ -612,14 +612,11 @@ void MainScene::deleteTree() {
     Tree * target = _trees[_trees.size() - 1];
     Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
     float xPos = targetTreePos.x;
-    float yPos = targetTreePos.y;
-    Size visibleSize = Director::getInstance()->getVisibleSize();
 
     Sprite * rope = _ropes[_ropes.size() - 1];
     float rangeLeft = 0;
     float rangeRight = 0;
     
-    int i = _ropes.size() - 1;
     rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
     rangeRight = xPos + target->getContentSize().width / 2;
     //this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
