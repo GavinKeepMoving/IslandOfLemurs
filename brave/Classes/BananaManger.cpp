@@ -8,7 +8,7 @@
 
 
 #include "BananaManger.h"
-#include "Banana.h"
+
 #define max_Banana_num 3
 
 BananaManger::BananaManger(){}
@@ -45,21 +45,16 @@ void BananaManger::createBananas()
     
     //Banana* banana=NULL;
     //CCSprite* sprite=NULL;
-    
+    /*
     for(int i=0;i<max_Banana_num; i++)
     {
         auto banana=Banana::create();
-        
-        /******************************** Begin-Added by Wenbo Lin *********************************/
         banana->_background = this->_background;
-        /******************************** End-Added by Wenbo Lin ***********************************/
-        
-        //banana->setScale(0.3);
         banana->bindSprite(Sprite::create("fruit.png"));
         banana->reset(i);
-        this->addChild(banana);  /*将怪物添加到管理器(CCNode)中*/
-        _bananaArr->addObject(banana);/*添加到数组中，便于管理*/
-    }
+        this->addChild(banana);
+        _bananaArr->addObject(banana);
+    }*/
 }
 
 void BananaManger::update(float dt)
@@ -73,6 +68,7 @@ void BananaManger::update(float dt)
         if(banana->isAlive())/*活动状态*/
         {
             //banana->setPositionX(banana->getPositionX()-3);//左移
+            
             if(banana->getPositionX()<0)
             {
                 banana->hide();

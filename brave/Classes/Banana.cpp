@@ -37,18 +37,6 @@ void Banana::hide()
     this->m_isAlive=false;/*标记为活动状态*/
 }
 
-/********************************* Begin-Added Wenbo Lin *********************************/
-//Origin Version
-/*
-void Banana::reset(int i)
-{
-    //初始化金币坐标,宽度(800-2800),高度（100-200
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    auto origin = Director::getInstance()->getVisibleOrigin();
-    this->setPosition(origin.x +120+ i*100, origin.y + visibleSize.height*Player::height*3);
-    //this->setPosition(ccp(800+CCRANDOM_0_1()*2000,200-CCRANDOM_0_1()*100));
-}
-*/
 
 //Edited Version
 void Banana::reset(int i)
@@ -67,15 +55,16 @@ bool Banana::isAlive()
 
 bool Banana::isCollideWithPlayer(Player* player)
 {
+
     Rect playerRect=player->getBoundingBox();
-    //Vec2 BananaPos=_background->convertToWorldSpace(this->getPosition());
-    
-    /******************************** Begin-Added by Wenbo Lin *********************************/
-    Vec2 BananaPos=_background->convertToWorldSpace(this->getPosition());
-    /******************************** End-Added by Wenbo Lin ***********************************/
+
+    //Vec2 PlayerPos = player->convertToNodeSpace(_background->getPosition());
+
+    Vec2 BananaPos=this->convertToNodeSpace(_background->getPosition());
     
     /*判断是否有交集*/
     return playerRect.containsPoint(BananaPos);
+    //return player->boundingBox().intersectsRect(this->boundingBox());
 }
 void Banana::bindSprite(Sprite* sprite){
     this->_sprite=sprite;

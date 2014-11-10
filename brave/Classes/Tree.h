@@ -12,11 +12,13 @@
 #include <stdio.h>
 #include "cocos2d.h"
 #include "Fire.h"
+#include "BananaManger.h"
 USING_NS_CC;
 
 class Tree : public Sprite
 {
 public:
+    CCArray* _bananaArr;
     //0-6: 0 = healthy; 6 = burn up;
     int state;
     
@@ -30,11 +32,11 @@ public:
     Sprite* _background;
     
     Tree(void);
-    Tree(Sprite* tree);
+    Tree(Sprite* tree, BananaManger* bm, Sprite* background);
 
     bool initSingleTree();
     std::vector<Tree*> initWithTreeNum(int num);// call createTree to build trees
-
+    
     int setBlood(int value);
     
     int getBlood(Tree* tree);//get blood values
@@ -43,6 +45,7 @@ public:
     void showStateAccordingtoBlood();
     void showAnimation();//show burning or burndown, need to call getState to know which animations to play
     Fire* addFire(int scale);
+    float getRightBoundary();
     
     //sound effect
     unsigned int _soundEffectId;

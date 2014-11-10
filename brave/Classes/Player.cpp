@@ -84,7 +84,7 @@ bool Player::initWithPlayerType(PlayerType type)
 			//init player's blood value xiaojing
 			_health = 100;
 			_maxHealth =100;
-			_attack = 20;
+			_attack = 200;
 			//-----------------------------------//
             _animationFrameNum.assign(animationFrameNum, animationFrameNum + 5);
             break;
@@ -255,6 +255,7 @@ void Player::walkTo(Vec2 dest, int boundry)
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, this, dest, boundry);
     _fsm->setOnEnter("walking", onWalk);
     _fsm->doEvent("walk");
+    std::cout<<"currentState"<<this->_fsm->getState();
 }
 
 void Player::stop(float r) {
@@ -305,10 +306,14 @@ void Player::constructActionArray(int start, int end,
                                   Vector< FiniteTimeAction * > &arrayOfActions,
                                   Vector< FiniteTimeAction * > &backgroundActions) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    int minDiff = -visibleSize.width/2;
-    int firstChange = 0;
-    int secondChange = background->getContentSize().width*5/4 - visibleSize.width*2;
-    int maxDiff = background->getContentSize().width*5/4 - visibleSize.width*3/2;
+//    int minDiff = -visibleSize.width/2;
+//    int firstChange = 0;
+//    int secondChange = background->getContentSize().width*5/4 - visibleSize.width*2;
+//    int maxDiff = background->getContentSize().width*5/4 - visibleSize.width*3/2;
+    int minDiff = 0;
+    int firstChange = visibleSize.width/2;
+    int secondChange = background->getContentSize().width - visibleSize.width/2;
+    int maxDiff = background->getContentSize().width;
     auto empty = Vec2(0, 0);
     if (start < end) {
         if(start < firstChange) {
@@ -470,7 +475,7 @@ void Player::onWalk(Vec2 dest, int boundry) {
             auto bmove = MoveBy::create(time, empty);
             arrayOfActions.pushBack(climb);
             backgroundActions.pushBack(bmove);
-            this->constructActionArray(boundry, -visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(boundry, 0, arrayOfActions, backgroundActions);
         }
         else {
             this->constructActionArray(pPos.x - bPos.x, -visibleSize.width/2, arrayOfActions, backgroundActions);
@@ -487,10 +492,10 @@ void Player::onWalk(Vec2 dest, int boundry) {
             auto bmove = MoveBy::create(time, empty);
             arrayOfActions.pushBack(climb);
             backgroundActions.pushBack(bmove);
-            this->constructActionArray(boundry,  background->getContentSize().width*5/4 - visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(boundry,  background->getContentSize().width, arrayOfActions, backgroundActions);
         }
         else {
-            this->constructActionArray(pPos.x - bPos.x,  background->getContentSize().width*5/4 - visibleSize.width/2, arrayOfActions, backgroundActions);
+            this->constructActionArray(pPos.x - bPos.x,  background->getContentSize().width, arrayOfActions, backgroundActions);
         }
         this->setFlippedX(false);
     }
@@ -698,13 +703,12 @@ int Player::getMoney()
 
 Rect Player::getBoundingBox()
 {
-    /*由于Sprite是放在Player上的，所以要检测Player的碰撞范围*/
     Size spriteSize=getContentSize();
-    Vec2 entityPos=getCurPos();//获取player中心点
+    Vec2 entityPos=this->convertToNodeSpace(background->getPosition());//获取player中心点
     
     //获取Player左下角的坐标值
-    int x=entityPos.x-spriteSize.width/4;
-    int y=entityPos.y-spriteSize.height/2;
+    int x=entityPos.x+spriteSize.width/4+300;
+    int y=entityPos.y+spriteSize.height+100;
     
     return Rect(x,y,spriteSize.width/2,spriteSize.height);
 }

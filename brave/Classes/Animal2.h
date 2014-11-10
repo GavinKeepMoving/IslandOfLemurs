@@ -16,7 +16,7 @@
 USING_NS_CC;
 using namespace cocostudio;
 
-#define WALK_SPEED 1
+#define WALK_SPEED 3
 #define WALK_LEFT 1
 #define WALK_RIGHT -1
 
@@ -62,7 +62,7 @@ private:
     bool lockState;                     //锁定状态
     void onAnimationEvent(Armature *pArmature, MovementEventType eventType, const char *animationID);                   //角色射击状态
     int _blood;
-    int _maxHealth;
+    
     int _attack;
 	int _maxblood;
 };

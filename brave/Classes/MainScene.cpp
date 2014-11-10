@@ -63,6 +63,8 @@ bool MainScene::init()
     this->addRoles();
     
     this->addWeaponOptionBar();
+    this->addEnemyNumber();
+//    this->addEnemiesAI(0.5);
     
     this->setScheduleAndProgress();
     //this->addgotoItem();//or combine with menu create??
@@ -314,21 +316,34 @@ void MainScene::spriteMoveFinished(CCNode* sender)
 
 void MainScene::initTrees(int num) {
     if(_background == NULL) return;
-    int beginningPos = 900;
-    int interval = 600;
-    int treeNum = 2;
+    int beginningPos = 400;
+    int interval = 560;
+    int treeNum = num;
     
     //add treeBase
     treeBase = Sprite::create("image/trees/treeBase.png");
-    treeBase->setPosition(580, 460);
+    treeBase->cocos2d::Node::setAnchorPoint(ccp(0, 0));
+    treeBase->setPosition(0, 100);
     _background->addChild(treeBase);
 
     
     for(int i = 0; i < treeNum; i++) {
         //add ropes
         auto rope = Sprite::create("image/trees/rope.png");
-        rope->setScale(0.2 + i * 0.3, 0.5);
-        rope->cocos2d::Node::setPosition(beginningPos - 180 + i * 520, 520);
+        rope->cocos2d::Node::setAnchorPoint(ccp(0, 0));
+        if(_ropes.size() == 0) {
+            rope->setScale(0.35, 0.5);
+            rope->cocos2d::Node::setPosition(200, 360);
+        }
+        else if(_ropes.size() == 1) {
+            rope->setScale(0.43, 0.5);
+            rope->cocos2d::Node::setPosition(710, 360);
+        }
+        else {
+            rope->setScale(0.43, 0.5);
+            rope->cocos2d::Node::setPosition(710 + (i - 1) * interval, 360);
+        }
+        
         _ropes.push_back(rope);
         _background->addChild(rope);
         
@@ -337,9 +352,10 @@ void MainScene::initTrees(int num) {
 //        _background->addChild(bareTree);
         
         auto treeSprite = Sprite::create("image/trees/tree.png");
-        treeSprite->setPosition(beginningPos + interval * i, 430);
+        treeSprite->setAnchorPoint(ccp(0, 0));
+        treeSprite->setPosition(beginningPos + interval * i, 50);
         _background->addChild(treeSprite);
-        _trees.push_back(new Tree(treeSprite));
+        _trees.push_back(new Tree(treeSprite,bananaManger,_background));
         _trees[_trees.size() - 1]->_background = _background;
     }
 }
@@ -465,6 +481,9 @@ void MainScene::updateAnimal(float dt)
                 int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
                 if (state == 1){// enemy is dead, remove it
                     eraseEnemy(index);
+//                    _enemy2Arr[index]->removeFromParentAndCleanup(true);
+//                    _enemy2Arr[index]->setState(DEAD);
+//                    _enemy2Arr.erase(_enemy2Arr.begin()+index);
                     index = -1;
                 }
             }
@@ -492,15 +511,16 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-//        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
+        std::cout<<"current target is: "<<index<<std::endl;
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
         }
         else{
             if (index == 0){ // lemur
-                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 160)
+                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 80)
                 {
                     _enemy2Arr[i]->setState(ATTACK);
                     int status = _player->beHit(_enemy2Arr[i]->getAttack());
@@ -516,7 +536,7 @@ void MainScene::updateEnemy(float dt)
                 }
             }
             else if (index == 1){ // tree
-                if (_enemy2Arr[i]->getPositionX()-_trees.back()->treeSprite->getPositionX() < _enemy2Arr[i]->mindist){
+                if (_enemy2Arr[i]->getPositionX()-_trees.back()->getRightBoundary() < _enemy2Arr[i]->mindist){
                     _enemy2Arr[i]->setState(ATTACK);
                     int state = _trees.back()->setBlood(_enemy2Arr[i]->getAttack());
                     if (state <= 0){
@@ -615,12 +635,14 @@ void MainScene::deleteTree() {
     int i = _ropes.size() - 1;
     rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
     rangeRight = xPos + target->getContentSize().width / 2;
-    this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
+    //this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
     _player->playerDrop(rangeLeft, rangeRight, onWalk);
     
     _trees.pop_back();
-    
+    //Zhenni
+    updateBoundry();
+
     //add sound
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("AudioClip/TreeFall.wav");
     
@@ -644,9 +666,6 @@ void MainScene::setParameters()
 {
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
-    
-    //Zhenni
-    this->boundry = 550;
 }
 
 void MainScene::addCloseIcon()
@@ -695,25 +714,27 @@ void MainScene::addBackground()
     //add background image
     log("create background");
     _background = Sprite::create("image/background.png");
-    _background1 = Sprite::create("image/background.png");
+    //_background1 = Sprite::create("image/background.png");
     log("created background");
     
     // position the sprite on the center of the screen
-    _background->setPosition(origin + visibleSize/2);
-    _background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
+    _background->setAnchorPoint(ccp(0,0));
+    _background->setPosition(0,0);
+    //_background1->setPosition(_background->getPosition() + Vec2(_background->getBoundingBox().size.width, 0));
     // add the sprite as a child to this layer
     this->addChild(_background, 0);
-    this->addChild(_background1, 0);
+    //this->addChild(_background1, 0);
 }
 
 void MainScene::addRoles()
 {
-    this->addTrees();
+    
     this->addAnimations();
     this->addFires();
     this->addPlayer();
     this->addEnemies();
     this->addBananas();
+    this->addTrees();
 }
 
 //method in addRoles
@@ -724,12 +745,24 @@ void MainScene::addTrees()
     //added by Wenbo Lin
     
     //add trees to background
-    this->initTrees(2);
+    this->initTrees(4);
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
+    //Zhenni
+    updateBoundry();
     
 }
+
+void MainScene::updateBoundry() {
+    if (this->_trees.empty() ) {
+        this->boundry = 0;
+    }
+    else {
+        this->boundry = this->_trees[this->_trees.size()-1]->getRightBoundary();
+    }
+}
+
 
 void MainScene::addAnimations()
 {
@@ -829,15 +862,33 @@ void MainScene::addEnemies()
 
 void MainScene::addEnemiesAI(float dt)
 {
-//    _enemy2Arr = __Array::create();
-//    _enemy2Arr->retain();
-    Enemy2* enemy1 = _enemy2Manager->createEnemy2s();
-    Enemy2* enemy2 = _enemy2Manager->createEnemy2s();
-    _enemy2Arr.push_back(enemy1);
-    _enemy2Arr.push_back(enemy2);
+    int i;
+    Enemy2* enemy;
+//    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
+    int dist = 100;
+    if (level < dispatch.size()){
+        for (i=0;i<dispatch[level];i++){
+            enemy = _enemy2Manager->createEnemy2s(2*dist);
+            _enemy2Arr.push_back(enemy);
+            dist += 50;
+        }
+        level++;
+    }
+    else{
+        // the game ends
+    }
+//    Enemy2* enemy1 = _enemy2Manager->createEnemy2s(100);
+//    Enemy2* enemy2 = _enemy2Manager->createEnemy2s(200);
+//    _enemy2Arr.push_back(enemy1);
+//    _enemy2Arr.push_back(enemy2);
 //    _enemy2Arr->addObject(enemy1);
 //    _enemy2Arr->addObject(enemy2);
 //    _animal2Manager->setEnemy(_enemy2Arr);
+}
+
+void MainScene::addEnemyNumber()
+{
+    dispatch = {3,4,5,6,6};
 }
 
 void MainScene::addBananas()
