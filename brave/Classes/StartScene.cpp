@@ -54,6 +54,6 @@ void StartScene::onStart(Ref* obj)
 //    mainLayer = (MainScene *)children.back();
 //    /******************End-Modified by Yafu*****************************/
     
-    //Director::getInstance()->replaceScene(scene);
+    Director::getInstance()->replaceScene(scene);
 }
 
