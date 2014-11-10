@@ -42,7 +42,7 @@ public:
     void setTrees(std::vector<Tree*> _trees){this->_trees = _trees;}
     void setAnimales(__Array* _animal2Arr){this->_animal2Arr = _animal2Arr;}
     int judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> trees,std::vector<Animal2*> animal);
-    Enemy2* createEnemy2s();/*创建Monster对象*/
+    Enemy2* createEnemy2s(int order);/*创建Monster对象*/
     /****/
     
 private:

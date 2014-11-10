@@ -23,15 +23,18 @@ Enemy2::Enemy2()
     lockState = false;
     // 
     _attack = 1;
-    _blood = 100;
-	_maxblood = 100;
+    _blood = 1000;
+    _maxHealth = 1000;
+    _attack = 1;
+//    _blood = 100;
+	_maxblood = 1000;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//
 	//add enemy's progress
 	auto size = this->getContentSize();
 	Point enemyPos = this->getPosition();
-	_progress->setPosition( enemyPos.x +size.width*2/3, enemyPos.y + size.height+ _progress->getContentSize().height/2+130);
+	_progress->setPosition( enemyPos.x +size.width*2/3, enemyPos.y + size.height+ _progress->getContentSize().height/2+230);
 	//enemy2->_progress->setPosition( 1800+size.width*2/3, 130+ size.height + enemy2->_progress->getContentSize().height/2);
 	this->addChild(_progress);
 
@@ -48,10 +51,12 @@ int Enemy2::behit(int attack)
     _blood -= attack;
     std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
     if (_blood <= 0){
-		_progress->setProgress((float)0.0/_maxblood*100);
+        _blood = 0;
+		_progress->setProgress((float)_blood/_maxblood*100);
         return 1;
     }
     else{
+        std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
 		_progress->setProgress((float)_blood/_maxblood*100);
         return 0;
     }
