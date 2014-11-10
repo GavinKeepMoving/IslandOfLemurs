@@ -702,12 +702,12 @@ int Player::getMoney()
 
 Rect Player::getBoundingBox()
 {
-        Size spriteSize=getContentSize();
-    Vec2 entityPos=getCurPos();//获取player中心点
+    Size spriteSize=getContentSize();
+    Vec2 entityPos=this->convertToNodeSpace(background->getPosition());//获取player中心点
     
     //获取Player左下角的坐标值
-    int x=entityPos.x-spriteSize.width/4;
-    int y=entityPos.y-spriteSize.height/2;
+    int x=entityPos.x+spriteSize.width/4+300;
+    int y=entityPos.y+spriteSize.height+100;
     
     return Rect(x,y,spriteSize.width/2,spriteSize.height);
 }

@@ -57,13 +57,10 @@ bool Banana::isCollideWithPlayer(Player* player)
 {
 
     Rect playerRect=player->getBoundingBox();
-    //auto p = player->getPosition();
-    //Vec2 BananaPos=_background->convertToWorldSpace(this->getPosition());
-    auto p = player->getPosition();
-    /******************************** Begin-Added by Wenbo Lin *********************************/
-    //playerRect.origin = _background->convertToNodeSpace(playerRect.origin);
-    Vec2 BananaPos=this->getParent()->convertToNodeSpace(this->getPosition());
-    /******************************** End-Added by Wenbo Lin ***********************************/
+
+    //Vec2 PlayerPos = player->convertToNodeSpace(_background->getPosition());
+
+    Vec2 BananaPos=this->convertToNodeSpace(_background->getPosition());
     
     /*判断是否有交集*/
     return playerRect.containsPoint(BananaPos);
