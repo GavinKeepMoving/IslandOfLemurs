@@ -15,11 +15,13 @@
 
 USING_NS_CC;
 
-class LoseScene : public Sprite
+class LoseScene : public Layer
 {
     
 public:
-    static void createScene(Layer* father);
+    //need to create an object first before createScene
+    bool createScene(Layer* father);
+    void menuCloseCallback(cocos2d::Ref* pSender);
 };
 
 #endif /* defined(__brave__LoseScene__) */

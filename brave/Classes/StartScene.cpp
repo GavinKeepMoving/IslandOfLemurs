@@ -12,6 +12,7 @@
 #include "VisibleRect.h"
 #include "CustomTool.h"
 #include "WinScene.h"
+#include "LoseScene.h"
 
 /******************Start-Modified by Yafu****************************/
 MainScene *mainLayer;
@@ -48,12 +49,14 @@ Scene* StartScene::createScene()
 void StartScene::onStart(Ref* obj)
 {
     log("StartLayer::onStart");
-    auto scene = MapScene::createScene();
+    //auto scene = MapScene::createScene();
+    LoseScene scene;
+    auto check = scene.createScene(this);
     //    /******************Start-Modified by Yafu****************************/
 //    Vector<Node *> children = scene->getChildren();
 //    mainLayer = (MainScene *)children.back();
 //    /******************End-Modified by Yafu*****************************/
     
-    Director::getInstance()->replaceScene(scene);
+    //Director::getInstance()->replaceScene(scene);
 }
 
