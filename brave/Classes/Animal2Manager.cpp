@@ -47,11 +47,29 @@ Animal2* Animal2Manager::createAnimal2s(int index)
     
     //for(int i=0;i<max_Banana_num; i++)
     //{
-    log("animal!!!!");
+    
         auto animal2=Animal2::create(index);
 //        animal2->setblood();
         animal2->_background = this->_background;
-        animal2->setPosition(350, 80);
+    log("animal!!!! %f", animal2->armature->getContentSize().height);
+    switch (index) {
+        case 0:
+            animal2->setPosition(350, 8);//monkey
+            break;
+        case 1:
+            animal2->setPosition(350, 30);//tiger
+            break;
+        case 2:
+            animal2->setPosition(350, 10);//panda
+            break;
+        case 3:
+            animal2->setPosition(350, 40);//clothe
+            break;
+        default:
+            animal2->setPosition(350, 80);
+            break;
+    }
+    
         this->addChild(animal2);  /*将怪物添加到管理器(CCNode)中*/
 
 //        _animal2Arr->addObject(animal2);/*添加到数组中，便于管理*/
