@@ -9,6 +9,7 @@
 #include "Progress.h"
 #include <unistd.h>
 #include "CustomTool.h"
+#include "LoseScene.h"
 //******************************************************************************************************************
 
 
@@ -648,6 +649,12 @@ void MainScene::deleteTree() {
     if(rope != NULL) {
         _background->removeChild(rope, true);
         _ropes.pop_back();
+    }
+    
+    /** show lose scene */
+    if(_trees.size() == 0) {
+        LoseScene loseScene;
+        loseScene.createScene(this);
     }
 }
 /*******************************Ended add by Wenbo Lin*******************************/
