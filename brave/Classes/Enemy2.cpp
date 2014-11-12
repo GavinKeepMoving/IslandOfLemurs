@@ -82,7 +82,7 @@ void Enemy2::update(float dt)
         
         //add by wenbo
         //change state
-        playSound();
+        //playSound();
     }
 }
 
