@@ -20,8 +20,8 @@ bool LoseScene::createScene(cocos2d::Layer *father) {
     auto loseSprite = Sprite::create("lose.png");
     
     cocos2d::MenuItem* pCloseItem = cocos2d::MenuItemImage::create(
-                                                                   "CloseNormal.png",
-                                                                   "CloseSelected.png",
+                                                                   "backToMap.png",
+                                                                   "backToMap.png",
                                                                    this,
                                                                    menu_selector(LoseScene::menuCloseCallback));
     

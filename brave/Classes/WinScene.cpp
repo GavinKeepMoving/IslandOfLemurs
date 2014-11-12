@@ -21,8 +21,8 @@ bool WinScene::createScene(cocos2d::Layer *father) {
     auto winSprite = Sprite::create("win.png");
     
     cocos2d::MenuItem* pCloseItem = cocos2d::MenuItemImage::create(
-                                                                   "CloseNormal.png",
-                                                                   "CloseSelected.png",
+                                                                   "backToMap.png",
+                                                                   "backToMap.png",
                                                                    this,
                                                                    menu_selector(WinScene::menuCloseCallback));
     
