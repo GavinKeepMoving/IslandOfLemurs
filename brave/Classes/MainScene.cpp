@@ -535,6 +535,12 @@ void MainScene::updateEnemy(float dt)
                     if (status == 1){// lemur is dead
                         // game over!!
                         _player->removeFromParentAndCleanup(true);
+                        
+                        //add by wenbo lin
+                        LoseScene loseScene;
+                        loseScene.createScene(this);
+                        //end of add by wenbo lin
+                        
                         index = -1;
                     }
                 }
