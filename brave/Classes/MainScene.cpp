@@ -9,6 +9,7 @@
 #include "Progress.h"
 #include <unistd.h>
 #include "CustomTool.h"
+#include "LoseScene.h"
 //******************************************************************************************************************
 
 
@@ -46,8 +47,6 @@ bool MainScene::init()
     this->setParameters();
 
     this->addCloseIcon();
-    
-    this->addWeaponOptionBar();
 
     this->addHelloWorldLabel();
     
@@ -55,6 +54,7 @@ bool MainScene::init()
     
     this->addRoles();
     
+    this->addWeaponOptionBar();
     this->addEnemyNumber();
 //    this->addEnemiesAI(0.5);
     
@@ -154,6 +154,9 @@ void MainScene::update(float delta)
 //Right top Weapon option bar
 void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
 {
+    _weaponManager = WeaponManager::create(_background);
+    _weaponManager->bindPlayer(_player);
+    
     // add a "close" icon to exit the progress. it's an autorelease object
     auto optionItem = MenuItemImage::create(
                                            "attackoption1.png",
@@ -241,7 +244,18 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
             break;
     }
     
-    this->_player->attack();
+    //put out fire
+    if (index == 2) {
+        Tree* t = _weaponManager->getNearestTree(_trees);
+        
+        if (t) {            
+            this->_player->attack(_weaponManager->getAttackRadius(t));
+            t->setBlood(-20.);
+        }
+
+    }
+    
+    
 
 }
 // 1450, origin.y + visibleSize.height * Enemy::height
@@ -489,10 +503,10 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+        //std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
-        std::cout<<"current target is: "<<index<<std::endl;
+        //std::cout<<"current target is: "<<index<<std::endl;
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
         }
@@ -603,14 +617,11 @@ void MainScene::deleteTree() {
     Tree * target = _trees[_trees.size() - 1];
     Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
     float xPos = targetTreePos.x;
-    float yPos = targetTreePos.y;
-    Size visibleSize = Director::getInstance()->getVisibleSize();
 
     Sprite * rope = _ropes[_ropes.size() - 1];
     float rangeLeft = 0;
     float rangeRight = 0;
     
-    int i = _ropes.size() - 1;
     rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
     rangeRight = xPos + target->getContentSize().width / 2;
     //this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
@@ -629,6 +640,12 @@ void MainScene::deleteTree() {
     if(rope != NULL) {
         _background->removeChild(rope, true);
         _ropes.pop_back();
+    }
+    
+    /** show lose scene */
+    if(_trees.size() == 0) {
+        LoseScene loseScene;
+        loseScene.createScene(this);
     }
 }
 /*******************************Ended add by Wenbo Lin*******************************/

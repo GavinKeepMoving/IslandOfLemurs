@@ -66,8 +66,8 @@ bool Player::initWithPlayerType(PlayerType type)
     _speed = 100;
     _attackSpeed = 3;
     _attackRange = 350;
+    _attackEnemyCount = 0;
 	_seq = nullptr;
-    DROPING = false;
     _blood = 100;
     _maxHealth = 100;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
@@ -114,6 +114,14 @@ bool Player::initWithPlayerType(PlayerType type)
 	_progress->setPosition( LemurPos.x +size.width*2/3, LemurPos.y + size.height+ _progress->getContentSize().height/2+30);
 	this->addChild(_progress);
 
+    this->_groundHeight = 100;
+    this->_treeHeight = Director::getInstance()->getVisibleSize().height*Player::height*3;
+    
+    //auto attack
+    auto attackSpeed = _attackSpeed;
+    this->schedule(schedule_selector(Player::generalAttack), attackSpeed);
+    this->scheduleUpdate();
+    
     // add progress end
     return true;
 }
@@ -136,11 +144,24 @@ void Player::initFSM()
 //        auto sfName = String::createWithFormat("%s-1-1.png", _name.c_str());
 //        auto spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfName->getCString());
 //        this->setSpriteFrame(spriteFrame);
-        this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
-    
-        this->scheduleUpdate();
+        
+        //this->generalAttack(0);
+//        if (true) {
+//            this->generalAttack(0);
+//            this->scheduleOnce(schedule_selector(Player::generalAttack), _attackSpeed/2);
+//            //this->scheduleOnce(schedule_selector(Player::generalAttack), _attackSpeed*3/2);
+//            //this->scheduleOnce(schedule_selector(Player::generalAttack), _attackSpeed*5/2);
+//        }
+        //static CCRepeat* CCRepeat::actionWithAction
     };
+    auto onMove = [&]()
+    {
+        log("onChange: Leave idle");
+        this->unschedule(schedule_selector(Player::generalAttack));
+    };
+    
     _fsm->setOnEnter("idle",onIdle);
+    //_fsm->setOnChange("idle", onMove);
 }
 
 
@@ -166,14 +187,34 @@ void Player::attackCallback(float test) {
     }
 }
 
+void Player::buffAttack(int attackBuff) {
+    switch (attackBuff) {
+        case ACCELERATE:
+            _attackEnemyCount = 0;
+            this->unschedule(schedule_selector(Player::generalAttack));
+            auto attackSpeed = _attackSpeed/3;
+            this->schedule(schedule_selector(Player::generalAttack), attackSpeed);
+            break;
+            
+        //default:
+            //break;
+    }
+}
+
 void Player::generalAttack(float radius) {
+    //std::cout<<_attackEnemyCount++<<std::endl;
+    _attackEnemyCount++;
+    if (_attackEnemyCount == 6) {
+        this->unschedule(schedule_selector(Player::generalAttack));
+        this->schedule(schedule_selector(Player::generalAttack), _attackSpeed);
+    }
     //log(mainLayer->_enemys.size());
     if(this->_fsm->getState() == "idle" && mainLayer->isEnemyInRange(this)) {
-        log("Player: attacking enemy");
+        cocos2d::log("Player: attacking enemy");
         Vec2 attackTarget = mainLayer->attackTarget(this);
         radius = attackTarget.x - this->getPositionX();
         auto weapon = this->attack(radius);
-        auto attackTime = (attackTarget-this->getPosition()).getLength()/weapon->getSpeed();
+        auto attackTime = (float)(attackTarget-this->getPosition()).getLength()/weapon->getSpeed();
         this->scheduleOnce(schedule_selector(Player::attackCallback), attackTime);
         this->scheduleUpdate();
     }
@@ -197,7 +238,7 @@ void Player::onDrop(int start, int end, std::function<void()> callback) {
     Vec2 ground;
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    ground.y = origin.y + visibleSize.height*Player::height/2;
+    ground.y = _groundHeight;
     ground.x = this->getPositionX();
     auto time = (this->getPosition()-ground).getLength()/400;
     auto drop = MoveTo::create(time, ground);
@@ -261,8 +302,8 @@ void Player::walkTo(Vec2 dest, int boundry)
 void Player::stop(float r) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    float upGround = origin.y + visibleSize.height*Player::height*3;
-    float downGround = origin.y + visibleSize.height*Player::height/2;
+    float upGround = _treeHeight;//origin.y + visibleSize.height*Player::height*3;
+    float downGround = _groundHeight;//origin.y + visibleSize.height*Player::height/2;
     
     if(this->getPositionY() < upGround - 20 &&
        this->getPositionY() > downGround + 20) {
@@ -468,7 +509,8 @@ void Player::onWalk(Vec2 dest, int boundry) {
     if(dest.x < origin.x + visibleSize.width/2) {
         if(pPos.x - bPos.x >= boundry - 10) {
             this->constructActionArray(pPos.x - bPos.x, boundry, arrayOfActions, backgroundActions);
-            Vec2 climbBy(0, origin.y + visibleSize.height*Player::height*3 - pPos.y);
+            //Vec2 climbBy(0, origin.y + visibleSize.height*Player::height*3 - pPos.y);
+            Vec2 climbBy(0, _treeHeight - pPos.y);
             auto time = climbBy.getLength()/_speed;
             auto climb = MoveBy::create(time, climbBy);
             //climb->setTag(1);
@@ -485,7 +527,8 @@ void Player::onWalk(Vec2 dest, int boundry) {
     else {
         if(pPos.x - bPos.x <= boundry + 10) {
             this->constructActionArray(pPos.x - bPos.x,  boundry, arrayOfActions, backgroundActions);
-            Vec2 climbBy(0, origin.y + visibleSize.height*Player::height/2 - pPos.y);
+            //Vec2 climbBy(0, origin.y + visibleSize.height*Player::height/2 - pPos.y);
+            Vec2 climbBy(0, _groundHeight - pPos.y);
             auto time = climbBy.getLength()/_speed;
             auto climb = MoveBy::create(time, climbBy);
             //climb->setTag(1);
@@ -703,8 +746,9 @@ int Player::getMoney()
 
 Rect Player::getBoundingBox()
 {
-        Size spriteSize=getContentSize();
-    Vec2 entityPos=getCurPos();//获取player中心点
+    Size spriteSize=getContentSize();
+    Vec2 entityPos = background->convertToNodeSpace(this->getPosition());
+    //Vec2 entityPos=getCurPos();//this->convertToNodeSpace(background->getPosition());//获取player中心点
     
     //获取Player左下角的坐标值
     int x=entityPos.x-spriteSize.width/4;
