@@ -623,16 +623,16 @@ Vec2 MainScene::attackTarget(Player *p) {
 
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
-    Tree * target = _trees[_trees.size() - 1];
-    Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
+    Tree * targetTree = _trees[_trees.size() - 1];
+    Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(targetTree->_posX, 0));
     float xPos = targetTreePos.x;
 
     Sprite * rope = _ropes[_ropes.size() - 1];
     float rangeLeft = 0;
     float rangeRight = 0;
     
-    rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
-    rangeRight = xPos + target->getContentSize().width / 2;
+    rangeLeft = xPos - rope->getContentSize().width * 0.4;
+    rangeRight = xPos + targetTree->treeSprite->getContentSize().width;
     //this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
     _player->playerDrop(rangeLeft, rangeRight, onWalk);
