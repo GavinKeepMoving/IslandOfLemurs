@@ -41,16 +41,7 @@ bool MainScene::init()
     {
         return false;
     }
-    
-//    if (_enemy2Arr == NULL){
-//    _enemy2Arr = __Array::create();
-//    _enemy2Arr->init();
-//    }
-//    if (_animal2Arr == NULL){
-//    _animal2Arr = __Array::create();
-//    _animal2Arr->init();
-    
-//    }
+
     this->playMusic();
     
     this->setParameters();
@@ -172,7 +163,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this, 1));
     
-	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 - optionItem->getContentSize().width,
+	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*3 + optionItem->getContentSize().width/2,
                                 origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     auto optionItem2 = MenuItemImage::create(
@@ -180,12 +171,21 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
                                             "CloseSelected.png",
                                             CC_CALLBACK_1(MainScene::activateWeaponOption, this, 2));
     
-    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 ,
+    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*2 + optionItem->getContentSize().width/2,
                                  origin.y + visibleSize.height - optionItem->getContentSize().height/2));
+    
+    auto optionItem3 = MenuItemImage::create(
+                                             "attackoption3.png",
+                                             "CloseSelected.png",
+                                             CC_CALLBACK_1(MainScene::activateWeaponOption, this, 3));
+    
+    optionItem3->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width + optionItem->getContentSize().width/2,
+                                  origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(optionItem, NULL);
     menu->addChild(optionItem2);
+    menu->addChild(optionItem3);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 }
@@ -248,6 +248,9 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
             break;
         case 2:
             this->_player->setWeapon(Weapon::WeaponType::WATER);
+            break;
+        case 3:
+            this->_player->buffAttack();
             break;
         default:
             break;
@@ -876,7 +879,7 @@ void MainScene::addEnemiesAI(float dt)
             _enemy2Arr.push_back(enemy);
             dist += 50;
         }
-        level++;
+//        level++;
     }
     else{
         // the game ends
@@ -892,7 +895,8 @@ void MainScene::addEnemiesAI(float dt)
 
 void MainScene::addEnemyNumber()
 {
-    dispatch = {3,4,5,6,6};
+    dispatch = {2,3,4,3,3};
+    enemydelay = {40,50,50,40,30};
 }
 
 void MainScene::addBananas()
@@ -925,7 +929,10 @@ void MainScene::setScheduleAndProgress()
 //    this->schedule(schedule_selector(MainScene::enemyMove), 3);
 //    this->schedule(schedule_selector(MainScene::animalMove), 3);
     //this->schedule(schedule_selector(MainScene::addEnemy),20);
-    this->schedule(schedule_selector(MainScene::addEnemiesAI),20);
+    if (level < dispatch.size()){
+        this->schedule(schedule_selector(MainScene::addEnemiesAI),enemydelay[level]);
+        level++;
+    }
     /****************** End-Added by Zhe Liu *********************/
     
     //*****init blood progress  xiaojing **************//

@@ -48,6 +48,7 @@ Animal2* Animal2Manager::createAnimal2s(int index)
     //for(int i=0;i<max_Banana_num; i++)
     //{
     
+    log("animal!!!!");
         auto animal2=Animal2::create(index);
 //        animal2->setblood();
         animal2->_background = this->_background;

@@ -89,6 +89,7 @@ public:
     void addEnemy(float dt);
     std::vector<Tree*> getTrees(){return _trees;}
     std::vector<int> dispatch;
+    std::vector<int> enemydelay;
     void updateEnemy(float dt);
     void updateAnimal(float dt);
     /*** added by Zhe Liu ***/
