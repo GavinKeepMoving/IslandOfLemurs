@@ -34,6 +34,8 @@ public:
     bool canDoEvent(std::string eventName);
     //set the onEnter callback for a specified state
     void setOnEnter(std::string state, std::function<void()> onEnter);
+    //Zhenni set on change: action on leave state
+    void setOnChange(std::string state, std::function<void()> onChange);
     // get current state
     std::string getState(){return _currentState;}
 private:
@@ -43,6 +45,7 @@ private:
     std::set<std::string> _states;
     std::unordered_map<std::string,std::unordered_map<std::string,std::string>> _events;
     std::unordered_map<std::string,std::function<void()>> _onEnters;
+    std::unordered_map<std::string,std::function<void()>> _onChanges;
     std::string _currentState;
     std::string _previousState;
 };

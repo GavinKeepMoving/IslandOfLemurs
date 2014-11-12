@@ -36,6 +36,10 @@ public:
     {
         WALKTO_TAG =100
     };
+    enum buffType
+    {
+        ACCELERATE
+    };
     static float height;
     bool initWithPlayerType(PlayerType type);
     static Player* create(PlayerType type);
@@ -81,11 +85,13 @@ public:
     void playerDrop(int start, int end, std::function<void()> callback);
     void onDrop(int start, int end, std::function<void()> callback);
     void constructActionArray(int start, int end,Vector< FiniteTimeAction * > &arrayOfActions, Vector< FiniteTimeAction * > &backgroundActions);
+    void buffAttack(int attackBuff = ACCELERATE);
 private:
     //Action _seq;
     float _speed;
     float _attackSpeed; //wait duration for attack //Zhenni
     float _attackRange; //horizontal attack range // Zhenni
+    int _attackBuff;
     PlayerType _type;
     std::string _name;
     int _animationNum;
@@ -96,6 +102,9 @@ private:
     FSM *_fsm;
     Weapon::WeaponType currentWeapon;
     bool DROPING;
+    int _groundHeight;
+    int _treeHeight;
+    int _attackEnemyCount;
     //std::vector<Enemy*> *_enemys;
 
 };

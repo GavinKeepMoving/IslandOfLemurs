@@ -55,16 +55,14 @@ bool Banana::isAlive()
 
 bool Banana::isCollideWithPlayer(Player* player)
 {
-
     Rect playerRect=player->getBoundingBox();
-
-    //Vec2 PlayerPos = player->convertToNodeSpace(_background->getPosition());
-
-    Vec2 BananaPos=this->convertToNodeSpace(_background->getPosition());
-    
+    Vec2 playerPos = _background->convertToNodeSpace(player->getPosition());
+    Node * tree = this->getParent();
+    Vec2 bananaPos = tree->getPosition()+this->getPosition();
+    //log("player position: %f",playerRect.origin.x);
+    //log("banana position: %f",bananaPos.x);
     /*判断是否有交集*/
-    return playerRect.containsPoint(BananaPos);
-    //return player->boundingBox().intersectsRect(this->boundingBox());
+    return playerRect.containsPoint(bananaPos);
 }
 void Banana::bindSprite(Sprite* sprite){
     this->_sprite=sprite;

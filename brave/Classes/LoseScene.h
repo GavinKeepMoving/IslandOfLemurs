@@ -1,13 +1,13 @@
 //
-//  WinScene.h
+//  LoseScene.h
 //  brave
 //
 //  Created by Wenbo Lin on 11/9/14.
 //
 //
 
-#ifndef __brave__WinScene__
-#define __brave__WinScene__
+#ifndef __brave__LoseScene__
+#define __brave__LoseScene__
 
 #include <stdio.h>
 #include "cocos2d.h"
@@ -15,12 +15,13 @@
 
 USING_NS_CC;
 
-class WinScene : public Menu
+class LoseScene : public Layer
 {
-    //need to create an object first before createScene
+    
 public:
+    //need to create an object first before createScene
     bool createScene(Layer* father);
     void menuCloseCallback(cocos2d::Ref* pSender);
 };
 
-#endif /* defined(__brave__WinScene__) */
+#endif /* defined(__brave__LoseScene__) */

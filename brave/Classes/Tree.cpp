@@ -23,8 +23,8 @@ Tree::Tree () {
 //constructor2
 Tree::Tree(Sprite* tree, BananaManger* bm, Sprite* background) {
     this->treeSprite = tree;
-    _posX = this->treeSprite->getPosition().x;
-    _posY = this->treeSprite->getPosition().y;
+    this->_posX = this->treeSprite->getPosition().x;
+    this->_posY = this->treeSprite->getPosition().y;
     blood = (float)originalBlood;
     auto s = tree->getContentSize();
 
@@ -81,6 +81,8 @@ std::vector<Tree*> Tree::initWithTreeNum(int num) {
 int Tree::setBlood(int value) {
     log("in setBlood");
     this->blood -= value;
+    if(this->blood >= 100)
+        this->blood = 100;
     this->showStateAccordingtoBlood();
     return this->blood;
 }
@@ -214,7 +216,7 @@ Fire* Tree::addFire(int scale) {
 float Tree::getRightBoundary() {
     auto leftCorner = this->treeSprite->getPosition();
     auto leftX = leftCorner.x;
-    auto rightX = leftCorner.x + this->getContentSize().width + 300;
+    auto rightX = leftCorner.x + this->getContentSize().width + beginningPos;
     return rightX;
 }
 

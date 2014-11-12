@@ -9,6 +9,7 @@
 #include "Progress.h"
 #include <unistd.h>
 #include "CustomTool.h"
+#include "LoseScene.h"
 //******************************************************************************************************************
 
 
@@ -511,10 +512,10 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-        std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+        //std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
-        std::cout<<"current target is: "<<index<<std::endl;
+        //std::cout<<"current target is: "<<index<<std::endl;
         if (index == -1){
             _enemy2Arr[i]->setState(WALK);
         }
@@ -625,14 +626,11 @@ void MainScene::deleteTree() {
     Tree * target = _trees[_trees.size() - 1];
     Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
     float xPos = targetTreePos.x;
-    float yPos = targetTreePos.y;
-    Size visibleSize = Director::getInstance()->getVisibleSize();
 
     Sprite * rope = _ropes[_ropes.size() - 1];
     float rangeLeft = 0;
     float rangeRight = 0;
     
-    int i = _ropes.size() - 1;
     rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
     rangeRight = xPos + target->getContentSize().width / 2;
     //this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
@@ -651,6 +649,12 @@ void MainScene::deleteTree() {
     if(rope != NULL) {
         _background->removeChild(rope, true);
         _ropes.pop_back();
+    }
+    
+    /** show lose scene */
+    if(_trees.size() == 0) {
+        LoseScene loseScene;
+        loseScene.createScene(this);
     }
 }
 /*******************************Ended add by Wenbo Lin*******************************/
