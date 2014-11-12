@@ -358,6 +358,9 @@ void MainScene::initTrees(int num) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
         treeSprite->setAnchorPoint(ccp(0, 0));
         treeSprite->setPosition(beginningPos + interval * i, 50);
+        
+        std::cout<<"tree width: "<<treeSprite->getContentSize().width;
+        
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite,bananaManger,_background));
         _trees[_trees.size() - 1]->_background = _background;
@@ -629,13 +632,14 @@ void MainScene::deleteTree() {
     Tree * targetTree = _trees[_trees.size() - 1];
     Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(targetTree->_posX, 0));
     float xPos = targetTreePos.x;
-
+    int treeWidth = 446;
+    
     Sprite * rope = _ropes[_ropes.size() - 1];
     float rangeLeft = 0;
     float rangeRight = 0;
     
     rangeLeft = xPos - rope->getContentSize().width * 0.4;
-    rangeRight = xPos + targetTree->treeSprite->getContentSize().width;
+    rangeRight = xPos + treeWidth;
     //this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
     _player->playerDrop(rangeLeft, rangeRight, onWalk);
