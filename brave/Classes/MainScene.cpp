@@ -862,7 +862,7 @@ void MainScene::addEnemiesAI(float dt)
 //    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
     int dist = 100;
     if (level < dispatch.size()){
-        for (i=1;i<dispatch[level];i++){
+        for (i=0;i<dispatch[level];i++){
             enemy = _enemy2Manager->createEnemy2s(2*dist);
             _enemy2Arr.push_back(enemy);
             dist += 50;
