@@ -51,7 +51,7 @@ Animal2* Animal2Manager::createAnimal2s(int index)
         auto animal2=Animal2::create(index);
 //        animal2->setblood();
         animal2->_background = this->_background;
-        animal2->setPosition(350, 80);
+        animal2->setPosition(350, 30);
         this->addChild(animal2);  /*将怪物添加到管理器(CCNode)中*/
 
 //        _animal2Arr->addObject(animal2);/*添加到数组中，便于管理*/

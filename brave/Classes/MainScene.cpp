@@ -40,16 +40,7 @@ bool MainScene::init()
     {
         return false;
     }
-    
-//    if (_enemy2Arr == NULL){
-//    _enemy2Arr = __Array::create();
-//    _enemy2Arr->init();
-//    }
-//    if (_animal2Arr == NULL){
-//    _animal2Arr = __Array::create();
-//    _animal2Arr->init();
-    
-//    }
+
     this->playMusic();
     
     this->setParameters();
@@ -854,12 +845,12 @@ void MainScene::addEnemiesAI(float dt)
 //    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
     int dist = 100;
     if (level < dispatch.size()){
-        for (i=0;i<dispatch[level];i++){
+        for (i=1;i<dispatch[level];i++){
             enemy = _enemy2Manager->createEnemy2s(2*dist);
             _enemy2Arr.push_back(enemy);
             dist += 50;
         }
-        level++;
+//        level++;
     }
     else{
         // the game ends
@@ -875,7 +866,8 @@ void MainScene::addEnemiesAI(float dt)
 
 void MainScene::addEnemyNumber()
 {
-    dispatch = {3,4,5,6,6};
+    dispatch = {2,3,4,3,3};
+    enemydelay = {40,50,50,40,30};
 }
 
 void MainScene::addBananas()
@@ -908,7 +900,10 @@ void MainScene::setScheduleAndProgress()
 //    this->schedule(schedule_selector(MainScene::enemyMove), 3);
 //    this->schedule(schedule_selector(MainScene::animalMove), 3);
     //this->schedule(schedule_selector(MainScene::addEnemy),20);
-    this->schedule(schedule_selector(MainScene::addEnemiesAI),20);
+    if (level < dispatch.size()){
+        this->schedule(schedule_selector(MainScene::addEnemiesAI),enemydelay[level]);
+        level++;
+    }
     /****************** End-Added by Zhe Liu *********************/
     
     //*****init blood progress  xiaojing **************//
