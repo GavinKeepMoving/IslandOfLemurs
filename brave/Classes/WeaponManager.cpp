@@ -57,9 +57,7 @@ Tree* WeaponManager::getNearestTree(std::vector<Tree*> trees)
 }
 
 float WeaponManager::getAttackRadius(Tree* t) {
-    Vec2 treePos = _background->convertToWorldSpace(t->treeSprite->getPosition());
+    Vec2 LemurPos = _background->convertToNodeSpace(_player->getPosition());
     
-    Vec2 playerPos = _player->getPosition();
-    
-    return treePos.x - playerPos.x;
+    return t->getRightBoundary()-LemurPos.x;
 }
