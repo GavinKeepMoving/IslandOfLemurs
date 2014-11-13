@@ -159,23 +159,23 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     
     // add a "close" icon to exit the progress. it's an autorelease object
     auto optionItem = MenuItemImage::create(
-                                           "attackoption1.png",
+                                           "weapon1.png",
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this, 1));
     
-	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*3 + optionItem->getContentSize().width/2,
+	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*3 + optionItem->getContentSize().width/2-6,
                                 origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     auto optionItem2 = MenuItemImage::create(
-                                            "attackoption2.png",
+                                            "weapon3.png",
                                             "CloseSelected.png",
                                             CC_CALLBACK_1(MainScene::activateWeaponOption, this, 2));
     
-    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*2 + optionItem->getContentSize().width/2,
+    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*2 + optionItem->getContentSize().width/2-3,
                                  origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     auto optionItem3 = MenuItemImage::create(
-                                             "attackoption3.png",
+                                             "weapon2.png",
                                              "CloseSelected.png",
                                              CC_CALLBACK_1(MainScene::activateWeaponOption, this, 3));
     
