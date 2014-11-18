@@ -47,7 +47,7 @@ public:
     void addRoles();
     //method in addRoles
     void addAnimations();
-    void addTrees();
+    void addTrees(int treeNum);
     void addFires();
     void addPlayer();
     void addEnemies();

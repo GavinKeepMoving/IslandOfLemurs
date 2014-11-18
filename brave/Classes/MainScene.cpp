@@ -751,18 +751,18 @@ void MainScene::addRoles()
     this->addPlayer();
     this->addEnemies();
     this->addBananas();
-    this->addTrees();
+    this->addTrees(4);
 }
 
 //method in addRoles
 
-void MainScene::addTrees()
+void MainScene::addTrees(int treeNum)
 {
     //********************************************************************************************************//
     //added by Wenbo Lin
     
     //add trees to background
-    this->initTrees(4);
+    this->initTrees(treeNum);
     //finish initializing trees
     //end of Wenbo Lin's code
     //********************************************************************************************************//
