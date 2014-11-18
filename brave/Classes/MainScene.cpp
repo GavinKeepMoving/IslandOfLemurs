@@ -11,7 +11,7 @@
 #include "CustomTool.h"
 #include "LoseScene.h"
 //******************************************************************************************************************
-
+#include "SkillButton.h"
 
 
 USING_NS_CC;
@@ -157,8 +157,23 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     _weaponManager = WeaponManager::create(_background);
     _weaponManager->bindPlayer(_player);
     
+
+    SkillButton* mSkillButton = SkillButton::createSkillButton(10.f, "weapon1grey.png", "weapon1.png", "weapon1grey.png", 1);
+    mSkillButton->setPosition(Vec2(visibleSize.width-260, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    mSkillButton = SkillButton::createSkillButton(25.f, "weapon3grey.png", "weapon3.png", "weapon3grey.png", 2);
+    mSkillButton->_player = _player;
+    mSkillButton->_weaponManager = _weaponManager;
+    mSkillButton->_trees = _trees;
+    mSkillButton->setPosition(Vec2(visibleSize.width-155, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    mSkillButton = SkillButton::createSkillButton(15.f, "weapon2grey.png", "weapon2.png", "weapon2grey.png", 3);
+    mSkillButton->bananaManger = bananaManger;
+    mSkillButton->setPosition(Vec2(visibleSize.width-50, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto optionItem = MenuItemImage::create(
+    /*auto optionItem = MenuItemImage::create(
                                            "weapon1.png",
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this, 1));
@@ -187,13 +202,12 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     menu->addChild(optionItem2);
     menu->addChild(optionItem3);
     menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    this->addChild(menu, 1);*/
 }
 
 //Right top Weapon option bar
 void MainScene::initAnimalOptionsBar()
 {
-    
     // add a "close" icon to exit the progress. it's an autorelease object
     a_optionItem1 = MenuItemImage::create(
                                             "money.png",
