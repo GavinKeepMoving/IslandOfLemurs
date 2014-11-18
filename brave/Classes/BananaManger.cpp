@@ -77,7 +77,7 @@ void BananaManger::update(float dt)
                 _player->money += Banana::value;
                 //_player->hit();
                 banana->hide();
-                banana->timeshow();
+                banana->timeshow(5.0f);
                 log("get a fruit, now: %d",_player->money);
             }
             
