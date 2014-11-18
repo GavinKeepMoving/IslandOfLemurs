@@ -242,31 +242,33 @@ void MainScene::initAnimalOptionsBar()
 
 void MainScene::activateWeaponOption(Ref* pSender, int index)
 {
-    switch (index) {
-        case 1:
-            this->_player->setWeapon(Weapon::WeaponType::COCONUT);
-            break;
-        case 2:
-            this->_player->setWeapon(Weapon::WeaponType::WATER);
-            break;
-        case 3:
-            this->_player->buffAttack();
-            break;
-        default:
-            break;
-    }
-    
+
     //put out fire
     if (index == 2) {
+        this->_player->setWeapon(Weapon::WeaponType::WATER);
         Tree* t = _weaponManager->getNearestTree(_trees);
         
         if (t) {            
             this->_player->attack(_weaponManager->getAttackRadius(t));
             t->setBlood(-20.);
         }
-
+        this->_player->setWeapon(Weapon::WeaponType::COCONUT);
     }
-    
+    //get all the banana
+    if (index == 3) {
+        CCObject* obj=NULL;
+        Banana* banana=NULL;
+        CCARRAY_FOREACH(bananaManger->_bananaArr,obj)/*循环遍历怪物数组，重复出现在屏幕上*/
+        {
+            banana=(Banana*) obj;
+            if(banana->isAlive())/*活动状态*/
+            {
+                _player->money += Banana::value;
+                banana->hide();
+                banana->timeshow();
+            }
+        }
+    }
     
 
 }
