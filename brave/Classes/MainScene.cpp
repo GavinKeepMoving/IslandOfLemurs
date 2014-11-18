@@ -265,7 +265,8 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
             {
                 _player->money += Banana::value;
                 banana->hide();
-                banana->timeshow();
+                float time = 2 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/3));
+                banana->timeshow(time);
             }
         }
     }
