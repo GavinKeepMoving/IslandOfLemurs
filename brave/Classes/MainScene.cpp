@@ -777,7 +777,7 @@ void MainScene::addRoles()
 void MainScene::addTrees()
 {
     int baseNum = 1;
-    int level = 1;
+    //int level = 1;
     int delta = 2;
     int upperLimit = 4;
     //********************************************************************************************************//
