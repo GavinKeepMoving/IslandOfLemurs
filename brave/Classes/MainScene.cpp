@@ -563,6 +563,7 @@ void MainScene::updateEnemy(float dt)
                         _player->removeFromParentAndCleanup(true);
                         
                         //add by wenbo lin
+                        this->cocos2d::Node::pause();
                         LoseScene loseScene;
                         loseScene.createScene(this);
                         //end of add by wenbo lin
@@ -692,6 +693,7 @@ void MainScene::deleteTree() {
     
     /** show lose scene */
     if(_trees.size() == 0) {
+        this->cocos2d::Node::pause();
         LoseScene loseScene;
         loseScene.createScene(this);
     }
