@@ -22,11 +22,11 @@ private:
 public:
     bool init();
     static Scene* createScene();
-    void onStart(Ref* obj);
+    void onStart(Ref* obj, int level);
     CREATE_FUNC(MapScene);
     
     void setMapMarkIcons();
-    void addMarkIcon(Vec2 pos);
+    void addMarkIcon(Vec2 pos, int level);
 };
 
 #endif /* defined(__brave__MapScene__) */

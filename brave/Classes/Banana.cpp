@@ -25,9 +25,9 @@ void Banana::show(float dt)
     this->m_isAlive=true;/*标记为活动状态*/
 }
 
-void Banana::timeshow()
+void Banana::timeshow(float time)
 {
-    scheduleOnce(schedule_selector(Banana::show), 5.0f);
+    scheduleOnce(schedule_selector(Banana::show), time);
 }
 
 void Banana::hide()

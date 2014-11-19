@@ -21,12 +21,17 @@ bool WinScene::createScene(cocos2d::Layer *father) {
     auto winSprite = Sprite::create("win.png");
     
     cocos2d::MenuItem* pCloseItem = cocos2d::MenuItemImage::create(
-                                                                   "CloseNormal.png",
-                                                                   "CloseSelected.png",
+                                                                   "backToMap.png",
+                                                                   "backToMap.png",
                                                                    this,
                                                                    menu_selector(WinScene::menuCloseCallback));
+    //pCloseItem->setAnchorPoint(ccp(0, 0));
+    //pCloseItem->setPosition(0, 0);
     
     cocos2d::Menu* pMenu = cocos2d::Menu::create(pCloseItem, NULL);
+    
+    //pMenu->setAnchorPoint(ccp(0, 0));
+    pMenu->setPosition(winSprite->getContentSize().width / 2, winSprite->getContentSize().height * 0.2);
     
     winSprite->addChild(pMenu, 1);
     

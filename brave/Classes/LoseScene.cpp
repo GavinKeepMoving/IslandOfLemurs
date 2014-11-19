@@ -19,13 +19,17 @@ bool LoseScene::createScene(cocos2d::Layer *father) {
     
     auto loseSprite = Sprite::create("lose.png");
     
+    loseSprite->setScale(10.0, 10.0);
+    
     cocos2d::MenuItem* pCloseItem = cocos2d::MenuItemImage::create(
-                                                                   "CloseNormal.png",
-                                                                   "CloseSelected.png",
+                                                                   "backToMap.png",
+                                                                   "backToMap.png",
                                                                    this,
                                                                    menu_selector(LoseScene::menuCloseCallback));
     
     cocos2d::Menu* pMenu = cocos2d::Menu::create(pCloseItem, NULL);
+    
+    pMenu->setPosition(loseSprite->getContentSize().width / 2, loseSprite->getContentSize().height * 0.3);
     
     loseSprite->addChild(pMenu, 1);
     

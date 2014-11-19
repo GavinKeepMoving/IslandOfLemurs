@@ -9,11 +9,7 @@
 #include "Enemy.h"
 #include "Animal.h"
 #include <iostream>
-//<<<<<<< HEAD
-//#include "GameOverLayer.h"
-//=======
 #include "Enemy2.h"
-//>>>>>>> d5d27db014c320a5579e3b82d0284fc1616955e2
 
 //******************************************************************************************************************
 //added by Wenbo Lin
@@ -37,6 +33,11 @@ public:
     virtual bool init();
     
     /*********** begin add by Wenbo Lin **************/
+    void setLevel(int level);
+    /*********** ended add by Wenbo Lin **************/
+
+    
+    /*********** begin add by Wenbo Lin **************/
     void playMusic();
     void setParameters();
     void addCloseIcon();
@@ -54,7 +55,7 @@ public:
     void addBananas();
     void addEnemiesAI(float dt);
     void addEnemyNumber();
-    int level = 0;
+    int level;
     //end of method in addRoles
     
     void setScheduleAndProgress();
