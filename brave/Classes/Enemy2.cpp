@@ -17,13 +17,13 @@ Enemy2::Enemy2(int i)
     {
         case 0:
             armature = Armature::create("p1");
-            _attack = 1;
+            _attack = 2;
             mindist = 25;
             break;
         case 1:
             armature = Armature::create("remoteen1");
-            _attack = 2;
-            mindist = 100;
+            _attack = 1;
+            mindist = 125;
             break;
         default:
             break;
@@ -66,14 +66,14 @@ void Enemy2::setBlood()
 int Enemy2::behit(int attack)
 {
     _blood -= attack;
-    std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
+//    std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
     if (_blood <= 0){
         _blood = 0;
 		_progress->setProgress((float)_blood/_maxblood*100);
         return 1;
     }
     else{
-        std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
+//        std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
 		_progress->setProgress((float)_blood/_maxblood*100);
         return 0;
     }

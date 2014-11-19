@@ -44,7 +44,9 @@ bool MainScene::init()
         return false;
     }
 
-    level = globalLevel;
+    gamelevel = globalLevel;
+    
+    level = 0;
     
     this->playMusic();
     
@@ -60,7 +62,6 @@ bool MainScene::init()
     
     this->addWeaponOptionBar();
     this->addEnemyNumber();
-//    this->addEnemiesAI(0.5);
     
     this->setScheduleAndProgress();
     //this->addgotoItem();//or combine with menu create??
@@ -68,7 +69,7 @@ bool MainScene::init()
 }
 
 void MainScene::setLevel(int l) {
-    level = l;
+    gamelevel = l;
 }
 
 void MainScene::addProgress()
@@ -102,8 +103,8 @@ void MainScene::addgotoItem()
 bool MainScene::enemyAllDead()
 {
 	
-	log("all EnemyDead:%lu", _enemys.size());
-	if(_enemys.size() == 0) return true;
+	log("all EnemyDead:%lu", _enemy2Arr.size());
+	if(_enemy2Arr.size() == 0) return true;
 	else return false;
 }
 
@@ -125,11 +126,13 @@ void MainScene::gotoNextLevel(Ref* obj)
 
 void MainScene::showNextLevelItem() //called by enemy manager???
 {
-	if(enemyAllDead()){//of  check by enemy manager????
+	if(enemyAllDead() && level == dispatch.size()){//of  check by enemy manager????
 		auto goItem = this->_menu->getChildByTag(2);
 		goItem->setVisible(true);
 		goItem->runAction(RepeatForever::create(Blink::create(1,1)));
 		gamelevel = gamelevel+1;  //need add different number of enemy when enemy manager create enemy
+        level = 0;
+        addEnemyNumber();
 	}
 }
 /*****************************************************/
@@ -394,107 +397,6 @@ void MainScene::initTrees(int num) {
 }
 
 /****************** Begin-Added by Zhe Liu *********************/
-// enemy move
-//void MainScene::enemyMove(float dt)
-//{
-//    if (_enemys.size() == 0){
-//        std::cout<<"no enemy right now, please wait"<<std::endl;
-////        addEnemy(0.5);
-//        return;
-//    }
-//    std::cout<<"the size of enemy queue is: "<<_enemys.size()<<std::endl;
-//    for (auto enemy : _enemys)
-//    {
-//        if ("dead" != enemy->getState() && _player)
-//        {
-//            int type = -1;
-//            Vec2 dest = enemy->getBestAttackPosition(_player->getPosition(), _trees,_animals ,type);
-//            std::cout<<"the attack target of enemy i: "<<type<<std::endl;
-//            if (dest == enemy->getPosition()){
-//                if (type >= 0){
-//                    std::cout<<"the enemy is attacking "<<type<<std::endl;
-//                    enemy->attack();
-//                }
-////                std::cout<<"the attack target of enemy is: "<<type<<std::endl;
-//                int animal_index  = -1;
-//                // control the blood volumn of the object it hitted
-//                if (type == 0){// lemur
-//                    
-//                }
-//                else if (type == 1){
-//                    int state = _trees.back()->setBlood(enemy->getAttack());
-//                    if (state <= 0){
-//                        /*
-//                        _trees.pop_back();
-//                        if(rope != NULL)
-//                            _background->removeChild(rope, true);
-//                         */
-//                        deleteTree();
-//                    }
-//                }
-//                else if (type >= 200){
-//                    animal_index = type%200;
-////                    _animals[animal_index]->stop();
-//                    int state = _animals[animal_index]->beHit(enemy->getAttack());
-//                    std::cout<<"the enemy is attacking animal "<<animal_index<<std::endl;
-//                    if (state == 1){
-//                        log("this animal is dead, remove it~");
-//                        enemy->_canWalk = true;
-//                        _animals.erase(_animals.begin()+animal_index);
-//                        type = -1;
-//                        animal_index = -1;
-//                    }
-//
-//                }
-////                else{// type = -1
-//////                    enemy->walkTo(dest);
-////                }
-//            }
-//            else{
-//                enemy->walkTo(dest);
-//            }
-//        }
-//    }
-//    
-//}
-//
-//void MainScene::animalMove(float dt)
-//{
-//    if (_enemys.size() == 0){
-//        level++;
-////        for (auto animal : _animals)
-////            animal->stop();
-//    }
-//    for (auto animal : _animals)
-//    {
-//        if ("dead" != animal->getState() && _player)
-//        {
-//            int index = -1;
-//            Vec2 dest = animal->getBestAttackPosition(_enemys, index);
-//            std::cout<<"the target of animal is: "<<index<<std::endl;
-//            if (dest == animal->getPosition())
-//            {
-//                if (index != -1){
-//                    animal->attack();
-//                    std::cout<<"the hitting enemy is: "<<index<<std::endl;
-//                    _enemys[index]->stop();
-//                    // control the blood volumn of the bihitted animal
-//                    int state = _enemys[index]->beHit(animal->getAttack());
-//                    if (state == 1){
-//                        animal->_canWalk = true;
-//                        log("this enemy is dead, remove it~");
-//                        _enemys.erase(_enemys.begin()+index);
-//                        index = -1;
-//                    }
-//                }
-//            }
-//            else
-//            {
-//                animal->walkTo(dest);
-//            }
-//        }
-//    }
-//}
 
 void MainScene::updateAnimal(float dt)
 {
@@ -514,9 +416,6 @@ void MainScene::updateAnimal(float dt)
                 int state = _enemy2Arr[index]->behit(_animal2Arr[i]->getAttack());
                 if (state == 1){// enemy is dead, remove it
                     eraseEnemy(index);
-//                    _enemy2Arr[index]->removeFromParentAndCleanup(true);
-//                    _enemy2Arr[index]->setState(DEAD);
-//                    _enemy2Arr.erase(_enemy2Arr.begin()+index);
                     index = -1;
                 }
             }
@@ -544,7 +443,7 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-        std::cout<<"lemur's posistion is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+//        std::cout<<"lemur's posistion is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
         //std::cout<<"current target is: "<<index<<std::endl;
@@ -792,7 +691,7 @@ void MainScene::addTrees()
     //added by Wenbo Lin
     
     //add trees to background
-    int treeNum = baseNum + level;
+    int treeNum = baseNum + gamelevel;
     if(treeNum <= upperLimit)
         this->initTrees(treeNum);
     else
@@ -833,7 +732,7 @@ void MainScene::addAnimations()
     ArmatureDataManager::getInstance()->addArmatureFileInfo("animal0.png" , "animal0.plist" , "animal.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("monkey20.png" , "monkey20.plist" , "monkey2.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("tiger20.png" , "tiger20.plist" , "tiger2.ExportJson");
-    ArmatureDataManager::getInstance()->addArmatureFileInfo("panada0.png" , "panada0.plist" , "panada.ExportJson");
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("pada20.png" , "pada20.plist" , "pada2.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("remoteen10.png", "remoteen10.plist","remoteen1.ExportJson");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
@@ -919,39 +818,56 @@ void MainScene::addEnemiesAI(float dt)
 //    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
     int dist = 100;
     int enemy1 = enemycategory[level];
+    std::cout<<"current enemy 0 is: "<<enemy1<<std::endl;
+    std::cout<<"dispatch size is: "<<dispatch[level]<<std::endl;
     if (level < dispatch.size()){
         for (i=0;i<dispatch[level];i++){
             if (enemy1 > 0){
-                enemy = _enemy2Manager->createEnemy2s(2*dist,0);
+                enemy = _enemy2Manager->createEnemy2s(2*dist,0,gamelevel);
                 enemy1--;
             }
             else{
-                enemy = _enemy2Manager->createEnemy2s(2*dist,1);
+                enemy = _enemy2Manager->createEnemy2s(2*dist,1,gamelevel);
             }
             _enemy2Arr.push_back(enemy);
             dist += 50;
         }
+        level++;
+        std::cout<<"the size of enemy is: "<<_enemy2Arr.size()<<std::endl;
     }
     else{
         // the game ends
     }
-//    Enemy2* enemy1 = _enemy2Manager->createEnemy2s(100);
-//    Enemy2* enemy2 = _enemy2Manager->createEnemy2s(200);
-//    _enemy2Arr.push_back(enemy1);
-//    _enemy2Arr.push_back(enemy2);
-//    _enemy2Arr->addObject(enemy1);
-//    _enemy2Arr->addObject(enemy2);
-//    _animal2Manager->setEnemy(_enemy2Arr);
 }
 
 void MainScene::addEnemyNumber()
 {
-    dispatch = {2,3,4,3,3};
-    enemydelay = {30,50,50,40,30};
-//<<<<<<< HEAD
-    enemycategory = {2,1,2,1,1}; // number of enemy type 1
-//=======
-//>>>>>>> 4a49d032126373ebff6d4dc24a783f679ba06454
+    // assign enemys with gamelevel
+    switch (gamelevel){
+        case 1:
+            dispatch = {2,3,3};
+            enemydelay = {20,40,40};
+            enemycategory = {1,1,2};
+            break;
+        case 2:
+            dispatch = {2,3,4,3};
+            enemydelay = {20,40,40,40};
+            enemycategory = {1,2,2,2};
+            break;
+        case 3:
+            dispatch = {2,3,4,3,3};
+            enemydelay = {20,40,30,30,30};
+            enemycategory = {2,1,3,2,2};
+            break;
+        case 4:
+            dispatch = {2,3,4,4,4,5};
+            enemydelay = {20,30,30,30,30,40};
+            enemycategory = {2,2,2,2,2,3};
+            break;
+        default:
+            break;
+    }
+
 }
 
 void MainScene::addBananas()
@@ -976,25 +892,14 @@ void MainScene::setScheduleAndProgress()
     
     /****************** Begin-Added by Zhe Liu *********************/
     
-    //_enemys.push_back(_enemy1);
-    //    _enemys.pushBack(_enemy2);
-    //_enemy1->addAttacker(_player);
-    //    _enemy2->addAttacker(_player);
-    //    _animals.push_back(_animal);
-//    this->schedule(schedule_selector(MainScene::enemyMove), 3);
-//    this->schedule(schedule_selector(MainScene::animalMove), 3);
-    //this->schedule(schedule_selector(MainScene::addEnemy),20);
     if (level < dispatch.size()){
         this->schedule(schedule_selector(MainScene::addEnemiesAI),enemydelay[level]);
-        level++;
     }
     /****************** End-Added by Zhe Liu *********************/
     
     //*****init blood progress  xiaojing **************//
     addProgress();
     
-    
-    //auto fsm = FSM::create("idle",[](){cocos2d::log("Enter idle");});
     
     this->scheduleUpdate();
 }

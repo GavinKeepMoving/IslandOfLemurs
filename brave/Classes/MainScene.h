@@ -89,11 +89,12 @@ public:
 //    void animalMove(float dt);
     void addEnemy(float dt);
     std::vector<Tree*> getTrees(){return _trees;}
+    void updateEnemy(float dt);
+    void updateAnimal(float dt);
+    
     std::vector<int> dispatch;
     std::vector<int> enemydelay;
     std::vector<int> enemycategory;
-    void updateEnemy(float dt);
-    void updateAnimal(float dt);
     /*** added by Zhe Liu ***/
     
     
@@ -180,7 +181,7 @@ public:
     bool pause = false;
     //End added by Wenbo Lin
     //******************************************************************************************************************
-	int gamelevel; // used to init different number of enemy according to level
+	int gamelevel = 1; // used to init different number of enemy according to level
 	Menu* _menu;
 	
 	};
