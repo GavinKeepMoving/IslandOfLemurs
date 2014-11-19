@@ -12,6 +12,7 @@
 #include "VisibleRect.h"
 #include "CustomTool.h"
 #include "WinScene.h"
+#include "LoseScene.h"
 
 /******************Start-Modified by Yafu****************************/
 MainScene *mainLayer;

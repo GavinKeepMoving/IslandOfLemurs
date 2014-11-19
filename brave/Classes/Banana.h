@@ -22,7 +22,7 @@ public:
     CREATE_FUNC(Banana);
     
 public:
-    void timeshow();
+    void timeshow(float time);
     void show(float dt);
     void hide();
     void reset(int i);//重置怪物数据

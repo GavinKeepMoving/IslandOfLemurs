@@ -15,11 +15,12 @@
 
 USING_NS_CC;
 
-class WinScene : public Sprite
+class WinScene : public Menu
 {
-    
+    //need to create an object first before createScene
 public:
-    static void createScene(Layer* father);
+    bool createScene(Layer* father);
+    void menuCloseCallback(cocos2d::Ref* pSender);
 };
 
 #endif /* defined(__brave__WinScene__) */

@@ -9,8 +9,9 @@
 #include "Progress.h"
 #include <unistd.h>
 #include "CustomTool.h"
+#include "LoseScene.h"
 //******************************************************************************************************************
-
+#include "SkillButton.h"
 
 
 USING_NS_CC;
@@ -40,16 +41,7 @@ bool MainScene::init()
     {
         return false;
     }
-    
-//    if (_enemy2Arr == NULL){
-//    _enemy2Arr = __Array::create();
-//    _enemy2Arr->init();
-//    }
-//    if (_animal2Arr == NULL){
-//    _animal2Arr = __Array::create();
-//    _animal2Arr->init();
-    
-//    }
+
     this->playMusic();
     
     this->setParameters();
@@ -166,34 +158,58 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     _weaponManager = WeaponManager::create(_background);
     _weaponManager->bindPlayer(_player);
     
+
+    SkillButton* mSkillButton = SkillButton::createSkillButton(10.f, "weapon1grey.png", "weapon1.png", "weapon1grey.png", 1);
+    mSkillButton->setPosition(Vec2(visibleSize.width-260, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    mSkillButton = SkillButton::createSkillButton(25.f, "weapon3grey.png", "weapon3.png", "weapon3grey.png", 2);
+    mSkillButton->_player = _player;
+    mSkillButton->_weaponManager = _weaponManager;
+    mSkillButton->_trees = _trees;
+    mSkillButton->setPosition(Vec2(visibleSize.width-155, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    mSkillButton = SkillButton::createSkillButton(15.f, "weapon2grey.png", "weapon2.png", "weapon2grey.png", 3);
+    mSkillButton->_player = _player;
+    mSkillButton->bananaManger = bananaManger;
+    mSkillButton->setPosition(Vec2(visibleSize.width-50, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto optionItem = MenuItemImage::create(
-                                           "attackoption1.png",
+    /*auto optionItem = MenuItemImage::create(
+                                           "weapon1.png",
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this, 1));
     
-	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 - optionItem->getContentSize().width,
+	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*3 + optionItem->getContentSize().width/2-6,
                                 origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     auto optionItem2 = MenuItemImage::create(
-                                            "attackoption2.png",
+                                            "weapon3.png",
                                             "CloseSelected.png",
                                             CC_CALLBACK_1(MainScene::activateWeaponOption, this, 2));
     
-    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width/2 ,
+    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*2 + optionItem->getContentSize().width/2-3,
                                  origin.y + visibleSize.height - optionItem->getContentSize().height/2));
+    
+    auto optionItem3 = MenuItemImage::create(
+                                             "weapon2.png",
+                                             "CloseSelected.png",
+                                             CC_CALLBACK_1(MainScene::activateWeaponOption, this, 3));
+    
+    optionItem3->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width + optionItem->getContentSize().width/2,
+                                  origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(optionItem, NULL);
     menu->addChild(optionItem2);
+    menu->addChild(optionItem3);
     menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    this->addChild(menu, 1);*/
 }
 
 //Right top Weapon option bar
 void MainScene::initAnimalOptionsBar()
 {
-    
     // add a "close" icon to exit the progress. it's an autorelease object
     a_optionItem1 = MenuItemImage::create(
                                             "money.png",
@@ -242,28 +258,34 @@ void MainScene::initAnimalOptionsBar()
 
 void MainScene::activateWeaponOption(Ref* pSender, int index)
 {
-    switch (index) {
-        case 1:
-            this->_player->setWeapon(Weapon::WeaponType::COCONUT);
-            break;
-        case 2:
-            this->_player->setWeapon(Weapon::WeaponType::WATER);
-            break;
-        default:
-            break;
-    }
-    
+
     //put out fire
     if (index == 2) {
+        this->_player->setWeapon(Weapon::WeaponType::WATER);
         Tree* t = _weaponManager->getNearestTree(_trees);
         
         if (t) {            
             this->_player->attack(_weaponManager->getAttackRadius(t));
             t->setBlood(-20.);
         }
-
+        this->_player->setWeapon(Weapon::WeaponType::COCONUT);
     }
-    
+    //get all the banana
+    if (index == 3) {
+        CCObject* obj=NULL;
+        Banana* banana=NULL;
+        CCARRAY_FOREACH(bananaManger->_bananaArr,obj)/*循环遍历怪物数组，重复出现在屏幕上*/
+        {
+            banana=(Banana*) obj;
+            if(banana->isAlive())/*活动状态*/
+            {
+                _player->money += Banana::value;
+                banana->hide();
+                float time = 2 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/3));
+                banana->timeshow(time);
+            }
+        }
+    }
     
 
 }
@@ -355,6 +377,9 @@ void MainScene::initTrees(int num) {
         auto treeSprite = Sprite::create("image/trees/tree.png");
         treeSprite->setAnchorPoint(ccp(0, 0));
         treeSprite->setPosition(beginningPos + interval * i, 50);
+        
+        std::cout<<"tree width: "<<treeSprite->getContentSize().width;
+        
         _background->addChild(treeSprite);
         _trees.push_back(new Tree(treeSprite,bananaManger,_background));
         _trees[_trees.size() - 1]->_background = _background;
@@ -521,7 +546,7 @@ void MainScene::updateEnemy(float dt)
         }
         else{
             if (index == 0){ // lemur
-                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 80)
+                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 100)
                 {
                     _enemy2Arr[i]->setState(ATTACK);
                     int status = _player->beHit(_enemy2Arr[i]->getAttack());
@@ -529,6 +554,12 @@ void MainScene::updateEnemy(float dt)
                     if (status == 1){// lemur is dead
                         // game over!!
                         _player->removeFromParentAndCleanup(true);
+                        
+                        //add by wenbo lin
+                        LoseScene loseScene;
+                        loseScene.createScene(this);
+                        //end of add by wenbo lin
+                        
                         index = -1;
                     }
                 }
@@ -641,16 +672,17 @@ Vec2 MainScene::attackTarget(Player *p) {
 
 /*******************************Begin add by Wenbo Lin*******************************/
 void MainScene::deleteTree() {
-    Tree * target = _trees[_trees.size() - 1];
-    Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(target->_posX, 0));
+    Tree * targetTree = _trees[_trees.size() - 1];
+    Vec2 targetTreePos = _background->convertToWorldSpace(Vec2(targetTree->_posX, 0));
     float xPos = targetTreePos.x;
-
+    int treeWidth = 446;
+    
     Sprite * rope = _ropes[_ropes.size() - 1];
     float rangeLeft = 0;
     float rangeRight = 0;
     
-    rangeLeft = xPos - target->getContentSize().width - rope->getContentSize().width * 0.4;
-    rangeRight = xPos + target->getContentSize().width / 2;
+    rangeLeft = xPos - rope->getContentSize().width * 0.4;
+    rangeRight = xPos + treeWidth;
     //this->boundry = target->_posX - target->getContentSize().width*5/4 - rope->getContentSize().width - visibleSize.width/2;
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, _player, this->touchPos, this->boundry);
     _player->playerDrop(rangeLeft, rangeRight, onWalk);
@@ -667,6 +699,12 @@ void MainScene::deleteTree() {
     if(rope != NULL) {
         _background->removeChild(rope, true);
         _ropes.pop_back();
+    }
+    
+    /** show lose scene */
+    if(_trees.size() == 0) {
+        LoseScene loseScene;
+        loseScene.createScene(this);
     }
 }
 /*******************************Ended add by Wenbo Lin*******************************/
@@ -888,7 +926,7 @@ void MainScene::addEnemiesAI(float dt)
             _enemy2Arr.push_back(enemy);
             dist += 50;
         }
-        level++;
+//        level++;
     }
     else{
         // the game ends
@@ -904,7 +942,8 @@ void MainScene::addEnemiesAI(float dt)
 
 void MainScene::addEnemyNumber()
 {
-    dispatch = {3,4,5,6,6};
+    dispatch = {2,3,4,3,3};
+    enemydelay = {30,50,50,40,30};
 }
 
 void MainScene::addBananas()
@@ -937,7 +976,10 @@ void MainScene::setScheduleAndProgress()
 //    this->schedule(schedule_selector(MainScene::enemyMove), 3);
 //    this->schedule(schedule_selector(MainScene::animalMove), 3);
     //this->schedule(schedule_selector(MainScene::addEnemy),20);
-    this->schedule(schedule_selector(MainScene::addEnemiesAI),20);
+    if (level < dispatch.size()){
+        this->schedule(schedule_selector(MainScene::addEnemiesAI),enemydelay[level]);
+        level++;
+    }
     /****************** End-Added by Zhe Liu *********************/
     
     //*****init blood progress  xiaojing **************//
