@@ -11,7 +11,7 @@
 #include "CustomTool.h"
 #include "LoseScene.h"
 //******************************************************************************************************************
-
+#include "SkillButton.h"
 
 
 USING_NS_CC;
@@ -157,25 +157,40 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     _weaponManager = WeaponManager::create(_background);
     _weaponManager->bindPlayer(_player);
     
+
+    SkillButton* mSkillButton = SkillButton::createSkillButton(10.f, "weapon1grey.png", "weapon1.png", "weapon1grey.png", 1);
+    mSkillButton->setPosition(Vec2(visibleSize.width-260, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    mSkillButton = SkillButton::createSkillButton(25.f, "weapon3grey.png", "weapon3.png", "weapon3grey.png", 2);
+    mSkillButton->_player = _player;
+    mSkillButton->_weaponManager = _weaponManager;
+    mSkillButton->_trees = _trees;
+    mSkillButton->setPosition(Vec2(visibleSize.width-155, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    mSkillButton = SkillButton::createSkillButton(15.f, "weapon2grey.png", "weapon2.png", "weapon2grey.png", 3);
+    mSkillButton->bananaManger = bananaManger;
+    mSkillButton->setPosition(Vec2(visibleSize.width-50, visibleSize.height-32));
+    addChild(mSkillButton,1);
+    
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto optionItem = MenuItemImage::create(
-                                           "attackoption1.png",
+    /*auto optionItem = MenuItemImage::create(
+                                           "weapon1.png",
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(MainScene::activateWeaponOption, this, 1));
     
-	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*3 + optionItem->getContentSize().width/2,
+	optionItem->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*3 + optionItem->getContentSize().width/2-6,
                                 origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     auto optionItem2 = MenuItemImage::create(
-                                            "attackoption2.png",
+                                            "weapon3.png",
                                             "CloseSelected.png",
                                             CC_CALLBACK_1(MainScene::activateWeaponOption, this, 2));
     
-    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*2 + optionItem->getContentSize().width/2,
+    optionItem2->setPosition(Vec2(origin.x + visibleSize.width - optionItem->getContentSize().width*2 + optionItem->getContentSize().width/2-3,
                                  origin.y + visibleSize.height - optionItem->getContentSize().height/2));
     
     auto optionItem3 = MenuItemImage::create(
-                                             "attackoption3.png",
+                                             "weapon2.png",
                                              "CloseSelected.png",
                                              CC_CALLBACK_1(MainScene::activateWeaponOption, this, 3));
     
@@ -187,13 +202,12 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     menu->addChild(optionItem2);
     menu->addChild(optionItem3);
     menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    this->addChild(menu, 1);*/
 }
 
 //Right top Weapon option bar
 void MainScene::initAnimalOptionsBar()
 {
-    
     // add a "close" icon to exit the progress. it's an autorelease object
     a_optionItem1 = MenuItemImage::create(
                                             "money.png",
@@ -242,31 +256,34 @@ void MainScene::initAnimalOptionsBar()
 
 void MainScene::activateWeaponOption(Ref* pSender, int index)
 {
-    switch (index) {
-        case 1:
-            this->_player->setWeapon(Weapon::WeaponType::COCONUT);
-            break;
-        case 2:
-            this->_player->setWeapon(Weapon::WeaponType::WATER);
-            break;
-        case 3:
-            this->_player->buffAttack();
-            break;
-        default:
-            break;
-    }
-    
+
     //put out fire
     if (index == 2) {
+        this->_player->setWeapon(Weapon::WeaponType::WATER);
         Tree* t = _weaponManager->getNearestTree(_trees);
         
         if (t) {            
             this->_player->attack(_weaponManager->getAttackRadius(t));
             t->setBlood(-20.);
         }
-
+        this->_player->setWeapon(Weapon::WeaponType::COCONUT);
     }
-    
+    //get all the banana
+    if (index == 3) {
+        CCObject* obj=NULL;
+        Banana* banana=NULL;
+        CCARRAY_FOREACH(bananaManger->_bananaArr,obj)/*循环遍历怪物数组，重复出现在屏幕上*/
+        {
+            banana=(Banana*) obj;
+            if(banana->isAlive())/*活动状态*/
+            {
+                _player->money += Banana::value;
+                banana->hide();
+                float time = 2 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/3));
+                banana->timeshow(time);
+            }
+        }
+    }
     
 
 }
@@ -539,7 +556,7 @@ void MainScene::updateEnemy(float dt)
                         //add by wenbo lin
                         LoseScene loseScene;
                         loseScene.createScene(this);
-                        //end of adding by wenbol lin
+                        //end of add by wenbo lin
                         
                         index = -1;
                     }

@@ -9,11 +9,7 @@
 #include "Enemy.h"
 #include "Animal.h"
 #include <iostream>
-//<<<<<<< HEAD
-//#include "GameOverLayer.h"
-//=======
 #include "Enemy2.h"
-//>>>>>>> d5d27db014c320a5579e3b82d0284fc1616955e2
 
 //******************************************************************************************************************
 //added by Wenbo Lin
