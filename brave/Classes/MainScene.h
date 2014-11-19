@@ -90,6 +90,7 @@ public:
     std::vector<Tree*> getTrees(){return _trees;}
     std::vector<int> dispatch;
     std::vector<int> enemydelay;
+    std::vector<int> enemycategory;
     void updateEnemy(float dt);
     void updateAnimal(float dt);
     /*** added by Zhe Liu ***/

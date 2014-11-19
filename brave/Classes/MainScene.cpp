@@ -515,7 +515,7 @@ void MainScene::updateEnemy(float dt)
     {
 //        Vec2 enemyPos = _background->convertToWorldSpace(_enemy2Arr[i]->getPosition());
         Vec2 playerPos = _background->convertToNodeSpace(_player->getPosition());
-        //std::cout<<"lemur's position is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
+        std::cout<<"lemur's posistion is: "<<playerPos.x<<","<<playerPos.y<<std::endl;
 //        std::cout<<"enemy's position is: "<<_enemy2Arr[i]->getPositionX()<<","<<_enemy2Arr[i]->getPositionY()<<std::endl;
         int index = _enemy2Manager->judgeNearby(playerPos,_enemy2Arr[i],_trees,_animal2Arr);
         //std::cout<<"current target is: "<<index<<std::endl;
@@ -524,7 +524,7 @@ void MainScene::updateEnemy(float dt)
         }
         else{
             if (index == 0){ // lemur
-                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 80)
+                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 100)
                 {
                     _enemy2Arr[i]->setState(ATTACK);
                     int status = _player->beHit(_enemy2Arr[i]->getAttack());
@@ -791,6 +791,7 @@ void MainScene::addAnimations()
     ArmatureDataManager::getInstance()->addArmatureFileInfo("tiger20.png" , "tiger20.plist" , "tiger2.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("panada0.png" , "panada0.plist" , "panada.ExportJson");
     ArmatureDataManager::getInstance()->addArmatureFileInfo("p10.png" , "p10.plist" , "p1.ExportJson");
+    ArmatureDataManager::getInstance()->addArmatureFileInfo("remoteen10.png", "remoteen10.plist","remoteen1.ExportJson");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animals.plist", "animals.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image/weapons/weapons.plist","image/weapons/weapons.pvr.ccz");
     
@@ -873,13 +874,19 @@ void MainScene::addEnemiesAI(float dt)
     Enemy2* enemy;
 //    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
     int dist = 100;
+    int enemy1 = enemycategory[level];
     if (level < dispatch.size()){
         for (i=0;i<dispatch[level];i++){
-            enemy = _enemy2Manager->createEnemy2s(2*dist);
+            if (enemy1 > 0){
+                enemy = _enemy2Manager->createEnemy2s(2*dist,0);
+                enemy1--;
+            }
+            else{
+                enemy = _enemy2Manager->createEnemy2s(2*dist,1);
+            }
             _enemy2Arr.push_back(enemy);
             dist += 50;
         }
-//        level++;
     }
     else{
         // the game ends
@@ -896,7 +903,8 @@ void MainScene::addEnemiesAI(float dt)
 void MainScene::addEnemyNumber()
 {
     dispatch = {2,3,4,3,3};
-    enemydelay = {40,50,50,40,30};
+    enemydelay = {30,50,50,40,30};
+    enemycategory = {2,1,2,1,1}; // number of enemy type 1
 }
 
 void MainScene::addBananas()
