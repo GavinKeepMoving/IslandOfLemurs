@@ -948,10 +948,10 @@ void MainScene::addEnemyNumber()
 {
     dispatch = {2,3,4,3,3};
     enemydelay = {30,50,50,40,30};
-<<<<<<< HEAD
+//<<<<<<< HEAD
     enemycategory = {2,1,2,1,1}; // number of enemy type 1
-=======
->>>>>>> 4a49d032126373ebff6d4dc24a783f679ba06454
+//=======
+//>>>>>>> 4a49d032126373ebff6d4dc24a783f679ba06454
 }
 
 void MainScene::addBananas()
