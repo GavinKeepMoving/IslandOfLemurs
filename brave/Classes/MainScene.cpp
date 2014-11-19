@@ -160,6 +160,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     
 
     SkillButton* mSkillButton = SkillButton::createSkillButton(10.f, "weapon1grey.png", "weapon1.png", "weapon1grey.png", 1);
+    mSkillButton->_player = _player;
     mSkillButton->setPosition(Vec2(visibleSize.width-260, visibleSize.height-32));
     addChild(mSkillButton,1);
     mSkillButton = SkillButton::createSkillButton(25.f, "weapon3grey.png", "weapon3.png", "weapon3grey.png", 2);
@@ -636,7 +637,9 @@ void MainScene::aoeAttack(int attack, int range, int x) {
     for (int i=0;i<_enemy2Arr.size();i++)
     {
         if(attackRect.containsPoint(_enemy2Arr[i]->getPosition())) {
-            _enemy2Arr[i]->behit(attack);
+            if(_enemy2Arr[i]->behit(attack) == 1) {
+                this->eraseEnemy(i);
+            }
         }
     }
 }
@@ -644,8 +647,12 @@ void MainScene::aoeAttack(int attack, int range, int x) {
 void MainScene::stoneFall(int x){
     ParticleSystem *system = ParticleSystemQuad::create("aoe.plist");
     system->setPosition(Vec2(x, visibleSize.height));
+    system->setDuration(3.0);
+    system->setAutoRemoveOnFinish(true);
     this->_background->addChild(system);
+    
 }
+
 
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)

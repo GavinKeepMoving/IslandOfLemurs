@@ -105,6 +105,10 @@ void SkillButton::skillClickCallBack(Ref* pSender)
             }
         }
     }
+    //added by Zhenni
+    if (index == 1) {
+        _player->stoneAoeAttack();
+    }
     
     
     

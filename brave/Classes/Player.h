@@ -87,6 +87,7 @@ public:
     void constructActionArray(int start, int end,Vector< FiniteTimeAction * > &arrayOfActions, Vector< FiniteTimeAction * > &backgroundActions);
     void buffAttack(int attackBuff = ACCELERATE);
     void stoneAoeAttack();
+    void aoeAttack(float r);
 private:
     //Action _seq;
     float _speed;

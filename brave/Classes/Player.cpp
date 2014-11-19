@@ -211,7 +211,20 @@ void Player::stoneAoeAttack() {
     }
     x -= background->getPositionX();
     mainLayer->stoneFall(x);
-    mainLayer->aoeAttack(_attack/2, _attackRange, x);
+    aoeAttack(x);
+    this->scheduleOnce(schedule_selector(Player::aoeAttack), 2);
+}
+
+void Player::aoeAttack(float r) {
+    int x = this->getPositionX();
+    if (this->isFlippedX()) {
+        x -= 350;
+    }
+    else {
+        x += 350;
+    }
+    x -= background->getPositionX();
+    mainLayer->aoeAttack(_attack/2, _attackRange * 2, x);
 }
 
 void Player::generalAttack(float radius) {
@@ -306,6 +319,10 @@ Weapon* Player::attack(float radius)
 
 void Player::walkTo(Vec2 dest, int boundry)
 {
+    
+    //this->stoneAoeAttack();
+    
+    
     std::function<void()> onWalk = CC_CALLBACK_0(Player::onWalk, this, dest, boundry);
     _fsm->setOnEnter("walking", onWalk);
     _fsm->doEvent("walk");
