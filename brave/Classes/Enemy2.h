@@ -31,19 +31,20 @@ enum Enemy2State
 class Enemy2 : public Node
 {
 public:
-    Enemy2();
-    CREATE_FUNC(Enemy2);
+    Enemy2(int i);
+//    CREATE_FUNC(Enemy2);
     void update(float dt);              //更新角色状态
     void updateAnimation();             //状态判断及播放动画
     void updateMovement();              //行走状态
     void play(std::string animName);    //播放动画
     bool isLockState();                 //锁定角色状态
+    static Enemy2* create(int i);
     
     inline void setState(Enemy2State state) {newState = state;} //设置角色状态
     void setDirection(int newDirection); //设置方向
     Sprite* _background;
     /* added by Zhe Liu*/
-    double mindist = 20;
+    double mindist;
     int getAttack(){return _attack;}
     void setBlood();
     int behit(int attack);
@@ -56,6 +57,7 @@ public:
     //end add by wenbo
     
 private:
+    Armature *armature;
     int _attack;
     int _blood;
     int _maxHealth;
