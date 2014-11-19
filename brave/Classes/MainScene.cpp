@@ -67,6 +67,7 @@ bool MainScene::init()
 //    this->addEnemiesAI(0.5);
     
     this->setScheduleAndProgress();
+    
     //this->addgotoItem();//or combine with menu create??
     return true;
 }
@@ -597,6 +598,24 @@ bool MainScene::isEnemyInRange(Player* p) {
     }
     return _player->targetEnemy == NULL ? false : true;
 }
+
+//aoe attack enemy //by Zhenni
+void MainScene::aoeAttack(int attack, int range, int x) {
+    auto attackRect = Rect(x - range/2 , 0, range, visibleSize.height);
+    for (int i=0;i<_enemy2Arr.size();i++)
+    {
+        if(attackRect.containsPoint(_enemy2Arr[i]->getPosition())) {
+            _enemy2Arr[i]->behit(attack);
+        }
+    }
+}
+
+void MainScene::stoneFall(int x){
+    ParticleSystem *system = ParticleSystemQuad::create("aoe.plist");
+    system->setPosition(Vec2(x, visibleSize.height));
+    this->_background->addChild(system);
+}
+
 
 void MainScene::onTouchEnded(Touch* touch, Event* event)
 {

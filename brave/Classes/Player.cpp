@@ -201,6 +201,19 @@ void Player::buffAttack(int attackBuff) {
     }
 }
 
+void Player::stoneAoeAttack() {
+    int x = this->getPositionX();
+    if (this->isFlippedX()) {
+        x -= 350;
+    }
+    else {
+        x += 350;
+    }
+    x -= background->getPositionX();
+    mainLayer->stoneFall(x);
+    mainLayer->aoeAttack(_attack/2, _attackRange, x);
+}
+
 void Player::generalAttack(float radius) {
     //std::cout<<_attackEnemyCount++<<std::endl;
     _attackEnemyCount++;

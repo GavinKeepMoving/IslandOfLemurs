@@ -116,6 +116,10 @@ public:
     
     Vec2 attackTarget(Player* p);
     
+    void aoeAttack(int attack, int range, int x);
+    
+    void stoneFall(int x);
+    
 //    Enemy * getEnemy(int i) {
 //        return _enemys[i];
 //    }
