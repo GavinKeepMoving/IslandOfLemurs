@@ -544,7 +544,7 @@ void MainScene::updateEnemy(float dt)
         }
         else{
             if (index == 0){ // lemur
-                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 80)
+                if (_enemy2Arr[i]->getPositionX()-playerPos.x<= _enemy2Arr[i]->mindist &&playerPos.y == 100)
                 {
                     _enemy2Arr[i]->setState(ATTACK);
                     int status = _player->beHit(_enemy2Arr[i]->getAttack());
@@ -923,7 +923,7 @@ void MainScene::addEnemiesAI(float dt)
 void MainScene::addEnemyNumber()
 {
     dispatch = {2,3,4,3,3};
-    enemydelay = {40,50,50,40,30};
+    enemydelay = {30,50,50,40,30};
 }
 
 void MainScene::addBananas()
