@@ -17,6 +17,8 @@
 
 extern MainScene *mainLayer;
 
+int globalLevel;
+
 using namespace std;
 
 bool MapScene::init()
@@ -54,11 +56,13 @@ Scene* MapScene::createScene()
 }
 
 
-void MapScene::onStart(Ref* obj)
+void MapScene::onStart(Ref* obj, int level)
 {
+    globalLevel = level;
     log("StartLayer::onStart");
     auto scene = MainScene::createScene();
     
+    //setLevel(3);
     /******************Start-Modified by Yafu****************************/
     Vector<Node *> children = scene->getChildren();
     mainLayer = (MainScene *)children.back();
@@ -72,16 +76,19 @@ void MapScene::setMapMarkIcons()
     std::vector<Vec2> markPositions;
     markPositions.push_back(VisibleRect::leftBottom() + Vec2(screen.x / 8, screen.y / 8));
     markPositions.push_back(VisibleRect::leftBottom() + Vec2(screen.x / 4, screen.y / 4));
+    markPositions.push_back(VisibleRect::leftBottom() + Vec2(screen.x / 2, screen.y / 2));
     
+    int level = 1;
     for (auto p : markPositions) {
-        addMarkIcon(p);
+        addMarkIcon(p, level);
+        level++;
     }
     
 }
 
-void MapScene::addMarkIcon(Vec2 pos)
+void MapScene::addMarkIcon(Vec2 pos, int level)
 {
-    auto item = CustomTool::createMenuItemImage("mark.png", "mark.png", CC_CALLBACK_1(MapScene::onStart,this));
+    auto item = CustomTool::createMenuItemImage("mark.png", "mark.png", CC_CALLBACK_1(MapScene::onStart,this, level));
     
     //item->setPosition(VisibleRect::center());
     auto menu = Menu::createWithItem(item);

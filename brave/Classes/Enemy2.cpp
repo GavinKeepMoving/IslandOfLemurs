@@ -10,10 +10,29 @@
 //#include "Progress.h"
 #include "Progress.h"
 #include <iostream>
-Enemy2::Enemy2()
+Enemy2::Enemy2(int i)
 {
-    Armature *armature = Armature::create("p1");
+    armature = nullptr;
+    switch (i)
+    {
+        case 0:
+            armature = Armature::create("p1");
+            _attack = 2;
+            mindist = 25;
+            break;
+        case 1:
+            armature = Armature::create("remoteen1");
+            _attack = 1;
+            mindist = 125;
+            break;
+        default:
+            break;
+    }
+    _blood = 1000;
+    _maxHealth = 1000;
+	_maxblood = 1000;
     armature->setScaleX(-1);
+    
     this->animation = armature->getAnimation();
     this->animation->setMovementEventCallFunc(this, movementEvent_selector(Enemy2::onAnimationEvent));
     direction = WALK_LEFT;
@@ -21,13 +40,6 @@ Enemy2::Enemy2()
     currentState = IDLE;
     newState = IDLE;
     lockState = false;
-    // 
-    _attack = 1;
-    _blood = 1000;
-    _maxHealth = 1000;
-    _attack = 1;
-//    _blood = 100;
-	_maxblood = 1000;
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//
@@ -41,22 +53,27 @@ Enemy2::Enemy2()
 	//**********************************************************//
 }
 
+Enemy2* Enemy2::create(int i){
+    Enemy2* enemy = new Enemy2(i);
+    return enemy;
+}
+
 void Enemy2::setBlood()
 {
-    _blood = 100;
+    _blood = 1000;
 }
 
 int Enemy2::behit(int attack)
 {
     _blood -= attack;
-    std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
+//    std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
     if (_blood <= 0){
         _blood = 0;
 		_progress->setProgress((float)_blood/_maxblood*100);
         return 1;
     }
     else{
-        std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
+//        std::cout<<"enemy's current blood is: "<<_blood<<std::endl;
 		_progress->setProgress((float)_blood/_maxblood*100);
         return 0;
     }

@@ -28,7 +28,7 @@ bool Enemy2Manager::init()
     bool bRet=false;
     do
     {
-        createEnemy2s(20);/*创建怪物*/
+        createEnemy2s(20,0,1);/*创建怪物*/
         //this->schedule(schedule_selector(Enemy2Manager::update), 0.5);
         //this->scheduleUpdate();/*启用update*/
         bRet=true;
@@ -38,14 +38,14 @@ bool Enemy2Manager::init()
 }
 
 
-Enemy2* Enemy2Manager::createEnemy2s(int order)
+Enemy2* Enemy2Manager::createEnemy2s(int order,int index,int level)
 {
 
     
-        auto enemy2=Enemy2::create();
+        auto enemy2=Enemy2::create(index);
         enemy2->_background = this->_background;
 //        enemy2->setPosition(950 + i * 70, 430);
-        enemy2->setPosition(2800+order,70);
+        enemy2->setPosition(1600+order+level*400,70);
         this->addChild(enemy2);  /*将怪物添加到管理器(CCNode)中*/
 //        _enemy2Arr->addObject(enemy2);/*添加到数组中，便于管理*/
 //    }

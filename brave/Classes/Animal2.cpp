@@ -18,15 +18,19 @@ Animal2::Animal2(int i)
         case 0:
 //            armature = Armature::create("animal");
             armature = Armature::create("monkey2");
+            _attack = 1;
             break;
         case 1:
             armature = Armature::create("tiger2");
+            _attack = 2;
             break;
         case 2:
-            armature = Armature::create("panada");
+            armature = Armature::create("pada2");
+            _attack = 3;
             break;
         case 3:
             armature = Armature::create("animal");
+            _attack = 4;
             break;
         default:
             break;
@@ -39,7 +43,6 @@ Animal2::Animal2(int i)
     currentState = IDLE;
     newState = IDLE;
     lockState = false;
-    _attack = 2;
 	_maxblood = 1000;
 	_blood = 1000;
 	//****init progress for blood  xiaojing***********//
