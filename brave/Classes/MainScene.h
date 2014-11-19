@@ -33,6 +33,11 @@ public:
     virtual bool init();
     
     /*********** begin add by Wenbo Lin **************/
+    void setLevel(int level);
+    /*********** ended add by Wenbo Lin **************/
+
+    
+    /*********** begin add by Wenbo Lin **************/
     void playMusic();
     void setParameters();
     void addCloseIcon();
@@ -50,7 +55,7 @@ public:
     void addBananas();
     void addEnemiesAI(float dt);
     void addEnemyNumber();
-    int level = 0;
+    int level;
     //end of method in addRoles
     
     void setScheduleAndProgress();

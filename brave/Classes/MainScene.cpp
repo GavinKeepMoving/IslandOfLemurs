@@ -16,6 +16,8 @@
 
 USING_NS_CC;
 
+extern int globalLevel;
+
 
 Scene* MainScene::createScene()
 {
@@ -42,6 +44,8 @@ bool MainScene::init()
         return false;
     }
 
+    level = globalLevel;
+    
     this->playMusic();
     
     this->setParameters();
@@ -61,6 +65,10 @@ bool MainScene::init()
     this->setScheduleAndProgress();
     //this->addgotoItem();//or combine with menu create??
     return true;
+}
+
+void MainScene::setLevel(int l) {
+    level = l;
 }
 
 void MainScene::addProgress()
@@ -784,7 +792,7 @@ void MainScene::addTrees()
     //added by Wenbo Lin
     
     //add trees to background
-    int treeNum = baseNum + level * delta;
+    int treeNum = baseNum + level;
     if(treeNum <= upperLimit)
         this->initTrees(treeNum);
     else
