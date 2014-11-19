@@ -114,20 +114,20 @@ int Enemy2Manager::judgeNearby(const Vec2& pos,Enemy2* enemy,std::vector<Tree*> 
         }
     }
     // lemur
-    if ( pos.y == 80 &&(trees.size() == 0 || (pos.x >= trees.back()->getRightBoundary() &&
+    if ( pos.y == 100 &&(trees.size() == 0 || (pos.x >= trees.back()->getRightBoundary() &&
          enemy->getPositionX() >= pos.x))
         && (hasAnimal == 0 || (pos.x >= closest->getPositionX() && enemy->getPositionX() >= pos.x))){
         firstObj = pos;
         index = 0;
     }
     // tree
-    else if (trees.size() > 0 && (enemy->getPositionX() > trees.back()->getRightBoundary()) && (hasAnimal == 0 || (trees.back()->getRightBoundary() > closest->getPositionX()))&&(pos.y > 80 || pos.x < trees.back()->getRightBoundary())){
+    else if (trees.size() > 0 && (enemy->getPositionX() > trees.back()->getRightBoundary()) && (hasAnimal == 0 || (trees.back()->getRightBoundary() > closest->getPositionX()))&&(pos.y > 100 || pos.x < trees.back()->getRightBoundary())){
         firstObj = Vec2(trees.back()->getRightBoundary() ,enemy->getPositionY());
         index = 1;
         isTree = 1;
     }
     // animal
-    else if (hasAnimal > 0 && (trees.size() == 0 || closest->getPositionX() > trees.back()->getRightBoundary() ) && (pos.y > 80 || closest->getPositionX() > pos.x) && enemy->getPositionX() >= closest->getPositionX())
+    else if (hasAnimal > 0 && (trees.size() == 0 || closest->getPositionX() > trees.back()->getRightBoundary() ) && (pos.y > 100 || closest->getPositionX() > pos.x) && enemy->getPositionX() >= closest->getPositionX())
     {
         isTree = 2;
         firstObj = Vec2(closest->getPositionX(),enemy->getPositionY());
