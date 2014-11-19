@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include "CustomTool.h"
 #include "LoseScene.h"
+#include "WinScene.h"
 //******************************************************************************************************************
 #include "SkillButton.h"
 
@@ -400,6 +401,12 @@ void MainScene::initTrees(int num) {
 
 void MainScene::updateAnimal(float dt)
 {
+    if (_enemy2Arr.size() == 0 && level == dispatch.size()){
+        this->cocos2d::Node::pause();
+        WinScene winScene;
+        winScene.createScene(this);
+//        showNextLevelItem();
+    }
     for (int i=0;i<_animal2Arr.size();i++)
     {
         int index = _animal2Manager->judgeNeayBy(_animal2Arr[i],_enemy2Arr);
@@ -462,6 +469,7 @@ void MainScene::updateEnemy(float dt)
                         _player->removeFromParentAndCleanup(true);
                         
                         //add by wenbo lin
+                        this->cocos2d::Node::pause();
                         LoseScene loseScene;
                         loseScene.createScene(this);
                         //end of add by wenbo lin
@@ -818,8 +826,8 @@ void MainScene::addEnemiesAI(float dt)
 //    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
     int dist = 100;
     int enemy1 = enemycategory[level];
-    std::cout<<"current enemy 0 is: "<<enemy1<<std::endl;
-    std::cout<<"dispatch size is: "<<dispatch[level]<<std::endl;
+//    std::cout<<"current enemy 0 is: "<<enemy1<<std::endl;
+//    std::cout<<"dispatch size is: "<<dispatch[level]<<std::endl;
     if (level < dispatch.size()){
         for (i=0;i<dispatch[level];i++){
             if (enemy1 > 0){
@@ -833,10 +841,7 @@ void MainScene::addEnemiesAI(float dt)
             dist += 50;
         }
         level++;
-        std::cout<<"the size of enemy is: "<<_enemy2Arr.size()<<std::endl;
-    }
-    else{
-        // the game ends
+//        std::cout<<"the size of enemy is: "<<_enemy2Arr.size()<<std::endl;
     }
 }
 
