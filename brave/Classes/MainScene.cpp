@@ -168,6 +168,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     mSkillButton->setPosition(Vec2(visibleSize.width-155, visibleSize.height-32));
     addChild(mSkillButton,1);
     mSkillButton = SkillButton::createSkillButton(15.f, "weapon2grey.png", "weapon2.png", "weapon2grey.png", 3);
+    mSkillButton->_player = _player;
     mSkillButton->bananaManger = bananaManger;
     mSkillButton->setPosition(Vec2(visibleSize.width-50, visibleSize.height-32));
     addChild(mSkillButton,1);
