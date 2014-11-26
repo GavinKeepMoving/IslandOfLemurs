@@ -278,7 +278,7 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
         
         if (t) {            
             this->_player->attack(_weaponManager->getAttackRadius(t));
-            t->setBlood(-20.);
+            t->setBlood(-100.);
         }
         this->_player->setWeapon(Weapon::WeaponType::COCONUT);
     }
