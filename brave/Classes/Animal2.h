@@ -16,7 +16,7 @@
 USING_NS_CC;
 using namespace cocostudio;
 
-#define WALK_SPEED 3
+#define WALK_SPEED 2
 #define WALK_LEFT 1
 #define WALK_RIGHT -1
 
@@ -52,6 +52,7 @@ public:
 	Progress* _progress;
     Armature* armature;
     double mindist = 20;
+    float _speed;
 	//********************//
 private:
     Sprite* Animal2Node;
