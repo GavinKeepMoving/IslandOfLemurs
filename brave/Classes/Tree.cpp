@@ -12,7 +12,7 @@
 extern MainScene *mainLayer;
 
 //float Tree::blood = 6;
-#define originalBlood 300
+#define originalBlood 500
 #define beginningPos 300
 
 //constructor1
@@ -81,8 +81,8 @@ std::vector<Tree*> Tree::initWithTreeNum(int num) {
 int Tree::setBlood(int value) {
     log("in setBlood");
     this->blood -= value;
-    if(this->blood >= 100)
-        this->blood = 100;
+    if(this->blood >= originalBlood)
+        this->blood = originalBlood;
     this->showStateAccordingtoBlood();
     return this->blood;
 }

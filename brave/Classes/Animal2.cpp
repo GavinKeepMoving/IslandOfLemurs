@@ -31,14 +31,14 @@ Animal2::Animal2(int i)
             break;
         case 2:
             armature = Armature::create("pada2");
-            _attack = 3;
+            _attack = 1;
             _speed = 1;
             _maxblood = 10000;
             _blood = 10000;
             break;
         case 3:
             armature = Armature::create("animal");
-            _attack = 4;
+            _attack = 3;
             _speed = 1.5;
             _maxblood = 5000;
             _blood = 5000;

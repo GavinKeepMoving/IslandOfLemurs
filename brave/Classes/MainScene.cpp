@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include "CustomTool.h"
 #include "LoseScene.h"
+#include "WinScene.h"
 //******************************************************************************************************************
 #include "SkillButton.h"
 
@@ -180,7 +181,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     mSkillButton->_trees = _trees;
     mSkillButton->setPosition(Vec2(visibleSize.width-155, visibleSize.height-32));
     addChild(mSkillButton,1);
-    mSkillButton = SkillButton::createSkillButton(15.f, "weapon2grey.png", "weapon2.png", "weapon2grey.png", 3);
+    mSkillButton = SkillButton::createSkillButton(60.f, "weapon2grey.png", "weapon2.png", "weapon2grey.png", 3);
     mSkillButton->_player = _player;
     mSkillButton->bananaManger = bananaManger;
     mSkillButton->setPosition(Vec2(visibleSize.width-50, visibleSize.height-32));
@@ -278,7 +279,7 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
         
         if (t) {            
             this->_player->attack(_weaponManager->getAttackRadius(t));
-            t->setBlood(-20.);
+            t->setBlood(-100.);
         }
         this->_player->setWeapon(Weapon::WeaponType::COCONUT);
     }
@@ -402,6 +403,12 @@ void MainScene::initTrees(int num) {
 
 void MainScene::updateAnimal(float dt)
 {
+    if (_enemy2Arr.size() == 0 && level == dispatch.size()){
+        this->cocos2d::Node::pause();
+        WinScene winScene;
+        winScene.createScene(this);
+//        showNextLevelItem();
+    }
     for (int i=0;i<_animal2Arr.size();i++)
     {
         int index = _animal2Manager->judgeNeayBy(_animal2Arr[i],_enemy2Arr);
@@ -847,8 +854,8 @@ void MainScene::addEnemiesAI(float dt)
 //    std::cout<<_player->getPositionX()<<","<<_player->getPositionY()<<std::endl;
     int dist = 100;
     int enemy1 = enemycategory[level];
-    std::cout<<"current enemy 0 is: "<<enemy1<<std::endl;
-    std::cout<<"dispatch size is: "<<dispatch[level]<<std::endl;
+//    std::cout<<"current enemy 0 is: "<<enemy1<<std::endl;
+//    std::cout<<"dispatch size is: "<<dispatch[level]<<std::endl;
     if (level < dispatch.size()){
         for (i=0;i<dispatch[level];i++){
             if (enemy1 > 0){
@@ -862,10 +869,7 @@ void MainScene::addEnemiesAI(float dt)
             dist += 50;
         }
         level++;
-        std::cout<<"the size of enemy is: "<<_enemy2Arr.size()<<std::endl;
-    }
-    else{
-        // the game ends
+//        std::cout<<"the size of enemy is: "<<_enemy2Arr.size()<<std::endl;
     }
 }
 
