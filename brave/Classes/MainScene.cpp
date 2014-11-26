@@ -874,22 +874,22 @@ void MainScene::addEnemyNumber()
     switch (gamelevel){
         case 1:
             dispatch = {2,3,3};
-            enemydelay = {20,40,40};
+            enemydelay = {10,40,40};
             enemycategory = {1,1,2};
             break;
         case 2:
             dispatch = {2,3,4,3};
-            enemydelay = {20,40,40,40};
+            enemydelay = {10,40,40,40};
             enemycategory = {1,2,2,2};
             break;
         case 3:
             dispatch = {2,3,4,3,3};
-            enemydelay = {20,40,30,30,30};
+            enemydelay = {10,10,10,10,10};
             enemycategory = {2,1,3,2,2};
             break;
         case 4:
             dispatch = {2,3,4,4,4,5};
-            enemydelay = {20,30,30,30,30,40};
+            enemydelay = {10,10,10,10,10,10};
             enemycategory = {2,2,2,2,2,3};
             break;
         default:
