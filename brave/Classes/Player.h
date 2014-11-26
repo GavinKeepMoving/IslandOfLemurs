@@ -74,6 +74,8 @@ public:
 	int _attack;  //each attack harm enemy
     Progress* _progress;
 	int beHit(int attack);
+    void recover(float r);
+    
     
     //Zhenni
     Rect getAttackBox();
@@ -107,6 +109,7 @@ private:
     int _groundHeight;
     int _treeHeight;
     int _attackEnemyCount;
+    float recoverRate; // Zhenni
     //std::vector<Enemy*> *_enemys;
 
 };

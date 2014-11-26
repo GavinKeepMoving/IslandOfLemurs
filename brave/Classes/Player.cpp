@@ -63,13 +63,14 @@ bool Player::initWithPlayerType(PlayerType type)
     std::string sfName = "";
     money = 0;
     _type = type;
-    _speed = 100;
+    _speed = 200;
     _attackSpeed = 3;
     _attackRange = 350;
     _attackEnemyCount = 0;
 	_seq = nullptr;
     _blood = 100;
     _maxHealth = 100;
+    recoverRate = 0.05;
     int animationFrameNum[5] ={4, 4, 4, 2, 4};
     int animationFrameNum2[5] ={3, 3, 3, 2, 0};
     
@@ -80,7 +81,7 @@ bool Player::initWithPlayerType(PlayerType type)
             sfName = "lemur-1-1.png";
             _name = "lemur";
             _animationNum = 5;
-            _speed = 125;
+            _speed = 200;
 			//init player's blood value xiaojing
 			_health = 100;
 			_maxHealth =100;
@@ -120,10 +121,20 @@ bool Player::initWithPlayerType(PlayerType type)
     //auto attack
     auto attackSpeed = _attackSpeed;
     this->schedule(schedule_selector(Player::generalAttack), attackSpeed);
+    this->schedule(schedule_selector(Player::recover), 1);
     this->scheduleUpdate();
     
     // add progress end
     return true;
+}
+
+void Player::recover(float r) {
+    if(this->_blood < _maxHealth) {
+        this->_blood += recoverRate * _maxHealth;
+        this->_blood = this->_blood < _maxHealth ? this->_blood : _maxHealth;
+        this->_progress->setProgress((float)_blood/_maxHealth*100);
+    }
+    
 }
 
 void Player::initFSM()
