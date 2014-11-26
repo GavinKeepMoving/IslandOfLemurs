@@ -74,6 +74,8 @@ public:
 	int _attack;  //each attack harm enemy
     Progress* _progress;
 	int beHit(int attack);
+    void recover(float r);
+    
     
     //Zhenni
     Rect getAttackBox();
@@ -86,6 +88,8 @@ public:
     void onDrop(int start, int end, std::function<void()> callback);
     void constructActionArray(int start, int end,Vector< FiniteTimeAction * > &arrayOfActions, Vector< FiniteTimeAction * > &backgroundActions);
     void buffAttack(int attackBuff = ACCELERATE);
+    void stoneAoeAttack();
+    void aoeAttack(float r);
 private:
     //Action _seq;
     float _speed;
@@ -105,6 +109,7 @@ private:
     int _groundHeight;
     int _treeHeight;
     int _attackEnemyCount;
+    float recoverRate; // Zhenni
     //std::vector<Enemy*> *_enemys;
 
 };

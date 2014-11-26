@@ -65,6 +65,7 @@ bool MainScene::init()
     this->addEnemyNumber();
     
     this->setScheduleAndProgress();
+    
     //this->addgotoItem();//or combine with menu create??
     return true;
 }
@@ -171,6 +172,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     
 
     SkillButton* mSkillButton = SkillButton::createSkillButton(10.f, "weapon1grey.png", "weapon1.png", "weapon1grey.png", 1);
+    mSkillButton->_player = _player;
     mSkillButton->setPosition(Vec2(visibleSize.width-260, visibleSize.height-32));
     addChild(mSkillButton,1);
     mSkillButton = SkillButton::createSkillButton(25.f, "weapon3grey.png", "weapon3.png", "weapon3grey.png", 2);
@@ -179,7 +181,7 @@ void MainScene::initWeaponOptionsBar(Vec2 origin, Size visibleSize)
     mSkillButton->_trees = _trees;
     mSkillButton->setPosition(Vec2(visibleSize.width-155, visibleSize.height-32));
     addChild(mSkillButton,1);
-    mSkillButton = SkillButton::createSkillButton(15.f, "weapon2grey.png", "weapon2.png", "weapon2grey.png", 3);
+    mSkillButton = SkillButton::createSkillButton(60.f, "weapon2grey.png", "weapon2.png", "weapon2grey.png", 3);
     mSkillButton->_player = _player;
     mSkillButton->bananaManger = bananaManger;
     mSkillButton->setPosition(Vec2(visibleSize.width-50, visibleSize.height-32));
@@ -277,7 +279,7 @@ void MainScene::activateWeaponOption(Ref* pSender, int index)
         
         if (t) {            
             this->_player->attack(_weaponManager->getAttackRadius(t));
-            t->setBlood(-20.);
+            t->setBlood(-100.);
         }
         this->_player->setWeapon(Weapon::WeaponType::COCONUT);
     }
@@ -544,6 +546,30 @@ bool MainScene::isEnemyInRange(Player* p) {
     return _player->targetEnemy == NULL ? false : true;
 }
 
+//aoe attack enemy //by Zhenni
+void MainScene::aoeAttack(int attack, int range, int x) {
+    auto attackRect = Rect(x - range/2 , 0, range, visibleSize.height);
+    for (int i=0;i<_enemy2Arr.size();i++)
+    {
+        if(attackRect.containsPoint(_enemy2Arr[i]->getPosition())) {
+            if(_enemy2Arr[i]->behit(attack) == 1) {
+                this->eraseEnemy(i);
+            }
+        }
+    }
+}
+
+void MainScene::stoneFall(int x){
+    ParticleSystem *system = ParticleSystemQuad::create("aoe.plist");
+    system->setPosition(Vec2(x, visibleSize.height));
+    system->setDuration(3.0);
+    system->setAutoRemoveOnFinish(true);
+    this->_background->addChild(system);
+    
+}
+
+
+
 void MainScene::onTouchEnded(Touch* touch, Event* event)
 {
     Vec2 pos = this->convertToNodeSpace(touch->getLocation());
@@ -599,6 +625,7 @@ void MainScene::deleteTree() {
     
     /** show lose scene */
     if(_trees.size() == 0) {
+        this->cocos2d::Node::pause();
         LoseScene loseScene;
         loseScene.createScene(this);
     }
@@ -851,22 +878,22 @@ void MainScene::addEnemyNumber()
     switch (gamelevel){
         case 1:
             dispatch = {2,3,3};
-            enemydelay = {20,40,40};
+            enemydelay = {10,40,40};
             enemycategory = {1,1,2};
             break;
         case 2:
             dispatch = {2,3,4,3};
-            enemydelay = {20,40,40,40};
+            enemydelay = {10,40,40,40};
             enemycategory = {1,2,2,2};
             break;
         case 3:
             dispatch = {2,3,4,3,3};
-            enemydelay = {20,40,30,30,30};
+            enemydelay = {10,10,10,10,10};
             enemycategory = {2,1,3,2,2};
             break;
         case 4:
             dispatch = {2,3,4,4,4,5};
-            enemydelay = {20,30,30,30,30,40};
+            enemydelay = {10,10,10,10,10,10};
             enemycategory = {2,2,2,2,2,3};
             break;
         default:

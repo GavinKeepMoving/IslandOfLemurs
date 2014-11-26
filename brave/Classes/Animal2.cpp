@@ -16,21 +16,32 @@ Animal2::Animal2(int i)
     switch (i)
     {
         case 0:
-//            armature = Armature::create("animal");
             armature = Armature::create("monkey2");
             _attack = 1;
+            _speed = 2;
+            _maxblood = 1000;
+            _blood = 1000;
             break;
         case 1:
             armature = Armature::create("tiger2");
             _attack = 2;
+            _speed = 2.5;
+            _maxblood = 2000;
+            _blood = 2000;
             break;
         case 2:
             armature = Armature::create("pada2");
-            _attack = 3;
+            _attack = 1;
+            _speed = 1;
+            _maxblood = 10000;
+            _blood = 10000;
             break;
         case 3:
             armature = Armature::create("animal");
-            _attack = 4;
+            _attack = 3;
+            _speed = 1.5;
+            _maxblood = 5000;
+            _blood = 5000;
             break;
         default:
             break;
@@ -43,8 +54,7 @@ Animal2::Animal2(int i)
     currentState = IDLE;
     newState = IDLE;
     lockState = false;
-	_maxblood = 1000;
-	_blood = 1000;
+
 	//****init progress for blood  xiaojing***********//
 	_progress = Progress::create("small-enemy-progress-bg.png","small-enemy-progress-fill.png");
 	//************add its progress***xiaojing**********************//
@@ -112,7 +122,7 @@ void Animal2::updateMovement()
     Point oldPos = this->getPosition();
     if (currentState == WALK)
     {
-        this->setPosition(oldPos.x -direction * WALK_SPEED,oldPos.y);
+        this->setPosition(oldPos.x -direction * _speed,oldPos.y);
     }
 }
 
