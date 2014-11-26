@@ -12,7 +12,7 @@
 extern MainScene *mainLayer;
 
 //float Tree::blood = 6;
-#define originalBlood 300
+#define originalBlood 500
 #define beginningPos 300
 
 //constructor1
