@@ -128,6 +128,10 @@ bool Player::initWithPlayerType(PlayerType type)
     return true;
 }
 
+void Player::setBackgroundBoundry(int _bgBoundry) {
+    _backgroundBoundry = _bgBoundry;
+}
+
 void Player::recover(float r) {
     if(this->_blood < _maxHealth) {
         this->_blood += recoverRate * _maxHealth;
@@ -395,7 +399,7 @@ void Player::constructActionArray(int start, int end,
     int minDiff = 0;
     int firstChange = visibleSize.width/2;
     int secondChange = background->getContentSize().width - visibleSize.width/2;
-    int maxDiff = background->getContentSize().width;
+    int maxDiff = _backgroundBoundry;
     auto empty = Vec2(0, 0);
     if (start < end) {
         if(start < firstChange) {

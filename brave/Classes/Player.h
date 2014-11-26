@@ -90,6 +90,7 @@ public:
     void buffAttack(int attackBuff = ACCELERATE);
     void stoneAoeAttack();
     void aoeAttack(float r);
+    void setBackgroundBoundry(int _bgBoundry);
 private:
     //Action _seq;
     float _speed;
@@ -110,6 +111,7 @@ private:
     int _treeHeight;
     int _attackEnemyCount;
     float recoverRate; // Zhenni
+    int _backgroundBoundry; // Zhenni
     //std::vector<Enemy*> *_enemys;
 
 };

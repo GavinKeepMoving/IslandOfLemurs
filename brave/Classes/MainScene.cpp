@@ -729,6 +729,7 @@ void MainScene::addTrees()
     //********************************************************************************************************//
     //Zhenni
     updateBoundry();
+    this->_player->setBackgroundBoundry(this->_trees[this->_trees.size()-1]->getRightBoundary() + 500);
     
 }
 
