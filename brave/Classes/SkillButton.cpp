@@ -80,14 +80,15 @@ void SkillButton::skillClickCallBack(Ref* pSender)
     
     //put out fire
     if (index == 2) {
-        _player->setWeapon(Weapon::WeaponType::WATER);
-        Tree* t = _weaponManager->getNearestTree(_trees);
-        
-        if (t) {
-            _player->attack(_weaponManager->getAttackRadius(t));
-            t->setBlood(-20.);
-        }
-        _player->setWeapon(Weapon::WeaponType::COCONUT);
+//        _player->setWeapon(Weapon::WeaponType::WATER);
+//        Tree* t = _weaponManager->getNearestTree(_trees);
+//        
+//        if (t) {
+//            _player->attack(_weaponManager->getAttackRadius(t));
+//            t->setBlood(-20.);
+//        }
+//        _player->setWeapon(Weapon::WeaponType::COCONUT);
+        _player->buffAttack();
     }
     //get all the banana
     if (index == 3) {
